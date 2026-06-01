@@ -1,0 +1,65 @@
+{
+  "name": "@arcanada/throttle",
+  "version": "0.1.0",
+  "description": "Two-layer anti-abuse for NestJS — named @nestjs/throttler config plus an escalating-ban guard with Fibonacci block growth that holds even for authenticated principals.",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/throttle"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/throttle#readme",
+  "keywords": [
+    "arcanada",
+    "nestjs",
+    "throttler",
+    "rate-limit",
+    "anti-abuse",
+    "escalating-ban"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">=10",
+    "@nestjs/throttler": ">=6",
+    "ioredis": ">=5",
+    "rate-limiter-flexible": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "ioredis": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "@nestjs/throttler": "catalog:",
+    "ioredis": "catalog:",
+    "ioredis-mock": "catalog:",
+    "rate-limiter-flexible": "catalog:",
+    "reflect-metadata": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
