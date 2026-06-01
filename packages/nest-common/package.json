@@ -1,0 +1,55 @@
+{
+  "name": "@arcanada/nest-common",
+  "version": "0.1.0",
+  "description": "Shared NestJS building blocks for the Arcanada ecosystem — canonical Zod validation pipe, RFC 7807 problem-details filter, and Bearer-token guard primitives.",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/nest-common"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/nest-common#readme",
+  "keywords": [
+    "arcanada",
+    "nestjs",
+    "zod",
+    "rfc7807",
+    "problem-details",
+    "guard"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">=10",
+    "zod": ">=3"
+  },
+  "devDependencies": {
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "reflect-metadata": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "zod": "catalog:"
+  }
+}
