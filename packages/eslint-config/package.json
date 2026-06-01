@@ -1,0 +1,50 @@
+{
+  "name": "@arcanada/eslint-config",
+  "version": "0.1.0",
+  "description": "Shared flat ESLint config factories for the Arcanada ecosystem (base / nestjs / react).",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/eslint-config"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/eslint-config#readme",
+  "keywords": [
+    "arcanada",
+    "eslint",
+    "eslint-config",
+    "flat-config"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "eslint": ">=9"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "catalog:",
+    "@typescript-eslint/parser": "catalog:"
+  },
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

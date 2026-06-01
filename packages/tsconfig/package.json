@@ -1,0 +1,39 @@
+{
+  "name": "@arcanada/tsconfig",
+  "version": "0.1.0",
+  "description": "Shared TypeScript base configurations for the Arcanada ecosystem (base / nestjs / react profiles).",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/tsconfig"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/tsconfig#readme",
+  "keywords": [
+    "arcanada",
+    "tsconfig",
+    "typescript",
+    "config"
+  ],
+  "files": [
+    "base.json",
+    "nestjs.json",
+    "react.json"
+  ],
+  "exports": {
+    "./base": "./base.json",
+    "./nestjs": "./nestjs.json",
+    "./react": "./react.json"
+  },
+  "scripts": {
+    "build": "true",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "catalog:"
+  }
+}

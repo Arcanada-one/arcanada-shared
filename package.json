@@ -1,0 +1,39 @@
+{
+  "name": "arcanada-shared",
+  "version": "0.0.0-private",
+  "private": true,
+  "description": "Reusable cross-project modules for the Arcanada ecosystem — shared TypeScript packages published under the @arcanada scope.",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Arcanada-one/arcanada-shared/issues"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.30.3",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r --if-present lint && prettier --check \"**/*.{ts,md,json,yml,yaml}\"",
+    "typecheck": "pnpm -r exec tsc --noEmit",
+    "format": "prettier --write \"**/*.{ts,md,json,yml,yaml}\"",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "catalog:",
+    "@types/node": "catalog:",
+    "@typescript-eslint/eslint-plugin": "catalog:",
+    "@typescript-eslint/parser": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

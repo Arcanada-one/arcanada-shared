@@ -1,0 +1,10 @@
+# Release pipeline is the highest-trust surface: any change to how packages are
+# published (or to the workflows themselves) requires owner review. OIDC Trusted
+# Publishing removes token leakage; this review gate is the second layer against
+# a compromised pipeline.
+/.github/workflows/release.yml   @PavelValentov
+/.github/workflows/             @PavelValentov
+/.changeset/config.json         @PavelValentov
+
+# Whole repo default owner.
+*                                @PavelValentov
