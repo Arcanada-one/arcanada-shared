@@ -1,0 +1,58 @@
+{
+  "name": "@arcanada/logger",
+  "version": "0.1.0",
+  "description": "Shared nestjs-pino logger module for the Arcanada ecosystem — canonical redact-paths (secrets/PII) extracted from Auth Arcana, with a factory to append per-service extra redact paths.",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/logger"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/logger#readme",
+  "keywords": [
+    "arcanada",
+    "nestjs",
+    "pino",
+    "nestjs-pino",
+    "logger",
+    "redact"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">=10",
+    "nestjs-pino": ">=4",
+    "pino": ">=9"
+  },
+  "devDependencies": {
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "nestjs-pino": "^4.4.0",
+    "pino": "^9.6.0",
+    "pino-http": "^11.0.0",
+    "reflect-metadata": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
