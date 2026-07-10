@@ -1,6 +1,6 @@
 {
   "name": "@arcanada/eslint-config",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared flat ESLint config factories for the Arcanada ecosystem (base / nestjs / react).",
   "license": "MIT",
   "type": "module",
