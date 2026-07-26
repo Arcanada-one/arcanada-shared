@@ -14,17 +14,17 @@
     "url": "https://github.com/Arcanada-one/arcanada-shared/issues"
   },
   "engines": {
-    "node": ">=20",
-    "pnpm": ">=10"
+    "node": ">=22.14.0",
+    "pnpm": ">=11"
   },
-  "packageManager": "pnpm@10.30.3",
+  "packageManager": "pnpm@11.17.0",
   "scripts": {
     "build": "pnpm -r build",
     "test": "pnpm test:workflow && pnpm -r test",
-    "test:workflow": "node --test tests/release-workflow-policy.test.mjs",
-    "lint": "pnpm -r --if-present lint && prettier --check \"**/*.{ts,md,json,yml,yaml}\"",
+    "test:workflow": "node --test tests/*.test.mjs",
+    "lint": "pnpm -r --if-present lint && prettier --check \"**/*.{ts,mjs,md,json,yml,yaml}\"",
     "typecheck": "pnpm -r exec tsc --noEmit",
-    "format": "prettier --write \"**/*.{ts,md,json,yml,yaml}\"",
+    "format": "prettier --write \"**/*.{ts,mjs,md,json,yml,yaml}\"",
     "release": "changeset publish"
   },
   "devDependencies": {
