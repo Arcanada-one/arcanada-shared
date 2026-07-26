@@ -9,6 +9,14 @@ const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
 
 const assertAllActionsPinned = (workflow) => {
   for (const [jobName, job] of Object.entries(workflow?.jobs ?? {})) {
+    if (typeof job?.uses === "string") {
+      assert.match(
+        job.uses,
+        PINNED_ACTION_PATTERN,
+        `${jobName} reusable workflow ${job.uses} must use a full commit SHA`,
+      );
+    }
+
     for (const step of job?.steps ?? []) {
       if (typeof step?.uses !== "string") {
         continue;
@@ -55,4 +63,18 @@ test("project and CI pin the Node 22 and pnpm 11 audit toolchain", async () => {
   );
   const [setupNode] = setupNodeSteps;
   assert.equal(String(setupNode.with?.["node-version"] ?? ""), NODE_VERSION);
+});
+
+test("CI pinning rejects mutable reusable sibling workflows", () => {
+  assert.throws(
+    () =>
+      assertAllActionsPinned({
+        jobs: {
+          audit: {
+            uses: "example/repo/.github/workflows/audit.yml@v1",
+          },
+        },
+      }),
+    /audit reusable workflow .* must use a full commit SHA/,
+  );
 });

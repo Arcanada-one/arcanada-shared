@@ -8,10 +8,11 @@ within 72 hours.
 
 ## Supply-chain guarantees
 
-- **Publishing.** Packages are published only from the GitHub Actions release
-  workflow via npm **OIDC Trusted Publishing** — there is no long-lived npm
-  token stored in repository secrets. Every published package carries a
-  provenance attestation.
+- **Publishing.** After a one-time operator-controlled first publication,
+  packages are published only from the GitHub Actions release workflow via npm
+  **OIDC Trusted Publishing**. Bootstrap credentials are never stored in the
+  repository or GitHub Actions; the release preflight blocks absent packages.
+  Every automated publication carries a provenance attestation.
 - **Release gate.** The release workflow is protected by `CODEOWNERS`; a
   publish cannot run without a reviewed merge to `main`. (OIDC eliminates token
   leakage but not a compromised pipeline — the review gate is the second
