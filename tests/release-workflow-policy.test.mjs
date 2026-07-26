@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 import { parse } from "yaml";
@@ -14,6 +15,98 @@ const RELEASE_NPM_VERSION = "11.18.0";
 const NPM_REGISTRY = "https://registry.npmjs.org";
 const RELEASE_ARTIFACT_NAME = "release-plan-${{ github.sha }}";
 const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
+const PRIVILEGED_JOB_KEYS = ["if", "needs", "permissions", "runs-on", "steps"];
+const PRIVILEGED_STEP_ALLOWLIST = {
+  "version-pr": [
+    {
+      kind: "action",
+      keys: ["uses", "with"],
+      uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+      with: { "persist-credentials": false },
+    },
+    {
+      kind: "action",
+      keys: ["uses", "with"],
+      uses: "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+      with: {
+        name: RELEASE_ARTIFACT_NAME,
+        path: "${{ runner.temp }}/release-artifact",
+      },
+    },
+    {
+      kind: "run",
+      keys: ["env", "name", "run"],
+      name: "Verify and restore version plan",
+      runSha256:
+        "4e029a13152db68fefc9004786ba284ee156436c1063f32c37cc37e5e32ed2bb",
+      env: {
+        RELEASE_ARCHIVE: "release-plan-${{ github.sha }}.tar.gz",
+      },
+    },
+    {
+      kind: "run",
+      keys: ["env", "name", "run"],
+      name: "Open a fresh Version Packages pull request",
+      runSha256:
+        "58e5d4f647ab7cd8d89dba55236f7ad31fd1aaae5781c609a0ea54102a4dd354",
+      env: {
+        GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
+        GH_REPO: "${{ github.repository }}",
+        RELEASE_BRANCH: "changeset-release/${{ github.sha }}",
+      },
+    },
+  ],
+  publish: [
+    {
+      kind: "action",
+      keys: ["uses", "with"],
+      uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+      with: {
+        "node-version": RELEASE_NODE_VERSION,
+        "package-manager-cache": false,
+        "registry-url": NPM_REGISTRY,
+      },
+    },
+    {
+      kind: "run",
+      keys: ["name", "run"],
+      name: "Ensure npm supports trusted publishing",
+      runSha256:
+        "a16e577dc0083813577f02572b1638388f68ce69b13b1fec5fd8144d75dc370c",
+      env: {},
+    },
+    {
+      kind: "action",
+      keys: ["uses", "with"],
+      uses: "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+      with: {
+        name: RELEASE_ARTIFACT_NAME,
+        path: "${{ runner.temp }}/release-artifact",
+      },
+    },
+    {
+      kind: "run",
+      keys: ["env", "name", "run"],
+      name: "Verify and restore publish plan",
+      runSha256:
+        "d5f8abdc93f5fe8eecacdb9a7e296abb7b258e35c8419ea89aade596bd2fc3fc",
+      env: {
+        RELEASE_ARCHIVE: "release-plan-${{ github.sha }}.tar.gz",
+      },
+    },
+    {
+      kind: "run",
+      keys: ["env", "name", "run"],
+      name: "Publish only validated package tarballs",
+      runSha256:
+        "3c89d51d5a00cf71e5cf2dffae4d571a8643f3d55ce89ee0ac793c02097598e4",
+      env: {
+        GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
+        GH_REPO: "${{ github.repository }}",
+      },
+    },
+  ],
+};
 
 const findActionSteps = (steps, action) =>
   steps
@@ -75,6 +168,41 @@ const assertArtifactDownload = (steps, jobName) => {
   );
 };
 
+const privilegedStepShape = (step) => {
+  const keys = Object.keys(step).sort();
+  if (typeof step?.uses === "string") {
+    return {
+      kind: "action",
+      keys,
+      uses: step.uses,
+      with: step.with ?? {},
+    };
+  }
+  if (typeof step?.run === "string") {
+    return {
+      kind: "run",
+      keys,
+      name: step.name ?? "",
+      runSha256: createHash("sha256").update(step.run).digest("hex"),
+      env: step.env ?? {},
+    };
+  }
+  return { kind: "unknown", keys };
+};
+
+const assertPrivilegedStepAllowlist = (jobName, job) => {
+  assert.deepEqual(
+    Object.keys(job ?? {}).sort(),
+    PRIVILEGED_JOB_KEYS,
+    `${jobName} privileged step allowlist rejects unknown job-level configuration`,
+  );
+  assert.deepEqual(
+    (job?.steps ?? []).map(privilegedStepShape),
+    PRIVILEGED_STEP_ALLOWLIST[jobName],
+    `${jobName} privileged step allowlist rejects unknown, reordered, or credential-bearing steps`,
+  );
+};
+
 const validateReleaseWorkflow = (source) => {
   const workflow = parse(source);
   const prepareJob = workflow?.jobs?.prepare;
@@ -119,6 +247,8 @@ const validateReleaseWorkflow = (source) => {
   assert.ok(Array.isArray(publishSteps));
 
   assertPinnedUses(workflow);
+  assertPrivilegedStepAllowlist("version-pr", versionJob);
+  assertPrivilegedStepAllowlist("publish", publishJob);
   assertCheckoutDoesNotPersistCredentials(prepareSteps, "prepare");
   assertCheckoutDoesNotPersistCredentials(versionSteps, "version-pr");
   assert.equal(
@@ -264,7 +394,7 @@ test("duplicate Node setup cannot shadow either release toolchain", async () => 
   });
   assert.throws(
     () => validateReleaseWorkflow(JSON.stringify(workflow)),
-    /publish must define exactly one Node setup/,
+    /privileged step allowlist/,
   );
 });
 
@@ -295,6 +425,11 @@ for (const [label, mutation] of [
   ],
 ]) {
   test(`${label} cannot shadow the publishing toolchain`, async () => {
+    assert.equal(
+      isGlobalToolchainMutation(mutation),
+      true,
+      `mutation classifier missed ${JSON.stringify(mutation)}`,
+    );
     const workflow = parse(
       await readFile(
         new URL("../.github/workflows/release.yml", import.meta.url),
@@ -307,7 +442,7 @@ for (const [label, mutation] of [
     });
     assert.throws(
       () => validateReleaseWorkflow(JSON.stringify(workflow)),
-      /publish must define exactly one global toolchain mutation/,
+      /privileged step allowlist/,
     );
   });
 }
@@ -358,6 +493,89 @@ test("mutable reusable sibling workflows cannot bypass pinning", async () => {
     /audit reusable workflow .* must use a full commit SHA/,
   );
 });
+
+for (const [label, jobName, injectedStep] of [
+  [
+    "arbitrary curl run",
+    "version-pr",
+    { name: "Exfiltrate", run: "curl https://example.invalid" },
+  ],
+  [
+    "arbitrary bash run",
+    "publish",
+    { name: "Injected shell", run: "bash -c 'echo unexpected'" },
+  ],
+  [
+    "unknown pinned action",
+    "publish",
+    { uses: `attacker/example@${"a".repeat(40)}` },
+  ],
+  [
+    "extra npm publish",
+    "publish",
+    {
+      name: "Surprise publish",
+      run: "npm publish unexpected.tgz --access public",
+    },
+  ],
+]) {
+  test(`${label} cannot enter a privileged job`, async () => {
+    const workflow = parse(
+      await readFile(
+        new URL("../.github/workflows/release.yml", import.meta.url),
+        "utf8",
+      ),
+    );
+    workflow.jobs[jobName].steps.push(injectedStep);
+    assert.throws(
+      () => validateReleaseWorkflow(JSON.stringify(workflow)),
+      /privileged step allowlist/,
+    );
+  });
+}
+
+test("reordered allowed steps cannot enter a privileged job", async () => {
+  const workflow = parse(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
+  );
+  const steps = workflow.jobs.publish.steps;
+  [steps[1], steps[2]] = [steps[2], steps[1]];
+  assert.throws(
+    () => validateReleaseWorkflow(JSON.stringify(workflow)),
+    /privileged step allowlist/,
+  );
+});
+
+test("credential-bearing changes cannot enter an allowed privileged step", async () => {
+  const workflow = parse(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
+  );
+  workflow.jobs["version-pr"].steps[2].env.EXTRA_TOKEN =
+    "${{ secrets.EXTRA_TOKEN }}";
+  assert.throws(
+    () => validateReleaseWorkflow(JSON.stringify(workflow)),
+    /privileged step allowlist/,
+  );
+});
+
+for (const command of [
+  "corepack enable",
+  "corepack disable",
+  String.raw`sudo corepack \
+    enable`,
+  String.raw`corepack \
+    disable`,
+]) {
+  test(`${command} is a blocked toolchain mutation`, () => {
+    assert.equal(isGlobalToolchainMutation(command), true);
+  });
+}
 
 test("every declared universal and Arcanada task prefix is rejected", () => {
   for (const prefix of INTERNAL_TASK_PREFIXES) {

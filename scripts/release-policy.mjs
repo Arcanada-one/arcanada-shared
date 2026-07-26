@@ -57,7 +57,7 @@ export const INTERNAL_TASK_ID_PATTERN = new RegExp(
 );
 
 const GLOBAL_TOOLCHAIN_MUTATION_PATTERN =
-  /(?=.*\b(?:npm|pnpm)\b)(?=.*\b(?:add|install|i|update|upgrade)\b)(?=.*(?:-g\b|--global(?:=true)?\b|--location(?:=|\s+)global\b)).+|\bcorepack\s+(?:install|prepare|use)\b.*(?:--global(?:\s|$)|--activate(?:\s|$))/;
+  /(?=.*\b(?:npm|pnpm)\b)(?=.*\b(?:add|install|i|update|upgrade)\b)(?=.*(?:-g\b|--global(?:=true)?\b|--location(?:=|\s+)global\b)).+|\bcorepack\s+(?:install|prepare|use)\b.*(?:--global(?:\s|$)|--activate(?:\s|$))|\bcorepack\s+(?:enable|disable)\b/;
 
 export const normalizeShellCommand = (command) =>
   String(command)
