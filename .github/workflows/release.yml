@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 20.20.2
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
@@ -29,9 +29,10 @@ jobs:
 
       - run: pnpm build
 
-      # npm >= 11.5.1 generates provenance automatically under Trusted Publishing.
+      # npm 11 supports Node 20; 11.5.1 is the Trusted Publishing floor.
+      # Keep both versions exact: npm 12 requires Node 22.22.2 or newer.
       - name: Ensure npm supports trusted publishing
-        run: npm install -g npm@latest
+        run: npm install -g npm@11.5.1
 
       - name: Create Release PR or publish
         uses: changesets/action@v1

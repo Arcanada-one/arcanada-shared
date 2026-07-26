@@ -20,7 +20,8 @@
   "packageManager": "pnpm@10.30.3",
   "scripts": {
     "build": "pnpm -r build",
-    "test": "pnpm -r test",
+    "test": "pnpm test:workflow && pnpm -r test",
+    "test:workflow": "node --test tests/release-workflow-policy.test.mjs",
     "lint": "pnpm -r --if-present lint && prettier --check \"**/*.{ts,md,json,yml,yaml}\"",
     "typecheck": "pnpm -r exec tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,md,json,yml,yaml}\"",
