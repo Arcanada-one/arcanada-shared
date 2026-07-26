@@ -3,7 +3,7 @@
 ---
 
 Initial release of `@arcanada/logger`: a canonical `nestjs-pino` `LoggerModule`
-factory extracted from Auth Arcana's original pino setup (`AUTH-0074`) —
+factory derived from the logging setup originally proven in Auth Arcana —
 `createLoggerModule(extraRedactPaths?)` with `LOG_LEVEL`-driven level, `/health`
 excluded from access logs, `pino-pretty` in development only, and a frozen
 `DEFAULT_REDACT_PATHS` list (auth headers + common secret-bearing field names,

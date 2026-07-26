@@ -5,6 +5,23 @@ import { parse } from "yaml";
 
 const NODE_VERSION = "22.23.1";
 const PNPM_VERSION = "11.17.0";
+const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
+
+const assertAllActionsPinned = (workflow) => {
+  for (const [jobName, job] of Object.entries(workflow?.jobs ?? {})) {
+    for (const step of job?.steps ?? []) {
+      if (typeof step?.uses !== "string") {
+        continue;
+      }
+
+      assert.match(
+        step.uses,
+        PINNED_ACTION_PATTERN,
+        `${jobName} action ${step.uses} must use a full commit SHA`,
+      );
+    }
+  }
+};
 
 test("project and CI pin the Node 22 and pnpm 11 audit toolchain", async () => {
   const [packageSource, ciSource] = await Promise.all([
@@ -18,17 +35,24 @@ test("project and CI pin the Node 22 and pnpm 11 audit toolchain", async () => {
   assert.equal(packageManifest.engines?.pnpm, ">=11");
 
   const ciWorkflow = parse(ciSource);
+  assertAllActionsPinned(ciWorkflow);
+
   const steps = ciWorkflow?.jobs?.["build-test"]?.steps;
   assert.ok(
     Array.isArray(steps),
     "CI workflow must define the build-test steps",
   );
 
-  const setupNode = steps.find(
+  const setupNodeSteps = steps.filter(
     (step) =>
       typeof step?.uses === "string" &&
       step.uses.startsWith("actions/setup-node@"),
   );
-  assert.ok(setupNode, "CI workflow must use actions/setup-node");
+  assert.equal(
+    setupNodeSteps.length,
+    1,
+    "CI workflow must define exactly one active actions/setup-node step",
+  );
+  const [setupNode] = setupNodeSteps;
   assert.equal(String(setupNode.with?.["node-version"] ?? ""), NODE_VERSION);
 });
