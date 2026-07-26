@@ -15,7 +15,118 @@ const RELEASE_NPM_VERSION = "11.18.0";
 const NPM_REGISTRY = "https://registry.npmjs.org";
 const RELEASE_ARTIFACT_NAME = "release-plan-${{ github.sha }}";
 const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
+const WORKFLOW_KEYS = ["concurrency", "jobs", "name", "on", "permissions"];
+const WORKFLOW_JOB_ALLOWLIST = ["prepare", "publish", "version-pr"];
+const PREPARE_JOB_KEYS = ["outputs", "permissions", "runs-on", "steps"];
 const PRIVILEGED_JOB_KEYS = ["if", "needs", "permissions", "runs-on", "steps"];
+const PREPARE_STEP_ALLOWLIST = [
+  {
+    kind: "action",
+    keys: ["uses", "with"],
+    uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+    with: { "persist-credentials": false },
+  },
+  {
+    kind: "action",
+    keys: ["uses"],
+    uses: "pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271",
+    with: {},
+  },
+  {
+    kind: "action",
+    keys: ["uses", "with"],
+    uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+    with: {
+      "node-version": RELEASE_NODE_VERSION,
+      "package-manager-cache": false,
+    },
+  },
+  {
+    kind: "run",
+    keys: ["run"],
+    name: "",
+    runSha256:
+      "f733afb2da73a36bd48778fd7502436e384741ad191367d97182afc4909130a5",
+    env: {},
+  },
+  {
+    kind: "run",
+    keys: ["run"],
+    name: "",
+    runSha256:
+      "ede823a2d5f2814db6ddd8a2969504d513bf5a4428b806aa4d1a0499fb38462f",
+    env: {},
+  },
+  {
+    kind: "run",
+    keys: ["run"],
+    name: "",
+    runSha256:
+      "1b65adab2d69e0f148ddd11c15c7dcd73ca087b66cc02dac2672f9493093cc6d",
+    env: {},
+  },
+  {
+    kind: "run",
+    keys: ["run"],
+    name: "",
+    runSha256:
+      "702e948d947e109310cb2bf19c157b5bb8142b88c87e02ae87a7594c9b797893",
+    env: {},
+  },
+  {
+    kind: "run",
+    keys: ["run"],
+    name: "",
+    runSha256:
+      "ae7aca4de98e885127fe392c0b60056f3472ed0f0be972870a06df422b3f140a",
+    env: {},
+  },
+  {
+    kind: "run",
+    keys: ["run"],
+    name: "",
+    runSha256:
+      "9dbc7826e3ce1948ecace1c396963f1a004a08617361f0037fcca1ac9254f741",
+    env: {},
+  },
+  {
+    kind: "run",
+    keys: ["env", "id", "name", "run"],
+    id: "plan",
+    name: "Prepare version patch or publish tarballs",
+    runSha256:
+      "72155c060d5ffdc886afad8abcff2ab543bdf6e4c7357368ad2c94723ecce499",
+    env: {
+      RELEASE_PLAN_DIR: "${{ runner.temp }}/release-plan",
+    },
+  },
+  {
+    kind: "run",
+    keys: ["env", "name", "run"],
+    name: "Build checksum-bound release plan",
+    runSha256:
+      "438297d4799c25c1035ab13f6227cb64b0657a3f9da73feb55cacf95716113e9",
+    env: {
+      RELEASE_ARCHIVE: "release-plan-${{ github.sha }}.tar.gz",
+    },
+  },
+  {
+    kind: "action",
+    keys: ["uses", "with"],
+    uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+    with: {
+      name: RELEASE_ARTIFACT_NAME,
+      path: [
+        "${{ runner.temp }}/release-plan-${{ github.sha }}.tar.gz",
+        "${{ runner.temp }}/release-plan-${{ github.sha }}.tar.gz.sha256",
+        "",
+      ].join("\n"),
+      "if-no-files-found": "error",
+      overwrite: false,
+      "retention-days": 1,
+    },
+  },
+];
 const PRIVILEGED_STEP_ALLOWLIST = {
   "version-pr": [
     {
@@ -179,15 +290,47 @@ const privilegedStepShape = (step) => {
     };
   }
   if (typeof step?.run === "string") {
-    return {
+    const shape = {
       kind: "run",
       keys,
       name: step.name ?? "",
       runSha256: createHash("sha256").update(step.run).digest("hex"),
       env: step.env ?? {},
     };
+    if (Object.hasOwn(step, "id")) {
+      shape.id = step.id;
+    }
+    return shape;
   }
   return { kind: "unknown", keys };
+};
+
+const assertWorkflowAllowlist = (workflow) => {
+  assert.deepEqual(
+    Object.keys(workflow ?? {}).sort(),
+    WORKFLOW_KEYS,
+    "workflow allowlist rejects top-level env, defaults, or unknown configuration",
+  );
+  assert.equal(workflow.name, "Release");
+  assert.deepEqual(workflow.on, { push: { branches: ["main"] } });
+  assert.deepEqual(
+    Object.keys(workflow.jobs ?? {}).sort(),
+    WORKFLOW_JOB_ALLOWLIST,
+    "workflow allowlist rejects sibling or direct-publish jobs",
+  );
+};
+
+const assertPrepareStepAllowlist = (job) => {
+  assert.deepEqual(
+    Object.keys(job ?? {}).sort(),
+    PREPARE_JOB_KEYS,
+    "prepare step allowlist rejects unknown job-level configuration",
+  );
+  assert.deepEqual(
+    (job?.steps ?? []).map(privilegedStepShape),
+    PREPARE_STEP_ALLOWLIST,
+    "prepare step allowlist rejects unknown, reordered, or plan-mutating steps",
+  );
 };
 
 const assertPrivilegedStepAllowlist = (jobName, job) => {
@@ -205,6 +348,7 @@ const assertPrivilegedStepAllowlist = (jobName, job) => {
 
 const validateReleaseWorkflow = (source) => {
   const workflow = parse(source);
+  assertWorkflowAllowlist(workflow);
   const prepareJob = workflow?.jobs?.prepare;
   const versionJob = workflow?.jobs?.["version-pr"];
   const publishJob = workflow?.jobs?.publish;
@@ -247,6 +391,7 @@ const validateReleaseWorkflow = (source) => {
   assert.ok(Array.isArray(publishSteps));
 
   assertPinnedUses(workflow);
+  assertPrepareStepAllowlist(prepareJob);
   assertPrivilegedStepAllowlist("version-pr", versionJob);
   assertPrivilegedStepAllowlist("publish", publishJob);
   assertCheckoutDoesNotPersistCredentials(prepareSteps, "prepare");
@@ -474,7 +619,7 @@ test("mutable actions in sibling release jobs cannot bypass pinning", async () =
   };
   assert.throws(
     () => validateReleaseWorkflow(JSON.stringify(workflow)),
-    /audit action actions\/checkout@v4 must use a full commit SHA/,
+    /workflow allowlist/,
   );
 });
 
@@ -490,7 +635,7 @@ test("mutable reusable sibling workflows cannot bypass pinning", async () => {
   };
   assert.throws(
     () => validateReleaseWorkflow(JSON.stringify(workflow)),
-    /audit reusable workflow .* must use a full commit SHA/,
+    /workflow allowlist/,
   );
 });
 
@@ -563,6 +708,115 @@ test("credential-bearing changes cannot enter an allowed privileged step", async
     /privileged step allowlist/,
   );
 });
+
+for (const [label, job] of [
+  [
+    "privileged sibling",
+    {
+      "runs-on": "ubuntu-latest",
+      permissions: { contents: "write" },
+      steps: [{ run: "gh api repos/example/example" }],
+    },
+  ],
+  [
+    "direct-publish sibling",
+    {
+      "runs-on": "ubuntu-latest",
+      permissions: { contents: "write", "id-token": "write" },
+      steps: [{ run: "npm publish unexpected.tgz --provenance" }],
+    },
+  ],
+]) {
+  test(`${label} cannot enter the release workflow`, async () => {
+    const workflow = parse(
+      await readFile(
+        new URL("../.github/workflows/release.yml", import.meta.url),
+        "utf8",
+      ),
+    );
+    workflow.jobs.backdoor = job;
+    assert.throws(
+      () => validateReleaseWorkflow(JSON.stringify(workflow)),
+      /workflow allowlist/,
+    );
+  });
+}
+
+for (const [label, mutate] of [
+  [
+    "workflow secret environment",
+    (workflow) => {
+      workflow.env = { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" };
+    },
+  ],
+  [
+    "workflow defaults",
+    (workflow) => {
+      workflow.defaults = { run: { shell: "bash" } };
+    },
+  ],
+]) {
+  test(`${label} cannot expand the release workflow`, async () => {
+    const workflow = parse(
+      await readFile(
+        new URL("../.github/workflows/release.yml", import.meta.url),
+        "utf8",
+      ),
+    );
+    mutate(workflow);
+    assert.throws(
+      () => validateReleaseWorkflow(JSON.stringify(workflow)),
+      /workflow allowlist/,
+    );
+  });
+}
+
+for (const [label, mutate] of [
+  [
+    "plan mutation run",
+    (prepare) => {
+      prepare.steps.push({
+        name: "Mutate release plan",
+        run: 'printf "surprise" >> "$RUNNER_TEMP/release-plan/mode"',
+      });
+    },
+  ],
+  [
+    "unknown prepare action",
+    (prepare) => {
+      prepare.steps.push({ uses: `attacker/plan@${"a".repeat(40)}` });
+    },
+  ],
+  [
+    "reordered prepare steps",
+    (prepare) => {
+      [prepare.steps[9], prepare.steps[10]] = [
+        prepare.steps[10],
+        prepare.steps[9],
+      ];
+    },
+  ],
+  [
+    "prepare credential environment",
+    (prepare) => {
+      prepare.env = { NPM_TOKEN: "${{ secrets.NPM_TOKEN }}" };
+    },
+  ],
+]) {
+  test(`${label} cannot alter release-plan preparation`, async () => {
+    const workflow = parse(
+      await readFile(
+        new URL("../.github/workflows/release.yml", import.meta.url),
+        "utf8",
+      ),
+    );
+    mutate(workflow.jobs.prepare);
+    assert.throws(
+      () => validateReleaseWorkflow(JSON.stringify(workflow)),
+      /prepare step allowlist/,
+    );
+  });
+}
 
 for (const command of [
   "corepack enable",
