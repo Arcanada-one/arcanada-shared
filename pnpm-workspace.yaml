@@ -26,4 +26,5 @@ catalog:
 dangerouslyAllowAllBuilds: true
 
 overrides:
+  "brace-expansion@1.1.15": 1.1.16
   "brace-expansion@>=5.0.0 <5.0.8": 5.0.8

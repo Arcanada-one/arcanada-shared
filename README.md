@@ -29,7 +29,7 @@ duplicated code.
 ```bash
 pnpm install
 pnpm build      # tsc --build across all packages
-pnpm test       # Vitest
+pnpm test       # workflow-policy node:test + package Vitest suites
 pnpm lint       # eslint + prettier --check
 ```
 
