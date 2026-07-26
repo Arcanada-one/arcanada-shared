@@ -12,7 +12,10 @@ within 72 hours.
   packages are published only from the GitHub Actions release workflow via npm
   **OIDC Trusted Publishing**. Bootstrap credentials are never stored in the
   repository or GitHub Actions; the release preflight blocks absent packages.
-  Every automated publication carries a provenance attestation.
+  Every automated publication carries a provenance attestation. Dependency
+  installation, verification, Changesets versioning, building, and `npm pack`
+  all run in a read-only job. The write-capable jobs install no repository
+  dependencies and consume only checksum-bound patches or scanned tarballs.
 - **Release gate.** The release workflow is protected by `CODEOWNERS`; a
   publish cannot run without a reviewed merge to `main`. (OIDC eliminates token
   leakage but not a compromised pipeline — the review gate is the second

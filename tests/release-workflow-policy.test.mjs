@@ -2,68 +2,18 @@ import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 import { parse } from "yaml";
+import {
+  INTERNAL_TASK_ID_PATTERN,
+  INTERNAL_TASK_PREFIXES,
+  isGlobalToolchainMutation,
+  normalizeShellCommand,
+} from "../scripts/release-policy.mjs";
 
 const RELEASE_NODE_VERSION = "22.23.1";
 const RELEASE_NPM_VERSION = "11.18.0";
 const NPM_REGISTRY = "https://registry.npmjs.org";
-const RELEASE_ARTIFACT_NAME = "release-build-${{ github.sha }}";
+const RELEASE_ARTIFACT_NAME = "release-plan-${{ github.sha }}";
 const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
-const UNIVERSAL_TASK_PREFIXES = [
-  "INFRA",
-  "WEB",
-  "DEV",
-  "DEVOPS",
-  "CONTENT",
-  "RESEARCH",
-  "AGENT",
-  "BENCH",
-  "MAINT",
-  "FIN",
-  "QA",
-  "SEC",
-  "QCK",
-  "TUNE",
-  "ROB",
-  "DATA",
-];
-const ARCANADA_TASK_PREFIXES = [
-  "ARCA",
-  "CUBR",
-  "VERD",
-  "AUTH",
-  "BILL",
-  "CONV",
-  "MUN",
-  "TRANS",
-  "SUP",
-  "OVER",
-  "CONS",
-  "VOICE",
-  "LTM",
-  "SRCH",
-  "CONN",
-  "ARGA",
-  "EMAIL",
-  "ARAS",
-  "STATUS",
-  "ADSR",
-  "LEGAL",
-  "PUB",
-  "SPACE",
-  "SHARED",
-  "CTRL",
-  "WIKI",
-  "DISK",
-];
-const INTERNAL_TASK_PREFIXES = [
-  ...UNIVERSAL_TASK_PREFIXES,
-  ...ARCANADA_TASK_PREFIXES,
-];
-const INTERNAL_TASK_ID_PATTERN = new RegExp(
-  `\\b(?:${INTERNAL_TASK_PREFIXES.join("|")})-\\d{4}\\b`,
-);
-const GLOBAL_TOOLCHAIN_MUTATION_PATTERN =
-  /(?=[^\n]*\b(?:npm|pnpm)\b)(?=[^\n]*\b(?:add|install|i|update|upgrade)\b)(?=[^\n]*(?:-g\b|--global(?:=true)?\b|--location(?:=|\s+)global\b))[^\n]+|\bcorepack\s+(?:install|prepare|use)\b[^\n]*(?:--global(?:\s|$)|--activate(?:\s|$))/;
 
 const findActionSteps = (steps, action) =>
   steps
@@ -89,7 +39,6 @@ const assertPinnedUses = (workflow) => {
         `${jobName} reusable workflow ${job.uses} must use a full commit SHA`,
       );
     }
-
     for (const step of job?.steps ?? []) {
       if (typeof step?.uses === "string") {
         assert.match(
@@ -112,61 +61,33 @@ const assertCheckoutDoesNotPersistCredentials = (steps, jobName) => {
     false,
     `${jobName} checkout must not persist credentials`,
   );
-  return checkout;
+};
+
+const assertArtifactDownload = (steps, jobName) => {
+  const download = assertOne(
+    findActionSteps(steps, "actions/download-artifact"),
+    `${jobName} must download exactly one prepared release plan`,
+  );
+  assert.equal(download.step.with?.name, RELEASE_ARTIFACT_NAME);
+  assertOne(
+    findRunSteps(steps, /sha256sum --check/),
+    `${jobName} must verify the release-plan checksum`,
+  );
 };
 
 const validateReleaseWorkflow = (source) => {
   const workflow = parse(source);
-  const verifyJob = workflow?.jobs?.verify;
-  const preflightJob = workflow?.jobs?.preflight;
-  const releaseJob = workflow?.jobs?.release;
-  const verifySteps = verifyJob?.steps;
-  const preflightSteps = preflightJob?.steps;
-  const releaseSteps = releaseJob?.steps;
+  const prepareJob = workflow?.jobs?.prepare;
+  const versionJob = workflow?.jobs?.["version-pr"];
+  const publishJob = workflow?.jobs?.publish;
+  const prepareSteps = prepareJob?.steps;
+  const versionSteps = versionJob?.steps;
+  const publishSteps = publishJob?.steps;
 
   assert.deepEqual(
     workflow.permissions,
     {},
     "release workflow must default the token to no permissions",
-  );
-  assert.deepEqual(
-    verifyJob?.permissions,
-    { contents: "read" },
-    "verify job must be read-only",
-  );
-  assert.deepEqual(
-    preflightJob?.permissions,
-    { contents: "read" },
-    "registry preflight job must be read-only",
-  );
-  assert.deepEqual(
-    releaseJob?.permissions,
-    {
-      contents: "write",
-      "pull-requests": "write",
-      "id-token": "write",
-    },
-    "release job must use only Changesets and OIDC permissions",
-  );
-  assert.deepEqual(
-    releaseJob?.needs,
-    ["verify", "preflight"],
-    "release job must wait for unprivileged verification and registry preflight",
-  );
-  assert.equal(
-    preflightJob?.["runs-on"],
-    "ubuntu-latest",
-    "registry preflight must run on a GitHub-hosted runner",
-  );
-  assert.equal(
-    verifyJob?.["runs-on"],
-    "ubuntu-latest",
-    "verify must run on a GitHub-hosted runner",
-  );
-  assert.equal(
-    releaseJob?.["runs-on"],
-    "ubuntu-latest",
-    "trusted publishing must run on a GitHub-hosted runner",
   );
   assert.deepEqual(
     workflow.concurrency,
@@ -176,191 +97,174 @@ const validateReleaseWorkflow = (source) => {
     },
     "release concurrency must serialize without cancelling an in-flight publish",
   );
-  assert.ok(
-    Array.isArray(preflightSteps),
-    "release workflow must define jobs.preflight.steps",
-  );
-  assert.ok(
-    Array.isArray(verifySteps),
-    "release workflow must define jobs.verify.steps",
-  );
-  assert.ok(
-    Array.isArray(releaseSteps),
-    "release workflow must define jobs.release.steps",
-  );
+  assert.deepEqual(prepareJob?.permissions, { contents: "read" });
+  assert.equal(prepareJob?.outputs?.mode, "${{ steps.plan.outputs.mode }}");
+  assert.deepEqual(versionJob?.permissions, {
+    contents: "write",
+    "pull-requests": "write",
+  });
+  assert.deepEqual(publishJob?.permissions, {
+    contents: "write",
+    "id-token": "write",
+  });
+  assert.equal(versionJob?.needs, "prepare");
+  assert.equal(publishJob?.needs, "prepare");
+  assert.equal(versionJob?.if, "needs.prepare.outputs.mode == 'version'");
+  assert.equal(publishJob?.if, "needs.prepare.outputs.mode == 'publish'");
+  assert.equal(prepareJob?.["runs-on"], "ubuntu-latest");
+  assert.equal(versionJob?.["runs-on"], "ubuntu-latest");
+  assert.equal(publishJob?.["runs-on"], "ubuntu-latest");
+  assert.ok(Array.isArray(prepareSteps));
+  assert.ok(Array.isArray(versionSteps));
+  assert.ok(Array.isArray(publishSteps));
 
   assertPinnedUses(workflow);
-  assertCheckoutDoesNotPersistCredentials(verifySteps, "verify");
-  assertCheckoutDoesNotPersistCredentials(preflightSteps, "preflight");
-  assertCheckoutDoesNotPersistCredentials(releaseSteps, "release");
+  assertCheckoutDoesNotPersistCredentials(prepareSteps, "prepare");
+  assertCheckoutDoesNotPersistCredentials(versionSteps, "version-pr");
+  assert.equal(
+    findActionSteps(publishSteps, "actions/checkout").length,
+    0,
+    "publish must not check out or execute repository content",
+  );
 
-  const verifySetupNode = assertOne(
-    findActionSteps(verifySteps, "actions/setup-node"),
-    "verify must define exactly one actions/setup-node step",
+  const prepareNode = assertOne(
+    findActionSteps(prepareSteps, "actions/setup-node"),
+    "prepare must define exactly one Node setup",
   );
   assert.equal(
-    String(verifySetupNode.step.with?.["node-version"] ?? ""),
+    String(prepareNode.step.with?.["node-version"]),
     RELEASE_NODE_VERSION,
   );
-  assertOne(
-    findRunSteps(verifySteps, /^pnpm install --frozen-lockfile$/),
-    "verify must run exactly one frozen install",
-  );
-  assertOne(findRunSteps(verifySteps, /^pnpm lint$/), "verify must run lint");
-  assertOne(
-    findRunSteps(verifySteps, /^pnpm typecheck$/),
-    "verify must run typecheck",
-  );
-  assertOne(
-    findRunSteps(verifySteps, /^pnpm build$/),
-    "verify must build release artifacts",
-  );
-  assertOne(
-    findRunSteps(verifySteps, /^pnpm test$/),
-    "verify must run the complete test suite",
-  );
+  for (const [pattern, message] of [
+    [/^pnpm install --frozen-lockfile$/, "frozen install"],
+    [/^pnpm lint$/, "lint"],
+    [/^pnpm typecheck$/, "typecheck"],
+    [/^pnpm build$/, "build"],
+    [/^pnpm test$/, "complete test suite"],
+    [/^pnpm audit --audit-level=high$/, "full audit"],
+    [/^node scripts\/prepare-release-plan\.mjs$/, "release-plan preparation"],
+  ]) {
+    assertOne(
+      findRunSteps(prepareSteps, pattern),
+      `prepare must run exactly one ${message}`,
+    );
+  }
   const audit = assertOne(
-    findRunSteps(verifySteps, /^pnpm audit --audit-level=high$/),
-    "verify must run the full high-severity audit",
+    findRunSteps(prepareSteps, /^pnpm audit --audit-level=high$/),
+    "prepare must run the full high-severity audit",
   );
   assert.doesNotMatch(String(audit.step.run), /--prod(?:uction)?\b/);
-
-  const artifactUpload = assertOne(
-    findActionSteps(verifySteps, "actions/upload-artifact"),
-    "verify must upload exactly one immutable build artifact",
+  const planStep = assertOne(
+    prepareSteps
+      .map((step, index) => ({ index, step }))
+      .filter(({ step }) => step?.id === "plan"),
+    "prepare must expose exactly one release-plan output step",
   );
-  assert.equal(artifactUpload.step.with?.name, RELEASE_ARTIFACT_NAME);
-  assert.equal(artifactUpload.step.with?.["if-no-files-found"], "error");
-  assert.equal(artifactUpload.step.with?.overwrite, false);
-
-  const preflightSetupNode = assertOne(
-    findActionSteps(preflightSteps, "actions/setup-node"),
-    "preflight must define exactly one actions/setup-node step",
+  assert.equal(planStep.step.run, "node scripts/prepare-release-plan.mjs");
+  const upload = assertOne(
+    findActionSteps(prepareSteps, "actions/upload-artifact"),
+    "prepare must upload exactly one immutable release plan",
   );
-  assert.equal(
-    String(preflightSetupNode.step.with?.["node-version"] ?? ""),
-    RELEASE_NODE_VERSION,
+  assert.equal(upload.step.with?.name, RELEASE_ARTIFACT_NAME);
+  assert.equal(upload.step.with?.["if-no-files-found"], "error");
+  assert.equal(upload.step.with?.overwrite, false);
+
+  assertArtifactDownload(versionSteps, "version-pr");
+  assertArtifactDownload(publishSteps, "publish");
+  assertOne(
+    findRunSteps(versionSteps, /git apply --index/),
+    "version-pr must apply only the prepared version patch",
   );
   assertOne(
-    findRunSteps(preflightSteps, /^node scripts\/release-preflight\.mjs$/),
-    "preflight job must run the registry preflight exactly once",
+    findRunSteps(versionSteps, /gh pr create/),
+    "version-pr must create a fresh pull request",
   );
-
-  const releaseSetupNode = assertOne(
-    findActionSteps(releaseSteps, "actions/setup-node"),
-    "release must define exactly one actions/setup-node step",
+  assertOne(
+    findRunSteps(versionSteps, /gh pr close/),
+    "version-pr must supersede stale Version Packages pull requests",
   );
   assert.equal(
-    String(releaseSetupNode.step.with?.["node-version"] ?? ""),
+    findRunSteps(versionSteps, /(?:--force|-f)\b/).length,
+    0,
+    "version-pr must never force-push",
+  );
+
+  const publishNode = assertOne(
+    findActionSteps(publishSteps, "actions/setup-node"),
+    "publish must define exactly one Node setup",
+  );
+  assert.equal(
+    String(publishNode.step.with?.["node-version"]),
     RELEASE_NODE_VERSION,
   );
-  assert.equal(
-    releaseSetupNode.step.with?.["registry-url"],
-    NPM_REGISTRY,
-    `release registry must be ${NPM_REGISTRY}`,
-  );
-
-  const lifecycleFreeInstall = assertOne(
-    findRunSteps(
-      releaseSteps,
-      /^pnpm install --frozen-lockfile --ignore-scripts$/,
-    ),
-    "privileged release must install with lifecycle scripts disabled",
-  );
-  const toolchainMutations = findRunSteps(
-    releaseSteps,
-    GLOBAL_TOOLCHAIN_MUTATION_PATTERN,
-  );
+  assert.equal(publishNode.step.with?.["registry-url"], NPM_REGISTRY);
+  const mutations = publishSteps
+    .map((step, index) => ({ index, step }))
+    .filter(({ step }) => isGlobalToolchainMutation(step?.run));
   const npmSetup = assertOne(
-    toolchainMutations,
-    "release must define exactly one global npm/pnpm toolchain mutation",
+    mutations,
+    "publish must define exactly one global toolchain mutation",
   );
   assert.equal(
-    String(npmSetup.step.run ?? ""),
+    normalizeShellCommand(npmSetup.step.run),
     `npm install --global --ignore-scripts npm@${RELEASE_NPM_VERSION}`,
-    "release npm install must be exact and lifecycle-free",
+  );
+  assertOne(
+    findRunSteps(
+      publishSteps,
+      /npm publish "\$package_file" --access public --provenance --ignore-scripts/,
+    ),
+    "publish must publish only prepared tarball files without scripts",
+  );
+  assertOne(
+    findRunSteps(publishSteps, /grep -aERq.*INFRA.*DISK/s),
+    "publish must independently reject task IDs in tarball content",
   );
 
-  const artifactDownload = assertOne(
-    findActionSteps(releaseSteps, "actions/download-artifact"),
-    "release must download exactly one build artifact",
-  );
-  assert.equal(artifactDownload.step.with?.name, RELEASE_ARTIFACT_NAME);
-  const artifactVerify = assertOne(
-    findRunSteps(releaseSteps, /sha256sum --check/),
-    "release must verify the inner build-artifact checksum",
-  );
-  const changesets = assertOne(
-    findActionSteps(releaseSteps, "changesets/action"),
-    "release must define exactly one changesets/action step",
-  );
-  assert.equal(changesets.step.with?.publish, "pnpm release");
-  assert.equal(changesets.step.with?.version, "pnpm changeset version");
-  assert.equal(
-    changesets.step.env?.GITHUB_TOKEN,
-    "${{ secrets.GITHUB_TOKEN }}",
-  );
-
-  assert.ok(
-    lifecycleFreeInstall.index < npmSetup.index &&
-      npmSetup.index < artifactDownload.index &&
-      artifactDownload.index < artifactVerify.index &&
-      artifactVerify.index < changesets.index,
-    "release must install without scripts, verify the artifact, then invoke Changesets",
-  );
-
-  for (const { step } of findRunSteps(
-    releaseSteps,
-    /\bpnpm (?:lint|typecheck|build|test|audit)\b/,
-  )) {
-    assert.fail(
-      `privileged release job must not run verification/build command: ${step.run}`,
+  for (const [jobName, steps] of [
+    ["version-pr", versionSteps],
+    ["publish", publishSteps],
+  ]) {
+    const usesChangesets = findActionSteps(steps, "changesets/action");
+    assert.equal(
+      usesChangesets.length,
+      0,
+      `${jobName} must not execute Changesets`,
     );
+    for (const { step } of findRunSteps(
+      steps,
+      /\bpnpm\b|\bnpm\s+(?:ci|add|i)\b|\bnpm\s+install(?! --global --ignore-scripts npm@11\.18\.0\b)/,
+    )) {
+      assert.fail(
+        `${jobName} must not install or execute repository dependencies: ${step.run}`,
+      );
+    }
   }
 };
 
-test("release workflow separates verification from privileged publishing", async () => {
-  const releaseWorkflow = await readFile(
-    new URL("../.github/workflows/release.yml", import.meta.url),
-    "utf8",
-  );
-
-  validateReleaseWorkflow(releaseWorkflow);
-});
-
-test("commented Node pins cannot shadow the active release value", async () => {
-  const releaseWorkflow = await readFile(
-    new URL("../.github/workflows/release.yml", import.meta.url),
-    "utf8",
-  );
-  const commentShadow = releaseWorkflow.replace(
-    `          node-version: ${RELEASE_NODE_VERSION}`,
-    `          # node-version: ${RELEASE_NODE_VERSION}
-          node-version: 20.20.2`,
-  );
-
-  assert.throws(
-    () => validateReleaseWorkflow(commentShadow),
-    new RegExp(RELEASE_NODE_VERSION.replaceAll(".", "\\.")),
+test("release workflow prepares code read-only and publishes without repo dependencies", async () => {
+  validateReleaseWorkflow(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
   );
 });
 
-test("duplicate Node setup cannot shadow the release toolchain", async () => {
-  const releaseWorkflow = await readFile(
-    new URL("../.github/workflows/release.yml", import.meta.url),
-    "utf8",
+test("duplicate Node setup cannot shadow either release toolchain", async () => {
+  const workflow = parse(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
   );
-  const duplicate = releaseWorkflow.replace(
-    "      - uses: actions/setup-node@",
-    `      - uses: actions/setup-node@${"a".repeat(40)}
-        with:
-          node-version: ${RELEASE_NODE_VERSION}
-      - uses: actions/setup-node@`,
-  );
-
+  workflow.jobs.publish.steps.unshift({
+    uses: `actions/setup-node@${"a".repeat(40)}`,
+    with: { "node-version": RELEASE_NODE_VERSION },
+  });
   assert.throws(
-    () => validateReleaseWorkflow(duplicate),
-    /exactly one actions\/setup-node step/,
+    () => validateReleaseWorkflow(JSON.stringify(workflow)),
+    /publish must define exactly one Node setup/,
   );
 });
 
@@ -372,52 +276,67 @@ for (const [label, mutation] of [
   ["pnpm global add", "pnpm add --global npm@latest"],
   ["leading pnpm global flag", "pnpm --global add npm@latest"],
   ["corepack activation", "corepack prepare pnpm@latest --activate"],
+  [
+    "multiline npm continuation",
+    String.raw`npm install \
+      --global npm@latest`,
+  ],
+  [
+    "multiline npm location",
+    String.raw`sudo npm \
+      --location global \
+      install npm@latest`,
+  ],
+  [
+    "multiline pnpm continuation",
+    String.raw`pnpm \
+      add npm@latest \
+      -g`,
+  ],
 ]) {
   test(`${label} cannot shadow the publishing toolchain`, async () => {
-    const releaseWorkflow = await readFile(
-      new URL("../.github/workflows/release.yml", import.meta.url),
-      "utf8",
+    const workflow = parse(
+      await readFile(
+        new URL("../.github/workflows/release.yml", import.meta.url),
+        "utf8",
+      ),
     );
-    const duplicate = releaseWorkflow.replace(
-      "      - name: Create Release PR or publish",
-      `      - name: Shadow toolchain
-        run: ${mutation}
-
-      - name: Create Release PR or publish`,
-    );
-
+    workflow.jobs.publish.steps.push({
+      name: "Shadow toolchain",
+      run: mutation,
+    });
     assert.throws(
-      () => validateReleaseWorkflow(duplicate),
-      /exactly one global npm\/pnpm toolchain mutation/,
+      () => validateReleaseWorkflow(JSON.stringify(workflow)),
+      /publish must define exactly one global toolchain mutation/,
     );
   });
 }
 
-test("changesets cannot run without the registry preflight dependency", async () => {
-  const releaseWorkflow = await readFile(
-    new URL("../.github/workflows/release.yml", import.meta.url),
-    "utf8",
+test("publish cannot bypass the read-only release-plan dependency", async () => {
+  const workflow = parse(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
   );
-  const workflow = parse(releaseWorkflow);
-  workflow.jobs.release.needs = ["verify"];
-
+  workflow.jobs.publish.needs = [];
   assert.throws(
     () => validateReleaseWorkflow(JSON.stringify(workflow)),
-    /release job must wait for unprivileged verification and registry preflight/,
+    /Expected values to be strictly equal/,
   );
 });
 
 test("mutable actions in sibling release jobs cannot bypass pinning", async () => {
-  const releaseWorkflow = await readFile(
-    new URL("../.github/workflows/release.yml", import.meta.url),
-    "utf8",
+  const workflow = parse(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
   );
-  const workflow = parse(releaseWorkflow);
   workflow.jobs.audit = {
     "runs-on": "ubuntu-latest",
     steps: [{ uses: "actions/checkout@v4" }],
   };
-
   assert.throws(
     () => validateReleaseWorkflow(JSON.stringify(workflow)),
     /audit action actions\/checkout@v4 must use a full commit SHA/,
@@ -425,15 +344,15 @@ test("mutable actions in sibling release jobs cannot bypass pinning", async () =
 });
 
 test("mutable reusable sibling workflows cannot bypass pinning", async () => {
-  const releaseWorkflow = await readFile(
-    new URL("../.github/workflows/release.yml", import.meta.url),
-    "utf8",
+  const workflow = parse(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
   );
-  const workflow = parse(releaseWorkflow);
   workflow.jobs.audit = {
     uses: "example/repo/.github/workflows/audit.yml@v1",
   };
-
   assert.throws(
     () => validateReleaseWorkflow(JSON.stringify(workflow)),
     /audit reusable workflow .* must use a full commit SHA/,

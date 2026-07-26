@@ -164,6 +164,7 @@ export const runReleasePreflight = async ({
   fetchImpl = globalThis.fetch,
   logger = console,
 } = {}) => {
+  const publishablePackages = await validateAllowlist(rootDir);
   const pendingChangesets = await listPendingChangesets(rootDir);
   if (pendingChangesets.length > 0) {
     logger.log(
@@ -172,7 +173,6 @@ export const runReleasePreflight = async ({
     return { mode: "version", pendingChangesets };
   }
 
-  const publishablePackages = await validateAllowlist(rootDir);
   const registryState = await Promise.all(
     publishablePackages.map((packageInfo) =>
       fetchPackageMetadata({ fetchImpl, packageInfo }),

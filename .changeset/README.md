@@ -28,5 +28,7 @@ is irreversible and may require temporary secret material. The operator must:
    `npm view <package> version`, and rerun the release workflow.
 
 The exact automated-release allowlist lives in
-`scripts/release-preflight.mjs`. Adding another public workspace requires a
-reviewed allowlist change before automation can see it.
+`scripts/release-preflight.mjs`. `scripts/prepare-release-plan.mjs` creates and
+scans the actual package tarballs in the read-only preparation job; write-capable
+jobs never install repository dependencies. Adding another public workspace
+requires a reviewed allowlist change before automation can see it.
