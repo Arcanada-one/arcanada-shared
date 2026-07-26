@@ -48,7 +48,9 @@ pnpm changeset
 
 On merge to `main`, the release workflow opens a Version PR; merging it
 publishes the changed packages to npm via **OIDC Trusted Publishing** (no
-long-lived npm token in CI) with provenance attestations.
+long-lived npm token in CI) with provenance attestations. A registry preflight
+fails closed before publish when an allowlisted package has not completed the
+one-time operator bootstrap documented in [`.changeset/README.md`](.changeset/README.md).
 
 ## License
 

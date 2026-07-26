@@ -5,7 +5,7 @@ import { DEFAULT_REDACT_PATHS } from "./redact-paths.js";
 /**
  * Builds the ecosystem's canonical `nestjs-pino` `LoggerModule`.
  *
- * Behaviour mirrors Auth Arcana's original setup (`AUTH-0074`):
+ * Behaviour mirrors Auth Arcana's original production setup:
  * - `LOG_LEVEL` env var controls the pino level, defaulting to `"info"`.
  * - `/health` requests are excluded from access logging.
  * - Redaction uses {@link DEFAULT_REDACT_PATHS} plus any consumer-supplied

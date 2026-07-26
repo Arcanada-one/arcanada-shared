@@ -1,8 +1,7 @@
 # @arcanada/logger
 
 Canonical `nestjs-pino` `LoggerModule` for the Arcanada ecosystem, extracted
-from Auth Arcana's original pino setup (`AUTH-0074`) — the ecosystem's first
-production pino configuration.
+from the ecosystem's first production pino configuration in Auth Arcana.
 
 - **`DEFAULT_REDACT_PATHS`** — a generic, frozen list of fast-redact glob
   paths: auth headers (`Authorization`, `Cookie`, `Set-Cookie`) and the common
