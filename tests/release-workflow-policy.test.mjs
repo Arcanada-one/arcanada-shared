@@ -1,57 +1,99 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { parse } from "yaml";
 
-const versionTuple = (version) => version.split(".").map(Number);
+const RELEASE_NODE_VERSION = "22.23.1";
+const RELEASE_NPM_VERSION = "11.18.0";
 
-const atLeast = (actual, minimum) => {
-  const actualParts = versionTuple(actual);
-  const minimumParts = versionTuple(minimum);
+const validateReleaseToolchain = (source) => {
+  const workflow = parse(source);
+  const steps = workflow?.jobs?.release?.steps;
 
-  for (const [index, part] of minimumParts.entries()) {
-    if (actualParts[index] > part) return true;
-    if (actualParts[index] < part) return false;
-  }
+  assert.ok(
+    Array.isArray(steps),
+    "release workflow must define jobs.release.steps",
+  );
 
-  return true;
+  const setupNode = steps.find(
+    (step) =>
+      typeof step?.uses === "string" &&
+      step.uses.startsWith("actions/setup-node@"),
+  );
+  assert.ok(setupNode, "release workflow must use actions/setup-node");
+  assert.equal(
+    String(setupNode.with?.["node-version"] ?? ""),
+    RELEASE_NODE_VERSION,
+    `release Node must be ${RELEASE_NODE_VERSION}`,
+  );
+
+  const npmSetup = steps.find(
+    (step) => step?.name === "Ensure npm supports trusted publishing",
+  );
+  assert.ok(
+    npmSetup,
+    "release workflow must define the trusted-publishing npm setup step",
+  );
+
+  const npmInstall = String(npmSetup.run ?? "").match(
+    /^npm install -g npm@(\d+\.\d+\.\d+)$/,
+  );
+  assert.ok(
+    npmInstall,
+    "release npm install must contain one exact version and no moving tag",
+  );
+  assert.equal(
+    npmInstall[1],
+    RELEASE_NPM_VERSION,
+    `release npm must be ${RELEASE_NPM_VERSION}`,
+  );
 };
 
-test("release workflow pins a Node 20 and npm 11 trusted-publishing toolchain", async () => {
+test("release workflow pins the supported trusted-publishing toolchain", async () => {
   const releaseWorkflow = await readFile(
     new URL("../.github/workflows/release.yml", import.meta.url),
     "utf8",
   );
 
-  const npmSpecifier = releaseWorkflow.match(/npm install -g npm@(\S+)/)?.[1];
-  assert.match(
-    npmSpecifier ?? "",
-    /^\d+\.\d+\.\d+$/,
-    "release npm must be an exact version, never a moving tag or range",
-  );
+  validateReleaseToolchain(releaseWorkflow);
+});
 
-  const releaseNode = releaseWorkflow.match(/node-version:\s*(\S+)/)?.[1];
-  assert.match(
-    releaseNode ?? "",
-    /^\d+\.\d+\.\d+$/,
-    "release Node must be an exact version",
-  );
+test("commented Node pins cannot shadow the active release value", () => {
+  const commentShadow = `
+jobs:
+  release:
+    steps:
+      # node-version: ${RELEASE_NODE_VERSION}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.20.2
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@${RELEASE_NPM_VERSION}
+`;
 
-  assert.equal(
-    versionTuple(releaseNode)[0],
-    20,
-    "release must stay on the declared Node 20 line",
+  assert.throws(
+    () => validateReleaseToolchain(commentShadow),
+    new RegExp(
+      `release Node must be ${RELEASE_NODE_VERSION.replaceAll(".", "\\.")}`,
+    ),
   );
-  assert.ok(
-    atLeast(releaseNode, "20.17.0"),
-    "npm 11 requires Node >=20.17 on the Node 20 line",
-  );
-  assert.equal(
-    versionTuple(npmSpecifier)[0],
-    11,
-    "trusted publishing on Node 20 must use the npm 11 release line",
-  );
-  assert.ok(
-    atLeast(npmSpecifier, "11.5.1"),
-    "trusted publishing requires npm >=11.5.1",
+});
+
+test("commented npm pins cannot shadow the active release command", () => {
+  const commentShadow = `
+jobs:
+  release:
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${RELEASE_NODE_VERSION}
+      # run: npm install -g npm@${RELEASE_NPM_VERSION}
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@latest
+`;
+
+  assert.throws(
+    () => validateReleaseToolchain(commentShadow),
+    /release npm install must contain one exact version/,
   );
 });
