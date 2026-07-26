@@ -1,6 +1,6 @@
 {
   "name": "@arcanada/logger",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared nestjs-pino logger module for the Arcanada ecosystem — canonical redact-paths (secrets/PII) extracted from Auth Arcana, with a factory to append per-service extra redact paths.",
   "license": "MIT",
   "type": "module",
