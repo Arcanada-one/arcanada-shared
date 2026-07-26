@@ -1,0 +1,34 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import { parse } from "yaml";
+
+const NODE_VERSION = "22.23.1";
+const PNPM_VERSION = "11.17.0";
+
+test("project and CI pin the Node 22 and pnpm 11 audit toolchain", async () => {
+  const [packageSource, ciSource] = await Promise.all([
+    readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8"),
+  ]);
+
+  const packageManifest = JSON.parse(packageSource);
+  assert.equal(packageManifest.packageManager, `pnpm@${PNPM_VERSION}`);
+  assert.equal(packageManifest.engines?.node, ">=22.14.0");
+  assert.equal(packageManifest.engines?.pnpm, ">=11");
+
+  const ciWorkflow = parse(ciSource);
+  const steps = ciWorkflow?.jobs?.["build-test"]?.steps;
+  assert.ok(
+    Array.isArray(steps),
+    "CI workflow must define the build-test steps",
+  );
+
+  const setupNode = steps.find(
+    (step) =>
+      typeof step?.uses === "string" &&
+      step.uses.startsWith("actions/setup-node@"),
+  );
+  assert.ok(setupNode, "CI workflow must use actions/setup-node");
+  assert.equal(String(setupNode.with?.["node-version"] ?? ""), NODE_VERSION);
+});

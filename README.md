@@ -29,12 +29,12 @@ duplicated code.
 ```bash
 pnpm install
 pnpm build      # tsc --build across all packages
-pnpm test       # Vitest
+pnpm test       # workflow-policy node:test + package Vitest suites
 pnpm lint       # eslint + prettier --check
 ```
 
-Requires Node `>=20` and pnpm `>=10`. Shared dev-dependency versions are pinned
-once in `pnpm-workspace.yaml` under `catalog:`.
+Requires Node `>=22.14.0` and pnpm `>=11`. Shared dev-dependency versions are
+pinned once in `pnpm-workspace.yaml` under `catalog:`.
 
 ## Releasing
 
