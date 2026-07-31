@@ -12,15 +12,15 @@ This ledger exists for **relocated** components: packages authored elsewhere and
 moved in. Packages written here from scratch do not need a row; their provenance
 is the repository's own history.
 
-> **Not a publication clearance.** A row below records what a component *is*,
+> **Not a publication clearance.** A row below records what a component _is_,
 > not what may be done with it. Publishing any package remains a separate,
 > operator-gated decision governed by `.github/workflows/release.yml` and the
 > release policy, and no row here authorises it.
 
 ## Relocated components
 
-| Package | Origin repository | Origin commit | Arrived via | Licence tier | Donor-derived content | Identifier scan | Date |
-|---|---|---|---|---|---|---|---|
+| Package                     | Origin repository                               | Origin commit                                                             | Arrived via                                                                                              | Licence tier                          | Donor-derived content                                                                                                                                         | Identifier scan                                                                                     | Date       |
+| --------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ---------- |
 | `packages/access-contracts` | `Arcanada-one/arcanada-design-system` (private) | `9a69871` (last commit before removal; deleted there in `#7` / `6a55d7c`) | arrival `arcanada-shared#8`; deletion `arcanada-design-system#7`; git-installability `arcanada-shared#9` | MIT — clean-room, **not** WHITE-LABEL | **None.** Zero dependencies, zero donor-template identifiers; the origin repository's own ledger recorded "no donor code present" for it while it lived there | clean — `scanned_file_count=6`, zero matches against the 5 committed deny-list digests (2026-07-31) | 2026-07-31 |
 
 ### Why this move was safe to make
@@ -54,7 +54,7 @@ it into a public repository would widen that disclosure surface for no gain,
 and widening it is not a call this ledger entry is entitled to make.
 
 **Residual, recorded rather than papered over:** because the scan runs from the
-other repository, it is *not* a gate on this repository's CI. Nothing here
+other repository, it is _not_ a gate on this repository's CI. Nothing here
 mechanically prevents donor-derived content from being added to this package
 later. The scan result above is a point-in-time attestation for the relocated
 tree as of the date in the row, not a standing guarantee. Closing that gap means
