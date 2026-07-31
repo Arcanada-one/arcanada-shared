@@ -89,6 +89,18 @@ importers:
         specifier: 'catalog:'
         version: 2.9.0
 
+  packages/access-contracts:
+    devDependencies:
+      tsup:
+        specifier: 'catalog:'
+        version: 8.5.1(postcss@8.5.18)(supports-color@7.2.0)(typescript@5.9.3)(yaml@2.9.0)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.7(@types/node@22.19.19)(supports-color@7.2.0)(yaml@2.9.0)
+
   packages/eslint-config:
     dependencies:
       '@typescript-eslint/eslint-plugin':

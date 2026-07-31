@@ -1,0 +1,46 @@
+{
+  "name": "@arcanada/access-contracts",
+  "version": "0.1.0",
+  "description": "Shared access and capability contract for Arcanada product surfaces — the closed capability vocabulary, request/response validators, and the fail-closed decision resolver that an authorization service and its consumers must agree on.",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/access-contracts"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/access-contracts#readme",
+  "keywords": [
+    "arcanada",
+    "authorization",
+    "capabilities",
+    "entitlements",
+    "fail-closed"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
