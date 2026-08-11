@@ -11,6 +11,18 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
+    ignore:
+      # `@types/node` majors track the Node major they describe, so the types
+      # must follow `engines.node` (>=22.14.0) — not npm's `latest`. A newer
+      # major silently disables the CI typecheck gate: `@types/node@26`
+      # declares `URLPattern` and `Float16Array` as available globals, so
+      # `tsc --noEmit` accepts them and CI goes green, while Node 22.23.1 —
+      # the version CI runs and the floor this package supports — throws
+      # `ReferenceError` on both. Raise this deliberately when `engines.node`
+      # moves, together with the CI `node-version` and the toolchain policy
+      # test; do not let it ride in on a routine dependency bump.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:

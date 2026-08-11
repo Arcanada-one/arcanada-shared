@@ -6,6 +6,12 @@ import { parse } from "yaml";
 const NODE_VERSION = "22.23.1";
 const PNPM_VERSION = "11.17.0";
 const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
+const NODE_MAJOR = Number(NODE_VERSION.split(".")[0]);
+
+const majorOfRange = (range) => {
+  const match = /(\d+)\./.exec(String(range));
+  return match ? Number(match[1]) : Number.NaN;
+};
 
 const assertAllActionsPinned = (workflow) => {
   for (const [jobName, job] of Object.entries(workflow?.jobs ?? {})) {
@@ -63,6 +69,36 @@ test("project and CI pin the Node 22 and pnpm 11 audit toolchain", async () => {
   );
   const [setupNode] = setupNodeSteps;
   assert.equal(String(setupNode.with?.["node-version"] ?? ""), NODE_VERSION);
+});
+
+test("@types/node major tracks the supported Node major", async () => {
+  const workspaceSource = await readFile(
+    new URL("../pnpm-workspace.yaml", import.meta.url),
+    "utf8",
+  );
+  const catalog = parse(workspaceSource)?.catalog ?? {};
+  const typesNode = catalog["@types/node"];
+
+  assert.ok(
+    typeof typesNode === "string",
+    "pnpm-workspace.yaml catalog must pin @types/node",
+  );
+
+  // `@types/node` describes a specific Node major. Ahead of `engines.node` it
+  // stops being a gate and becomes a liability: the typecheck accepts APIs the
+  // supported runtime does not have, so CI is green and consumers crash. Move
+  // this only together with `engines.node` and the CI `node-version`.
+  assert.equal(
+    majorOfRange(typesNode),
+    NODE_MAJOR,
+    `@types/node (${typesNode}) must describe Node ${NODE_MAJOR}, the version CI runs and engines.node requires`,
+  );
+});
+
+test("toolchain major comparison reads the leading major of a range", () => {
+  assert.equal(majorOfRange("^22.10.2"), 22);
+  assert.equal(majorOfRange("^26.2.0"), 26);
+  assert.notEqual(majorOfRange("^26.2.0"), NODE_MAJOR);
 });
 
 test("CI pinning rejects mutable reusable sibling workflows", () => {
