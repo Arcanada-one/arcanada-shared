@@ -1,7 +1,13 @@
 version: 2
 updates:
+  # `directories` (plural), not `directory`. With a single root entry Dependabot
+  # ignores the workspace members' package.json files entirely, so this repo's
+  # five published packages would never be scanned — a config that looks present
+  # and updates nothing.
   - package-ecosystem: npm
-    directory: /
+    directories:
+      - "/"
+      - "/packages/*"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
