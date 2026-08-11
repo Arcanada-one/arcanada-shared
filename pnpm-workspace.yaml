@@ -13,7 +13,7 @@ catalog:
   "@nestjs/core": ^11.1.28
   "@types/node": ^22.10.2
   "@typescript-eslint/eslint-plugin": ^8.18.0
-  "@typescript-eslint/parser": ^8.18.0
+  "@typescript-eslint/parser": ^8.66.0
   eslint: ^10.8.1
   prettier: ^3.4.2
   reflect-metadata: ^0.2.2
