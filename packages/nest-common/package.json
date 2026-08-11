@@ -1,6 +1,6 @@
 {
   "name": "@arcanada/nest-common",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared NestJS building blocks for the Arcanada ecosystem — canonical Zod validation pipe, RFC 7807 problem-details filter, and Bearer-token guard primitives.",
   "license": "MIT",
   "type": "module",
