@@ -11,6 +11,10 @@ const PACKAGE_VERSION_PATTERN =
 export const RELEASE_PACKAGES = Object.freeze(
   [
     {
+      name: "@arcanada/access-contracts",
+      directory: "packages/access-contracts",
+    },
+    {
       name: "@arcanada/eslint-config",
       directory: "packages/eslint-config",
     },
