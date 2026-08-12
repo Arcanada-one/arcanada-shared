@@ -22,7 +22,7 @@ catalog:
   prettier: ^3.4.2
   reflect-metadata: ^0.2.2
   tsup: ^8.3.5
-  typescript: ^5.7.2
+  typescript: ^6.0.3
   vitest: ^4.1.10
   yaml: ^2.9.0
   zod: ^4.4.3
