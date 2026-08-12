@@ -5,3 +5,30 @@ manages versioning and changelogs with a focus on monorepos.
 
 Add a changeset with `pnpm changeset` whenever you change a published package.
 Each package is versioned independently (`linked: []`, `fixed: []`).
+
+## First-publish boundary
+
+The automated release workflow uses npm OIDC Trusted Publishing and never
+stores a long-lived npm token. npm can establish that trust only after a
+package exists. When an allowlisted package is absent from the public registry,
+the release preflight stops with `BOOTSTRAP_REQUIRED`; it does not call
+Changesets or attempt any package publication.
+
+First publication is an **OPERATOR boundary** because creating a public package
+is irreversible and may require temporary secret material. The operator must:
+
+1. Approve the exact package name and version shown by the preflight.
+2. Publish that package once through an approved interactive npm flow, using
+   temporary credentials that are never stored in GitHub Actions or this
+   repository and never pasted into an issue, pull request, or log.
+3. Configure npm Trusted Publishing for
+   `Arcanada-one/arcanada-shared`, workflow `release.yml`, with only the required
+   publish permission.
+4. Revoke any temporary credential, verify the package with
+   `npm view <package> version`, and rerun the release workflow.
+
+The exact automated-release allowlist lives in
+`scripts/release-preflight.mjs`. `scripts/prepare-release-plan.mjs` creates and
+scans the actual package tarballs in the read-only preparation job; write-capable
+jobs never install repository dependencies. Adding another public workspace
+requires a reviewed allowlist change before automation can see it.

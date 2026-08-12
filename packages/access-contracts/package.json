@@ -1,7 +1,7 @@
 {
-  "name": "@arcanada/nest-common",
-  "version": "0.2.0",
-  "description": "Shared NestJS building blocks for the Arcanada ecosystem — canonical Zod validation pipe, RFC 7807 problem-details filter, and Bearer-token guard primitives.",
+  "name": "@arcanada/access-contracts",
+  "version": "0.1.0",
+  "description": "Shared access and capability contract for Arcanada product surfaces — the closed capability vocabulary, request/response validators, and the fail-closed decision resolver that an authorization service and its consumers must agree on.",
   "license": "MIT",
   "type": "module",
   "publishConfig": {
@@ -11,16 +11,15 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
-    "directory": "packages/nest-common"
+    "directory": "packages/access-contracts"
   },
-  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/nest-common#readme",
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/access-contracts#readme",
   "keywords": [
     "arcanada",
-    "nestjs",
-    "zod",
-    "rfc7807",
-    "problem-details",
-    "guard"
+    "authorization",
+    "capabilities",
+    "entitlements",
+    "fail-closed"
   ],
   "files": [
     "dist"
@@ -37,19 +36,12 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "prepare": "pnpm run build",
     "test": "vitest run"
   },
-  "peerDependencies": {
-    "@nestjs/common": ">=10",
-    "zod": ">=4"
-  },
   "devDependencies": {
-    "@nestjs/common": "catalog:",
-    "@nestjs/core": "catalog:",
-    "reflect-metadata": "catalog:",
     "tsup": "catalog:",
     "typescript": "catalog:",
-    "vitest": "catalog:",
-    "zod": "catalog:"
+    "vitest": "catalog:"
   }
 }
