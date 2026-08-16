@@ -13,7 +13,7 @@ catalog:
   "@nestjs/core": ^11.1.28
   "@nestjs/throttler": ^6.5.0
   "@types/node": ^22.10.2
-  ioredis: ^5.11.0
+  ioredis: ^6.0.0
   ioredis-mock: ^8.9.0
   "rate-limiter-flexible": ^11.1.0
   "@typescript-eslint/eslint-plugin": ^8.18.0
