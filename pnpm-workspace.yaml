@@ -10,7 +10,7 @@ strictPeerDependencies: false
 catalog:
   "@changesets/cli": ^3.0.1
   "@nestjs/common": ^11.2.1
-  "@nestjs/core": ^11.1.28
+  "@nestjs/core": ^11.2.1
   "@nestjs/throttler": ^6.5.0
   "@types/node": ^22.10.2
   ioredis: ^6.0.0
