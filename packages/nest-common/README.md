@@ -95,8 +95,8 @@ export class MyGuard extends AbstractApiKeyGuard {
   "issues": [
     {
       "path": "user.email",
-      "message": "Invalid email",
-      "code": "invalid_string"
+      "message": "Invalid email address",
+      "code": "invalid_format"
     }
   ]
 }
@@ -115,6 +115,26 @@ Clients parsing the validation error body must be updated to read
 `issues[].{path,message,code}`. Services fronted by `Rfc7807ExceptionFilter`
 already re-render the `BadRequestException` as `application/problem+json`, so the
 filter path is unaffected.
+
+### `code` values track the Zod major
+
+`issues[].code` is Zod's own issue code, so it is only stable within a Zod
+major. This package requires `zod >= 4`; the peer range is deliberately not
+`>= 3`, because the same published version would otherwise emit two different
+contracts depending on which Zod a consumer resolved. Zod 4 renamed several
+codes relative to Zod 3:
+
+| Validation                         | Zod 3 (`code`)       | Zod 4 (`code`)   |
+| ---------------------------------- | -------------------- | ---------------- |
+| `email` / `url` / `uuid` / `regex` | `invalid_string`     | `invalid_format` |
+| `enum`                             | `invalid_enum_value` | `invalid_value`  |
+| `literal`                          | `invalid_literal`    | `invalid_value`  |
+
+`invalid_type`, `unrecognized_keys`, `too_small`, `too_big` and `invalid_union`
+are unchanged. The human-readable `message` strings were also reworded in Zod 4
+and are not a stable interface — branch on `code`, never on `message`. The codes
+above are pinned by `test/zod-validation.pipe.test.ts`, so a future Zod rename
+fails the suite instead of silently changing the contract.
 
 ## License
 

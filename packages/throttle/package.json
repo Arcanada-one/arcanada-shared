@@ -1,7 +1,7 @@
 {
-  "name": "@arcanada/logger",
+  "name": "@arcanada/throttle",
   "version": "0.1.0",
-  "description": "Shared nestjs-pino logger module for the Arcanada ecosystem — canonical redact-paths (secrets/PII) extracted from Auth Arcana, with a factory to append per-service extra redact paths.",
+  "description": "Two-layer anti-abuse for NestJS — named @nestjs/throttler config plus an escalating-ban guard with Fibonacci block growth that holds even for authenticated principals.",
   "license": "MIT",
   "type": "module",
   "publishConfig": {
@@ -11,16 +11,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
-    "directory": "packages/logger"
+    "directory": "packages/throttle"
   },
-  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/logger#readme",
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/throttle#readme",
   "keywords": [
     "arcanada",
     "nestjs",
-    "pino",
-    "nestjs-pino",
-    "logger",
-    "redact"
+    "throttler",
+    "rate-limit",
+    "anti-abuse",
+    "escalating-ban"
   ],
   "files": [
     "dist"
@@ -41,15 +41,22 @@
   },
   "peerDependencies": {
     "@nestjs/common": ">=10",
-    "nestjs-pino": ">=4",
-    "pino": ">=9"
+    "@nestjs/throttler": ">=6",
+    "ioredis": ">=5",
+    "rate-limiter-flexible": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "ioredis": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@nestjs/common": "catalog:",
     "@nestjs/core": "catalog:",
-    "nestjs-pino": "^4.4.0",
-    "pino": "^10.3.1",
-    "pino-http": "^11.0.0",
+    "@nestjs/throttler": "catalog:",
+    "ioredis": "catalog:",
+    "ioredis-mock": "catalog:",
+    "rate-limiter-flexible": "catalog:",
     "reflect-metadata": "catalog:",
     "tsup": "catalog:",
     "typescript": "catalog:",
