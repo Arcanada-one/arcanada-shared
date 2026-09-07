@@ -135,29 +135,32 @@ function fail(error: string): { readonly ok: false; readonly error: string } {
   return { ok: false, error };
 }
 
-/** Accept JSON records, including null-prototype records, but never accessors. */
-function record(
+/** Capture data descriptors once; never validate one value then return another. */
+function snapshotRecord(
   value: unknown,
   keys: readonly string[],
-): value is Record<string, unknown> {
+  exact = true,
+): Record<string, unknown> | null {
   if (typeof value !== "object" || value === null || Array.isArray(value))
-    return false;
+    return null;
   const prototype: unknown = Object.getPrototypeOf(value);
-  if (prototype !== Object.prototype && prototype !== null) return false;
+  if (prototype !== Object.prototype && prototype !== null) return null;
   const ownKeys = Reflect.ownKeys(value);
-  return (
-    ownKeys.length === keys.length &&
-    ownKeys.every(
-      (key) =>
-        typeof key === "string" &&
-        keys.includes(key) &&
-        Object.getOwnPropertyDescriptor(value, key)?.enumerable === true &&
-        Object.hasOwn(
-          Object.getOwnPropertyDescriptor(value, key) ?? {},
-          "value",
-        ),
+  if (ownKeys.length > keys.length || (exact && ownKeys.length !== keys.length))
+    return null;
+  const snapshot: Record<string, unknown> = {};
+  for (const key of ownKeys) {
+    if (typeof key !== "string" || !keys.includes(key)) return null;
+    const property = Object.getOwnPropertyDescriptor(value, key);
+    if (
+      property === undefined ||
+      !property.enumerable ||
+      !Object.hasOwn(property, "value")
     )
-  );
+      return null;
+    snapshot[key] = property.value;
+  }
+  return snapshot;
 }
 
 function uuid(value: unknown): value is string {
@@ -168,25 +171,31 @@ function digest(value: unknown): value is string {
   return typeof value === "string" && value.length === 64 && SHA256.test(value);
 }
 
-function boundedArray(
+function snapshotArray(
   value: unknown,
   min: number,
   max: number,
-): value is unknown[] {
+): unknown[] | null {
+  if (!Array.isArray(value) || Object.getPrototypeOf(value) !== Array.prototype)
+    return null;
+  const lengthProperty = Object.getOwnPropertyDescriptor(value, "length");
+  if (lengthProperty === undefined || !Object.hasOwn(lengthProperty, "value"))
+    return null;
+  const length: unknown = lengthProperty.value;
   if (
-    !Array.isArray(value) ||
-    Object.getPrototypeOf(value) !== Array.prototype ||
-    value.length < min ||
-    value.length > max ||
-    Reflect.ownKeys(value).length !== value.length + 1
+    !counter(length, min) ||
+    length > max ||
+    Reflect.ownKeys(value).length !== length + 1
   )
-    return false;
-  for (let index = 0; index < value.length; index += 1) {
+    return null;
+  const snapshot: unknown[] = [];
+  for (let index = 0; index < length; index += 1) {
     const item = Object.getOwnPropertyDescriptor(value, String(index));
     if (item === undefined || !Object.hasOwn(item, "value") || !item.enumerable)
-      return false;
+      return null;
+    snapshot.push(item.value);
   }
-  return true;
+  return snapshot;
 }
 
 function counter(value: unknown, min = 0): value is number {
@@ -208,10 +217,10 @@ function content(value: Record<string, unknown>, max: number): boolean {
 }
 
 function parseDescriptor(
-  value: unknown,
+  input: unknown,
 ): ValidationResult<PersonalCaptureDescriptor> {
-  if (!record(value, DESCRIPTOR_KEYS))
-    return fail("descriptor: invalid fields");
+  const value = snapshotRecord(input, DESCRIPTOR_KEYS);
+  if (value === null) return fail("descriptor: invalid fields");
   if (
     value["schemaVersion"] !== PERSONAL_CAPTURE_VERSION ||
     value["operation"] !== "append_message"
@@ -234,22 +243,17 @@ function parseDescriptor(
     value["cancellationGeneration"] === Number.MAX_SAFE_INTEGER
   )
     return fail("descriptor: invalid fingerprint or counter");
-  const raw = value["parts"];
-  if (!boundedArray(raw, 1, PERSONAL_CAPTURE_LIMITS.parts))
-    return fail("descriptor: invalid part count");
+  const raw = snapshotArray(value["parts"], 1, PERSONAL_CAPTURE_LIMITS.parts);
+  if (raw === null) return fail("descriptor: invalid part count");
   const parts: PersonalCapturePart[] = [];
   for (let index = 0; index < raw.length; index += 1) {
-    const part: unknown = raw[index];
+    const part = snapshotRecord(raw[index], PART_KEYS);
     const role = index === 0 ? "note" : "attachment";
     const limit =
       index === 0
         ? PERSONAL_CAPTURE_LIMITS.noteBytes
         : PERSONAL_CAPTURE_LIMITS.attachmentBytes;
-    if (
-      !record(part, PART_KEYS) ||
-      part["role"] !== role ||
-      !content(part, limit)
-    )
+    if (part === null || part["role"] !== role || !content(part, limit))
       return fail("descriptor: invalid part");
     parts.push({ ...part } as unknown as PersonalCapturePart);
   }
@@ -264,9 +268,10 @@ function parseDescriptor(
   };
 }
 
-function parseReceipt(value: unknown): ValidationResult<PersonalObjectReceipt> {
+function parseReceipt(input: unknown): ValidationResult<PersonalObjectReceipt> {
+  const value = snapshotRecord(input, RECEIPT_KEYS);
   if (
-    !record(value, RECEIPT_KEYS) ||
+    value === null ||
     value["schemaVersion"] !== PERSONAL_CAPTURE_VERSION ||
     !uuid(value["realmId"]) ||
     !uuid(value["captureId"]) ||
@@ -279,10 +284,11 @@ function parseReceipt(value: unknown): ValidationResult<PersonalObjectReceipt> {
 }
 
 function parseCancellation(
-  value: unknown,
+  input: unknown,
 ): ValidationResult<PersonalCaptureCancellation> {
+  const value = snapshotRecord(input, CANCELLATION_KEYS);
   if (
-    !record(value, CANCELLATION_KEYS) ||
+    value === null ||
     value["schemaVersion"] !== PERSONAL_CAPTURE_VERSION ||
     value["purpose"] !== "cancel_unpublished_capture" ||
     !uuid(value["realmId"]) ||
@@ -354,11 +360,22 @@ export function personalObjectReceiptMatches(
   return d.ok && r.ok && receiptMatches(d.value, r.value);
 }
 
-function parseStatus(value: unknown): ValidationResult<PersonalCaptureStatus> {
-  // Inspect the discriminant without invoking a getter.
-  if (typeof value !== "object" || value === null)
-    return fail("status: invalid record");
-  const state: unknown = Object.getOwnPropertyDescriptor(value, "state")?.value;
+function parseStatus(input: unknown): ValidationResult<PersonalCaptureStatus> {
+  // Capture the discriminant and all possible fields in the same single pass.
+  const baseKeys = ["schemaVersion", "descriptor", "intentRevision", "state"];
+  const value = snapshotRecord(
+    input,
+    [
+      ...baseKeys,
+      "receipts",
+      "manifestId",
+      "conversationRevision",
+      "cancellation",
+    ],
+    false,
+  );
+  if (value === null) return fail("status: invalid record");
+  const state = value["state"];
   const extra =
     state === "awaiting_bytes"
       ? []
@@ -371,13 +388,8 @@ function parseStatus(value: unknown): ValidationResult<PersonalCaptureStatus> {
             : null;
   if (
     extra === null ||
-    !record(value, [
-      "schemaVersion",
-      "descriptor",
-      "intentRevision",
-      "state",
-      ...extra,
-    ]) ||
+    Object.keys(value).length !== baseKeys.length + extra.length ||
+    ![...baseKeys, ...extra].every((key) => Object.hasOwn(value, key)) ||
     value["schemaVersion"] !== PERSONAL_CAPTURE_VERSION ||
     !counter(value["intentRevision"], 1)
   )
@@ -405,15 +417,12 @@ function parseStatus(value: unknown): ValidationResult<PersonalCaptureStatus> {
       return fail("status: cancellation mismatch");
     return { ok: true, value: { ...base, state, cancellation: c.value } };
   }
-  const raw = value["receipts"];
-  if (
-    !boundedArray(
-      raw,
-      descriptor.value.parts.length,
-      descriptor.value.parts.length,
-    )
-  )
-    return fail("status: incomplete receipts");
+  const raw = snapshotArray(
+    value["receipts"],
+    descriptor.value.parts.length,
+    descriptor.value.parts.length,
+  );
+  if (raw === null) return fail("status: incomplete receipts");
   const receipts: PersonalObjectReceipt[] = [];
   for (const item of raw) {
     const receipt = parseReceipt(item);

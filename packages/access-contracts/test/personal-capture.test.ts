@@ -19,6 +19,31 @@ const id = (n: number) =>
 const hash = (body: string) =>
   createHash("sha256").update(body, "utf8").digest("hex");
 
+function changingProxy<T extends object>(
+  target: T,
+  key: string,
+  changed: unknown,
+) {
+  const counts = { gets: 0, descriptors: 0 };
+  const value = new Proxy(target, {
+    get(object, property, receiver) {
+      counts.gets += 1;
+      return property === key && counts.gets > 1
+        ? changed
+        : Reflect.get(object, property, receiver);
+    },
+    getOwnPropertyDescriptor(object, property) {
+      const descriptor = Reflect.getOwnPropertyDescriptor(object, property);
+      if (property !== key || descriptor === undefined) return descriptor;
+      counts.descriptors += 1;
+      return counts.descriptors === 1
+        ? descriptor
+        : { ...descriptor, value: changed };
+    },
+  });
+  return { value, counts };
+}
+
 function descriptor(): PersonalCaptureDescriptor {
   const d: PersonalCaptureDescriptor = {
     schemaVersion: PERSONAL_CAPTURE_VERSION,
@@ -237,6 +262,83 @@ describe("personal capture wire parsing", () => {
 });
 
 describe("object receipt binding and exact state shapes", () => {
+  it("returns validated snapshots when live proxies change later property reads", () => {
+    const source = descriptor();
+    const descriptorProxy = changingProxy(source, "realmId", "../foreign");
+    expect(parsePersonalCaptureDescriptor(descriptorProxy.value)).toEqual({
+      ok: true,
+      value: source,
+    });
+    expect(descriptorProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+
+    const partProxy = changingProxy(source.parts[0], "sha256", "not-a-digest");
+    const partArrayProxy = changingProxy(
+      [partProxy.value, source.parts[1]],
+      "0",
+      {},
+    );
+    const nested = parsePersonalCaptureDescriptor({
+      ...source,
+      parts: partArrayProxy.value,
+    });
+    expect(nested).toEqual({ ok: true, value: source });
+    expect(partProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+    expect(partArrayProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+
+    const receipt = receipts()[0];
+    const receiptProxy = changingProxy(receipt, "objectRevision", "../foreign");
+    expect(parsePersonalObjectReceipt(receiptProxy.value)).toEqual({
+      ok: true,
+      value: receipt,
+    });
+    expect(receiptProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+
+    const cancelled = status("cancelled", 3);
+    if (!("cancellation" in cancelled)) throw new Error("fixture");
+    const cancellationProxy = changingProxy(
+      cancelled.cancellation,
+      "cancellationGeneration",
+      -1,
+    );
+    const statusProxy = changingProxy(
+      { ...cancelled, cancellation: cancellationProxy.value },
+      "state",
+      "committed",
+    );
+    expect(parsePersonalCaptureStatus(statusProxy.value)).toEqual({
+      ok: true,
+      value: cancelled,
+    });
+    expect(cancellationProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+    expect(statusProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+  });
+
+  it("snapshots receipt arrays and array length without invoking proxy get traps", () => {
+    const original = receipts();
+    const receiptProxy = changingProxy(original[0], "realmId", "../foreign");
+    const listProxy = changingProxy(
+      [receiptProxy.value, original[1]],
+      "length",
+      Number.MAX_SAFE_INTEGER,
+    );
+    const staged = status("staged", 2);
+    expect(
+      parsePersonalCaptureStatus({ ...staged, receipts: listProxy.value }),
+    ).toEqual({ ok: true, value: staged });
+    expect(listProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+    expect(receiptProxy.counts).toEqual({ gets: 0, descriptors: 1 });
+  });
+
+  it("rejects an invalid captured value even when a subsequent read would be valid", () => {
+    const proxy = changingProxy(
+      { ...descriptor(), realmId: "../foreign" },
+      "realmId",
+      id(1),
+    );
+    expect(parsePersonalCaptureDescriptor(proxy.value).ok).toBe(false);
+    expect(proxy.counts).toEqual({ gets: 0, descriptors: 1 });
+  });
+
   it("matches exact immutable bytes and scope, including equal-size foreign objects", () => {
     const d = descriptor();
     const r = receipts(d)[1];
@@ -357,6 +459,7 @@ describe("idempotency and CAS preconditions", () => {
     );
     for (const patch of [
       { captureId: id(99) },
+      { conversationId: id(99) },
       { messageId: id(99) },
       { expectedConversationRevision: 1 },
       { cancellationGeneration: 1 },
@@ -374,6 +477,101 @@ describe("idempotency and CAS preconditions", () => {
     ).toBe("different_scope");
     expect(comparePersonalCaptureRetry(d, null)).toBe("invalid");
   });
+
+  it.each(["partId", "objectId", "objectRevision"] as const)(
+    "conflicts on an independently changed %s",
+    (field) => {
+      const original = descriptor();
+      for (let index = 0; index < original.parts.length; index += 1) {
+        const parts = original.parts.map((part, i) =>
+          i === index ? { ...part, [field]: id(99) } : part,
+        );
+        const retry = { ...original, parts };
+        expect(parsePersonalCaptureDescriptor(retry).ok).toBe(true);
+        expect(comparePersonalCaptureRetry(original, retry)).toBe("conflict");
+      }
+    },
+  );
+
+  it("bounds the final safe revision increment without rounding or overflow", () => {
+    const maximum = Number.MAX_SAFE_INTEGER;
+    expect(
+      evaluatePersonalCaptureTransition(
+        status("staged", maximum - 1),
+        status("committed", maximum),
+        maximum - 1,
+      ),
+    ).toBe("eligible");
+    expect(
+      evaluatePersonalCaptureTransition(
+        status("staged", maximum),
+        status("committed", maximum),
+        maximum,
+      ),
+    ).toBe("revision_conflict");
+    expect(
+      evaluatePersonalCaptureTransition(
+        status("staged", maximum),
+        status("committed", maximum + 1),
+        maximum,
+      ),
+    ).toBe("invalid");
+    const d = {
+      ...descriptor(),
+      expectedConversationRevision: maximum - 1,
+      cancellationGeneration: maximum - 1,
+    };
+    expect(
+      parsePersonalCaptureStatus({
+        ...status("committed", maximum),
+        descriptor: d,
+        receipts: receipts(d),
+        conversationRevision: maximum,
+      }).ok,
+    ).toBe(true);
+    expect(
+      parsePersonalCaptureDescriptor({
+        ...d,
+        expectedConversationRevision: maximum,
+      }).ok,
+    ).toBe(false);
+    expect(
+      parsePersonalCaptureDescriptor({ ...d, cancellationGeneration: maximum })
+        .ok,
+    ).toBe(false);
+    const cancelled = status("cancelled", maximum);
+    if (!("cancellation" in cancelled)) throw new Error("fixture");
+    expect(
+      parsePersonalCaptureStatus({
+        ...cancelled,
+        descriptor: d,
+        cancellation: {
+          ...cancelled.cancellation,
+          cancellationGeneration: maximum,
+        },
+      }).ok,
+    ).toBe(true);
+  });
+
+  it.each(["committed", "cancelled"] as const)(
+    "rejects every transition out of terminal %s",
+    (current) => {
+      for (const proposed of [
+        "awaiting_bytes",
+        "staged",
+        "committed",
+        "cancelled",
+      ] as const) {
+        expect(
+          evaluatePersonalCaptureTransition(
+            status(current, 3),
+            status(proposed, 4),
+            3,
+          ),
+        ).toBe("terminal");
+      }
+    },
+  );
 
   it("allows only publication via staged and terminal cancellation from either pending state", () => {
     expect(

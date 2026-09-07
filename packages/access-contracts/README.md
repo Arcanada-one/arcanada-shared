@@ -67,7 +67,11 @@ cannot equal the maximum safe integer.
 
 Parsers accept decoded JSON-like records, reject missing/unknown fields,
 accessors, sparse arrays, duplicate identities, unsupported versions and
-out-of-bound values, and return detached copies. Errors never echo input values.
+out-of-bound values, and return detached copies. They capture each own data
+property once into an ordinary snapshot, including nested records and array
+elements; validation and returned values use that same capture, with no direct
+property reads from the input. This establishes structural consistency, not
+authentication or an atomic snapshot of external state. Errors never echo input values.
 Consumers must also bound transport body size before JSON decoding. The profile
 carries no private body, display filename, path, token, signed URL, or claim that
 the data is already knowledge. It is not a browser status projection: full
