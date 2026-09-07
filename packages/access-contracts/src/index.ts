@@ -439,3 +439,5 @@ export function snapshotApplies(
 ): boolean {
   return snapshot.subject === subject && snapshot.sessionId === sessionId;
 }
+
+export * from "./personal-capture.js";
