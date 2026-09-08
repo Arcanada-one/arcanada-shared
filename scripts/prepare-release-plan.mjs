@@ -135,7 +135,13 @@ const buildVersionPlan = async ({ rootDir, planDir }) => {
       try {
         assertTaskIdFree(relative(rootDir, path), await readFile(path, "utf8"));
       } catch (error) {
-        if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) {
+        if (
+          !(
+            error instanceof Error &&
+            "code" in error &&
+            error.code === "ENOENT"
+          )
+        ) {
           throw error;
         }
       }
@@ -229,7 +235,9 @@ const extractReleaseNotes = async ({ rootDir, directory, version }) => {
       return changelog.slice(start, next === -1 ? undefined : next).trim();
     }
   } catch (error) {
-    if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) {
+    if (
+      !(error instanceof Error && "code" in error && error.code === "ENOENT")
+    ) {
       throw error;
     }
   }

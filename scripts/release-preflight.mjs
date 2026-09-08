@@ -66,7 +66,11 @@ const readPublishablePackages = async (rootDir) => {
     try {
       manifest = await readJson(manifestPath);
     } catch (error) {
-      if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
         continue;
       }
       throw error;

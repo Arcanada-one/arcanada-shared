@@ -2,7 +2,7 @@
   "name": "arcanada-shared",
   "version": "0.0.0-private",
   "private": true,
-  "description": "Reusable cross-project modules for the Arcanada ecosystem \u2014 shared TypeScript packages published under the @arcanada scope.",
+  "description": "Reusable cross-project modules for the Arcanada ecosystem — shared TypeScript packages published under the @arcanada scope.",
   "license": "MIT",
   "type": "module",
   "homepage": "https://github.com/Arcanada-one/arcanada-shared#readme",

@@ -54,7 +54,10 @@ test("write-capable release jobs never install or execute repository dependencie
   assert.equal(versionPr?.if, "needs.prepare.outputs.mode == 'version'");
   assert.equal(publish?.if, "needs.prepare.outputs.mode == 'publish'");
 
-  for (const [jobName, job] of /** @type {[string, import('./workflow-types.js').Job][]} */ ([
+  for (const [
+    jobName,
+    job,
+  ] of /** @type {[string, import('./workflow-types.js').Job][]} */ ([
     ["version-pr", versionPr],
     ["publish", publish],
   ])) {

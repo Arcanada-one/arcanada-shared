@@ -662,7 +662,11 @@ test("mutable reusable sibling workflows cannot bypass pinning", async () => {
   );
 });
 
-for (const [label, jobName, injectedStep] of /** @type {[string, string, Step][]} */ ([
+for (const [
+  label,
+  jobName,
+  injectedStep,
+] of /** @type {[string, string, Step][]} */ ([
   [
     "arbitrary curl run",
     "version-pr",
@@ -765,7 +769,10 @@ for (const [label, job] of [
   });
 }
 
-for (const [label, mutate] of /** @type {[string, (value: Workflow) => void][]} */ ([
+for (const [
+  label,
+  mutate,
+] of /** @type {[string, (value: Workflow) => void][]} */ ([
   [
     "workflow secret environment",
     (workflow) => {
