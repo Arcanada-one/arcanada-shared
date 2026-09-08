@@ -144,3 +144,31 @@ The separate Auth grant/audience, person/session binding, bounded release-unit,
 lease/fence and restart-recovery protocols remain unfinished. Product and Disk
 integration, cross-language conformance, durable transactions and real restart,
 race, isolation and revocation evidence are required before runtime admission.
+
+## Bounded JSON decoding reference
+
+`parseBoundedJson(raw: Uint8Array): unknown` is exported from the package root.
+It accepts one JSON value in **1 to 65532 UTF-8 bytes**, including surrounding
+JSON whitespace. The root value has depth **0**; each object member value or
+array element adds one, with maximum depth **16**, including empty containers.
+Keys do not add another level. Callers must also bound transport reads before
+allocating the input. Only the supplied byte view is read.
+
+The parser rejects empty or whitespace-only input, malformed UTF-8, a leading
+BOM, malformed JSON, trailing values or garbage, duplicate **decoded** keys in
+any object, lone Unicode surrogates in keys or string values, and numbers that
+decode to infinity. Escaped and literal spellings of the same key collide;
+Unicode normalization is not performed. Valid surrogate pairs, Unicode strings,
+arrays, objects, booleans and null are preserved. Finite numbers use native
+`JSON.parse` IEEE-754 semantics, including rounding, underflow and negative zero;
+this is not a lossless-number or canonical-serialization API. Domain validators
+must separately enforce safe integers or other numeric constraints.
+
+Invalid input throws `SyntaxError("Invalid bounded JSON")`, without input data
+or an underlying error cause. A private grammar pass validates before native
+`JSON.parse`; bounded input and recursion limit the work and allocation, and
+number matching uses a cursor without repeatedly copying the remaining input.
+The implementation uses ES2022 primitives without Node `Buffer`, DOM types or
+runtime dependencies. The existing ESM/CJS build uses the same public export.
+Parsing authenticates nothing and grants no capabilities; consumers must still
+validate the returned `unknown` against their schema and authenticate evidence.
