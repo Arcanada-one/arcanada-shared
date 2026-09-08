@@ -3,6 +3,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import {
   RELEASE_PACKAGES,
   runReleasePreflight,
@@ -38,6 +39,16 @@ const response = (status, body = {}) => ({
   ok: status >= 200 && status < 300,
   status,
   json: async () => body,
+});
+
+test("release allowlist covers the actual workspace manifests", async () => {
+  const result = await runReleasePreflight({
+    rootDir: fileURLToPath(new URL("../", import.meta.url)),
+    fetchImpl: async () => response(200, { versions: {} }),
+    logger: { log() {} },
+  });
+
+  assert.ok(["version", "publish"].includes(result.mode));
 });
 
 test("pending changesets select Version-PR mode without querying npm", async (t) => {

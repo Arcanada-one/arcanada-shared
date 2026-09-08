@@ -27,6 +27,10 @@ export const RELEASE_PACKAGES = Object.freeze(
       directory: "packages/nest-common",
     },
     {
+      name: "@arcanada/throttle",
+      directory: "packages/throttle",
+    },
+    {
       name: "@arcanada/tsconfig",
       directory: "packages/tsconfig",
     },
