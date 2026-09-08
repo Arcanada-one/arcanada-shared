@@ -441,3 +441,6 @@ export function snapshotApplies(
 }
 
 export * from "./personal-capture.js";
+
+export * from "./personal-auth-v1.js";
+export { parsePersonalAuthJson } from "./personal-auth-json.js";
