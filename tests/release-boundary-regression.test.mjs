@@ -15,6 +15,7 @@ const TASK_ID_PATTERN =
 const REPO_DEPENDENCY_COMMAND =
   /\bpnpm\b|\bchangesets?\b|\bnpm\s+(?:ci|add|i)\b|\bnpm\s+install(?! --global --ignore-scripts npm@11\.18\.0\b)/;
 
+/** @returns {Promise<import('./workflow-types.js').Workflow>} */
 const readWorkflow = async () =>
   parse(
     await readFile(
@@ -53,10 +54,13 @@ test("write-capable release jobs never install or execute repository dependencie
   assert.equal(versionPr?.if, "needs.prepare.outputs.mode == 'version'");
   assert.equal(publish?.if, "needs.prepare.outputs.mode == 'publish'");
 
-  for (const [jobName, job] of [
+  for (const [
+    jobName,
+    job,
+  ] of /** @type {[string, import('./workflow-types.js').Job][]} */ ([
     ["version-pr", versionPr],
     ["publish", publish],
-  ]) {
+  ])) {
     const commands = (job?.steps ?? [])
       .map((step) => String(step.run ?? ""))
       .join("\n");

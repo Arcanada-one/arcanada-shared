@@ -3,6 +3,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import {
   RELEASE_PACKAGES,
   runReleasePreflight,
@@ -34,10 +35,22 @@ const createFixture = async () => {
   return rootDir;
 };
 
+/** @param {number} status
+ * @param {unknown} [body] */
 const response = (status, body = {}) => ({
   ok: status >= 200 && status < 300,
   status,
   json: async () => body,
+});
+
+test("release allowlist covers the actual workspace manifests", async () => {
+  const result = await runReleasePreflight({
+    rootDir: fileURLToPath(new URL("../", import.meta.url)),
+    fetchImpl: async () => response(200, { versions: {} }),
+    logger: { log() {} },
+  });
+
+  assert.ok(["version", "publish"].includes(result.mode));
 });
 
 test("pending changesets select Version-PR mode without querying npm", async (t) => {
@@ -74,6 +87,7 @@ test("publish mode fails closed when any allowlisted package is absent", async (
       logger: { log() {} },
     }),
     (error) => {
+      assert.ok(error instanceof Error);
       assert.match(error.message, /BOOTSTRAP_REQUIRED/);
       for (const { name } of RELEASE_PACKAGES) {
         assert.match(error.message, new RegExp(name.replace("/", "\\/")));
