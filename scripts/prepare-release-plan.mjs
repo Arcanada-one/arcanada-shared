@@ -17,18 +17,39 @@ const VERSION_FILE_PATTERN =
   /^packages\/[^/]+\/(?:CHANGELOG\.md|package\.json)$/;
 const CHANGESET_FILE_PATTERN = /^\.changeset\/[^/]+\.md$/;
 
+/** @overload
+ * @param {string} file
+ * @param {string[]} args
+ * @param {import('node:child_process').ExecFileOptionsWithBufferEncoding} options
+ * @returns {Promise<{stdout: Buffer, stderr: Buffer}>}
+ */
+/** @overload
+ * @param {string} file
+ * @param {string[]} args
+ * @param {import('node:child_process').ExecFileOptionsWithStringEncoding} [options]
+ * @returns {Promise<{stdout: string, stderr: string}>}
+ */
+/** @param {string} file
+ * @param {string[]} args
+ * @param {import('node:child_process').ExecFileOptions} [options]
+ */
 const run = async (file, args, options = {}) =>
   execFileAsync(file, args, {
     maxBuffer: 20 * 1024 * 1024,
     ...options,
   });
 
+/** @param {string} name
+ * @param {string} value
+ * @param {string | undefined} outputPath */
 const writeOutput = async (name, value, outputPath) => {
   if (outputPath) {
     await appendFile(outputPath, `${name}=${value}\n`, "utf8");
   }
 };
 
+/** @param {string} label
+ * @param {string} content */
 const assertTaskIdFree = (label, content) => {
   const taskId = findInternalTaskId(content);
   if (taskId) {
@@ -38,6 +59,7 @@ const assertTaskIdFree = (label, content) => {
   }
 };
 
+/** @param {string} path */
 const validateVersionPath = (path) => {
   if (CHANGESET_FILE_PATTERN.test(path)) {
     return;
@@ -56,6 +78,7 @@ const validateVersionPath = (path) => {
   }
 };
 
+/** @param {string} output */
 const parseNameStatus = (output) => {
   const fields = output.split("\0").filter(Boolean);
   const changes = [];
@@ -73,6 +96,7 @@ const parseNameStatus = (output) => {
   return changes;
 };
 
+/** @param {{rootDir: string, planDir: string}} options */
 const buildVersionPlan = async ({ rootDir, planDir }) => {
   await run("pnpm", ["exec", "changeset", "version"], { cwd: rootDir });
   const { stdout: nameStatus } = await run(
@@ -111,7 +135,13 @@ const buildVersionPlan = async ({ rootDir, planDir }) => {
       try {
         assertTaskIdFree(relative(rootDir, path), await readFile(path, "utf8"));
       } catch (error) {
-        if (error?.code !== "ENOENT") {
+        if (
+          !(
+            error instanceof Error &&
+            "code" in error &&
+            error.code === "ENOENT"
+          )
+        ) {
           throw error;
         }
       }
@@ -145,6 +175,7 @@ const buildVersionPlan = async ({ rootDir, planDir }) => {
   );
 };
 
+/** @param {{tarball: string, expectedName: string, expectedVersion: string}} options */
 export const inspectPackedTarball = async ({
   tarball,
   expectedName,
@@ -190,6 +221,7 @@ export const inspectPackedTarball = async ({
   }
 };
 
+/** @param {{rootDir: string, directory: string, version: string}} options */
 const extractReleaseNotes = async ({ rootDir, directory, version }) => {
   try {
     const changelog = await readFile(
@@ -203,18 +235,22 @@ const extractReleaseNotes = async ({ rootDir, directory, version }) => {
       return changelog.slice(start, next === -1 ? undefined : next).trim();
     }
   } catch (error) {
-    if (error?.code !== "ENOENT") {
+    if (
+      !(error instanceof Error && "code" in error && error.code === "ENOENT")
+    ) {
       throw error;
     }
   }
   return `Published ${version}.`;
 };
 
+/** @param {{rootDir: string, planDir: string, candidates: import('./release-preflight.mjs').Candidate[]}} options */
 const buildPublishPlan = async ({ rootDir, planDir, candidates }) => {
   const packageDirectory = join(planDir, "packages");
   const notesDirectory = join(planDir, "notes");
   await mkdir(packageDirectory, { recursive: true });
   await mkdir(notesDirectory, { recursive: true });
+  /** @type {{packages: {name: string, version: string, file: string, notesFile: string, sha256: string}[]}} */
   const manifest = { packages: [] };
 
   for (const candidate of candidates) {
@@ -284,6 +320,7 @@ const buildPublishPlan = async ({ rootDir, planDir, candidates }) => {
   );
 };
 
+/** @param {import('./release-preflight.mjs').PreflightOptions & {planDir?: string, outputPath?: string}} [options] */
 export const prepareReleasePlan = async ({
   rootDir = resolve(dirname(fileURLToPath(import.meta.url)), ".."),
   planDir = process.env.RELEASE_PLAN_DIR,
@@ -308,7 +345,7 @@ export const prepareReleasePlan = async ({
 
   if (mode === "version") {
     await buildVersionPlan({ rootDir, planDir });
-  } else if (mode === "publish") {
+  } else if (mode === "publish" && preflight.mode === "publish") {
     await buildPublishPlan({
       rootDir,
       planDir,
