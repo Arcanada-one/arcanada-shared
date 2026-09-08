@@ -433,7 +433,7 @@ const validateReleaseWorkflow = (source) => {
     String(prepareNode.step.with?.["node-version"]),
     RELEASE_NODE_VERSION,
   );
-  for (const [pattern, message] of [
+  for (const [pattern, message] of /** @type {[RegExp, string][]} */ ([
     [/^pnpm install --frozen-lockfile$/, "frozen install"],
     [/^pnpm lint$/, "lint"],
     [/^pnpm typecheck$/, "typecheck"],
@@ -441,7 +441,7 @@ const validateReleaseWorkflow = (source) => {
     [/^pnpm test$/, "complete test suite"],
     [/^pnpm audit --audit-level=high$/, "full audit"],
     [/^node scripts\/prepare-release-plan\.mjs$/, "release-plan preparation"],
-  ]) {
+  ])) {
     assertOne(
       findRunSteps(prepareSteps, pattern),
       `prepare must run exactly one ${message}`,
@@ -519,10 +519,10 @@ const validateReleaseWorkflow = (source) => {
     "publish must independently reject task IDs in tarball content",
   );
 
-  for (const [jobName, steps] of [
+  for (const [jobName, steps] of /** @type {[string, Step[]][]} */ ([
     ["version-pr", versionSteps],
     ["publish", publishSteps],
-  ]) {
+  ])) {
     const usesChangesets = findActionSteps(steps, "changesets/action");
     assert.equal(
       usesChangesets.length,
