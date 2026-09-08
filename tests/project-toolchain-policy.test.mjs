@@ -8,11 +8,13 @@ const PNPM_VERSION = "11.17.0";
 const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
 const NODE_MAJOR = Number(NODE_VERSION.split(".")[0]);
 
+/** @param {unknown} range */
 const majorOfRange = (range) => {
   const match = /(\d+)\./.exec(String(range));
   return match ? Number(match[1]) : Number.NaN;
 };
 
+/** @param {{jobs: Record<string, Partial<import('./workflow-types.js').Job>>}} workflow */
 const assertAllActionsPinned = (workflow) => {
   for (const [jobName, job] of Object.entries(workflow?.jobs ?? {})) {
     if (typeof job?.uses === "string") {

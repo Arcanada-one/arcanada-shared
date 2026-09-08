@@ -1,3 +1,6 @@
+/** @typedef {import('./workflow-types.js').Step} Step */
+/** @typedef {import('./workflow-types.js').Job} Job */
+/** @typedef {import('./workflow-types.js').Workflow} Workflow */
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
@@ -219,21 +222,30 @@ const PRIVILEGED_STEP_ALLOWLIST = {
   ],
 };
 
+/** @param {Step[]} steps
+ * @param {string} action */
 const findActionSteps = (steps, action) =>
   steps
     .map((step, index) => ({ index, step }))
     .filter(({ step }) => step?.uses?.split("@", 1)[0] === action);
 
+/** @param {Step[]} steps
+ * @param {RegExp} pattern */
 const findRunSteps = (steps, pattern) =>
   steps
     .map((step, index) => ({ index, step }))
     .filter(({ step }) => pattern.test(String(step?.run ?? "")));
 
+/** @template T
+ * @param {T[]} matches
+ * @param {string} message
+ * @returns {T} */
 const assertOne = (matches, message) => {
   assert.equal(matches.length, 1, message);
   return matches[0];
 };
 
+/** @param {Workflow} workflow */
 const assertPinnedUses = (workflow) => {
   for (const [jobName, job] of Object.entries(workflow?.jobs ?? {})) {
     if (typeof job?.uses === "string") {
@@ -255,6 +267,8 @@ const assertPinnedUses = (workflow) => {
   }
 };
 
+/** @param {Step[]} steps
+ * @param {string} jobName */
 const assertCheckoutDoesNotPersistCredentials = (steps, jobName) => {
   const checkout = assertOne(
     findActionSteps(steps, "actions/checkout"),
@@ -267,6 +281,8 @@ const assertCheckoutDoesNotPersistCredentials = (steps, jobName) => {
   );
 };
 
+/** @param {Step[]} steps
+ * @param {string} jobName */
 const assertArtifactDownload = (steps, jobName) => {
   const download = assertOne(
     findActionSteps(steps, "actions/download-artifact"),
@@ -279,6 +295,7 @@ const assertArtifactDownload = (steps, jobName) => {
   );
 };
 
+/** @param {Step} step */
 const privilegedStepShape = (step) => {
   const keys = Object.keys(step).sort();
   if (typeof step?.uses === "string") {
@@ -290,6 +307,7 @@ const privilegedStepShape = (step) => {
     };
   }
   if (typeof step?.run === "string") {
+    /** @type {{kind: string, keys: string[], name: string, runSha256: string, env: Record<string, unknown>, id?: string | undefined}} */
     const shape = {
       kind: "run",
       keys,
@@ -305,6 +323,7 @@ const privilegedStepShape = (step) => {
   return { kind: "unknown", keys };
 };
 
+/** @param {Workflow} workflow */
 const assertWorkflowAllowlist = (workflow) => {
   assert.deepEqual(
     Object.keys(workflow ?? {}).sort(),
@@ -320,6 +339,7 @@ const assertWorkflowAllowlist = (workflow) => {
   );
 };
 
+/** @param {Job} job */
 const assertPrepareStepAllowlist = (job) => {
   assert.deepEqual(
     Object.keys(job ?? {}).sort(),
@@ -333,6 +353,8 @@ const assertPrepareStepAllowlist = (job) => {
   );
 };
 
+/** @param {'version-pr' | 'publish'} jobName
+ * @param {Job} job */
 const assertPrivilegedStepAllowlist = (jobName, job) => {
   assert.deepEqual(
     Object.keys(job ?? {}).sort(),
@@ -346,6 +368,7 @@ const assertPrivilegedStepAllowlist = (jobName, job) => {
   );
 };
 
+/** @param {string} source */
 const validateReleaseWorkflow = (source) => {
   const workflow = parse(source);
   assertWorkflowAllowlist(workflow);
@@ -639,7 +662,7 @@ test("mutable reusable sibling workflows cannot bypass pinning", async () => {
   );
 });
 
-for (const [label, jobName, injectedStep] of [
+for (const [label, jobName, injectedStep] of /** @type {[string, string, Step][]} */ ([
   [
     "arbitrary curl run",
     "version-pr",
@@ -663,7 +686,7 @@ for (const [label, jobName, injectedStep] of [
       run: "npm publish unexpected.tgz --access public",
     },
   ],
-]) {
+])) {
   test(`${label} cannot enter a privileged job`, async () => {
     const workflow = parse(
       await readFile(
@@ -742,7 +765,7 @@ for (const [label, job] of [
   });
 }
 
-for (const [label, mutate] of [
+for (const [label, mutate] of /** @type {[string, (value: Workflow) => void][]} */ ([
   [
     "workflow secret environment",
     (workflow) => {
@@ -755,7 +778,7 @@ for (const [label, mutate] of [
       workflow.defaults = { run: { shell: "bash" } };
     },
   ],
-]) {
+])) {
   test(`${label} cannot expand the release workflow`, async () => {
     const workflow = parse(
       await readFile(
@@ -771,7 +794,7 @@ for (const [label, mutate] of [
   });
 }
 
-for (const [label, mutate] of [
+for (const [label, mutate] of /** @type {[string, (value: Job) => void][]} */ ([
   [
     "plan mutation run",
     (prepare) => {
@@ -802,7 +825,7 @@ for (const [label, mutate] of [
       prepare.env = { NPM_TOKEN: "${{ secrets.NPM_TOKEN }}" };
     },
   ],
-]) {
+])) {
   test(`${label} cannot alter release-plan preparation`, async () => {
     const workflow = parse(
       await readFile(

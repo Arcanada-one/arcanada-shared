@@ -2,7 +2,7 @@
   "name": "arcanada-shared",
   "version": "0.0.0-private",
   "private": true,
-  "description": "Reusable cross-project modules for the Arcanada ecosystem — shared TypeScript packages published under the @arcanada scope.",
+  "description": "Reusable cross-project modules for the Arcanada ecosystem \u2014 shared TypeScript packages published under the @arcanada scope.",
   "license": "MIT",
   "type": "module",
   "homepage": "https://github.com/Arcanada-one/arcanada-shared#readme",
@@ -23,7 +23,7 @@
     "test": "pnpm test:workflow && pnpm -r test",
     "test:workflow": "node --test tests/*.test.mjs",
     "lint": "pnpm -r --if-present lint && prettier --check \"**/*.{ts,mjs,md,json,yml,yaml}\"",
-    "typecheck": "pnpm -r exec tsc --noEmit",
+    "typecheck": "tsc --noEmit && pnpm -r exec tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,mjs,md,json,yml,yaml}\"",
     "release": "changeset publish"
   },
@@ -36,6 +36,7 @@
     "prettier": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "yaml": "catalog:"
+    "yaml": "catalog:",
+    "@arcanada/eslint-config": "workspace:*"
   }
 }
