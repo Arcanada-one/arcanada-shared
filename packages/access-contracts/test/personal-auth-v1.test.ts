@@ -372,3 +372,12 @@ it("matches the portable initial wire fixture and independently generated hash",
       createHash("sha256").update(result.value, "utf8").digest("hex"),
     ).toBe(golden.expectedFingerprintSha256);
 });
+
+it("rejects negative zero in the already decoded shared descriptor too", () => {
+  const { request } = fixture();
+  request.capture_binding.descriptor = {
+    ...request.capture_binding.descriptor,
+    cancellationGeneration: -0,
+  };
+  expect(parsePersonalAuthOperation(request).ok).toBe(false);
+});

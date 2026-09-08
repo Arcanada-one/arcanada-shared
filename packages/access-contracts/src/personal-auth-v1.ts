@@ -245,6 +245,15 @@ function canonical(value: unknown): string {
   if (encoded === undefined) throw new Error();
   return encoded;
 }
+function canonicalNumbers(value: unknown): void {
+  if (typeof value === "number")
+    requireValue(
+      Number.isSafeInteger(value) && value >= 0 && !Object.is(value, -0),
+    );
+  else if (Array.isArray(value)) value.forEach(canonicalNumbers);
+  else if (value !== null && typeof value === "object")
+    Object.values(value).forEach(canonicalNumbers);
+}
 function operation(input: unknown): PersonalAuthOperationRequest {
   const v = record(
     input,
@@ -286,11 +295,13 @@ function operation(input: unknown): PersonalAuthOperationRequest {
   const binding = record(v.capture_binding, ["descriptor", "status"]);
   const descriptor = parsePersonalCaptureDescriptor(binding.descriptor);
   requireValue(descriptor.ok);
+  canonicalNumbers(descriptor.value);
   let status: PersonalCaptureStatus | null = null;
   if (binding.status !== null) {
     const parsed = parsePersonalCaptureStatus(binding.status);
     requireValue(parsed.ok);
     status = parsed.value;
+    canonicalNumbers(status);
     requireValue(canonical(status.descriptor) === canonical(descriptor.value));
   }
   requireValue(
