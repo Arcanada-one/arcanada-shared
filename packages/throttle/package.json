@@ -1,6 +1,6 @@
 {
   "name": "@arcanada/throttle",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Two-layer anti-abuse for NestJS — named @nestjs/throttler config plus an escalating-ban guard with Fibonacci block growth that holds even for authenticated principals.",
   "license": "MIT",
   "type": "module",
