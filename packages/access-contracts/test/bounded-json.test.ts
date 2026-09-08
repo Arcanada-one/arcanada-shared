@@ -118,9 +118,12 @@ describe("parseBoundedJson public export", () => {
     [0xf5, 0x80, 0x80, 0x80],
     [0xff],
     [0xe2, 0x82],
-  ])("rejects malformed UTF-8 within an otherwise quoted string: %j", (...bad) => {
-    rejects(Uint8Array.from([34, ...bad, 34]));
-  });
+  ])(
+    "rejects malformed UTF-8 within an otherwise quoted string: %j",
+    (...bad) => {
+      rejects(Uint8Array.from([34, ...bad, 34]));
+    },
+  );
 
   it("accepts the scalar boundaries of every UTF-8 sequence width", () => {
     const cases: [number[], string][] = [
@@ -143,16 +146,27 @@ describe("parseBoundedJson public export", () => {
   it("rejects BOM but preserves valid Unicode inside strings", () => {
     rejects(Uint8Array.from([0xef, 0xbb, 0xbf, 110, 117, 108, 108]));
     rejects(Uint8Array.from([32, 0xef, 0xbb, 0xbf, 48]));
-    expect(parseBoundedJson(Uint8Array.from([
-      34, 0xc3, 0xa9, 0xe2, 0x82, 0xac, 0xf0, 0x9f, 0x98, 0x80,
-      0xef, 0xbb, 0xbf, 34,
-    ]))).toBe("é€😀\ufeff");
+    expect(
+      parseBoundedJson(
+        Uint8Array.from([
+          34, 0xc3, 0xa9, 0xe2, 0x82, 0xac, 0xf0, 0x9f, 0x98, 0x80, 0xef, 0xbb,
+          0xbf, 34,
+        ]),
+      ),
+    ).toBe("é€😀\ufeff");
     expect(parse('"\\ud83d\\ude00"')).toBe("😀");
-    expect(parse('"\\u0000\\uD7FF\\uE000\\uFFFF"')).toBe("\0\ud7ff\ue000\uffff");
+    expect(parse('"\\u0000\\uD7FF\\uE000\\uFFFF"')).toBe(
+      "\0\ud7ff\ue000\uffff",
+    );
     // Literal and escaped Unicode keys collide after decoding.
-    rejects(Uint8Array.from([
-      ...bytes('{"'), 0xc3, 0xa9, ...bytes('":1,"\\u00e9":1}'),
-    ]));
+    rejects(
+      Uint8Array.from([
+        ...bytes('{"'),
+        0xc3,
+        0xa9,
+        ...bytes('":1,"\\u00e9":1}'),
+      ]),
+    );
   });
 
   it.each([
@@ -165,23 +179,52 @@ describe("parseBoundedJson public export", () => {
   ])("rejects lone surrogate escapes: %s", (raw) => rejects(bytes(raw)));
 
   it.each([
-    "1e309", "-1e309", "1.7976931348623159e308",
-    '[1e309]', '{"n":-1e309}',
+    "1e309",
+    "-1e309",
+    "1.7976931348623159e308",
+    "[1e309]",
+    '{"n":-1e309}',
   ])("rejects non-finite decoded numbers: %s", (raw) => rejects(bytes(raw)));
 
   it.each([
-    "1.7976931348623157e308", "-1.7976931348623157e308",
-    "5e-324", "1e-400", "9007199254740993", "-0", "-1e-400",
+    "1.7976931348623157e308",
+    "-1.7976931348623157e308",
+    "5e-324",
+    "1e-400",
+    "9007199254740993",
+    "-0",
+    "-1e-400",
   ])("retains native finite-number semantics: %s", (raw) => {
     expect(Object.is(parse(raw), JSON.parse(raw))).toBe(true);
   });
 
   it.each([
-    "null true", "{}[]", "0garbage", "[1,]", '{"a":1,}',
-    "[", "{", '"unfinished', '"bad\\x20"', '"bad\\u12"',
-    '"line\nfeed"', '"control\u0000"', "[1 2]", '{"a" 1}',
-    "{a:1}", "01", "+1", ".1", "1.", "1e", "NaN", "Infinity",
-    "undefined", "// comment\n0", "\u000b0", "\u00a00",
+    "null true",
+    "{}[]",
+    "0garbage",
+    "[1,]",
+    '{"a":1,}',
+    "[",
+    "{",
+    '"unfinished',
+    '"bad\\x20"',
+    '"bad\\u12"',
+    '"line\nfeed"',
+    '"control\u0000"',
+    "[1 2]",
+    '{"a" 1}',
+    "{a:1}",
+    "01",
+    "+1",
+    ".1",
+    "1.",
+    "1e",
+    "NaN",
+    "Infinity",
+    "undefined",
+    "// comment\n0",
+    "\u000b0",
+    "\u00a00",
     '{"secret-sentinel":oops}',
   ])("rejects malformed syntax without disclosing data: %s", (raw) => {
     rejects(bytes(raw));
