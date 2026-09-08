@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
 import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 import { parse } from "yaml";
+import { RELEASE_PACKAGES } from "../scripts/release-preflight.mjs";
 import {
   INTERNAL_TASK_ID_PATTERN,
   INTERNAL_TASK_PREFIXES,
@@ -210,7 +212,7 @@ const PRIVILEGED_STEP_ALLOWLIST = {
       keys: ["env", "name", "run"],
       name: "Publish only validated package tarballs",
       runSha256:
-        "3c89d51d5a00cf71e5cf2dffae4d571a8643f3d55ce89ee0ac793c02097598e4",
+        "89b0d9c4b9d130750242ad41c86d0773465dbfbf2eb0362425cb44cce2a3c6df",
       env: {
         GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
         GH_REPO: "${{ github.repository }}",
@@ -524,6 +526,35 @@ test("release workflow prepares code read-only and publishes without repo depend
       "utf8",
     ),
   );
+});
+
+test("publish shell guard admits exactly the reviewed release packages", async () => {
+  const workflow = parse(
+    await readFile(
+      new URL("../.github/workflows/release.yml", import.meta.url),
+      "utf8",
+    ),
+  );
+  const script = workflow.jobs.publish.steps.find(
+    (step) => step.name === "Publish only validated package tarballs",
+  ).run;
+  const guard = script.match(/case "\$package_name" in[\s\S]*?\besac\b/)?.[0];
+  assert.ok(guard);
+  for (const name of [
+    ...RELEASE_PACKAGES.map((entry) => entry.name),
+    "@arcanada/unreviewed",
+    "@arcanada/logger-extra",
+  ]) {
+    const result = spawnSync("bash", ["-eu", "-c", guard], {
+      env: { PATH: process.env.PATH, package_name: name },
+      encoding: "utf8",
+    });
+    assert.equal(
+      result.status,
+      RELEASE_PACKAGES.some((entry) => entry.name === name) ? 0 : 1,
+      `unexpected publish guard verdict for ${name}`,
+    );
+  }
 });
 
 test("duplicate Node setup cannot shadow either release toolchain", async () => {

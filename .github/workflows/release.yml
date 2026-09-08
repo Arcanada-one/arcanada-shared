@@ -198,9 +198,11 @@ jobs:
           while IFS=$'\t' read -r \
             package_name package_version package_path notes_path expected_sha; do
             case "$package_name" in
+              "@arcanada/access-contracts" | \
               "@arcanada/eslint-config" | \
               "@arcanada/logger" | \
               "@arcanada/nest-common" | \
+              "@arcanada/throttle" | \
               "@arcanada/tsconfig") ;;
               *)
                 echo "Unexpected package in release plan: $package_name" >&2
