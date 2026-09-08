@@ -1,3 +1,6 @@
+/** @typedef {import('./workflow-types.js').Step} Step */
+/** @typedef {import('./workflow-types.js').Job} Job */
+/** @typedef {import('./workflow-types.js').Workflow} Workflow */
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
@@ -221,21 +224,30 @@ const PRIVILEGED_STEP_ALLOWLIST = {
   ],
 };
 
+/** @param {Step[]} steps
+ * @param {string} action */
 const findActionSteps = (steps, action) =>
   steps
     .map((step, index) => ({ index, step }))
     .filter(({ step }) => step?.uses?.split("@", 1)[0] === action);
 
+/** @param {Step[]} steps
+ * @param {RegExp} pattern */
 const findRunSteps = (steps, pattern) =>
   steps
     .map((step, index) => ({ index, step }))
     .filter(({ step }) => pattern.test(String(step?.run ?? "")));
 
+/** @template T
+ * @param {T[]} matches
+ * @param {string} message
+ * @returns {T} */
 const assertOne = (matches, message) => {
   assert.equal(matches.length, 1, message);
   return matches[0];
 };
 
+/** @param {Workflow} workflow */
 const assertPinnedUses = (workflow) => {
   for (const [jobName, job] of Object.entries(workflow?.jobs ?? {})) {
     if (typeof job?.uses === "string") {
@@ -257,6 +269,8 @@ const assertPinnedUses = (workflow) => {
   }
 };
 
+/** @param {Step[]} steps
+ * @param {string} jobName */
 const assertCheckoutDoesNotPersistCredentials = (steps, jobName) => {
   const checkout = assertOne(
     findActionSteps(steps, "actions/checkout"),
@@ -269,6 +283,8 @@ const assertCheckoutDoesNotPersistCredentials = (steps, jobName) => {
   );
 };
 
+/** @param {Step[]} steps
+ * @param {string} jobName */
 const assertArtifactDownload = (steps, jobName) => {
   const download = assertOne(
     findActionSteps(steps, "actions/download-artifact"),
@@ -281,6 +297,7 @@ const assertArtifactDownload = (steps, jobName) => {
   );
 };
 
+/** @param {Step} step */
 const privilegedStepShape = (step) => {
   const keys = Object.keys(step).sort();
   if (typeof step?.uses === "string") {
@@ -292,6 +309,7 @@ const privilegedStepShape = (step) => {
     };
   }
   if (typeof step?.run === "string") {
+    /** @type {{kind: string, keys: string[], name: string, runSha256: string, env: Record<string, unknown>, id?: string | undefined}} */
     const shape = {
       kind: "run",
       keys,
@@ -307,6 +325,7 @@ const privilegedStepShape = (step) => {
   return { kind: "unknown", keys };
 };
 
+/** @param {Workflow} workflow */
 const assertWorkflowAllowlist = (workflow) => {
   assert.deepEqual(
     Object.keys(workflow ?? {}).sort(),
@@ -322,6 +341,7 @@ const assertWorkflowAllowlist = (workflow) => {
   );
 };
 
+/** @param {Job} job */
 const assertPrepareStepAllowlist = (job) => {
   assert.deepEqual(
     Object.keys(job ?? {}).sort(),
@@ -335,6 +355,8 @@ const assertPrepareStepAllowlist = (job) => {
   );
 };
 
+/** @param {'version-pr' | 'publish'} jobName
+ * @param {Job} job */
 const assertPrivilegedStepAllowlist = (jobName, job) => {
   assert.deepEqual(
     Object.keys(job ?? {}).sort(),
@@ -348,6 +370,7 @@ const assertPrivilegedStepAllowlist = (jobName, job) => {
   );
 };
 
+/** @param {string} source */
 const validateReleaseWorkflow = (source) => {
   const workflow = parse(source);
   assertWorkflowAllowlist(workflow);
@@ -412,7 +435,7 @@ const validateReleaseWorkflow = (source) => {
     String(prepareNode.step.with?.["node-version"]),
     RELEASE_NODE_VERSION,
   );
-  for (const [pattern, message] of [
+  for (const [pattern, message] of /** @type {[RegExp, string][]} */ ([
     [/^pnpm install --frozen-lockfile$/, "frozen install"],
     [/^pnpm lint$/, "lint"],
     [/^pnpm typecheck$/, "typecheck"],
@@ -420,7 +443,7 @@ const validateReleaseWorkflow = (source) => {
     [/^pnpm test$/, "complete test suite"],
     [/^pnpm audit --audit-level=high$/, "full audit"],
     [/^node scripts\/prepare-release-plan\.mjs$/, "release-plan preparation"],
-  ]) {
+  ])) {
     assertOne(
       findRunSteps(prepareSteps, pattern),
       `prepare must run exactly one ${message}`,
@@ -498,10 +521,10 @@ const validateReleaseWorkflow = (source) => {
     "publish must independently reject task IDs in tarball content",
   );
 
-  for (const [jobName, steps] of [
+  for (const [jobName, steps] of /** @type {[string, Step[]][]} */ ([
     ["version-pr", versionSteps],
     ["publish", publishSteps],
-  ]) {
+  ])) {
     const usesChangesets = findActionSteps(steps, "changesets/action");
     assert.equal(
       usesChangesets.length,
@@ -529,15 +552,20 @@ test("release workflow prepares code read-only and publishes without repo depend
 });
 
 test("publish shell guard admits exactly the reviewed release packages", async () => {
+  /** @type {Workflow} */
   const workflow = parse(
     await readFile(
       new URL("../.github/workflows/release.yml", import.meta.url),
       "utf8",
     ),
   );
-  const script = workflow.jobs.publish.steps.find(
+  const publishStep = workflow.jobs.publish.steps.find(
     (step) => step.name === "Publish only validated package tarballs",
-  ).run;
+  );
+  assert.ok(publishStep);
+  const script = publishStep.run;
+  assert.equal(typeof script, "string");
+  assert.ok(script);
   const guard = script.match(/case "\$package_name" in[\s\S]*?\besac\b/)?.[0];
   assert.ok(guard);
   for (const name of [
@@ -545,8 +573,9 @@ test("publish shell guard admits exactly the reviewed release packages", async (
     "@arcanada/unreviewed",
     "@arcanada/logger-extra",
   ]) {
-    const result = spawnSync("bash", ["-eu", "-c", guard], {
-      env: { PATH: process.env.PATH, package_name: name },
+    /** @type {import("node:child_process").SpawnSyncReturns<string>} */
+    const result = spawnSync("/bin/bash", ["-eu", "-c", guard], {
+      env: { package_name: name },
       encoding: "utf8",
     });
     assert.equal(
@@ -670,7 +699,11 @@ test("mutable reusable sibling workflows cannot bypass pinning", async () => {
   );
 });
 
-for (const [label, jobName, injectedStep] of [
+for (const [
+  label,
+  jobName,
+  injectedStep,
+] of /** @type {[string, string, Step][]} */ ([
   [
     "arbitrary curl run",
     "version-pr",
@@ -694,7 +727,7 @@ for (const [label, jobName, injectedStep] of [
       run: "npm publish unexpected.tgz --access public",
     },
   ],
-]) {
+])) {
   test(`${label} cannot enter a privileged job`, async () => {
     const workflow = parse(
       await readFile(
@@ -773,7 +806,10 @@ for (const [label, job] of [
   });
 }
 
-for (const [label, mutate] of [
+for (const [
+  label,
+  mutate,
+] of /** @type {[string, (value: Workflow) => void][]} */ ([
   [
     "workflow secret environment",
     (workflow) => {
@@ -786,7 +822,7 @@ for (const [label, mutate] of [
       workflow.defaults = { run: { shell: "bash" } };
     },
   ],
-]) {
+])) {
   test(`${label} cannot expand the release workflow`, async () => {
     const workflow = parse(
       await readFile(
@@ -802,7 +838,7 @@ for (const [label, mutate] of [
   });
 }
 
-for (const [label, mutate] of [
+for (const [label, mutate] of /** @type {[string, (value: Job) => void][]} */ ([
   [
     "plan mutation run",
     (prepare) => {
@@ -833,7 +869,7 @@ for (const [label, mutate] of [
       prepare.env = { NPM_TOKEN: "${{ secrets.NPM_TOKEN }}" };
     },
   ],
-]) {
+])) {
   test(`${label} cannot alter release-plan preparation`, async () => {
     const workflow = parse(
       await readFile(

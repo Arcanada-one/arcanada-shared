@@ -35,6 +35,8 @@ const createFixture = async () => {
   return rootDir;
 };
 
+/** @param {number} status
+ * @param {unknown} [body] */
 const response = (status, body = {}) => ({
   ok: status >= 200 && status < 300,
   status,
@@ -85,6 +87,7 @@ test("publish mode fails closed when any allowlisted package is absent", async (
       logger: { log() {} },
     }),
     (error) => {
+      assert.ok(error instanceof Error);
       assert.match(error.message, /BOOTSTRAP_REQUIRED/);
       for (const { name } of RELEASE_PACKAGES) {
         assert.match(error.message, new RegExp(name.replace("/", "\\/")));

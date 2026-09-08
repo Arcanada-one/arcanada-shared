@@ -59,14 +59,17 @@ export const INTERNAL_TASK_ID_PATTERN = new RegExp(
 const GLOBAL_TOOLCHAIN_MUTATION_PATTERN =
   /(?=.*\b(?:npm|pnpm)\b)(?=.*\b(?:add|install|i|update|upgrade)\b)(?=.*(?:-g\b|--global(?:=true)?\b|--location(?:=|\s+)global\b)).+|\bcorepack\s+(?:install|prepare|use)\b.*(?:--global(?:\s|$)|--activate(?:\s|$))|\bcorepack\s+(?:enable|disable)\b/;
 
+/** @param {unknown} command */
 export const normalizeShellCommand = (command) =>
   String(command)
     .replace(/\\\r?\n[ \t]*/g, " ")
     .replace(/[ \t\r\n]+/g, " ")
     .trim();
 
+/** @param {unknown} command */
 export const isGlobalToolchainMutation = (command) =>
   GLOBAL_TOOLCHAIN_MUTATION_PATTERN.test(normalizeShellCommand(command));
 
+/** @param {unknown} content */
 export const findInternalTaskId = (content) =>
   String(content).match(INTERNAL_TASK_ID_PATTERN)?.[0] ?? null;

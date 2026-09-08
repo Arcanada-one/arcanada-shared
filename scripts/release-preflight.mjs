@@ -34,16 +34,26 @@ export const RELEASE_PACKAGES = Object.freeze(
       name: "@arcanada/tsconfig",
       directory: "packages/tsconfig",
     },
-  ].map(Object.freeze),
+  ].map((entry) => Object.freeze(entry)),
 );
 
+/**
+ * @typedef {{name: string, directory: string, version: string, access: unknown}} PackageInfo
+ * @typedef {{name: string, version: string}} Candidate
+ * @typedef {(url: string, init: RequestInit) => Promise<{status: number, ok: boolean, json(): Promise<unknown>}>} RegistryFetch
+ * @typedef {{rootDir?: string, fetchImpl?: RegistryFetch, logger?: Pick<Console, 'log'>}} PreflightOptions
+ * @typedef {{mode: 'version', pendingChangesets: string[]} | {mode: 'publish', candidates: Candidate[]}} PreflightResult
+ */
+/** @param {string} path */
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 
+/** @param {string} rootDir */
 const listPendingChangesets = async (rootDir) =>
   (await readdir(join(rootDir, ".changeset")))
     .filter((file) => file.endsWith(".md") && file !== "README.md")
     .sort();
 
+/** @param {string} rootDir */
 const readPublishablePackages = async (rootDir) => {
   const packageRoot = join(rootDir, "packages");
   const entries = await readdir(packageRoot, { withFileTypes: true });
@@ -60,7 +70,11 @@ const readPublishablePackages = async (rootDir) => {
     try {
       manifest = await readJson(manifestPath);
     } catch (error) {
-      if (error?.code === "ENOENT") {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
         continue;
       }
       throw error;
@@ -79,6 +93,7 @@ const readPublishablePackages = async (rootDir) => {
   return discovered.sort((left, right) => left.name.localeCompare(right.name));
 };
 
+/** @param {string} rootDir */
 const validateAllowlist = async (rootDir) => {
   const discovered = await readPublishablePackages(rootDir);
   const expected = [...RELEASE_PACKAGES].sort((left, right) =>
@@ -123,6 +138,7 @@ const validateAllowlist = async (rootDir) => {
   return discovered;
 };
 
+/** @param {{fetchImpl: RegistryFetch, packageInfo: PackageInfo}} options */
 const fetchPackageMetadata = async ({ fetchImpl, packageInfo }) => {
   const url = `${REGISTRY_URL}/${encodeURIComponent(packageInfo.name)}`;
   let response;
@@ -133,7 +149,7 @@ const fetchPackageMetadata = async ({ fetchImpl, packageInfo }) => {
     });
   } catch (error) {
     throw new Error(
-      `REGISTRY_CHECK_FAILED: ${packageInfo.name}: ${error.message}. No publish was attempted.`,
+      `REGISTRY_CHECK_FAILED: ${packageInfo.name}: ${error instanceof Error ? error.message : String(error)}. No publish was attempted.`,
       { cause: error },
     );
   }
@@ -151,6 +167,7 @@ const fetchPackageMetadata = async ({ fetchImpl, packageInfo }) => {
   if (
     metadata === null ||
     typeof metadata !== "object" ||
+    !("versions" in metadata) ||
     metadata.versions === null ||
     typeof metadata.versions !== "object" ||
     Array.isArray(metadata.versions)
@@ -167,6 +184,8 @@ const fetchPackageMetadata = async ({ fetchImpl, packageInfo }) => {
   };
 };
 
+/** @param {PreflightOptions} [options]
+ * @returns {Promise<PreflightResult>} */
 export const runReleasePreflight = async ({
   rootDir = resolve(dirname(fileURLToPath(import.meta.url)), ".."),
   fetchImpl = globalThis.fetch,
