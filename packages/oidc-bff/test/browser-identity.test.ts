@@ -213,7 +213,7 @@ describe("real openid-client code and browser session boundary with synthetic si
       expect(result.status).toBe(303);
       const authorization = new URL(result.headers.get("location")!);
       expect(authorization.searchParams.get("ui_locales")).toBe(locale);
-      expect(authorization.searchParams.get("scope")).toBe("openid");
+      expect(authorization.searchParams.get("scope")).toBe("openid profile");
     },
   );
   it.each(["fr", "", "https://foreign.example/", "ru&locale=en"])(
