@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import {
@@ -151,7 +152,13 @@ describe("proposed Auth operation structural slice", () => {
     };
     request.resource.intent_revision = 1;
     expect(parsePersonalAuthOperation(request).ok).toBe(true);
-    request.capture_binding.status.descriptor.messageId = id(90);
+    request.capture_binding.status = {
+      ...request.capture_binding.status,
+      descriptor: {
+        ...request.capture_binding.status.descriptor,
+        messageId: id(90),
+      },
+    };
     expect(parsePersonalAuthOperation(request).ok).toBe(false);
   });
   for (const field of ["intent_id", "conversation_id", "message_id"] as const)
@@ -278,7 +285,10 @@ describe("proposed Auth operation structural slice", () => {
   it("conflicts on changed allocation even with same claimed Product fingerprint", () => {
     const { request, context } = fixture();
     const retry = structuredClone(request);
-    retry.capture_binding.descriptor.messageId = id(81);
+    retry.capture_binding.descriptor = {
+      ...retry.capture_binding.descriptor,
+      messageId: id(81),
+    };
     retry.resource.message_id = id(81);
     expect(
       comparePersonalAuthOperationRetry(request, context, retry, context),
@@ -337,4 +347,28 @@ describe("proposed Auth operation structural slice", () => {
       parsePersonalAuthJson("[".repeat(30) + "0" + "]".repeat(30)).ok,
     ).toBe(false);
   });
+});
+
+it("matches the portable initial wire fixture and independently generated hash", () => {
+  const golden = JSON.parse(
+    readFileSync(
+      new URL("./fixtures/personal-auth-initial.json", import.meta.url),
+      "utf8",
+    ),
+  ) as {
+    request: unknown;
+    context: unknown;
+    expectedFingerprintSha256: string;
+  };
+  expect(golden.request).toEqual(fixture().request);
+  expect(golden.context).toEqual(fixture().context);
+  const result = personalAuthOperationFingerprintInput(
+    golden.request,
+    golden.context,
+  );
+  expect(result.ok).toBe(true);
+  if (result.ok)
+    expect(
+      createHash("sha256").update(result.value, "utf8").digest("hex"),
+    ).toBe(golden.expectedFingerprintSha256);
 });

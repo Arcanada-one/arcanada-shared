@@ -387,6 +387,7 @@ function context(input: unknown): PersonalAuthBindingContext {
   const issuer = new URL(v.issuer);
   requireValue(
     issuer.protocol === "https:" &&
+      (issuer.href === v.issuer || issuer.href === v.issuer + "/") &&
       !issuer.username &&
       !issuer.password &&
       !issuer.search &&
