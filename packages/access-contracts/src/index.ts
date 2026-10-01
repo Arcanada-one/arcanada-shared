@@ -445,3 +445,5 @@ export { parseBoundedJson } from "./bounded-json.js";
 export * from "./personal-auth-capture-binding.js";
 export * from "./personal-auth-v1.js";
 export { parsePersonalAuthJson } from "./personal-auth-json.js";
+
+export * from "./personal-auth-lease-v1.js";
