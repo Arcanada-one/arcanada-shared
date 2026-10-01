@@ -5,10 +5,16 @@
     "superseded_self_rule": "DEC-AUP-0035: the entity a receipt can never verify is the PREVIOUS VERSION OF ITSELF. When a receipt is re-issued at the same path for the same work item — the ordinary case after a rebase or a second commit on a card — the copy of it standing in the tree is superseded by construction: this run is the measurement that replaces it, so the only verdict it could carry is I14 `not_measured` about a document that no longer exists at that path once the run finishes. It is excluded with the work item and the output path that identify it, both re-derived from Git by impact_pair.receipt_problems, never asserted.",
     "verdict": "admitted"
   },
-  "captured_at_utc": "2026-10-01T05:27:25Z",
+  "captured_at_utc": "2026-10-01T05:42:20Z",
   "change_set": {
     "base": "fc1aff0be1855a5fd33e7d9cbd034a90af5da0cf",
     "files": [
+      {
+        "kind": "config",
+        "new": true,
+        "path": ".arcana/verify.json",
+        "status": "A"
+      },
       {
         "kind": "lockfile",
         "path": "pnpm-lock.yaml",
@@ -18,29 +24,36 @@
         "kind": "global_config",
         "path": "pnpm-workspace.yaml",
         "status": "M"
+      },
+      {
+        "kind": "receipt",
+        "node_id": "receipt:receipts/graph/persist-foundation-audit.json",
+        "node_ids": ["receipt:receipts/graph/persist-foundation-audit.json"],
+        "path": "receipts/graph/persist-foundation-audit.json",
+        "status": "A"
       }
     ],
-    "head": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
+    "head": "f54cafddcbfc10072950d1093f55ea5410a1d6ce",
     "mode": "diff"
   },
   "decision_ref": "DEC-AUP-0008",
   "exemptions": [],
   "graph": {
-    "builder_version": "1.0.1",
+    "builder_version": "1.0.2",
     "built_at_utc": "2026-09-05T00:00:00Z",
-    "graph_digest": "sha256:e042959872b4661dda76fe835f4e797b9f5587e26a8dba5452a0de44e74fa1c5",
-    "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/graph-fc1aff0be185.json",
+    "graph_digest": "sha256:fbcc7feeaada2d35ce6eb07e77c764c1261e7727d0d19be0d1f5844a21f5c48f",
+    "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/graph-fc1aff0be185.json",
     "source_commit": "fc1aff0be1855a5fd33e7d9cbd034a90af5da0cf"
   },
   "head_graph": {
-    "builder_version": "1.0.1",
+    "builder_version": "1.0.2",
     "built_at_utc": "2026-09-05T00:00:00Z",
-    "graph_digest": "sha256:51fddf945636c455e55a1e97c80a8de24812c1e60eba377dfe180b20a2a5541f",
-    "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/graph-head-838d7dc1ae7e.json",
-    "source_commit": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
+    "graph_digest": "sha256:a42319cb5a6a86766f219c28c4c02c4b11b97e745156e819047cac19285d287b",
+    "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/graph-head-f54cafddcbfc.json",
+    "source_commit": "f54cafddcbfc10072950d1093f55ea5410a1d6ce",
     "staleness": {
-      "checked_at_utc": "2026-10-01T05:27:25Z",
-      "checked_nodes": 76,
+      "checked_at_utc": "2026-10-01T05:42:20Z",
+      "checked_nodes": 77,
       "method": "manifest.dirty must be false; manifest.source_commit == change_set.head; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at head (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
       "mismatched_nodes": [],
       "verdict": "fresh"
@@ -48,7 +61,7 @@
   },
   "host": "isolated-build",
   "host_redacted": true,
-  "host_sha256": "8366805d550543b460fa475c0d51380918b93093061a752a66355d91739d27b8",
+  "host_sha256": "45dd86d2400ba3d680ac130aa1d3fda8b8db88016ee35dcbd70f59e630081cbf",
   "impact_set": {
     "deterministic_core": [
       {
@@ -1509,14 +1522,14 @@
     "total": 85
   },
   "notes": [
-    "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.2.0) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
-    "profile: (auto-detected); baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: none; disabled: none"
+    "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.3.0) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
+    "profile: .arcana/verify.json at verified head; baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: none; disabled: none"
   ],
   "producer": {
     "tool": "tools/graph/verify.py",
-    "version": "1.2.0"
+    "version": "1.3.0"
   },
-  "receipt_id": "car-verify-20261001T052725Z-838d7dc1",
+  "receipt_id": "car-verify-20261001T054220Z-f54cafdd",
   "receipt_path": "receipts/graph/persist-foundation-audit.json",
   "repo": {
     "name": "Arcanada-one/arcanada-shared",
@@ -1565,152 +1578,240 @@
       "deployable_unit:packages/logger",
       "deployable_unit:packages/nest-common",
       "deployable_unit:packages/throttle",
-      "deployable_unit:packages/tsconfig"
+      "deployable_unit:packages/tsconfig",
+      "receipt:receipts/graph/persist-foundation-audit.json"
     ],
     "schema": "RevisionImpactSelection/v1",
     "unmeasured_head_files": []
   },
   "schema": "ChangeAdmissionReceipt/v1",
   "staleness": {
-    "checked_at_utc": "2026-10-01T05:27:25Z",
+    "checked_at_utc": "2026-10-01T05:42:20Z",
     "method": "manifest.dirty must be false; manifest.source_commit == change_set.base; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at base (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
     "mismatched_nodes": [],
     "verdict": "fresh"
   },
-  "structural_exclusions": [],
+  "structural_exclusions": [
+    {
+      "content_hash": {
+        "base": null,
+        "head": "sha256:9974648aba7c08405504a735c743632c6c41cfb849790f6f4a7dc1c1faf8a8af"
+      },
+      "entity": "receipt:receipts/graph/persist-foundation-audit.json",
+      "node_type": "receipt",
+      "path": "receipts/graph/persist-foundation-audit.json",
+      "reason": "historical receipt: asserted, never re-verified (I14); a new receipt supersedes it; superseded by construction — this run re-issues the receipt at receipts/graph/persist-foundation-audit.json for work item 7f131984-cd74-439a-89fc-21a7fe705837",
+      "rule": "DEC-AUP-0035",
+      "superseded": {
+        "receipt_path": "receipts/graph/persist-foundation-audit.json",
+        "work_item": "7f131984-cd74-439a-89fc-21a7fe705837"
+      }
+    }
+  ],
   "tree": {
-    "commit": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
+    "commit": "f54cafddcbfc10072950d1093f55ea5410a1d6ce",
     "dirty": false
   },
   "verdicts": [
     {
       "entity": "code_unit:.github/workflows/ci.yml",
-      "reason": "v-workflow-config-b803fcb7f17ed923: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-workflow-config-b803fcb7f17ed923"]
-    },
-    {
-      "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
-      "reason": "v-workflow-config-2fe48d1021006468: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-workflow-config-2fe48d1021006468"]
-    },
-    {
-      "entity": "code_unit:.github/workflows/governance.yml",
-      "reason": "v-workflow-config-5844296ae241614c: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-workflow-config-5844296ae241614c"]
-    },
-    {
-      "entity": "code_unit:.github/workflows/release.yml",
-      "reason": "v-workflow-config-87db21a973eed4fe: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-workflow-config-87db21a973eed4fe"]
-    },
-    {
-      "entity": "code_unit:eslint.config.js",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:scripts/prepare-release-plan.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:scripts/release-policy.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:scripts/release-preflight.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:tests/release-boundary-regression.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:tests/release-preflight.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:tests/release-workflow-policy.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:tests/workflow-types.d.ts",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "code_unit:vitest.config.ts",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
-    },
-    {
-      "entity": "deployable_unit:packages/access-contracts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: 0 errors; v-fitness: no new violation in packages/access-contracts",
+      "reason": "v-workflow-config-b803fcb7f17ed923: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
+        "v-global-fallback-test-root",
+        "v-workflow-config-b803fcb7f17ed923"
+      ]
+    },
+    {
+      "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+      "reason": "v-workflow-config-2fe48d1021006468: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-workflow-config-2fe48d1021006468"
+      ]
+    },
+    {
+      "entity": "code_unit:.github/workflows/governance.yml",
+      "reason": "v-workflow-config-5844296ae241614c: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-workflow-config-5844296ae241614c"
+      ]
+    },
+    {
+      "entity": "code_unit:.github/workflows/release.yml",
+      "reason": "v-workflow-config-87db21a973eed4fe: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-workflow-config-87db21a973eed4fe"
+      ]
+    },
+    {
+      "entity": "code_unit:eslint.config.js",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:scripts/prepare-release-plan.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:scripts/release-policy.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:scripts/release-preflight.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:tests/release-boundary-regression.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:tests/release-preflight.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:tests/release-workflow-policy.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:tests/workflow-types.d.ts",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "code_unit:vitest.config.ts",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-root",
+        "v-type-check-tsconfig"
+      ]
+    },
+    {
+      "entity": "deployable_unit:packages/access-contracts",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: 0 errors; v-fitness: no new violation in packages/access-contracts; v-global-fallback-test-packages-access-contracts: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
     {
       "entity": "deployable_unit:packages/eslint-config",
-      "reason": "v-type-check-packages-eslint-config-tsconfig: packages/eslint-config/tsconfig.json: 0 errors; v-fitness: no new violation in packages/eslint-config",
+      "reason": "v-type-check-packages-eslint-config-tsconfig: packages/eslint-config/tsconfig.json: 0 errors; v-fitness: no new violation in packages/eslint-config; v-global-fallback-test-packages-eslint-config: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
+        "v-global-fallback-test-packages-eslint-config",
         "v-type-check-packages-eslint-config-tsconfig"
       ]
     },
     {
       "entity": "deployable_unit:packages/logger",
-      "reason": "v-type-check-packages-logger-tsconfig: packages/logger/tsconfig.json: 0 errors; v-fitness: no new violation in packages/logger",
-      "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-packages-logger-tsconfig"]
-    },
-    {
-      "entity": "deployable_unit:packages/nest-common",
-      "reason": "v-type-check-packages-nest-common-tsconfig: packages/nest-common/tsconfig.json: 0 errors; v-fitness: no new violation in packages/nest-common",
+      "reason": "v-type-check-packages-logger-tsconfig: packages/logger/tsconfig.json: 0 errors; v-fitness: no new violation in packages/logger; v-global-fallback-test-packages-logger: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
+        "v-global-fallback-test-packages-logger",
+        "v-type-check-packages-logger-tsconfig"
+      ]
+    },
+    {
+      "entity": "deployable_unit:packages/nest-common",
+      "reason": "v-type-check-packages-nest-common-tsconfig: packages/nest-common/tsconfig.json: 0 errors; v-fitness: no new violation in packages/nest-common; v-global-fallback-test-packages-nest-common: complete fallback suite: verified",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-packages-nest-common",
         "v-type-check-packages-nest-common-tsconfig"
       ]
     },
     {
       "entity": "deployable_unit:packages/throttle",
-      "reason": "v-type-check-packages-throttle-tsconfig: packages/throttle/tsconfig.json: 0 errors; v-fitness: no new violation in packages/throttle",
+      "reason": "v-type-check-packages-throttle-tsconfig: packages/throttle/tsconfig.json: 0 errors; v-fitness: no new violation in packages/throttle; v-global-fallback-test-packages-throttle: complete fallback suite: verified",
       "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-packages-throttle-tsconfig"]
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-packages-throttle",
+        "v-type-check-packages-throttle-tsconfig"
+      ]
     },
     {
       "entity": "deployable_unit:packages/tsconfig",
-      "reason": "v-type-check-packages-tsconfig-tsconfig: packages/tsconfig/tsconfig.json: 0 errors; v-fitness: no new violation in packages/tsconfig",
+      "reason": "v-type-check-packages-tsconfig-tsconfig: packages/tsconfig/tsconfig.json: 0 errors; v-fitness: no new violation in packages/tsconfig; v-global-fallback-test-packages-tsconfig: complete fallback suite: verified",
       "verdict": "verified",
-      "verifier_ids": ["v-fitness", "v-type-check-packages-tsconfig-tsconfig"]
+      "verifier_ids": [
+        "v-fitness",
+        "v-global-fallback-test-packages-tsconfig",
+        "v-type-check-packages-tsconfig-tsconfig"
+      ]
     }
   ],
   "verifier_selection": {
@@ -1722,7 +1823,7 @@
   "verifiers": [
     {
       "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 2.42,
+      "duration_s": 1.55,
       "entities": [
         "code_unit:eslint.config.js",
         "code_unit:scripts/prepare-release-plan.mjs",
@@ -1750,13 +1851,13 @@
       "exit_code": 0,
       "id": "v-type-check-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-tsconfig.txt",
-      "started_at_utc": "2026-10-01T05:27:26Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-type-check-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:42:21Z",
       "summary": "tsconfig.json: exit 0, 0 error(s), 395 files listed"
     },
     {
       "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/access-contracts/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 1.85,
+      "duration_s": 1.32,
       "entities": ["deployable_unit:packages/access-contracts"],
       "entity_verdicts": {
         "deployable_unit:packages/access-contracts": "verified"
@@ -1764,13 +1865,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-access-contracts-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
-      "started_at_utc": "2026-10-01T05:27:29Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:42:22Z",
       "summary": "packages/access-contracts/tsconfig.json: exit 0, 0 error(s), 258 files listed"
     },
     {
       "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/eslint-config/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 1.93,
+      "duration_s": 1.16,
       "entities": ["deployable_unit:packages/eslint-config"],
       "entity_verdicts": {
         "deployable_unit:packages/eslint-config": "verified"
@@ -1778,13 +1879,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-eslint-config-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-eslint-config-tsconfig.txt",
-      "started_at_utc": "2026-10-01T05:27:31Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-type-check-packages-eslint-config-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:42:24Z",
       "summary": "packages/eslint-config/tsconfig.json: exit 0, 0 error(s), 357 files listed"
     },
     {
       "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/logger/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 1.65,
+      "duration_s": 1.24,
       "entities": ["deployable_unit:packages/logger"],
       "entity_verdicts": {
         "deployable_unit:packages/logger": "verified"
@@ -1792,13 +1893,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-logger-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-logger-tsconfig.txt",
-      "started_at_utc": "2026-10-01T05:27:33Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-type-check-packages-logger-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:42:25Z",
       "summary": "packages/logger/tsconfig.json: exit 0, 0 error(s), 626 files listed"
     },
     {
       "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/nest-common/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 2.63,
+      "duration_s": 2.25,
       "entities": ["deployable_unit:packages/nest-common"],
       "entity_verdicts": {
         "deployable_unit:packages/nest-common": "verified"
@@ -1806,13 +1907,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-nest-common-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-nest-common-tsconfig.txt",
-      "started_at_utc": "2026-10-01T05:27:35Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-type-check-packages-nest-common-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:42:26Z",
       "summary": "packages/nest-common/tsconfig.json: exit 0, 0 error(s), 711 files listed"
     },
     {
       "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/throttle/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 1.89,
+      "duration_s": 1.56,
       "entities": ["deployable_unit:packages/throttle"],
       "entity_verdicts": {
         "deployable_unit:packages/throttle": "verified"
@@ -1820,13 +1921,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-throttle-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-throttle-tsconfig.txt",
-      "started_at_utc": "2026-10-01T05:27:37Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-type-check-packages-throttle-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:42:29Z",
       "summary": "packages/throttle/tsconfig.json: exit 0, 0 error(s), 719 files listed"
     },
     {
       "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/tsconfig/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 1.38,
+      "duration_s": 1.13,
       "entities": ["deployable_unit:packages/tsconfig"],
       "entity_verdicts": {
         "deployable_unit:packages/tsconfig": "verified"
@@ -1834,8 +1935,8 @@
       "exit_code": 0,
       "id": "v-type-check-packages-tsconfig-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-tsconfig-tsconfig.txt",
-      "started_at_utc": "2026-10-01T05:27:39Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-type-check-packages-tsconfig-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:42:30Z",
       "summary": "packages/tsconfig/tsconfig.json: exit 0, 0 error(s), 253 files listed"
     },
     {
@@ -1848,8 +1949,8 @@
       "exit_code": 0,
       "id": "v-workflow-config-b803fcb7f17ed923",
       "kind": "config_schema",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-b803fcb7f17ed923.txt",
-      "started_at_utc": "2026-10-01T05:27:41Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-workflow-config-b803fcb7f17ed923.txt",
+      "started_at_utc": "2026-10-01T05:42:32Z",
       "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
     },
     {
@@ -1862,8 +1963,8 @@
       "exit_code": 0,
       "id": "v-workflow-config-2fe48d1021006468",
       "kind": "config_schema",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-2fe48d1021006468.txt",
-      "started_at_utc": "2026-10-01T05:27:41Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-workflow-config-2fe48d1021006468.txt",
+      "started_at_utc": "2026-10-01T05:42:32Z",
       "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
     },
     {
@@ -1876,8 +1977,8 @@
       "exit_code": 0,
       "id": "v-workflow-config-5844296ae241614c",
       "kind": "config_schema",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-5844296ae241614c.txt",
-      "started_at_utc": "2026-10-01T05:27:41Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-workflow-config-5844296ae241614c.txt",
+      "started_at_utc": "2026-10-01T05:42:32Z",
       "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
     },
     {
@@ -1890,8 +1991,8 @@
       "exit_code": 0,
       "id": "v-workflow-config-87db21a973eed4fe",
       "kind": "config_schema",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-87db21a973eed4fe.txt",
-      "started_at_utc": "2026-10-01T05:27:41Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-workflow-config-87db21a973eed4fe.txt",
+      "started_at_utc": "2026-10-01T05:42:32Z",
       "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
     },
     {
@@ -1944,69 +2045,272 @@
       "exit_code": 0,
       "id": "v-fitness",
       "kind": "fitness_rules",
-      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-fitness.json",
-      "started_at_utc": "2026-10-01T05:27:41Z",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-fitness.json",
+      "started_at_utc": "2026-10-01T05:42:32Z",
       "summary": "0 finding(s): 0 new / 0 frozen; 0 entity(ies) failed"
+    },
+    {
+      "command": "pnpm test",
+      "duration_s": 11.85,
+      "entities": [
+        "code_unit:.github/workflows/ci.yml",
+        "code_unit:.github/workflows/dependabot-auto-merge.yml",
+        "code_unit:.github/workflows/governance.yml",
+        "code_unit:.github/workflows/release.yml",
+        "code_unit:eslint.config.js",
+        "code_unit:scripts/prepare-release-plan.mjs",
+        "code_unit:scripts/release-policy.mjs",
+        "code_unit:scripts/release-preflight.mjs",
+        "code_unit:tests/project-toolchain-policy.test.mjs",
+        "code_unit:tests/release-boundary-regression.test.mjs",
+        "code_unit:tests/release-preflight.test.mjs",
+        "code_unit:tests/release-workflow-policy.test.mjs",
+        "code_unit:tests/workflow-types.d.ts",
+        "code_unit:vitest.config.ts"
+      ],
+      "entity_verdicts": {
+        "code_unit:.github/workflows/ci.yml": "verified",
+        "code_unit:.github/workflows/dependabot-auto-merge.yml": "verified",
+        "code_unit:.github/workflows/governance.yml": "verified",
+        "code_unit:.github/workflows/release.yml": "verified",
+        "code_unit:eslint.config.js": "verified",
+        "code_unit:scripts/prepare-release-plan.mjs": "verified",
+        "code_unit:scripts/release-policy.mjs": "verified",
+        "code_unit:scripts/release-preflight.mjs": "verified",
+        "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
+        "code_unit:tests/release-boundary-regression.test.mjs": "verified",
+        "code_unit:tests/release-preflight.test.mjs": "verified",
+        "code_unit:tests/release-workflow-policy.test.mjs": "verified",
+        "code_unit:tests/workflow-types.d.ts": "verified",
+        "code_unit:vitest.config.ts": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-global-fallback-test-root",
+      "kind": "targeted_test",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-global-fallback-test-root.txt",
+      "scope": "global_fallback_full_suite",
+      "started_at_utc": "2026-10-01T05:42:32Z",
+      "summary": "complete fallback suite: verified",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "pnpm test",
+      "duration_s": 1.49,
+      "entities": ["deployable_unit:packages/access-contracts"],
+      "entity_verdicts": {
+        "deployable_unit:packages/access-contracts": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-global-fallback-test-packages-access-contracts",
+      "kind": "targeted_test",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-global-fallback-test-packages-access-contracts.txt",
+      "scope": "global_fallback_full_suite",
+      "started_at_utc": "2026-10-01T05:42:44Z",
+      "summary": "complete fallback suite: verified",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "pnpm test",
+      "duration_s": 2.12,
+      "entities": ["deployable_unit:packages/eslint-config"],
+      "entity_verdicts": {
+        "deployable_unit:packages/eslint-config": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-global-fallback-test-packages-eslint-config",
+      "kind": "targeted_test",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-global-fallback-test-packages-eslint-config.txt",
+      "scope": "global_fallback_full_suite",
+      "started_at_utc": "2026-10-01T05:42:45Z",
+      "summary": "complete fallback suite: verified",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "pnpm test",
+      "duration_s": 1.66,
+      "entities": ["deployable_unit:packages/logger"],
+      "entity_verdicts": {
+        "deployable_unit:packages/logger": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-global-fallback-test-packages-logger",
+      "kind": "targeted_test",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-global-fallback-test-packages-logger.txt",
+      "scope": "global_fallback_full_suite",
+      "started_at_utc": "2026-10-01T05:42:47Z",
+      "summary": "complete fallback suite: verified",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "pnpm test",
+      "duration_s": 1.65,
+      "entities": ["deployable_unit:packages/nest-common"],
+      "entity_verdicts": {
+        "deployable_unit:packages/nest-common": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-global-fallback-test-packages-nest-common",
+      "kind": "targeted_test",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-global-fallback-test-packages-nest-common.txt",
+      "scope": "global_fallback_full_suite",
+      "started_at_utc": "2026-10-01T05:42:49Z",
+      "summary": "complete fallback suite: verified",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "pnpm test",
+      "duration_s": 1.77,
+      "entities": ["deployable_unit:packages/throttle"],
+      "entity_verdicts": {
+        "deployable_unit:packages/throttle": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-global-fallback-test-packages-throttle",
+      "kind": "targeted_test",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-global-fallback-test-packages-throttle.txt",
+      "scope": "global_fallback_full_suite",
+      "started_at_utc": "2026-10-01T05:42:50Z",
+      "summary": "complete fallback suite: verified",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "pnpm test",
+      "duration_s": 1.31,
+      "entities": ["deployable_unit:packages/tsconfig"],
+      "entity_verdicts": {
+        "deployable_unit:packages/tsconfig": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-global-fallback-test-packages-tsconfig",
+      "kind": "targeted_test",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph-canonical-v3/verifier-out/v-global-fallback-test-packages-tsconfig.txt",
+      "scope": "global_fallback_full_suite",
+      "started_at_utc": "2026-10-01T05:42:52Z",
+      "summary": "complete fallback suite: verified",
+      "timeout_seconds": 900
     }
   ],
   "verify": {
-    "events": [],
+    "events": [
+      {
+        "code": "SUPERSEDED_SELF_EXCLUSION",
+        "entity": "receipt:receipts/graph/persist-foundation-audit.json",
+        "rule": "DEC-AUP-0035",
+        "text": "the receipt at receipts/graph/persist-foundation-audit.json is the previous version of the one this run is writing, for the same work item 7f131984-cd74-439a-89fc-21a7fe705837 — superseded by construction, so it owes this change no verdict"
+      },
+      {
+        "code": "STRUCTURAL_EXCLUSION",
+        "rule": "DEC-AUP-0034",
+        "text": "1 affected entity(ies) owe no verdict (receipt: 1): unchanged at both revisions and given no verifier by the matrix"
+      }
+    ],
     "required_by_entity": {
-      "code_unit:.github/workflows/ci.yml": ["config_schema", "fitness_rules"],
+      "code_unit:.github/workflows/ci.yml": [
+        "config_schema",
+        "fitness_rules",
+        "full_fallback_test"
+      ],
       "code_unit:.github/workflows/dependabot-auto-merge.yml": [
         "config_schema",
-        "fitness_rules"
+        "fitness_rules",
+        "full_fallback_test"
       ],
       "code_unit:.github/workflows/governance.yml": [
         "config_schema",
-        "fitness_rules"
+        "fitness_rules",
+        "full_fallback_test"
       ],
       "code_unit:.github/workflows/release.yml": [
         "config_schema",
-        "fitness_rules"
-      ],
-      "code_unit:eslint.config.js": ["fitness_rules", "type_check"],
-      "code_unit:scripts/prepare-release-plan.mjs": [
         "fitness_rules",
+        "full_fallback_test"
+      ],
+      "code_unit:eslint.config.js": [
+        "fitness_rules",
+        "full_fallback_test",
         "type_check"
       ],
-      "code_unit:scripts/release-policy.mjs": ["fitness_rules", "type_check"],
+      "code_unit:scripts/prepare-release-plan.mjs": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
+      "code_unit:scripts/release-policy.mjs": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
       "code_unit:scripts/release-preflight.mjs": [
         "fitness_rules",
+        "full_fallback_test",
         "type_check"
       ],
       "code_unit:tests/project-toolchain-policy.test.mjs": [
         "fitness_rules",
+        "full_fallback_test",
         "type_check"
       ],
       "code_unit:tests/release-boundary-regression.test.mjs": [
         "fitness_rules",
+        "full_fallback_test",
         "type_check"
       ],
       "code_unit:tests/release-preflight.test.mjs": [
         "fitness_rules",
+        "full_fallback_test",
         "type_check"
       ],
       "code_unit:tests/release-workflow-policy.test.mjs": [
         "fitness_rules",
+        "full_fallback_test",
         "type_check"
       ],
-      "code_unit:tests/workflow-types.d.ts": ["fitness_rules", "type_check"],
-      "code_unit:vitest.config.ts": ["fitness_rules", "type_check"],
+      "code_unit:tests/workflow-types.d.ts": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
+      "code_unit:vitest.config.ts": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
       "deployable_unit:packages/access-contracts": [
         "fitness_rules",
+        "full_fallback_test",
         "type_check"
       ],
-      "deployable_unit:packages/eslint-config": ["fitness_rules", "type_check"],
-      "deployable_unit:packages/logger": ["fitness_rules", "type_check"],
-      "deployable_unit:packages/nest-common": ["fitness_rules", "type_check"],
-      "deployable_unit:packages/throttle": ["fitness_rules", "type_check"],
-      "deployable_unit:packages/tsconfig": ["fitness_rules", "type_check"]
+      "deployable_unit:packages/eslint-config": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
+      "deployable_unit:packages/logger": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
+      "deployable_unit:packages/nest-common": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
+      "deployable_unit:packages/throttle": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
+      "deployable_unit:packages/tsconfig": [
+        "fitness_rules",
+        "full_fallback_test",
+        "type_check"
+      ],
+      "receipt:receipts/graph/persist-foundation-audit.json": []
     },
     "seconds": {
-      "prepare": 0.49,
-      "total": 16.18,
-      "verifiers": 13.76
+      "prepare": 0.35,
+      "total": 33.79,
+      "verifiers": 32.07
     }
   },
   "work_item": "7f131984-cd74-439a-89fc-21a7fe705837"
