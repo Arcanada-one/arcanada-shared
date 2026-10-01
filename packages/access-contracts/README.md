@@ -145,6 +145,46 @@ lease/fence and restart-recovery protocols remain unfinished. Product and Disk
 integration, cross-language conformance, durable transactions and real restart,
 race, isolation and revocation evidence are required before runtime admission.
 
+### Authorization capture binding adapter
+
+`parsePersonalCaptureBinding` composes the existing descriptor and status
+parsers. Its closed `{descriptor, status}` record accepts `status: null` for
+prospective allocation; otherwise both immutable descriptors must match in
+every field, including allocations and the claimed request fingerprint.
+
+`personalCaptureResourceMatches(realmId, resource, binding)` checks the
+`auth-personal/1-proposed`, `organize-me.synthetic/1` structural mapping for
+exactly three resource kinds: `intent`, `part`, and `cancellation`. Other kinds
+return false. The separately supplied realm must equal the descriptor realm.
+Snake case selectors must match the existing camel case allocations and byte
+identity; current resources require the status revision. Intent parts retain
+note-first order. A null status matches only a prospective intent with a null
+intent revision. Cancellation requires a cancelled status, matching terminal
+revision/generation/proof, a complete unique part-ID set, and a syntactically
+valid owner outcome ID. The set order is immaterial; capture part order is not.
+
+These checks validate decoded structural consistency only. A caller must first
+authenticate and resolve the realm, operation, status and owner outcome from
+current authority. A matching outcome ID is not an authenticated outcome.
+Null status must additionally be restricted to `intent.create`; the adapter
+does not accept an operation or authorize its execution. It does not compute
+or verify a payload digest/fingerprint, issue or validate grants/leases, narrow
+audiences, execute a CAS, authenticate a session, or admit maintenance cleanup.
+Version/profile constants describe this candidate and do not parse an outer
+Auth envelope. Unsupported resource variants and the remaining Auth protocol
+remain unfinished.
+
+The Auth transport boundary must reject noncanonical numeric spellings before
+decoding. These decoded-value checks inherit capture's safe-integer semantics,
+including equality of negative zero and zero; they cannot distinguish `0.0`,
+`0e0`, or numbers rounded by JSON decoding. `parseBoundedJson` rejects duplicate
+keys but is not a canonical-number decoder.
+
+Portable positive and negative JSON vectors are maintained at
+`test/fixtures/personal-auth-capture-v1.json`. Producer and consumer ports should
+pin the same file bytes and compare every case before integration. Passing the
+TypeScript runner alone establishes no Rust or deployed-consumer conformance.
+
 ## Bounded JSON decoding reference
 
 `parseBoundedJson(raw: Uint8Array): unknown` is exported from the package root.

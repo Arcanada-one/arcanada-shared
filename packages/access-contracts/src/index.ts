@@ -442,3 +442,5 @@ export function snapshotApplies(
 
 export * from "./personal-capture.js";
 export { parseBoundedJson } from "./bounded-json.js";
+
+export * from "./personal-auth-v1.js";
