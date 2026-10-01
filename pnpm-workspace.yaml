@@ -25,7 +25,7 @@ catalog:
   typescript: ^5.7.2
   vitest: ^4.1.11
   yaml: ^2.9.0
-  zod: ^4.5.4
+  zod: ^4.6.1
 
 dangerouslyAllowAllBuilds: true
 
