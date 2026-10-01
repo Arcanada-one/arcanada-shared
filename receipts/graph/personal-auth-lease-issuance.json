@@ -5,9 +5,9 @@
     "superseded_self_rule": "DEC-AUP-0035: the entity a receipt can never verify is the PREVIOUS VERSION OF ITSELF. When a receipt is re-issued at the same path for the same work item — the ordinary case after a rebase or a second commit on a card — the copy of it standing in the tree is superseded by construction: this run is the measurement that replaces it, so the only verdict it could carry is I14 `not_measured` about a document that no longer exists at that path once the run finishes. It is excluded with the work item and the output path that identify it, both re-derived from Git by impact_pair.receipt_problems, never asserted.",
     "verdict": "admitted"
   },
-  "captured_at_utc": "2026-10-01T02:04:45Z",
+  "captured_at_utc": "2026-10-01T10:11:51Z",
   "change_set": {
-    "base": "df9b82e08c7ccfe76473e96111300e96e3fa4c6a",
+    "base": "4b4c977a80b81c0f7206d0b4e2b85433f10fad72",
     "files": [
       {
         "kind": "doc",
@@ -56,37 +56,46 @@
         ],
         "path": "packages/access-contracts/test/personal-auth-lease-v1.test.ts",
         "status": "A"
+      },
+      {
+        "kind": "receipt",
+        "node_id": "receipt:receipts/graph/personal-auth-lease-issuance.json",
+        "node_ids": [
+          "receipt:receipts/graph/personal-auth-lease-issuance.json"
+        ],
+        "path": "receipts/graph/personal-auth-lease-issuance.json",
+        "status": "A"
       }
     ],
-    "head": "c1d86edb27bc4f10cab695166c1cb18bdb015d12",
+    "head": "356a046f0f81ee8819eb55fc500821a643db3f17",
     "mode": "diff"
   },
   "decision_ref": "DEC-AUP-0008",
   "exemptions": [],
   "graph": {
-    "builder_version": "1.0.1",
+    "builder_version": "1.0.2",
     "built_at_utc": "2026-09-05T00:00:00Z",
-    "graph_digest": "sha256:80e6e753e6abb90117e45badeb4ab4b5134cff828cf27139cc68cf59b0d6df5b",
-    "path": "/home/dev/aup/persist-01-20261001/graph-lease/verifier-out/graph-df9b82e08c7c.json",
-    "source_commit": "df9b82e08c7ccfe76473e96111300e96e3fa4c6a"
+    "graph_digest": "sha256:5edff70d850526b1499f267d001a130f934c890d926d23c113fe1ffec418cc33",
+    "path": "/home/dev/aup/frontend-implementation-20261001/crash-recovery-20261001/SHARED71-CURRENT-NATIVE/scratch/verifier-out/graph-4b4c977a80b8.json",
+    "source_commit": "4b4c977a80b81c0f7206d0b4e2b85433f10fad72"
   },
   "head_graph": {
-    "builder_version": "1.0.1",
+    "builder_version": "1.0.2",
     "built_at_utc": "2026-09-05T00:00:00Z",
-    "graph_digest": "sha256:10a9e4a02684c13466feaf0bf2e5be5cd39a2f8edcb742b3b16cec0c5f5d43db",
-    "path": "/home/dev/aup/persist-01-20261001/graph-lease/verifier-out/graph-head-c1d86edb27bc.json",
-    "source_commit": "c1d86edb27bc4f10cab695166c1cb18bdb015d12",
+    "graph_digest": "sha256:9e62db900fe78ebc7dc002bffffef3181edca3088ea8f630b73325e7146611cd",
+    "path": "/home/dev/aup/frontend-implementation-20261001/crash-recovery-20261001/SHARED71-CURRENT-NATIVE/scratch/verifier-out/graph-head-356a046f0f81.json",
+    "source_commit": "356a046f0f81ee8819eb55fc500821a643db3f17",
     "staleness": {
-      "checked_at_utc": "2026-10-01T02:04:46Z",
-      "checked_nodes": 89,
+      "checked_at_utc": "2026-10-01T10:11:51Z",
+      "checked_nodes": 91,
       "method": "manifest.dirty must be false; manifest.source_commit == change_set.head; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at head (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
       "mismatched_nodes": [],
       "verdict": "fresh"
     }
   },
-  "host": "isolated-verification",
+  "host": "owned-consumer-source-host",
   "host_redacted": true,
-  "host_sha256": "f5844937256eafd69b2def4ad04796e247f52535b3cf7a2b6ea4d0aa67d65104",
+  "host_sha256": "e37e733ffcef15e757cb7fa6be629df68b10051fe0c4f0910816594afc9a1dfd",
   "impact_set": {
     "deterministic_core": [
       {
@@ -310,6 +319,23 @@
       {
         "boundary": "intra_unit",
         "depth": 1,
+        "entity": "receipt:receipts/graph/persist-foundation-audit.json",
+        "node_type": "receipt",
+        "path": [
+          {
+            "edge_type": "verifies",
+            "from": "receipt:receipts/graph/persist-foundation-audit.json",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/src/index.ts",
+            "via": "explicit-path"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "selectable: run the targeted test / re-read the receipt"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 1,
         "entity": "receipt:receipts/graph/personal-capture-auth-binding.json",
         "node_type": "receipt",
         "path": [
@@ -332,17 +358,17 @@
     "inferred_tail": [],
     "max_depth": 3,
     "method": "Union of independently revision-bound base/head traversals; reverse traversal (dependents) + forward declared-by hops (provides_route, implements_contract, maps_model of the same file, deploys_to); best path = fewest inferred/observed hops, then shortest; max_depth 3",
-    "total": 13
+    "total": 14
   },
   "notes": [
-    "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.2.0) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
-    "profile: (auto-detected); baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: ['targeted_test']; disabled: none"
+    "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.3.0) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
+    "profile: .arcana/verify.json at verified head; baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: none; disabled: none"
   ],
   "producer": {
     "tool": "tools/graph/verify.py",
-    "version": "1.2.0"
+    "version": "1.3.0"
   },
-  "receipt_id": "car-verify-20261001T020445Z-c1d86edb",
+  "receipt_id": "car-verify-20261001T101151Z-356a046f",
   "receipt_path": "receipts/graph/personal-auth-lease-issuance.json",
   "repo": {
     "name": "Arcanada-one/arcanada-shared",
@@ -363,6 +389,7 @@
       "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureRetryDecision",
       "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureTransitionDecision",
       "deployable_unit:packages/access-contracts",
+      "receipt:receipts/graph/persist-foundation-audit.json",
       "receipt:receipts/graph/personal-capture-auth-binding.json"
     ],
     "head": [
@@ -384,6 +411,8 @@
       "deployable_unit:packages/access-contracts",
       "document:.changeset/personal-auth-lease-wire.md",
       "document:packages/access-contracts/docs/personal-auth-leases.md",
+      "receipt:receipts/graph/persist-foundation-audit.json",
+      "receipt:receipts/graph/personal-auth-lease-issuance.json",
       "receipt:receipts/graph/personal-capture-auth-binding.json"
     ],
     "schema": "RevisionImpactSelection/v1",
@@ -391,7 +420,7 @@
   },
   "schema": "ChangeAdmissionReceipt/v1",
   "staleness": {
-    "checked_at_utc": "2026-10-01T02:04:46Z",
+    "checked_at_utc": "2026-10-01T10:11:51Z",
     "method": "manifest.dirty must be false; manifest.source_commit == change_set.base; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at base (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
     "mismatched_nodes": [],
     "verdict": "fresh"
@@ -399,8 +428,34 @@
   "structural_exclusions": [
     {
       "content_hash": {
-        "base": "sha256:d298d5c4212f987e55eabd94ec25a4a21cedbfeab7dafc25d5e2112870587312",
-        "head": "sha256:d298d5c4212f987e55eabd94ec25a4a21cedbfeab7dafc25d5e2112870587312"
+        "base": "sha256:e882b1ddf4b49f8ca030b8897a708b3f092e8ff6aa737e89b2f9392a6e38e193",
+        "head": "sha256:e882b1ddf4b49f8ca030b8897a708b3f092e8ff6aa737e89b2f9392a6e38e193"
+      },
+      "entity": "receipt:receipts/graph/persist-foundation-audit.json",
+      "node_type": "receipt",
+      "path": "receipts/graph/persist-foundation-audit.json",
+      "reason": "historical receipt: asserted, never re-verified (I14); a new receipt supersedes it",
+      "rule": "DEC-AUP-0034"
+    },
+    {
+      "content_hash": {
+        "base": null,
+        "head": "sha256:e5ed5d7b4498eadd12d8c4635372bb2974568d497d74841d26c94342450c3b51"
+      },
+      "entity": "receipt:receipts/graph/personal-auth-lease-issuance.json",
+      "node_type": "receipt",
+      "path": "receipts/graph/personal-auth-lease-issuance.json",
+      "reason": "historical receipt: asserted, never re-verified (I14); a new receipt supersedes it; superseded by construction — this run re-issues the receipt at receipts/graph/personal-auth-lease-issuance.json for work item PERSIST-01",
+      "rule": "DEC-AUP-0035",
+      "superseded": {
+        "receipt_path": "receipts/graph/personal-auth-lease-issuance.json",
+        "work_item": "PERSIST-01"
+      }
+    },
+    {
+      "content_hash": {
+        "base": "sha256:96c318f6a425e9a9f54f13425ec86b61320397e133cd9137f07c464882c03501",
+        "head": "sha256:96c318f6a425e9a9f54f13425ec86b61320397e133cd9137f07c464882c03501"
       },
       "entity": "receipt:receipts/graph/personal-capture-auth-binding.json",
       "node_type": "receipt",
@@ -410,17 +465,16 @@
     }
   ],
   "tree": {
-    "commit": "c1d86edb27bc4f10cab695166c1cb18bdb015d12",
+    "commit": "356a046f0f81ee8819eb55fc500821a643db3f17",
     "dirty": false
   },
   "verdicts": [
     {
       "entity": "code_unit:packages/access-contracts/src/index.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/bounded-json.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
@@ -444,12 +498,11 @@
     },
     {
       "entity": "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-contract-diff: 1 contract edge(s) verified (consumer ⊆ provider); v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/personal-auth-lease-v1.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-contract-diff: 1 contract edge(s) verified (consumer ⊆ provider); v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-contract-diff",
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
@@ -474,61 +527,55 @@
     },
     {
       "entity": "code_unit:packages/access-contracts/test/bounded-json.test.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/bounded-json.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
     {
       "entity": "code_unit:packages/access-contracts/test/contract.test.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/contract.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
     {
       "entity": "code_unit:packages/access-contracts/test/personal-auth-capture-binding.test.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/personal-auth-capture-binding.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
     {
       "entity": "code_unit:packages/access-contracts/test/personal-auth-lease-v1.test.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/personal-auth-lease-v1.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
     {
       "entity": "code_unit:packages/access-contracts/test/personal-auth-v1.test.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/personal-auth-v1.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
     {
       "entity": "code_unit:packages/access-contracts/test/personal-capture.test.ts",
-      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-targeted-test-packages-access-contracts: test/personal-capture.test.ts: PASS (vitest)",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
-        "v-targeted-test-packages-access-contracts",
         "v-type-check-packages-access-contracts-tsconfig"
       ]
     },
@@ -573,37 +620,15 @@
     }
   ],
   "verifier_selection": {
-    "applied": {
-      "targeted_test": [
-        "code_unit:packages/access-contracts/src/index.ts",
-        "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts",
-        "code_unit:packages/access-contracts/test/bounded-json.test.ts",
-        "code_unit:packages/access-contracts/test/contract.test.ts",
-        "code_unit:packages/access-contracts/test/personal-auth-capture-binding.test.ts",
-        "code_unit:packages/access-contracts/test/personal-auth-lease-v1.test.ts",
-        "code_unit:packages/access-contracts/test/personal-auth-v1.test.ts",
-        "code_unit:packages/access-contracts/test/personal-capture.test.ts"
-      ]
-    },
-    "not_applied": [
-      {
-        "entities": [
-          "code_unit:packages/access-contracts/src/personal-auth-capture-binding.ts",
-          "code_unit:packages/access-contracts/src/personal-auth-json.ts",
-          "code_unit:packages/access-contracts/src/personal-auth-v1.ts",
-          "code_unit:packages/access-contracts/src/personal-capture.ts"
-        ],
-        "reason": "NO_SPEC_REACHES_ENTITY",
-        "verifier": "targeted_test"
-      }
-    ],
-    "requested": ["targeted_test"],
+    "applied": {},
+    "not_applied": [],
+    "requested": [],
     "schema": "VerifierSelection/v1"
   },
   "verifiers": [
     {
       "command": "/home/dev/aup/persist-01-20261001/shared-lease/node_modules/.bin/tsc -p /home/dev/aup/persist-01-20261001/shared-lease/packages/access-contracts/tsconfig.json --noEmit --incremental false --listFiles",
-      "duration_s": 1.16,
+      "duration_s": 1.82,
       "entities": [
         "code_unit:packages/access-contracts/src/index.ts",
         "code_unit:packages/access-contracts/src/personal-auth-capture-binding.ts",
@@ -637,13 +662,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-access-contracts-tsconfig",
       "kind": "type_check",
-      "output_ref": "/home/dev/aup/persist-01-20261001/graph-lease/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
-      "started_at_utc": "2026-10-01T02:04:46Z",
+      "output_ref": "/home/dev/aup/frontend-implementation-20261001/crash-recovery-20261001/SHARED71-CURRENT-NATIVE/scratch/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
+      "started_at_utc": "2026-10-01T10:11:52Z",
       "summary": "packages/access-contracts/tsconfig.json: exit 0, 0 error(s), 266 files listed"
     },
     {
-      "command": "tools/graph/contract_diff.py.run_diff(base=df9b82e08c7c, head=c1d86edb27bc, graph=head graph)",
-      "duration_s": 0.22,
+      "command": "tools/graph/contract_diff.py.run_diff(base=4b4c977a80b8, head=356a046f0f81, graph=head graph)",
+      "duration_s": 0.26,
       "entities": [
         "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts",
         "code_unit:packages/access-contracts/src/personal-capture.ts",
@@ -661,8 +686,8 @@
       "exit_code": 0,
       "id": "v-contract-diff",
       "kind": "contract_diff",
-      "output_ref": "/home/dev/aup/persist-01-20261001/graph-lease/verifier-out/v-contract-diff.json",
-      "started_at_utc": "2026-10-01T02:04:48Z",
+      "output_ref": "/home/dev/aup/frontend-implementation-20261001/crash-recovery-20261001/SHARED71-CURRENT-NATIVE/scratch/verifier-out/v-contract-diff.json",
+      "started_at_utc": "2026-10-01T10:11:54Z",
       "summary": "5→6 contracts, breaking 0, edges {'verified': 6}"
     },
     {
@@ -701,8 +726,8 @@
       "exit_code": 0,
       "id": "v-fitness",
       "kind": "fitness_rules",
-      "output_ref": "/home/dev/aup/persist-01-20261001/graph-lease/verifier-out/v-fitness.json",
-      "started_at_utc": "2026-10-01T02:04:48Z",
+      "output_ref": "/home/dev/aup/frontend-implementation-20261001/crash-recovery-20261001/SHARED71-CURRENT-NATIVE/scratch/verifier-out/v-fitness.json",
+      "started_at_utc": "2026-10-01T10:11:54Z",
       "summary": "0 finding(s): 0 new / 0 frozen; 0 entity(ies) failed"
     },
     {
@@ -719,53 +744,28 @@
       "exit_code": 0,
       "id": "v-doc-reference",
       "kind": "doc_reference",
-      "output_ref": "/home/dev/aup/persist-01-20261001/graph-lease/verifier-out/v-doc-reference.txt",
-      "started_at_utc": "2026-10-01T02:04:48Z",
+      "output_ref": "/home/dev/aup/frontend-implementation-20261001/crash-recovery-20261001/SHARED71-CURRENT-NATIVE/scratch/verifier-out/v-doc-reference.txt",
+      "started_at_utc": "2026-10-01T10:11:54Z",
       "summary": "2 document(s), 0 failed"
-    },
-    {
-      "command": "/home/dev/aup/persist-01-20261001/shared-lease/node_modules/.bin/vitest run test/bounded-json.test.ts test/contract.test.ts test/personal-auth-capture-binding.test.ts test/personal-auth-lease-v1.test.ts test/personal-auth-v1.test.ts test/personal-capture.test.ts",
-      "duration_s": 0.64,
-      "entities": [
-        "code_unit:packages/access-contracts/src/index.ts",
-        "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts",
-        "code_unit:packages/access-contracts/test/bounded-json.test.ts",
-        "code_unit:packages/access-contracts/test/contract.test.ts",
-        "code_unit:packages/access-contracts/test/personal-auth-capture-binding.test.ts",
-        "code_unit:packages/access-contracts/test/personal-auth-lease-v1.test.ts",
-        "code_unit:packages/access-contracts/test/personal-auth-v1.test.ts",
-        "code_unit:packages/access-contracts/test/personal-capture.test.ts"
-      ],
-      "entity_verdicts": {
-        "code_unit:packages/access-contracts/src/index.ts": "verified",
-        "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts": "verified",
-        "code_unit:packages/access-contracts/test/bounded-json.test.ts": "verified",
-        "code_unit:packages/access-contracts/test/contract.test.ts": "verified",
-        "code_unit:packages/access-contracts/test/personal-auth-capture-binding.test.ts": "verified",
-        "code_unit:packages/access-contracts/test/personal-auth-lease-v1.test.ts": "verified",
-        "code_unit:packages/access-contracts/test/personal-auth-v1.test.ts": "verified",
-        "code_unit:packages/access-contracts/test/personal-capture.test.ts": "verified"
-      },
-      "exit_code": 0,
-      "id": "v-targeted-test-packages-access-contracts",
-      "kind": "targeted_test",
-      "output_ref": "/home/dev/aup/persist-01-20261001/graph-lease/verifier-out/v-targeted-test-packages-access-contracts.txt",
-      "started_at_utc": "2026-10-01T02:04:48Z",
-      "summary": "6 spec(s) via vitest, exit 0, 0 failed"
     }
   ],
   "verify": {
     "events": [
       {
+        "code": "SUPERSEDED_SELF_EXCLUSION",
+        "entity": "receipt:receipts/graph/personal-auth-lease-issuance.json",
+        "rule": "DEC-AUP-0035",
+        "text": "the receipt at receipts/graph/personal-auth-lease-issuance.json is the previous version of the one this run is writing, for the same work item PERSIST-01 — superseded by construction, so it owes this change no verdict"
+      },
+      {
         "code": "STRUCTURAL_EXCLUSION",
         "rule": "DEC-AUP-0034",
-        "text": "1 affected entity(ies) owe no verdict (receipt: 1): unchanged at both revisions and given no verifier by the matrix"
+        "text": "3 affected entity(ies) owe no verdict (receipt: 3): unchanged at both revisions and given no verifier by the matrix"
       }
     ],
     "required_by_entity": {
       "code_unit:packages/access-contracts/src/index.ts": [
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "code_unit:packages/access-contracts/src/personal-auth-capture-binding.ts": [
@@ -779,7 +779,6 @@
       "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts": [
         "contract_diff",
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "code_unit:packages/access-contracts/src/personal-auth-v1.ts": [
@@ -793,32 +792,26 @@
       ],
       "code_unit:packages/access-contracts/test/bounded-json.test.ts": [
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "code_unit:packages/access-contracts/test/contract.test.ts": [
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "code_unit:packages/access-contracts/test/personal-auth-capture-binding.test.ts": [
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "code_unit:packages/access-contracts/test/personal-auth-lease-v1.test.ts": [
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "code_unit:packages/access-contracts/test/personal-auth-v1.test.ts": [
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "code_unit:packages/access-contracts/test/personal-capture.test.ts": [
         "fitness_rules",
-        "targeted_test",
         "type_check"
       ],
       "contract:packages/access-contracts/src/personal-auth-lease-v1.ts#PersonalAuthEffect": [
@@ -838,12 +831,14 @@
       "document:packages/access-contracts/docs/personal-auth-leases.md": [
         "doc_reference"
       ],
+      "receipt:receipts/graph/persist-foundation-audit.json": [],
+      "receipt:receipts/graph/personal-auth-lease-issuance.json": [],
       "receipt:receipts/graph/personal-capture-auth-binding.json": []
     },
     "seconds": {
-      "prepare": 0.38,
-      "total": 3.12,
-      "verifiers": 2.03
+      "prepare": 0.49,
+      "total": 3.56,
+      "verifiers": 2.09
     }
   },
   "work_item": "PERSIST-01"
