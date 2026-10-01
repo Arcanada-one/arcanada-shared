@@ -9,10 +9,6 @@ import {
 } from "./personal-capture.js";
 import { snapshotArray, snapshotRecord } from "./wire-snapshot.js";
 
-/** Structural contract candidate; it enables no Auth route or runtime grant. */
-export const PERSONAL_AUTH_WIRE_VERSION = "auth-personal/1-proposed" as const;
-export const PERSONAL_AUTH_PROFILE = "organize-me.synthetic/1" as const;
-
 export interface PersonalCaptureBinding {
   readonly descriptor: PersonalCaptureDescriptor;
   /** Null is prospective allocation, never evidence of a current intent. */
