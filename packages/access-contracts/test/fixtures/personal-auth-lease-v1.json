@@ -1,0 +1,2633 @@
+{
+  "wire_version": "auth-personal/1-proposed",
+  "profile_id": "organize-me.synthetic/1",
+  "scope": "Issuance shape only; historical admission is not permission to execute.",
+  "cases": [
+    {
+      "name": "historical admitted release remains an obligation",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "last maximum body frame",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 15,
+          "object_revision": "00000000-0000-4000-8000-00000000000b",
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 983040,
+          "length_bytes": 65536,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "empty metadata unit zero window",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:00.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "prospective Product access",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "access",
+        "effect": null,
+        "resource_binding_id": null,
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect product intent_create",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": null,
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect product intent_stage",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_stage",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect product intent_cancel",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_cancel",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect product product_publish",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "product_publish",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect product repair_link",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "repair_link",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect disk disk_stage",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "disk_stage",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect disk cleanup_cancelled",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "cleanup_cancelled",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "effect disk repair_link",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "repair_link",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "Disk to Product release",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "product",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "Disk access bound",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "access",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "invalid UUID lease_id",
+      "input": {
+        "lease_id": "not-an-id",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid UUID flow_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "not-an-id",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid UUID grant_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "not-an-id",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid UUID realm_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "not-an-id",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid UUID resource_binding_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "not-an-id",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter policy_epoch 01",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "01",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter policy_epoch -1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "-1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter policy_epoch 18446744073709551616",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "18446744073709551616",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter policy_epoch 1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": 1,
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "uint64 max policy_epoch",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "18446744073709551615",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "invalid counter participant_config_version 01",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "01",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter participant_config_version -1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "-1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter participant_config_version 18446744073709551616",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "18446744073709551616",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter participant_config_version 1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": 1,
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "uint64 max participant_config_version",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "18446744073709551615",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "invalid counter admitted_seq 01",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "01",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter admitted_seq -1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "-1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter admitted_seq 18446744073709551616",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "18446744073709551616",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid counter admitted_seq 1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": 1,
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "uint64 max admitted_seq",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "18446744073709551615",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": true
+    },
+    {
+      "name": "missing lease_id",
+      "input": {
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing flow_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing grant_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing participant",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing realm_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing policy_epoch",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing participant_config_version",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing lease_kind",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing effect",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing resource_binding_id",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing release_unit",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing admitted_seq",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing admitted_at",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing execute_before",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "missing state",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z"
+      },
+      "expected": false
+    },
+    {
+      "name": "unknown field",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted",
+        "verified": true
+      },
+      "expected": false
+    },
+    {
+      "name": "settled is not admission snapshot",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "settled"
+      },
+      "expected": false
+    },
+    {
+      "name": "unknown lease kind",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "recovery",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release cannot carry effect",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": "product_publish",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release requires binding",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": null,
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release requires unit",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "access cannot carry unit",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "access",
+        "effect": null,
+        "resource_binding_id": null,
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "access cannot carry effect",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "access",
+        "effect": "intent_create",
+        "resource_binding_id": null,
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "Disk cannot create intent",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": null,
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "Product cannot clean bytes",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "cleanup_cancelled",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "Disk access cannot be prospective",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "access",
+        "effect": null,
+        "resource_binding_id": null,
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "existing effect requires binding",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_stage",
+        "resource_binding_id": null,
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "Disk cannot release to client",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "Product cannot release to Product",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "product",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad length_bytes 65537",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 65537,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad length_bytes -1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": -1,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad length_bytes 1.5",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 1.5,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad offset_bytes 1048577",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 1048577,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad frame_index -1",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": -1,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad frame_index 1.5",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 1.5,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad object_revision bad",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": "bad",
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad destination public",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "public",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "release unit bad destination_binding_id bad",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "bad"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "frame beyond representation",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 1048576,
+          "length_bytes": 1,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid time admitted_at 2001-02-29T00:00:00.000Z",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-02-29T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid time admitted_at 2001-01-01T00:00:00Z",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid time execute_before 2001-01-01T00:00:01.001Z",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.001Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "invalid time execute_before 2000-12-31T23:59:59.999Z",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2000-12-31T23:59:59.999Z",
+        "state": "admitted"
+      },
+      "expected": false
+    },
+    {
+      "name": "access budget exceeded",
+      "input": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000004",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000009",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "access",
+        "effect": null,
+        "resource_binding_id": null,
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:30.001Z",
+        "state": "admitted"
+      },
+      "expected": false
+    }
+  ]
+}
