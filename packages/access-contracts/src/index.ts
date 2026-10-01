@@ -447,3 +447,4 @@ export * from "./personal-auth-v1.js";
 export { parsePersonalAuthJson } from "./personal-auth-json.js";
 
 export * from "./personal-auth-lease-v1.js";
+export * from "./personal-auth-owner-outcome.js";
