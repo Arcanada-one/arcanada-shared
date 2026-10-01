@@ -448,3 +448,10 @@ export { parsePersonalAuthJson } from "./personal-auth-json.js";
 
 export * from "./personal-auth-lease-v1.js";
 export * from "./personal-auth-owner-outcome.js";
+
+export {
+  parsePersonalAuthOwnerOutcomeRequest,
+  parsePersonalAuthOwnerOutcomeRequestJson,
+  personalAuthOwnerOutcomeRequestMatchesSameGenerationLease,
+  type PersonalAuthOwnerOutcomeRequest,
+} from "./personal-auth-outcome-request.js";

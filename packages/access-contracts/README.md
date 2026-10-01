@@ -222,3 +222,10 @@ content without authenticating it. See the [owner outcome reference](docs/person
 for fields, conservative vector ordering and required external owner context.
 These proposed exports provide no CAS, durability, effect permission, settlement
 or runtime activation.
+
+## Proposed personal owner outcome requests
+
+`parsePersonalAuthOwnerOutcomeRequest` and its strict JSON wrapper parse the
+closed protected mutation request. The explicitly same-generation lease matcher
+checks structural overlap only; it cannot bind operation/intent/resource fields
+absent from the lease or authenticate recovery. See the [request reference](docs/personal-auth-outcome-requests.md).
