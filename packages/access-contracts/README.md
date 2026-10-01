@@ -212,3 +212,13 @@ The implementation uses ES2022 primitives without Node `Buffer`, DOM types or
 runtime dependencies. The existing ESM/CJS build uses the same public export.
 Parsing authenticates nothing and grants no capabilities; consumers must still
 validate the returned `unknown` against their schema and authenticate evidence.
+
+## Proposed personal owner outcomes
+
+`parsePersonalAuthOwnerOutcome` composes the existing capture parsers into seven
+closed owner assertion variants. `personalAuthOwnerOutcomeEffect` reports their
+source effect spelling; `comparePersonalAuthOwnerOutcome` compares exact retry
+content without authenticating it. See the [owner outcome reference](docs/personal-auth-owner-outcomes.md)
+for fields, conservative vector ordering and required external owner context.
+These proposed exports provide no CAS, durability, effect permission, settlement
+or runtime activation.
