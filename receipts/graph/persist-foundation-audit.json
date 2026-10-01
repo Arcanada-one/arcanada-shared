@@ -1,2372 +1,2013 @@
 {
- "admission": {
-  "rule": "admitted requires every verdict = verified; failed without exemption ⇒ refused; not_measured without exemption ⇒ paused_safe; exemptions (owner + expiry) are attached by the admitting agent, never by the verifier (DEC-AUP-0008, matrix P1/P4)",
-  "structural_exclusion_rule": "DEC-AUP-0034: an affected entity is NOT verdict-owing when all three hold — the verifier matrix declares neither a mandatory nor a selectable verifier for its node type (so the only verdict it could ever carry states a property of the MATRIX, not of this change), the change set does not contain it, and its bytes are identical at base and head. Each one is listed in structural_exclusions with the content hash at both revisions that proves the byte-identity, and impact_pair.receipt_problems re-derives that proof from Git rather than believing the receipt.",
-  "superseded_self_rule": "DEC-AUP-0035: the entity a receipt can never verify is the PREVIOUS VERSION OF ITSELF. When a receipt is re-issued at the same path for the same work item — the ordinary case after a rebase or a second commit on a card — the copy of it standing in the tree is superseded by construction: this run is the measurement that replaces it, so the only verdict it could carry is I14 `not_measured` about a document that no longer exists at that path once the run finishes. It is excluded with the work item and the output path that identify it, both re-derived from Git by impact_pair.receipt_problems, never asserted.",
-  "verdict": "admitted"
- },
- "captured_at_utc": "2026-10-01T05:27:25Z",
- "change_set": {
-  "base": "fc1aff0be1855a5fd33e7d9cbd034a90af5da0cf",
-  "files": [
-   {
-    "kind": "lockfile",
-    "path": "pnpm-lock.yaml",
-    "status": "M"
-   },
-   {
-    "kind": "global_config",
-    "path": "pnpm-workspace.yaml",
-    "status": "M"
-   }
+  "admission": {
+    "rule": "admitted requires every verdict = verified; failed without exemption ⇒ refused; not_measured without exemption ⇒ paused_safe; exemptions (owner + expiry) are attached by the admitting agent, never by the verifier (DEC-AUP-0008, matrix P1/P4)",
+    "structural_exclusion_rule": "DEC-AUP-0034: an affected entity is NOT verdict-owing when all three hold — the verifier matrix declares neither a mandatory nor a selectable verifier for its node type (so the only verdict it could ever carry states a property of the MATRIX, not of this change), the change set does not contain it, and its bytes are identical at base and head. Each one is listed in structural_exclusions with the content hash at both revisions that proves the byte-identity, and impact_pair.receipt_problems re-derives that proof from Git rather than believing the receipt.",
+    "superseded_self_rule": "DEC-AUP-0035: the entity a receipt can never verify is the PREVIOUS VERSION OF ITSELF. When a receipt is re-issued at the same path for the same work item — the ordinary case after a rebase or a second commit on a card — the copy of it standing in the tree is superseded by construction: this run is the measurement that replaces it, so the only verdict it could carry is I14 `not_measured` about a document that no longer exists at that path once the run finishes. It is excluded with the work item and the output path that identify it, both re-derived from Git by impact_pair.receipt_problems, never asserted.",
+    "verdict": "admitted"
+  },
+  "captured_at_utc": "2026-10-01T05:27:25Z",
+  "change_set": {
+    "base": "fc1aff0be1855a5fd33e7d9cbd034a90af5da0cf",
+    "files": [
+      {
+        "kind": "lockfile",
+        "path": "pnpm-lock.yaml",
+        "status": "M"
+      },
+      {
+        "kind": "global_config",
+        "path": "pnpm-workspace.yaml",
+        "status": "M"
+      }
+    ],
+    "head": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
+    "mode": "diff"
+  },
+  "decision_ref": "DEC-AUP-0008",
+  "exemptions": [],
+  "graph": {
+    "builder_version": "1.0.1",
+    "built_at_utc": "2026-09-05T00:00:00Z",
+    "graph_digest": "sha256:e042959872b4661dda76fe835f4e797b9f5587e26a8dba5452a0de44e74fa1c5",
+    "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/graph-fc1aff0be185.json",
+    "source_commit": "fc1aff0be1855a5fd33e7d9cbd034a90af5da0cf"
+  },
+  "head_graph": {
+    "builder_version": "1.0.1",
+    "built_at_utc": "2026-09-05T00:00:00Z",
+    "graph_digest": "sha256:51fddf945636c455e55a1e97c80a8de24812c1e60eba377dfe180b20a2a5541f",
+    "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/graph-head-838d7dc1ae7e.json",
+    "source_commit": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
+    "staleness": {
+      "checked_at_utc": "2026-10-01T05:27:25Z",
+      "checked_nodes": 76,
+      "method": "manifest.dirty must be false; manifest.source_commit == change_set.head; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at head (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
+      "mismatched_nodes": [],
+      "verdict": "fresh"
+    }
+  },
+  "host": "isolated-build",
+  "host_redacted": true,
+  "host_sha256": "8366805d550543b460fa475c0d51380918b93093061a752a66355d91739d27b8",
+  "impact_set": {
+    "deterministic_core": [
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:.github/workflows/ci.yml",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:.github/workflows/ci.yml",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:.github/workflows/governance.yml",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:.github/workflows/governance.yml",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:.github/workflows/release.yml",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:.github/workflows/release.yml",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:eslint.config.js",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:eslint.config.js",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/access-contracts/src/bounded-json.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/src/bounded-json.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/access-contracts/src/index.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/src/index.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/access-contracts/src/personal-capture.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/src/personal-capture.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/access-contracts/test/bounded-json.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/test/bounded-json.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/access-contracts/test/contract.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/test/contract.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/access-contracts/test/personal-capture.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/test/personal-capture.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/access-contracts/vitest.config.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/access-contracts/vitest.config.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/eslint-config/src/index.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/eslint-config/src/index.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/eslint-config/test/factories.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/eslint-config/test/factories.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/eslint-config/vitest.config.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/eslint-config/vitest.config.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/logger/src/create-logger-module.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/logger/src/create-logger-module.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/logger/src/index.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/logger/src/index.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/logger/src/redact-paths.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/logger/src/redact-paths.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/logger/test/create-logger-module.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/logger/test/create-logger-module.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/logger/test/redact-behavior.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/logger/test/redact-behavior.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/logger/test/redact-paths.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/logger/test/redact-paths.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/logger/vitest.config.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/logger/vitest.config.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/src/guards/abstract-api-key.guard.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/src/guards/abstract-api-key.guard.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/src/guards/extract-bearer.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/src/guards/extract-bearer.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/src/index.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/src/index.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/src/rfc7807/problem-details.types.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/src/rfc7807/problem-details.types.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/src/rfc7807/problem-exception.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/src/rfc7807/problem-exception.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/src/rfc7807/rfc7807-exception.filter.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/src/rfc7807/rfc7807-exception.filter.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/src/zod-validation.pipe.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/src/zod-validation.pipe.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/test/abstract-api-key.guard.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/test/abstract-api-key.guard.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/test/extract-bearer.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/test/extract-bearer.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/test/rfc7807-exception.filter.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/test/rfc7807-exception.filter.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/test/zod-validation.pipe.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/test/zod-validation.pipe.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/nest-common/vitest.config.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/nest-common/vitest.config.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/src/escalating-ban.guard.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/src/escalating-ban.guard.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/src/fibonacci.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/src/fibonacci.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/src/index.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/src/index.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/src/throttler-options.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/src/throttler-options.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/test/escalating-ban.guard.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/test/escalating-ban.guard.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/test/fibonacci.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/test/fibonacci.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/test/throttler-options.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/test/throttler-options.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/throttle/vitest.config.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/throttle/vitest.config.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/tsconfig/test/profiles.test.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/tsconfig/test/profiles.test.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:packages/tsconfig/vitest.config.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:packages/tsconfig/vitest.config.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:scripts/prepare-release-plan.mjs",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:scripts/prepare-release-plan.mjs",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:scripts/release-policy.mjs",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:scripts/release-policy.mjs",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:scripts/release-preflight.mjs",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:scripts/release-preflight.mjs",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:tests/project-toolchain-policy.test.mjs",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:tests/release-boundary-regression.test.mjs",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:tests/release-boundary-regression.test.mjs",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:tests/release-preflight.test.mjs",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:tests/release-preflight.test.mjs",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:tests/release-workflow-policy.test.mjs",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:tests/release-workflow-policy.test.mjs",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:tests/workflow-types.d.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:tests/workflow-types.d.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "code_unit:vitest.config.ts",
+        "node_type": "code_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "code_unit:vitest.config.ts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "config_key:GITHUB_OUTPUT",
+        "node_type": "config_key",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "config_key:GITHUB_OUTPUT",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "config_key:LOG_LEVEL",
+        "node_type": "config_key",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "config_key:LOG_LEVEL",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "config_key:NODE_ENV",
+        "node_type": "config_key",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "config_key:NODE_ENV",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "config_key:RELEASE_PLAN_DIR",
+        "node_type": "config_key",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "config_key:RELEASE_PLAN_DIR",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureRetryDecision",
+        "node_type": "contract",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureRetryDecision",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureTransitionDecision",
+        "node_type": "contract",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureTransitionDecision",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "contract:packages/nest-common/test/rfc7807-exception.filter.test.ts#err",
+        "node_type": "contract",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "contract:packages/nest-common/test/rfc7807-exception.filter.test.ts#err",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#nested",
+        "node_type": "contract",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#nested",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#schema",
+        "node_type": "contract",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#schema",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "deployable_unit:packages/access-contracts",
+        "node_type": "deployable_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "deployable_unit:packages/access-contracts",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "deployable_unit:packages/eslint-config",
+        "node_type": "deployable_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "deployable_unit:packages/eslint-config",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "deployable_unit:packages/logger",
+        "node_type": "deployable_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "deployable_unit:packages/logger",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "deployable_unit:packages/nest-common",
+        "node_type": "deployable_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "deployable_unit:packages/nest-common",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "deployable_unit:packages/throttle",
+        "node_type": "deployable_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "deployable_unit:packages/throttle",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "deployable_unit:packages/tsconfig",
+        "node_type": "deployable_unit",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "deployable_unit:packages/tsconfig",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:.changeset/README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:.changeset/README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:.changeset/bounded-json-decoder.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:.changeset/bounded-json-decoder.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:.changeset/personal-capture-contract.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:.changeset/personal-capture-contract.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:.changeset/throttle-initial.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:.changeset/throttle-initial.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:SECURITY.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:SECURITY.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/access-contracts/README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/access-contracts/README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/eslint-config/CHANGELOG.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/eslint-config/CHANGELOG.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/eslint-config/README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/eslint-config/README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/logger/CHANGELOG.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/logger/CHANGELOG.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/logger/README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/logger/README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/nest-common/CHANGELOG.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/nest-common/CHANGELOG.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/nest-common/README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/nest-common/README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/throttle/README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/throttle/README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/tsconfig/CHANGELOG.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/tsconfig/CHANGELOG.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:packages/tsconfig/README.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:packages/tsconfig/README.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      },
+      {
+        "boundary": "intra_unit",
+        "depth": 0,
+        "entity": "document:provenance/component-provenance.md",
+        "node_type": "document",
+        "path": [
+          {
+            "edge_type": "deploys_to",
+            "from": "code_unit:pnpm-lock.yaml",
+            "provenance": "deterministic",
+            "to": "document:provenance/component-provenance.md",
+            "via": "global-fallback"
+          }
+        ],
+        "revisions": ["base", "head"],
+        "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+      }
+    ],
+    "edge_types": "all",
+    "global_fallback": {
+      "files": ["pnpm-lock.yaml", "pnpm-workspace.yaml"],
+      "reason": "pnpm-lock.yaml, pnpm-workspace.yaml changed ⇒ every node affected (lockfile / global config / env schema: safe fallback, Bazel/Nx practice)",
+      "triggered": true
+    },
+    "inferred_tail": [],
+    "max_depth": 3,
+    "method": "Union of independently revision-bound base/head traversals; global fallback: every node of the graph is affected (depth 0, synthetic containment hop); reverse traversal (dependents) + forward declared-by hops (provides_route, implements_contract, maps_model of the same file, deploys_to); best path = fewest inferred/observed hops, then shortest; max_depth 3",
+    "total": 85
+  },
+  "notes": [
+    "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.2.0) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
+    "profile: (auto-detected); baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: none; disabled: none"
   ],
-  "head": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
-  "mode": "diff"
- },
- "decision_ref": "DEC-AUP-0008",
- "exemptions": [],
- "graph": {
-  "builder_version": "1.0.1",
-  "built_at_utc": "2026-09-05T00:00:00Z",
-  "graph_digest": "sha256:e042959872b4661dda76fe835f4e797b9f5587e26a8dba5452a0de44e74fa1c5",
-  "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/graph-fc1aff0be185.json",
-  "source_commit": "fc1aff0be1855a5fd33e7d9cbd034a90af5da0cf"
- },
- "head_graph": {
-  "builder_version": "1.0.1",
-  "built_at_utc": "2026-09-05T00:00:00Z",
-  "graph_digest": "sha256:51fddf945636c455e55a1e97c80a8de24812c1e60eba377dfe180b20a2a5541f",
-  "path": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/graph-head-838d7dc1ae7e.json",
-  "source_commit": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
+  "producer": {
+    "tool": "tools/graph/verify.py",
+    "version": "1.2.0"
+  },
+  "receipt_id": "car-verify-20261001T052725Z-838d7dc1",
+  "receipt_path": "receipts/graph/persist-foundation-audit.json",
+  "repo": {
+    "name": "Arcanada-one/arcanada-shared",
+    "path": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit"
+  },
+  "revision_selection": {
+    "base": [
+      "code_unit:.github/workflows/ci.yml",
+      "code_unit:.github/workflows/dependabot-auto-merge.yml",
+      "code_unit:.github/workflows/governance.yml",
+      "code_unit:.github/workflows/release.yml",
+      "code_unit:eslint.config.js",
+      "code_unit:scripts/prepare-release-plan.mjs",
+      "code_unit:scripts/release-policy.mjs",
+      "code_unit:scripts/release-preflight.mjs",
+      "code_unit:tests/project-toolchain-policy.test.mjs",
+      "code_unit:tests/release-boundary-regression.test.mjs",
+      "code_unit:tests/release-preflight.test.mjs",
+      "code_unit:tests/release-workflow-policy.test.mjs",
+      "code_unit:tests/workflow-types.d.ts",
+      "code_unit:vitest.config.ts",
+      "deployable_unit:packages/access-contracts",
+      "deployable_unit:packages/eslint-config",
+      "deployable_unit:packages/logger",
+      "deployable_unit:packages/nest-common",
+      "deployable_unit:packages/throttle",
+      "deployable_unit:packages/tsconfig"
+    ],
+    "head": [
+      "code_unit:.github/workflows/ci.yml",
+      "code_unit:.github/workflows/dependabot-auto-merge.yml",
+      "code_unit:.github/workflows/governance.yml",
+      "code_unit:.github/workflows/release.yml",
+      "code_unit:eslint.config.js",
+      "code_unit:scripts/prepare-release-plan.mjs",
+      "code_unit:scripts/release-policy.mjs",
+      "code_unit:scripts/release-preflight.mjs",
+      "code_unit:tests/project-toolchain-policy.test.mjs",
+      "code_unit:tests/release-boundary-regression.test.mjs",
+      "code_unit:tests/release-preflight.test.mjs",
+      "code_unit:tests/release-workflow-policy.test.mjs",
+      "code_unit:tests/workflow-types.d.ts",
+      "code_unit:vitest.config.ts",
+      "deployable_unit:packages/access-contracts",
+      "deployable_unit:packages/eslint-config",
+      "deployable_unit:packages/logger",
+      "deployable_unit:packages/nest-common",
+      "deployable_unit:packages/throttle",
+      "deployable_unit:packages/tsconfig"
+    ],
+    "schema": "RevisionImpactSelection/v1",
+    "unmeasured_head_files": []
+  },
+  "schema": "ChangeAdmissionReceipt/v1",
   "staleness": {
-   "checked_at_utc": "2026-10-01T05:27:25Z",
-   "checked_nodes": 76,
-   "method": "manifest.dirty must be false; manifest.source_commit == change_set.head; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at head (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
-   "mismatched_nodes": [],
-   "verdict": "fresh"
-  }
- },
- "host": "isolated-build",
- "host_redacted": true,
- "host_sha256": "8366805d550543b460fa475c0d51380918b93093061a752a66355d91739d27b8",
- "impact_set": {
-  "deterministic_core": [
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:.github/workflows/ci.yml",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:.github/workflows/ci.yml",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:.github/workflows/dependabot-auto-merge.yml",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:.github/workflows/governance.yml",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:.github/workflows/governance.yml",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:.github/workflows/release.yml",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:.github/workflows/release.yml",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:eslint.config.js",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:eslint.config.js",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/access-contracts/src/bounded-json.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/access-contracts/src/bounded-json.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/access-contracts/src/index.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/access-contracts/src/index.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/access-contracts/src/personal-capture.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/access-contracts/src/personal-capture.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/access-contracts/test/bounded-json.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/access-contracts/test/bounded-json.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/access-contracts/test/contract.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/access-contracts/test/contract.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/access-contracts/test/personal-capture.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/access-contracts/test/personal-capture.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/access-contracts/vitest.config.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/access-contracts/vitest.config.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/eslint-config/src/index.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/eslint-config/src/index.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/eslint-config/test/factories.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/eslint-config/test/factories.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/eslint-config/vitest.config.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/eslint-config/vitest.config.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/logger/src/create-logger-module.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/logger/src/create-logger-module.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/logger/src/index.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/logger/src/index.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/logger/src/redact-paths.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/logger/src/redact-paths.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/logger/test/create-logger-module.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/logger/test/create-logger-module.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/logger/test/redact-behavior.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/logger/test/redact-behavior.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/logger/test/redact-paths.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/logger/test/redact-paths.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/logger/vitest.config.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/logger/vitest.config.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/src/guards/abstract-api-key.guard.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/src/guards/abstract-api-key.guard.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/src/guards/extract-bearer.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/src/guards/extract-bearer.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/src/index.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/src/index.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/src/rfc7807/problem-details.types.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/src/rfc7807/problem-details.types.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/src/rfc7807/problem-exception.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/src/rfc7807/problem-exception.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/src/rfc7807/rfc7807-exception.filter.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/src/rfc7807/rfc7807-exception.filter.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/src/zod-validation.pipe.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/src/zod-validation.pipe.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/test/abstract-api-key.guard.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/test/abstract-api-key.guard.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/test/extract-bearer.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/test/extract-bearer.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/test/rfc7807-exception.filter.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/test/rfc7807-exception.filter.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/test/zod-validation.pipe.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/test/zod-validation.pipe.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/nest-common/vitest.config.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/nest-common/vitest.config.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/src/escalating-ban.guard.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/src/escalating-ban.guard.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/src/fibonacci.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/src/fibonacci.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/src/index.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/src/index.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/src/throttler-options.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/src/throttler-options.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/test/escalating-ban.guard.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/test/escalating-ban.guard.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/test/fibonacci.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/test/fibonacci.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/test/throttler-options.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/test/throttler-options.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/throttle/vitest.config.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/throttle/vitest.config.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/tsconfig/test/profiles.test.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/tsconfig/test/profiles.test.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:packages/tsconfig/vitest.config.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:packages/tsconfig/vitest.config.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:scripts/prepare-release-plan.mjs",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:scripts/prepare-release-plan.mjs",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:scripts/release-policy.mjs",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:scripts/release-policy.mjs",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:scripts/release-preflight.mjs",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:scripts/release-preflight.mjs",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:tests/project-toolchain-policy.test.mjs",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:tests/release-boundary-regression.test.mjs",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:tests/release-boundary-regression.test.mjs",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:tests/release-preflight.test.mjs",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:tests/release-preflight.test.mjs",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:tests/release-workflow-policy.test.mjs",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:tests/release-workflow-policy.test.mjs",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:tests/workflow-types.d.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:tests/workflow-types.d.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "code_unit:vitest.config.ts",
-    "node_type": "code_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "code_unit:vitest.config.ts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "config_key:GITHUB_OUTPUT",
-    "node_type": "config_key",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "config_key:GITHUB_OUTPUT",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "config_key:LOG_LEVEL",
-    "node_type": "config_key",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "config_key:LOG_LEVEL",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "config_key:NODE_ENV",
-    "node_type": "config_key",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "config_key:NODE_ENV",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "config_key:RELEASE_PLAN_DIR",
-    "node_type": "config_key",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "config_key:RELEASE_PLAN_DIR",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureRetryDecision",
-    "node_type": "contract",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureRetryDecision",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureTransitionDecision",
-    "node_type": "contract",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureTransitionDecision",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "contract:packages/nest-common/test/rfc7807-exception.filter.test.ts#err",
-    "node_type": "contract",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "contract:packages/nest-common/test/rfc7807-exception.filter.test.ts#err",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#nested",
-    "node_type": "contract",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#nested",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#schema",
-    "node_type": "contract",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#schema",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "deployable_unit:packages/access-contracts",
-    "node_type": "deployable_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "deployable_unit:packages/access-contracts",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "deployable_unit:packages/eslint-config",
-    "node_type": "deployable_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "deployable_unit:packages/eslint-config",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "deployable_unit:packages/logger",
-    "node_type": "deployable_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "deployable_unit:packages/logger",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "deployable_unit:packages/nest-common",
-    "node_type": "deployable_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "deployable_unit:packages/nest-common",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "deployable_unit:packages/throttle",
-    "node_type": "deployable_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "deployable_unit:packages/throttle",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "deployable_unit:packages/tsconfig",
-    "node_type": "deployable_unit",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "deployable_unit:packages/tsconfig",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:.changeset/README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:.changeset/README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:.changeset/bounded-json-decoder.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:.changeset/bounded-json-decoder.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:.changeset/personal-capture-contract.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:.changeset/personal-capture-contract.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:.changeset/throttle-initial.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:.changeset/throttle-initial.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:SECURITY.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:SECURITY.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/access-contracts/README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/access-contracts/README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/eslint-config/CHANGELOG.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/eslint-config/CHANGELOG.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/eslint-config/README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/eslint-config/README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/logger/CHANGELOG.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/logger/CHANGELOG.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/logger/README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/logger/README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/nest-common/CHANGELOG.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/nest-common/CHANGELOG.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/nest-common/README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/nest-common/README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/throttle/README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/throttle/README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/tsconfig/CHANGELOG.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/tsconfig/CHANGELOG.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:packages/tsconfig/README.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:packages/tsconfig/README.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   },
-   {
-    "boundary": "intra_unit",
-    "depth": 0,
-    "entity": "document:provenance/component-provenance.md",
-    "node_type": "document",
-    "path": [
-     {
-      "edge_type": "deploys_to",
-      "from": "code_unit:pnpm-lock.yaml",
-      "provenance": "deterministic",
-      "to": "document:provenance/component-provenance.md",
-      "via": "global-fallback"
-     }
-    ],
-    "revisions": [
-     "base",
-     "head"
-    ],
-    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
-   }
+    "checked_at_utc": "2026-10-01T05:27:25Z",
+    "method": "manifest.dirty must be false; manifest.source_commit == change_set.base; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at base (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
+    "mismatched_nodes": [],
+    "verdict": "fresh"
+  },
+  "structural_exclusions": [],
+  "tree": {
+    "commit": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
+    "dirty": false
+  },
+  "verdicts": [
+    {
+      "entity": "code_unit:.github/workflows/ci.yml",
+      "reason": "v-workflow-config-b803fcb7f17ed923: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-workflow-config-b803fcb7f17ed923"]
+    },
+    {
+      "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+      "reason": "v-workflow-config-2fe48d1021006468: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-workflow-config-2fe48d1021006468"]
+    },
+    {
+      "entity": "code_unit:.github/workflows/governance.yml",
+      "reason": "v-workflow-config-5844296ae241614c: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-workflow-config-5844296ae241614c"]
+    },
+    {
+      "entity": "code_unit:.github/workflows/release.yml",
+      "reason": "v-workflow-config-87db21a973eed4fe: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-workflow-config-87db21a973eed4fe"]
+    },
+    {
+      "entity": "code_unit:eslint.config.js",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:scripts/prepare-release-plan.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:scripts/release-policy.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:scripts/release-preflight.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:tests/release-boundary-regression.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:tests/release-preflight.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:tests/release-workflow-policy.test.mjs",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:tests/workflow-types.d.ts",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "code_unit:vitest.config.ts",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-tsconfig"]
+    },
+    {
+      "entity": "deployable_unit:packages/access-contracts",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: 0 errors; v-fitness: no new violation in packages/access-contracts",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-type-check-packages-access-contracts-tsconfig"
+      ]
+    },
+    {
+      "entity": "deployable_unit:packages/eslint-config",
+      "reason": "v-type-check-packages-eslint-config-tsconfig: packages/eslint-config/tsconfig.json: 0 errors; v-fitness: no new violation in packages/eslint-config",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-type-check-packages-eslint-config-tsconfig"
+      ]
+    },
+    {
+      "entity": "deployable_unit:packages/logger",
+      "reason": "v-type-check-packages-logger-tsconfig: packages/logger/tsconfig.json: 0 errors; v-fitness: no new violation in packages/logger",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-packages-logger-tsconfig"]
+    },
+    {
+      "entity": "deployable_unit:packages/nest-common",
+      "reason": "v-type-check-packages-nest-common-tsconfig: packages/nest-common/tsconfig.json: 0 errors; v-fitness: no new violation in packages/nest-common",
+      "verdict": "verified",
+      "verifier_ids": [
+        "v-fitness",
+        "v-type-check-packages-nest-common-tsconfig"
+      ]
+    },
+    {
+      "entity": "deployable_unit:packages/throttle",
+      "reason": "v-type-check-packages-throttle-tsconfig: packages/throttle/tsconfig.json: 0 errors; v-fitness: no new violation in packages/throttle",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-packages-throttle-tsconfig"]
+    },
+    {
+      "entity": "deployable_unit:packages/tsconfig",
+      "reason": "v-type-check-packages-tsconfig-tsconfig: packages/tsconfig/tsconfig.json: 0 errors; v-fitness: no new violation in packages/tsconfig",
+      "verdict": "verified",
+      "verifier_ids": ["v-fitness", "v-type-check-packages-tsconfig-tsconfig"]
+    }
   ],
-  "edge_types": "all",
-  "global_fallback": {
-   "files": [
-    "pnpm-lock.yaml",
-    "pnpm-workspace.yaml"
-   ],
-   "reason": "pnpm-lock.yaml, pnpm-workspace.yaml changed ⇒ every node affected (lockfile / global config / env schema: safe fallback, Bazel/Nx practice)",
-   "triggered": true
+  "verifier_selection": {
+    "applied": {},
+    "not_applied": [],
+    "requested": [],
+    "schema": "VerifierSelection/v1"
   },
-  "inferred_tail": [],
-  "max_depth": 3,
-  "method": "Union of independently revision-bound base/head traversals; global fallback: every node of the graph is affected (depth 0, synthetic containment hop); reverse traversal (dependents) + forward declared-by hops (provides_route, implements_contract, maps_model of the same file, deploys_to); best path = fewest inferred/observed hops, then shortest; max_depth 3",
-  "total": 85
- },
- "notes": [
-  "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.2.0) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
-  "profile: (auto-detected); baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: none; disabled: none"
- ],
- "producer": {
-  "tool": "tools/graph/verify.py",
-  "version": "1.2.0"
- },
- "receipt_id": "car-verify-20261001T052725Z-838d7dc1",
- "receipt_path": "receipts/graph/persist-foundation-audit.json",
- "repo": {
-  "name": "Arcanada-one/arcanada-shared",
-  "path": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit"
- },
- "revision_selection": {
-  "base": [
-   "code_unit:.github/workflows/ci.yml",
-   "code_unit:.github/workflows/dependabot-auto-merge.yml",
-   "code_unit:.github/workflows/governance.yml",
-   "code_unit:.github/workflows/release.yml",
-   "code_unit:eslint.config.js",
-   "code_unit:scripts/prepare-release-plan.mjs",
-   "code_unit:scripts/release-policy.mjs",
-   "code_unit:scripts/release-preflight.mjs",
-   "code_unit:tests/project-toolchain-policy.test.mjs",
-   "code_unit:tests/release-boundary-regression.test.mjs",
-   "code_unit:tests/release-preflight.test.mjs",
-   "code_unit:tests/release-workflow-policy.test.mjs",
-   "code_unit:tests/workflow-types.d.ts",
-   "code_unit:vitest.config.ts",
-   "deployable_unit:packages/access-contracts",
-   "deployable_unit:packages/eslint-config",
-   "deployable_unit:packages/logger",
-   "deployable_unit:packages/nest-common",
-   "deployable_unit:packages/throttle",
-   "deployable_unit:packages/tsconfig"
+  "verifiers": [
+    {
+      "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/tsconfig.json --noEmit --incremental false --listFiles",
+      "duration_s": 2.42,
+      "entities": [
+        "code_unit:eslint.config.js",
+        "code_unit:scripts/prepare-release-plan.mjs",
+        "code_unit:scripts/release-policy.mjs",
+        "code_unit:scripts/release-preflight.mjs",
+        "code_unit:tests/project-toolchain-policy.test.mjs",
+        "code_unit:tests/release-boundary-regression.test.mjs",
+        "code_unit:tests/release-preflight.test.mjs",
+        "code_unit:tests/release-workflow-policy.test.mjs",
+        "code_unit:tests/workflow-types.d.ts",
+        "code_unit:vitest.config.ts"
+      ],
+      "entity_verdicts": {
+        "code_unit:eslint.config.js": "verified",
+        "code_unit:scripts/prepare-release-plan.mjs": "verified",
+        "code_unit:scripts/release-policy.mjs": "verified",
+        "code_unit:scripts/release-preflight.mjs": "verified",
+        "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
+        "code_unit:tests/release-boundary-regression.test.mjs": "verified",
+        "code_unit:tests/release-preflight.test.mjs": "verified",
+        "code_unit:tests/release-workflow-policy.test.mjs": "verified",
+        "code_unit:tests/workflow-types.d.ts": "verified",
+        "code_unit:vitest.config.ts": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-type-check-tsconfig",
+      "kind": "type_check",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:27:26Z",
+      "summary": "tsconfig.json: exit 0, 0 error(s), 395 files listed"
+    },
+    {
+      "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/access-contracts/tsconfig.json --noEmit --incremental false --listFiles",
+      "duration_s": 1.85,
+      "entities": ["deployable_unit:packages/access-contracts"],
+      "entity_verdicts": {
+        "deployable_unit:packages/access-contracts": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-type-check-packages-access-contracts-tsconfig",
+      "kind": "type_check",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:27:29Z",
+      "summary": "packages/access-contracts/tsconfig.json: exit 0, 0 error(s), 258 files listed"
+    },
+    {
+      "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/eslint-config/tsconfig.json --noEmit --incremental false --listFiles",
+      "duration_s": 1.93,
+      "entities": ["deployable_unit:packages/eslint-config"],
+      "entity_verdicts": {
+        "deployable_unit:packages/eslint-config": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-type-check-packages-eslint-config-tsconfig",
+      "kind": "type_check",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-eslint-config-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:27:31Z",
+      "summary": "packages/eslint-config/tsconfig.json: exit 0, 0 error(s), 357 files listed"
+    },
+    {
+      "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/logger/tsconfig.json --noEmit --incremental false --listFiles",
+      "duration_s": 1.65,
+      "entities": ["deployable_unit:packages/logger"],
+      "entity_verdicts": {
+        "deployable_unit:packages/logger": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-type-check-packages-logger-tsconfig",
+      "kind": "type_check",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-logger-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:27:33Z",
+      "summary": "packages/logger/tsconfig.json: exit 0, 0 error(s), 626 files listed"
+    },
+    {
+      "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/nest-common/tsconfig.json --noEmit --incremental false --listFiles",
+      "duration_s": 2.63,
+      "entities": ["deployable_unit:packages/nest-common"],
+      "entity_verdicts": {
+        "deployable_unit:packages/nest-common": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-type-check-packages-nest-common-tsconfig",
+      "kind": "type_check",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-nest-common-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:27:35Z",
+      "summary": "packages/nest-common/tsconfig.json: exit 0, 0 error(s), 711 files listed"
+    },
+    {
+      "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/throttle/tsconfig.json --noEmit --incremental false --listFiles",
+      "duration_s": 1.89,
+      "entities": ["deployable_unit:packages/throttle"],
+      "entity_verdicts": {
+        "deployable_unit:packages/throttle": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-type-check-packages-throttle-tsconfig",
+      "kind": "type_check",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-throttle-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:27:37Z",
+      "summary": "packages/throttle/tsconfig.json: exit 0, 0 error(s), 719 files listed"
+    },
+    {
+      "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/tsconfig/tsconfig.json --noEmit --incremental false --listFiles",
+      "duration_s": 1.38,
+      "entities": ["deployable_unit:packages/tsconfig"],
+      "entity_verdicts": {
+        "deployable_unit:packages/tsconfig": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-type-check-packages-tsconfig-tsconfig",
+      "kind": "type_check",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-tsconfig-tsconfig.txt",
+      "started_at_utc": "2026-10-01T05:27:39Z",
+      "summary": "packages/tsconfig/tsconfig.json: exit 0, 0 error(s), 253 files listed"
+    },
+    {
+      "command": "workflow_config.validate exact head bytes",
+      "duration_s": 0.0,
+      "entities": ["code_unit:.github/workflows/ci.yml"],
+      "entity_verdicts": {
+        "code_unit:.github/workflows/ci.yml": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-workflow-config-b803fcb7f17ed923",
+      "kind": "config_schema",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-b803fcb7f17ed923.txt",
+      "started_at_utc": "2026-10-01T05:27:41Z",
+      "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
+    },
+    {
+      "command": "workflow_config.validate exact head bytes",
+      "duration_s": 0.0,
+      "entities": ["code_unit:.github/workflows/dependabot-auto-merge.yml"],
+      "entity_verdicts": {
+        "code_unit:.github/workflows/dependabot-auto-merge.yml": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-workflow-config-2fe48d1021006468",
+      "kind": "config_schema",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-2fe48d1021006468.txt",
+      "started_at_utc": "2026-10-01T05:27:41Z",
+      "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
+    },
+    {
+      "command": "workflow_config.validate exact head bytes",
+      "duration_s": 0.0,
+      "entities": ["code_unit:.github/workflows/governance.yml"],
+      "entity_verdicts": {
+        "code_unit:.github/workflows/governance.yml": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-workflow-config-5844296ae241614c",
+      "kind": "config_schema",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-5844296ae241614c.txt",
+      "started_at_utc": "2026-10-01T05:27:41Z",
+      "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
+    },
+    {
+      "command": "workflow_config.validate exact head bytes",
+      "duration_s": 0.0,
+      "entities": ["code_unit:.github/workflows/release.yml"],
+      "entity_verdicts": {
+        "code_unit:.github/workflows/release.yml": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-workflow-config-87db21a973eed4fe",
+      "kind": "config_schema",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-87db21a973eed4fe.txt",
+      "started_at_utc": "2026-10-01T05:27:41Z",
+      "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
+    },
+    {
+      "command": "verify.py fitness_rules FR-01..FR-05 over the head graph + head sources",
+      "duration_s": 0.01,
+      "entities": [
+        "code_unit:.github/workflows/ci.yml",
+        "code_unit:.github/workflows/dependabot-auto-merge.yml",
+        "code_unit:.github/workflows/governance.yml",
+        "code_unit:.github/workflows/release.yml",
+        "code_unit:eslint.config.js",
+        "code_unit:scripts/prepare-release-plan.mjs",
+        "code_unit:scripts/release-policy.mjs",
+        "code_unit:scripts/release-preflight.mjs",
+        "code_unit:tests/project-toolchain-policy.test.mjs",
+        "code_unit:tests/release-boundary-regression.test.mjs",
+        "code_unit:tests/release-preflight.test.mjs",
+        "code_unit:tests/release-workflow-policy.test.mjs",
+        "code_unit:tests/workflow-types.d.ts",
+        "code_unit:vitest.config.ts",
+        "deployable_unit:packages/access-contracts",
+        "deployable_unit:packages/eslint-config",
+        "deployable_unit:packages/logger",
+        "deployable_unit:packages/nest-common",
+        "deployable_unit:packages/throttle",
+        "deployable_unit:packages/tsconfig"
+      ],
+      "entity_verdicts": {
+        "code_unit:.github/workflows/ci.yml": "verified",
+        "code_unit:.github/workflows/dependabot-auto-merge.yml": "verified",
+        "code_unit:.github/workflows/governance.yml": "verified",
+        "code_unit:.github/workflows/release.yml": "verified",
+        "code_unit:eslint.config.js": "verified",
+        "code_unit:scripts/prepare-release-plan.mjs": "verified",
+        "code_unit:scripts/release-policy.mjs": "verified",
+        "code_unit:scripts/release-preflight.mjs": "verified",
+        "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
+        "code_unit:tests/release-boundary-regression.test.mjs": "verified",
+        "code_unit:tests/release-preflight.test.mjs": "verified",
+        "code_unit:tests/release-workflow-policy.test.mjs": "verified",
+        "code_unit:tests/workflow-types.d.ts": "verified",
+        "code_unit:vitest.config.ts": "verified",
+        "deployable_unit:packages/access-contracts": "verified",
+        "deployable_unit:packages/eslint-config": "verified",
+        "deployable_unit:packages/logger": "verified",
+        "deployable_unit:packages/nest-common": "verified",
+        "deployable_unit:packages/throttle": "verified",
+        "deployable_unit:packages/tsconfig": "verified"
+      },
+      "exit_code": 0,
+      "id": "v-fitness",
+      "kind": "fitness_rules",
+      "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-fitness.json",
+      "started_at_utc": "2026-10-01T05:27:41Z",
+      "summary": "0 finding(s): 0 new / 0 frozen; 0 entity(ies) failed"
+    }
   ],
-  "head": [
-   "code_unit:.github/workflows/ci.yml",
-   "code_unit:.github/workflows/dependabot-auto-merge.yml",
-   "code_unit:.github/workflows/governance.yml",
-   "code_unit:.github/workflows/release.yml",
-   "code_unit:eslint.config.js",
-   "code_unit:scripts/prepare-release-plan.mjs",
-   "code_unit:scripts/release-policy.mjs",
-   "code_unit:scripts/release-preflight.mjs",
-   "code_unit:tests/project-toolchain-policy.test.mjs",
-   "code_unit:tests/release-boundary-regression.test.mjs",
-   "code_unit:tests/release-preflight.test.mjs",
-   "code_unit:tests/release-workflow-policy.test.mjs",
-   "code_unit:tests/workflow-types.d.ts",
-   "code_unit:vitest.config.ts",
-   "deployable_unit:packages/access-contracts",
-   "deployable_unit:packages/eslint-config",
-   "deployable_unit:packages/logger",
-   "deployable_unit:packages/nest-common",
-   "deployable_unit:packages/throttle",
-   "deployable_unit:packages/tsconfig"
-  ],
-  "schema": "RevisionImpactSelection/v1",
-  "unmeasured_head_files": []
- },
- "schema": "ChangeAdmissionReceipt/v1",
- "staleness": {
-  "checked_at_utc": "2026-10-01T05:27:25Z",
-  "method": "manifest.dirty must be false; manifest.source_commit == change_set.base; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at base (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
-  "mismatched_nodes": [],
-  "verdict": "fresh"
- },
- "structural_exclusions": [],
- "tree": {
-  "commit": "838d7dc1ae7e370011d138ff2b6aad6fcadadb45",
-  "dirty": false
- },
- "verdicts": [
-  {
-   "entity": "code_unit:.github/workflows/ci.yml",
-   "reason": "v-workflow-config-b803fcb7f17ed923: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-workflow-config-b803fcb7f17ed923"
-   ]
+  "verify": {
+    "events": [],
+    "required_by_entity": {
+      "code_unit:.github/workflows/ci.yml": ["config_schema", "fitness_rules"],
+      "code_unit:.github/workflows/dependabot-auto-merge.yml": [
+        "config_schema",
+        "fitness_rules"
+      ],
+      "code_unit:.github/workflows/governance.yml": [
+        "config_schema",
+        "fitness_rules"
+      ],
+      "code_unit:.github/workflows/release.yml": [
+        "config_schema",
+        "fitness_rules"
+      ],
+      "code_unit:eslint.config.js": ["fitness_rules", "type_check"],
+      "code_unit:scripts/prepare-release-plan.mjs": [
+        "fitness_rules",
+        "type_check"
+      ],
+      "code_unit:scripts/release-policy.mjs": ["fitness_rules", "type_check"],
+      "code_unit:scripts/release-preflight.mjs": [
+        "fitness_rules",
+        "type_check"
+      ],
+      "code_unit:tests/project-toolchain-policy.test.mjs": [
+        "fitness_rules",
+        "type_check"
+      ],
+      "code_unit:tests/release-boundary-regression.test.mjs": [
+        "fitness_rules",
+        "type_check"
+      ],
+      "code_unit:tests/release-preflight.test.mjs": [
+        "fitness_rules",
+        "type_check"
+      ],
+      "code_unit:tests/release-workflow-policy.test.mjs": [
+        "fitness_rules",
+        "type_check"
+      ],
+      "code_unit:tests/workflow-types.d.ts": ["fitness_rules", "type_check"],
+      "code_unit:vitest.config.ts": ["fitness_rules", "type_check"],
+      "deployable_unit:packages/access-contracts": [
+        "fitness_rules",
+        "type_check"
+      ],
+      "deployable_unit:packages/eslint-config": ["fitness_rules", "type_check"],
+      "deployable_unit:packages/logger": ["fitness_rules", "type_check"],
+      "deployable_unit:packages/nest-common": ["fitness_rules", "type_check"],
+      "deployable_unit:packages/throttle": ["fitness_rules", "type_check"],
+      "deployable_unit:packages/tsconfig": ["fitness_rules", "type_check"]
+    },
+    "seconds": {
+      "prepare": 0.49,
+      "total": 16.18,
+      "verifiers": 13.76
+    }
   },
-  {
-   "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
-   "reason": "v-workflow-config-2fe48d1021006468: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-workflow-config-2fe48d1021006468"
-   ]
-  },
-  {
-   "entity": "code_unit:.github/workflows/governance.yml",
-   "reason": "v-workflow-config-5844296ae241614c: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-workflow-config-5844296ae241614c"
-   ]
-  },
-  {
-   "entity": "code_unit:.github/workflows/release.yml",
-   "reason": "v-workflow-config-87db21a973eed4fe: bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-workflow-config-87db21a973eed4fe"
-   ]
-  },
-  {
-   "entity": "code_unit:eslint.config.js",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:scripts/prepare-release-plan.mjs",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:scripts/release-policy.mjs",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:scripts/release-preflight.mjs",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:tests/release-boundary-regression.test.mjs",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:tests/release-preflight.test.mjs",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:tests/release-workflow-policy.test.mjs",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:tests/workflow-types.d.ts",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "code_unit:vitest.config.ts",
-   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-tsconfig"
-   ]
-  },
-  {
-   "entity": "deployable_unit:packages/access-contracts",
-   "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: 0 errors; v-fitness: no new violation in packages/access-contracts",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-packages-access-contracts-tsconfig"
-   ]
-  },
-  {
-   "entity": "deployable_unit:packages/eslint-config",
-   "reason": "v-type-check-packages-eslint-config-tsconfig: packages/eslint-config/tsconfig.json: 0 errors; v-fitness: no new violation in packages/eslint-config",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-packages-eslint-config-tsconfig"
-   ]
-  },
-  {
-   "entity": "deployable_unit:packages/logger",
-   "reason": "v-type-check-packages-logger-tsconfig: packages/logger/tsconfig.json: 0 errors; v-fitness: no new violation in packages/logger",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-packages-logger-tsconfig"
-   ]
-  },
-  {
-   "entity": "deployable_unit:packages/nest-common",
-   "reason": "v-type-check-packages-nest-common-tsconfig: packages/nest-common/tsconfig.json: 0 errors; v-fitness: no new violation in packages/nest-common",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-packages-nest-common-tsconfig"
-   ]
-  },
-  {
-   "entity": "deployable_unit:packages/throttle",
-   "reason": "v-type-check-packages-throttle-tsconfig: packages/throttle/tsconfig.json: 0 errors; v-fitness: no new violation in packages/throttle",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-packages-throttle-tsconfig"
-   ]
-  },
-  {
-   "entity": "deployable_unit:packages/tsconfig",
-   "reason": "v-type-check-packages-tsconfig-tsconfig: packages/tsconfig/tsconfig.json: 0 errors; v-fitness: no new violation in packages/tsconfig",
-   "verdict": "verified",
-   "verifier_ids": [
-    "v-fitness",
-    "v-type-check-packages-tsconfig-tsconfig"
-   ]
-  }
- ],
- "verifier_selection": {
-  "applied": {},
-  "not_applied": [],
-  "requested": [],
-  "schema": "VerifierSelection/v1"
- },
- "verifiers": [
-  {
-   "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/tsconfig.json --noEmit --incremental false --listFiles",
-   "duration_s": 2.42,
-   "entities": [
-    "code_unit:eslint.config.js",
-    "code_unit:scripts/prepare-release-plan.mjs",
-    "code_unit:scripts/release-policy.mjs",
-    "code_unit:scripts/release-preflight.mjs",
-    "code_unit:tests/project-toolchain-policy.test.mjs",
-    "code_unit:tests/release-boundary-regression.test.mjs",
-    "code_unit:tests/release-preflight.test.mjs",
-    "code_unit:tests/release-workflow-policy.test.mjs",
-    "code_unit:tests/workflow-types.d.ts",
-    "code_unit:vitest.config.ts"
-   ],
-   "entity_verdicts": {
-    "code_unit:eslint.config.js": "verified",
-    "code_unit:scripts/prepare-release-plan.mjs": "verified",
-    "code_unit:scripts/release-policy.mjs": "verified",
-    "code_unit:scripts/release-preflight.mjs": "verified",
-    "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
-    "code_unit:tests/release-boundary-regression.test.mjs": "verified",
-    "code_unit:tests/release-preflight.test.mjs": "verified",
-    "code_unit:tests/release-workflow-policy.test.mjs": "verified",
-    "code_unit:tests/workflow-types.d.ts": "verified",
-    "code_unit:vitest.config.ts": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-type-check-tsconfig",
-   "kind": "type_check",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-tsconfig.txt",
-   "started_at_utc": "2026-10-01T05:27:26Z",
-   "summary": "tsconfig.json: exit 0, 0 error(s), 395 files listed"
-  },
-  {
-   "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/access-contracts/tsconfig.json --noEmit --incremental false --listFiles",
-   "duration_s": 1.85,
-   "entities": [
-    "deployable_unit:packages/access-contracts"
-   ],
-   "entity_verdicts": {
-    "deployable_unit:packages/access-contracts": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-type-check-packages-access-contracts-tsconfig",
-   "kind": "type_check",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
-   "started_at_utc": "2026-10-01T05:27:29Z",
-   "summary": "packages/access-contracts/tsconfig.json: exit 0, 0 error(s), 258 files listed"
-  },
-  {
-   "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/eslint-config/tsconfig.json --noEmit --incremental false --listFiles",
-   "duration_s": 1.93,
-   "entities": [
-    "deployable_unit:packages/eslint-config"
-   ],
-   "entity_verdicts": {
-    "deployable_unit:packages/eslint-config": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-type-check-packages-eslint-config-tsconfig",
-   "kind": "type_check",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-eslint-config-tsconfig.txt",
-   "started_at_utc": "2026-10-01T05:27:31Z",
-   "summary": "packages/eslint-config/tsconfig.json: exit 0, 0 error(s), 357 files listed"
-  },
-  {
-   "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/logger/tsconfig.json --noEmit --incremental false --listFiles",
-   "duration_s": 1.65,
-   "entities": [
-    "deployable_unit:packages/logger"
-   ],
-   "entity_verdicts": {
-    "deployable_unit:packages/logger": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-type-check-packages-logger-tsconfig",
-   "kind": "type_check",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-logger-tsconfig.txt",
-   "started_at_utc": "2026-10-01T05:27:33Z",
-   "summary": "packages/logger/tsconfig.json: exit 0, 0 error(s), 626 files listed"
-  },
-  {
-   "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/nest-common/tsconfig.json --noEmit --incremental false --listFiles",
-   "duration_s": 2.63,
-   "entities": [
-    "deployable_unit:packages/nest-common"
-   ],
-   "entity_verdicts": {
-    "deployable_unit:packages/nest-common": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-type-check-packages-nest-common-tsconfig",
-   "kind": "type_check",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-nest-common-tsconfig.txt",
-   "started_at_utc": "2026-10-01T05:27:35Z",
-   "summary": "packages/nest-common/tsconfig.json: exit 0, 0 error(s), 711 files listed"
-  },
-  {
-   "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/throttle/tsconfig.json --noEmit --incremental false --listFiles",
-   "duration_s": 1.89,
-   "entities": [
-    "deployable_unit:packages/throttle"
-   ],
-   "entity_verdicts": {
-    "deployable_unit:packages/throttle": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-type-check-packages-throttle-tsconfig",
-   "kind": "type_check",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-throttle-tsconfig.txt",
-   "started_at_utc": "2026-10-01T05:27:37Z",
-   "summary": "packages/throttle/tsconfig.json: exit 0, 0 error(s), 719 files listed"
-  },
-  {
-   "command": "/home/dev/orca/workspaces/shared-lease/persist-foundation-audit/node_modules/.bin/tsc -p /home/dev/orca/workspaces/shared-lease/persist-foundation-audit/packages/tsconfig/tsconfig.json --noEmit --incremental false --listFiles",
-   "duration_s": 1.38,
-   "entities": [
-    "deployable_unit:packages/tsconfig"
-   ],
-   "entity_verdicts": {
-    "deployable_unit:packages/tsconfig": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-type-check-packages-tsconfig-tsconfig",
-   "kind": "type_check",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-type-check-packages-tsconfig-tsconfig.txt",
-   "started_at_utc": "2026-10-01T05:27:39Z",
-   "summary": "packages/tsconfig/tsconfig.json: exit 0, 0 error(s), 253 files listed"
-  },
-  {
-   "command": "workflow_config.validate exact head bytes",
-   "duration_s": 0.0,
-   "entities": [
-    "code_unit:.github/workflows/ci.yml"
-   ],
-   "entity_verdicts": {
-    "code_unit:.github/workflows/ci.yml": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-workflow-config-b803fcb7f17ed923",
-   "kind": "config_schema",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-b803fcb7f17ed923.txt",
-   "started_at_utc": "2026-10-01T05:27:41Z",
-   "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
-  },
-  {
-   "command": "workflow_config.validate exact head bytes",
-   "duration_s": 0.0,
-   "entities": [
-    "code_unit:.github/workflows/dependabot-auto-merge.yml"
-   ],
-   "entity_verdicts": {
-    "code_unit:.github/workflows/dependabot-auto-merge.yml": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-workflow-config-2fe48d1021006468",
-   "kind": "config_schema",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-2fe48d1021006468.txt",
-   "started_at_utc": "2026-10-01T05:27:41Z",
-   "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
-  },
-  {
-   "command": "workflow_config.validate exact head bytes",
-   "duration_s": 0.0,
-   "entities": [
-    "code_unit:.github/workflows/governance.yml"
-   ],
-   "entity_verdicts": {
-    "code_unit:.github/workflows/governance.yml": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-workflow-config-5844296ae241614c",
-   "kind": "config_schema",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-5844296ae241614c.txt",
-   "started_at_utc": "2026-10-01T05:27:41Z",
-   "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
-  },
-  {
-   "command": "workflow_config.validate exact head bytes",
-   "duration_s": 0.0,
-   "entities": [
-    "code_unit:.github/workflows/release.yml"
-   ],
-   "entity_verdicts": {
-    "code_unit:.github/workflows/release.yml": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-workflow-config-87db21a973eed4fe",
-   "kind": "config_schema",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-workflow-config-87db21a973eed4fe.txt",
-   "started_at_utc": "2026-10-01T05:27:41Z",
-   "summary": "bounded workflow configuration shape valid; expressions, shell, actions and hosted execution NOT_MEASURED"
-  },
-  {
-   "command": "verify.py fitness_rules FR-01..FR-05 over the head graph + head sources",
-   "duration_s": 0.01,
-   "entities": [
-    "code_unit:.github/workflows/ci.yml",
-    "code_unit:.github/workflows/dependabot-auto-merge.yml",
-    "code_unit:.github/workflows/governance.yml",
-    "code_unit:.github/workflows/release.yml",
-    "code_unit:eslint.config.js",
-    "code_unit:scripts/prepare-release-plan.mjs",
-    "code_unit:scripts/release-policy.mjs",
-    "code_unit:scripts/release-preflight.mjs",
-    "code_unit:tests/project-toolchain-policy.test.mjs",
-    "code_unit:tests/release-boundary-regression.test.mjs",
-    "code_unit:tests/release-preflight.test.mjs",
-    "code_unit:tests/release-workflow-policy.test.mjs",
-    "code_unit:tests/workflow-types.d.ts",
-    "code_unit:vitest.config.ts",
-    "deployable_unit:packages/access-contracts",
-    "deployable_unit:packages/eslint-config",
-    "deployable_unit:packages/logger",
-    "deployable_unit:packages/nest-common",
-    "deployable_unit:packages/throttle",
-    "deployable_unit:packages/tsconfig"
-   ],
-   "entity_verdicts": {
-    "code_unit:.github/workflows/ci.yml": "verified",
-    "code_unit:.github/workflows/dependabot-auto-merge.yml": "verified",
-    "code_unit:.github/workflows/governance.yml": "verified",
-    "code_unit:.github/workflows/release.yml": "verified",
-    "code_unit:eslint.config.js": "verified",
-    "code_unit:scripts/prepare-release-plan.mjs": "verified",
-    "code_unit:scripts/release-policy.mjs": "verified",
-    "code_unit:scripts/release-preflight.mjs": "verified",
-    "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
-    "code_unit:tests/release-boundary-regression.test.mjs": "verified",
-    "code_unit:tests/release-preflight.test.mjs": "verified",
-    "code_unit:tests/release-workflow-policy.test.mjs": "verified",
-    "code_unit:tests/workflow-types.d.ts": "verified",
-    "code_unit:vitest.config.ts": "verified",
-    "deployable_unit:packages/access-contracts": "verified",
-    "deployable_unit:packages/eslint-config": "verified",
-    "deployable_unit:packages/logger": "verified",
-    "deployable_unit:packages/nest-common": "verified",
-    "deployable_unit:packages/throttle": "verified",
-    "deployable_unit:packages/tsconfig": "verified"
-   },
-   "exit_code": 0,
-   "id": "v-fitness",
-   "kind": "fitness_rules",
-   "output_ref": "/home/dev/aup/persist-01-20261001/dependency-repair/graph/verifier-out/v-fitness.json",
-   "started_at_utc": "2026-10-01T05:27:41Z",
-   "summary": "0 finding(s): 0 new / 0 frozen; 0 entity(ies) failed"
-  }
- ],
- "verify": {
-  "events": [],
-  "required_by_entity": {
-   "code_unit:.github/workflows/ci.yml": [
-    "config_schema",
-    "fitness_rules"
-   ],
-   "code_unit:.github/workflows/dependabot-auto-merge.yml": [
-    "config_schema",
-    "fitness_rules"
-   ],
-   "code_unit:.github/workflows/governance.yml": [
-    "config_schema",
-    "fitness_rules"
-   ],
-   "code_unit:.github/workflows/release.yml": [
-    "config_schema",
-    "fitness_rules"
-   ],
-   "code_unit:eslint.config.js": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:scripts/prepare-release-plan.mjs": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:scripts/release-policy.mjs": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:scripts/release-preflight.mjs": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:tests/project-toolchain-policy.test.mjs": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:tests/release-boundary-regression.test.mjs": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:tests/release-preflight.test.mjs": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:tests/release-workflow-policy.test.mjs": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:tests/workflow-types.d.ts": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "code_unit:vitest.config.ts": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "deployable_unit:packages/access-contracts": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "deployable_unit:packages/eslint-config": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "deployable_unit:packages/logger": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "deployable_unit:packages/nest-common": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "deployable_unit:packages/throttle": [
-    "fitness_rules",
-    "type_check"
-   ],
-   "deployable_unit:packages/tsconfig": [
-    "fitness_rules",
-    "type_check"
-   ]
-  },
-  "seconds": {
-   "prepare": 0.49,
-   "total": 16.18,
-   "verifiers": 13.76
-  }
- },
- "work_item": "7f131984-cd74-439a-89fc-21a7fe705837"
+  "work_item": "7f131984-cd74-439a-89fc-21a7fe705837"
 }
