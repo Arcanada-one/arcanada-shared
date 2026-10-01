@@ -1,11 +1,14 @@
 import type { ValidationResult } from "./index.js";
 import {
-  parsePersonalCaptureDescriptor,
-  parsePersonalCaptureStatus,
   type PersonalCaptureDescriptor,
   type PersonalCaptureStatus,
 } from "./personal-capture.js";
 import { parsePersonalAuthJson } from "./personal-auth-json.js";
+import {
+  parsePersonalCaptureBinding,
+  personalCaptureResourceMatches,
+} from "./personal-auth-capture-binding.js";
+import { snapshotArray, snapshotRecord } from "./wire-snapshot.js";
 
 /** Proposed structural slice only: parsing/comparison never authenticates or grants access. */
 export const PERSONAL_AUTH_WIRE_VERSION = "auth-personal/1-proposed" as const;
@@ -126,28 +129,9 @@ function record(
   required: readonly string[],
   optional: readonly string[] = [],
 ): Record<string, unknown> {
-  if (!v || typeof v !== "object" || Array.isArray(v)) throw new Error();
-  if (![Object.prototype, null].includes(Object.getPrototypeOf(v)))
+  const result = snapshotRecord(v, [...required, ...optional], false);
+  if (result === null || !required.every((key) => Object.hasOwn(result, key)))
     throw new Error();
-  const properties = Object.getOwnPropertyDescriptors(v);
-  const keys = Reflect.ownKeys(v);
-  if (
-    keys.some(
-      (k) => typeof k !== "string" || ![...required, ...optional].includes(k),
-    ) ||
-    required.some((k) => !Object.hasOwn(properties, k))
-  )
-    throw new Error();
-  const result: Record<string, unknown> = Object.create(null) as Record<
-    string,
-    unknown
-  >;
-  for (const key of Object.keys(properties)) {
-    const property = properties[key]!;
-    if (!property.enumerable || !Object.hasOwn(property, "value"))
-      throw new Error();
-    result[key] = property.value as unknown;
-  }
   return result;
 }
 function safely<T>(work: () => T): ValidationResult<T> {
@@ -189,11 +173,11 @@ function session(input: unknown): PersonalAuthSession {
     ["session_id", "session_uid", "client_id", "client_sid", "grant_id"],
   );
   if (tag.kind === "paseto") {
-    const v = record(input, ["kind", "session_id"]);
+    const v = record(tag, ["kind", "session_id"]);
     requireValue(id(v.session_id));
     return v as unknown as PersonalAuthSession;
   }
-  const v = record(input, [
+  const v = record(tag, [
     "kind",
     "session_uid",
     "client_id",
@@ -292,18 +276,11 @@ function operation(input: unknown): PersonalAuthOperationRequest {
   );
   const actor = participant(v.participant);
   requireValue(actor.role === "product");
-  const binding = record(v.capture_binding, ["descriptor", "status"]);
-  const descriptor = parsePersonalCaptureDescriptor(binding.descriptor);
-  requireValue(descriptor.ok);
-  canonicalNumbers(descriptor.value);
-  let status: PersonalCaptureStatus | null = null;
-  if (binding.status !== null) {
-    const parsed = parsePersonalCaptureStatus(binding.status);
-    requireValue(parsed.ok);
-    status = parsed.value;
-    canonicalNumbers(status);
-    requireValue(canonical(status.descriptor) === canonical(descriptor.value));
-  }
+  const binding = parsePersonalCaptureBinding(v.capture_binding);
+  requireValue(binding.ok);
+  const { descriptor, status } = binding.value;
+  canonicalNumbers(descriptor);
+  if (status !== null) canonicalNumbers(status);
   requireValue(
     v.operation === "intent.create"
       ? status === null
@@ -318,42 +295,20 @@ function operation(input: unknown): PersonalAuthOperationRequest {
     "expected_conversation_revision",
     "parts",
   ]);
+  const rawParts = snapshotArray(resource.parts, 1, 2);
+  requireValue(rawParts !== null);
+  const parts = rawParts.map(part);
+  const d = descriptor;
   requireValue(
-    resource.kind === "intent" &&
-      Array.isArray(resource.parts) &&
-      resource.parts.length >= 1 &&
-      resource.parts.length <= 2,
-  );
-  const parts = resource.parts.map(part);
-  const d = descriptor.value;
-  requireValue(
-    resource.intent_id === d.captureId &&
-      resource.conversation_id === d.conversationId &&
-      resource.message_id === d.messageId &&
-      resource.expected_conversation_revision ===
-        d.expectedConversationRevision &&
-      owner(resource.expected_conversation_revision),
-  );
-  requireValue(
-    status === null
-      ? resource.intent_revision === null
-      : resource.intent_revision === status.intentRevision &&
-          owner(resource.intent_revision, 1),
-  );
-  requireValue(
-    parts.length === d.parts.length &&
-      parts.every((p, i) => {
-        const q = d.parts[i]!;
-        return (
-          p.part_id === q.partId &&
-          p.part_kind === q.role &&
-          p.object_id === q.objectId &&
-          p.object_revision === q.objectRevision &&
-          p.sha256 === q.sha256 &&
-          p.size_bytes === q.sizeBytes &&
-          p.media_type === q.mediaType
-        );
-      }),
+    owner(resource.expected_conversation_revision) &&
+      (status === null
+        ? resource.intent_revision === null
+        : owner(resource.intent_revision, 1)) &&
+      personalCaptureResourceMatches(
+        d.realmId,
+        { ...resource, parts },
+        binding.value,
+      ),
   );
   if (v.expected_realm_id !== undefined)
     requireValue(v.expected_realm_id === d.realmId);

@@ -122,6 +122,55 @@ function fixture(): {
   };
 }
 describe("proposed Auth operation structural slice", () => {
+  it("rejects sparse intent parts instead of skipping their bindings", () => {
+    const { request } = fixture();
+    const parts = [...request.resource.parts];
+    delete parts[0];
+    request.resource.parts = parts;
+    expect(parsePersonalAuthOperation(request).ok).toBe(false);
+  });
+  it("rejects part array accessors without invoking them", () => {
+    const { request } = fixture();
+    const part = request.resource.parts[0];
+    let calls = 0;
+    Object.defineProperty(request.resource.parts, "0", {
+      enumerable: true,
+      get() {
+        calls++;
+        return part;
+      },
+    });
+    expect(parsePersonalAuthOperation(request).ok).toBe(false);
+    expect(calls).toBe(0);
+  });
+  it("rejects hidden additional array properties", () => {
+    const { request } = fixture();
+    Object.defineProperty(request.resource.parts, "extra", { value: true });
+    expect(parsePersonalAuthOperation(request).ok).toBe(false);
+  });
+  it("validates and returns the same typed session snapshot", () => {
+    const { context } = fixture();
+    let reads = 0;
+    context.session = new Proxy(
+      { kind: "paseto", session_id: id(15) },
+      {
+        getOwnPropertyDescriptor(target, key) {
+          const property = Reflect.getOwnPropertyDescriptor(target, key);
+          if (key !== "kind" || property === undefined) return property;
+          reads++;
+          return reads === 1 ? property : { ...property, value: "oidc" };
+        },
+      },
+    );
+    const result = parsePersonalAuthBindingContext(context);
+    expect(result.ok).toBe(true);
+    expect(reads).toBe(1);
+    if (result.ok)
+      expect(result.value.session).toEqual({
+        kind: "paseto",
+        session_id: id(15),
+      });
+  });
   it("parses a prospective intent, empty note and separately bound context without granting authority", () => {
     const { request, context } = fixture();
     expect(parsePersonalAuthOperationJson(JSON.stringify(request)).ok).toBe(

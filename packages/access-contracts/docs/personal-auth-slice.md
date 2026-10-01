@@ -38,7 +38,7 @@ The proposal explicitly chooses **one active data flow, zero waiting flows and a
 | `maintenance.cleanup_cancelled` | Rejected / not implemented      | Auth current-authority admission, durable idempotency, owner binding, lease/fence and applicable consumer execution remain NOT_MEASURED |
 | `maintenance.cancel_intent`     | Rejected / not implemented      | Auth current-authority admission, durable idempotency, owner binding, lease/fence and applicable consumer execution remain NOT_MEASURED |
 
-All other resource forms (standalone part/object/publication/selectors/pages/owner records/representations/cancellation), grants, narrowing, owner/delivery binding, outcomes, flows, leases, settlement, release-spend, invalidation, barrier acknowledgement, recovery permits, lifecycle fencing and mounted problem responses remain unimplemented. `PersonalAuthPart` is only the intent's exact descriptor projection, not a standalone object-stage permit. Full proposal status and deployment claims are unchanged.
+Operation envelopes for other resource forms, grants, narrowing, owner/delivery binding, outcomes, flows, leases, settlement, release-spend, invalidation, barrier acknowledgement, recovery permits, lifecycle fencing and mounted problem responses remain unimplemented. The separate capture binding adapter now checks structural standalone part and terminal cancellation selectors; it enables none of those operations. `PersonalAuthPart` is only the intent's exact descriptor projection, not a standalone object-stage permit. Full proposal status and deployment claims are unchanged.
 
 ## Full acceptance matrix
 
@@ -86,3 +86,18 @@ Unit controls supplement these integration controls; no unit test completes an F
 | F38     | None in this structural slice                                   | NOT_MEASURED    |
 | F39     | Unimplemented operations rejected                               | NOT_MEASURED    |
 | F40     | Generic input-free parser errors; no mounted filter/audit proof | NOT_MEASURED    |
+
+## Capture binding composition and decoded-value safety
+
+Initial operations compose `parsePersonalCaptureBinding` and
+`personalCaptureResourceMatches` with the existing capture profile. All record
+and array input data properties are captured once; session discriminants and
+returned session fields use the same snapshot. Sparse arrays, element accessors
+and additional own keys refuse before mapping parts. Four regression tests
+cover these cases against the previous initial implementation.
+
+The separate adapter accepts only intent, part and cancelled-intent resource
+forms. It compares exact allocations/byte identity/current revision and full
+terminal cancellation proof/part set. Matching an owner outcome ID proves only
+syntax, not authenticity or a cleanup lease. No new operation envelope, Product
+CAS or maintenance admission follows from a positive comparison.
