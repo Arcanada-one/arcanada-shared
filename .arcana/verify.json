@@ -1,0 +1,34 @@
+{
+  "schema": "VerifyProfile/v1",
+  "note": "The root full_test runs the unchanged CI test job: workflow tests followed by all package suites. Each package full_test is its complete unchanged test script, also executed by CI pnpm -r test. No targeted subset or audit suppression.",
+  "deployables": {
+    ".": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
+    "packages/access-contracts": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
+    "packages/eslint-config": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
+    "packages/logger": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
+    "packages/nest-common": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
+    "packages/throttle": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
+    "packages/tsconfig": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    }
+  }
+}
