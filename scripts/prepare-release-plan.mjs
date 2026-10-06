@@ -2,8 +2,16 @@
 
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join, relative, resolve, sep } from "node:path";
+import {
+  appendFile,
+  mkdir,
+  mkdtemp,
+  readFile,
+  rename,
+  rm,
+  writeFile,
+} from "node:fs/promises";
+import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 import { RELEASE_PACKAGES, runReleasePreflight } from "./release-preflight.mjs";
@@ -36,6 +44,7 @@ const CHANGESET_FILE_PATTERN = /^\.changeset\/[^/]+\.md$/;
 const run = async (file, args, options = {}) =>
   execFileAsync(file, args, {
     maxBuffer: 20 * 1024 * 1024,
+    timeout: 60_000,
     ...options,
   });
 
@@ -185,6 +194,7 @@ export const inspectPackedTarball = async ({
   const entries = listing.split("\n").filter(Boolean);
   if (
     entries.length === 0 ||
+    entries.length > 1024 ||
     entries.some(
       (entry) =>
         !entry.startsWith("package/") ||
@@ -209,6 +219,9 @@ export const inspectPackedTarball = async ({
     tarball,
     "package/package.json",
   ]);
+  if (Buffer.byteLength(manifestSource) > 1024 * 1024) {
+    throw new Error("PACKAGE_TARBALL_INVALID: manifest exceeds 1 MiB.");
+  }
   const manifest = JSON.parse(manifestSource);
   if (
     manifest.name !== expectedName ||
@@ -218,6 +231,80 @@ export const inspectPackedTarball = async ({
     throw new Error(
       `PACKAGE_TARBALL_INVALID: expected ${expectedName}@${expectedVersion} with public access, found ${manifest.name}@${manifest.version}.`,
     );
+  }
+  for (const section of [
+    "dependencies",
+    "optionalDependencies",
+    "peerDependencies",
+  ]) {
+    for (const spec of Object.values(manifest[section] ?? {})) {
+      if (
+        typeof spec !== "string" ||
+        /^(catalog|workspace|link|file):/.test(spec)
+      ) {
+        throw new Error(
+          `PACKAGE_TARBALL_INVALID: unresolved dependency in ${section}.`,
+        );
+      }
+    }
+  }
+  /** @param {unknown} target
+   * @param {boolean} isExport */
+  const checkTarget = (target, isExport) => {
+    if (target === null || target === undefined) return;
+    if (typeof target === "string") {
+      if (isExport && !target.startsWith("./")) {
+        throw new Error(
+          `PACKAGE_TARBALL_INVALID: export target must start with ./: ${target}.`,
+        );
+      }
+      const path = target.replace(/^\.\//, "");
+      if (
+        path.split("/").includes("..") ||
+        !entries.includes(`package/${path}`)
+      ) {
+        throw new Error(
+          `PACKAGE_TARBALL_INVALID: missing or unsafe export target ${target}.`,
+        );
+      }
+    } else if (typeof target === "object") {
+      for (const value of Object.values(target)) checkTarget(value, isExport);
+    } else {
+      throw new Error("PACKAGE_TARBALL_INVALID: invalid export target.");
+    }
+  };
+  checkTarget(manifest.exports, true);
+  for (const target of [manifest.main, manifest.module, manifest.types])
+    checkTarget(target, false);
+};
+
+/** Pack with the workspace's catalog-aware manager. Metadata comes from the
+ * archive, never lifecycle stdout. See https://pnpm.io/cli/pack (--out).
+ * @param {{packageDir: string, outputDir: string, name: string, version: string}} options */
+export const packReleaseTarball = async ({
+  packageDir,
+  outputDir,
+  name,
+  version,
+}) => {
+  const allowlisted = RELEASE_PACKAGES.find((entry) => entry.name === name);
+  if (!allowlisted)
+    throw new Error("RELEASE_ALLOWLIST_MISMATCH: unexpected package.");
+  const staging = await mkdtemp(join(resolve(outputDir), ".pack-"));
+  try {
+    const tarball = join(staging, "package.tgz");
+    await run("pnpm", ["pack", "--out", tarball], { cwd: packageDir });
+    await inspectPackedTarball({
+      tarball,
+      expectedName: name,
+      expectedVersion: version,
+    });
+    // Fixed artifact basename: neither package metadata nor stdout supplies a path.
+    const filename = `${allowlisted.directory.split("/").at(-1)}.tgz`;
+    await rename(tarball, join(outputDir, filename));
+    return filename;
+  } finally {
+    await rm(staging, { recursive: true, force: true });
   }
 };
 
@@ -263,36 +350,13 @@ const buildPublishPlan = async ({ rootDir, planDir, candidates }) => {
       );
     }
 
-    const { stdout } = await run(
-      "npm",
-      [
-        "pack",
-        "--ignore-scripts",
-        "--json",
-        "--pack-destination",
-        packageDirectory,
-      ],
-      { cwd: join(rootDir, allowlisted.directory) },
-    );
-    const result = JSON.parse(stdout);
-    if (!Array.isArray(result) || result.length !== 1 || !result[0]?.filename) {
-      throw new Error(
-        `PACKAGE_TARBALL_INVALID: npm pack returned an unexpected result for ${candidate.name}.`,
-      );
-    }
-
-    const filename = result[0].filename;
-    if (filename.includes("/") || filename.includes(sep)) {
-      throw new Error(
-        `PACKAGE_TARBALL_INVALID: npm pack returned unsafe filename ${filename}.`,
-      );
-    }
-    const tarball = join(packageDirectory, filename);
-    await inspectPackedTarball({
-      tarball,
-      expectedName: candidate.name,
-      expectedVersion: candidate.version,
+    const filename = await packReleaseTarball({
+      packageDir: join(rootDir, allowlisted.directory),
+      outputDir: packageDirectory,
+      name: candidate.name,
+      version: candidate.version,
     });
+    const tarball = join(packageDirectory, filename);
     const sha256 = createHash("sha256")
       .update(await readFile(tarball))
       .digest("hex");
