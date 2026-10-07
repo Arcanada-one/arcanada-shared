@@ -1,0 +1,20 @@
+{
+  "id": "task.intent",
+  "version": 1,
+  "primitive": "choice",
+  "instructions": "Classify the primary intent of trusted.task_text using exactly the supplied options.",
+  "criteria":
+    {
+      "implement": "Create or extend functionality.",
+      "fix": "Correct defective behavior.",
+      "research": "Investigate a question and collect evidence.",
+      "review": "Assess an existing artifact.",
+      "operate": "Perform an operational procedure.",
+      "document": "Write or update documentation.",
+      "migrate": "Move data or functionality between defined systems.",
+      "other": "None of the listed intents describes the task.",
+    },
+  "params_schema": {},
+  "state_schema_ref": "task_dialogue",
+  "allow_non_ascii": [],
+}

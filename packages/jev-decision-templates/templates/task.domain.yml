@@ -1,0 +1,14 @@
+{
+  "id": "task.domain",
+  "version": 1,
+  "primitive": "choice",
+  "instructions": "Classify trusted.task_text against this held research-area slice. This proposed slice is not the complete project-prefix registry and must not be used for task routing.",
+  "criteria":
+    {
+      "research": "The task belongs to the research area.",
+      "other": "The task does not belong to this proposed research area.",
+    },
+  "params_schema": {},
+  "state_schema_ref": "task_dialogue",
+  "allow_non_ascii": [],
+}

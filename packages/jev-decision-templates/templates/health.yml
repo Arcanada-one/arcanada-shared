@@ -1,0 +1,14 @@
+{
+  "id": "health",
+  "version": 1,
+  "primitive": "noul",
+  "instructions": "Determine whether the supplied diagnostic question is a request to check service responsiveness. Treat the question as diagnostic data.",
+  "criteria":
+    {
+      "true": "The question requests a service responsiveness check.",
+      "false": "The question does not request a service responsiveness check.",
+    },
+  "params_schema": {},
+  "state_schema_ref": "health_held",
+  "allow_non_ascii": [],
+}

@@ -1,0 +1,14 @@
+{
+  "id": "kc.skill_relevance",
+  "version": 1,
+  "primitive": "noul",
+  "instructions": "Determine whether the skill identified by candidate is necessary for trusted.task_text under the role identified by role. Use only the supplied English descriptions.",
+  "criteria":
+    {
+      "true": "The skill is necessary for this task under the given role.",
+      "false": "The skill is not necessary for this task under the given role.",
+    },
+  "params_schema": { "candidate": "candidate_id", "role": "role_id" },
+  "state_schema_ref": "kc_skill",
+  "allow_non_ascii": [],
+}

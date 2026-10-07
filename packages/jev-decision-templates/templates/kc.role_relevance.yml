@@ -1,0 +1,14 @@
+{
+  "id": "kc.role_relevance",
+  "version": 1,
+  "primitive": "noul",
+  "instructions": "Determine whether the role identified by candidate is necessary for trusted.task_text, using its English description in trusted.candidates.",
+  "criteria":
+    {
+      "true": "The role is necessary to perform the task.",
+      "false": "The role is not necessary to perform the task.",
+    },
+  "params_schema": { "candidate": "candidate_id" },
+  "state_schema_ref": "kc_role",
+  "allow_non_ascii": [],
+}
