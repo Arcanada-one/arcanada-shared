@@ -140,6 +140,8 @@ importers:
         specifier: 'catalog:'
         version: 4.1.11(@types/node@22.19.19)(vite@6.4.3(@types/node@22.19.19)(yaml@2.9.0))
 
+  packages/frontend-tokens: {}
+
   packages/logger:
     devDependencies:
       '@nestjs/common':
