@@ -54,7 +54,8 @@ test("aliases resolve before every exported format is generated", () => {
   assert.ok(output.css.includes("--arc-status-unknown: #246b35;"));
 });
 
-for (const [name, mutate, expected] of [
+/** @type {Array<[string, (input: any) => void, string]>} */
+const negatives = [
   [
     "cycle",
     (i) => {
@@ -133,7 +134,8 @@ for (const [name, mutate, expected] of [
     },
     "unknown_field",
   ],
-]) {
+];
+for (const [name, mutate, expected] of negatives) {
   test(`rejects ${name} without exposing its input`, () => {
     const invalid = copy();
     mutate(invalid);
