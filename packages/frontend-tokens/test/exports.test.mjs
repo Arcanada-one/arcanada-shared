@@ -158,3 +158,17 @@ test("oversized input is rejected before output files are changed", async () => 
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("malformed JSON emits a fixed diagnostic and preserves previous artifacts", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "semantic-status-"));
+  try {
+    const source = join(directory, "input.json");
+    const existing = join(directory, "tokens.css");
+    await writeFile(source, "FAKE_PRIVATE_MARKER");
+    await writeFile(existing, "previous valid artifact");
+    await assert.rejects(build(source, directory), { message: "invalid_json" });
+    assert.equal(await readFile(existing, "utf8"), "previous valid artifact");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

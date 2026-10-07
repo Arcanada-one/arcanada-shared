@@ -112,7 +112,14 @@ export function compileTokens(input) {
 export async function build(inputPath, outputDirectory) {
   const raw = await readFile(inputPath, "utf8");
   if (Buffer.byteLength(raw, "utf8") > 16_384) fail("input_too_large");
-  const output = compileTokens(JSON.parse(raw));
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    // Native parser diagnostics can echo malformed private input.
+    fail("invalid_json");
+  }
+  const output = compileTokens(parsed);
   // Validate completely before opening any output file.
   await mkdir(outputDirectory, { recursive: true });
   /** @type {Array<"css" | "json" | "ts">} */
