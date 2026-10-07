@@ -30,7 +30,8 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/state.ts --format esm --out-dir .manifest-stage --clean && node scripts/compile-manifest.mjs && tsup src/index.ts --format esm,cjs --dts --clean",
+    "build": "tsup src/state.ts --format esm --dts --out-dir .manifest-stage --clean && node scripts/compile-manifest.mjs && tsup src/index.ts --format esm,cjs --dts --clean",
+    "prepare": "pnpm run build",
     "test": "vitest run"
   },
   "dependencies": {

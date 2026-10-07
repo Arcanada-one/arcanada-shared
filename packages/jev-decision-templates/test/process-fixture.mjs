@@ -4,9 +4,11 @@ import { createRequire } from "node:module";
 import * as esm from "../dist/index.js";
 
 const require = createRequire(import.meta.url);
-const cjs = require("../dist/index.cjs");
+const cjs = /** @type {typeof esm} */ (require("../dist/index.cjs"));
+/** @param {unknown} value */
 const bytes = (value) => new TextEncoder().encode(JSON.stringify(value));
 let checks = 0;
+/** @param {boolean} condition */
 const check = (condition) => {
   assert.equal(condition, true);
   checks++;
@@ -15,8 +17,10 @@ const check = (condition) => {
 for (const library of [esm, cjs]) {
   const refs = library.packagedReferences();
   const task = refs.find((entry) => entry.id === "task.intent");
+  assert.ok(task);
   const ref = { id: task.id, version: task.version, sha256: task.sha256 };
   const state = { trusted: { task_text: "Review documents." }, untrusted: {} };
+  /** @param {unknown} reference @param {unknown} input @param {unknown} params */
   const run = (reference, input, params = {}) =>
     library.validatePackagedState(
       bytes(reference),
@@ -26,12 +30,12 @@ for (const library of [esm, cjs]) {
   const result = run(ref, state);
   check(result.state_structure.code === "MINIMAL_STATE_STRUCTURE_ONLY");
   check(
-    [
+    /** @type {(keyof typeof result)[]} */ ([
       "token_limits",
       "privacy_authority",
       "knowledge_authority",
       "runtime_authority",
-    ].every((key) => result[key].verdict === "not_measured"),
+    ]).every((key) => result[key].verdict === "not_measured"),
   );
   check(
     run({ ...ref, id: "../task.intent" }, state).reference.verdict === "failed",
