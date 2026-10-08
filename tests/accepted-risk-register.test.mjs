@@ -2,6 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { checkAcceptedRisk } from "../scripts/check-accepted-risk.mjs";
 
+/**
+ * @param {string} id
+ * @param {unknown} re_review
+ */
 const entry = (id, re_review) => ({ id, re_review });
 
 test("a covered ignore with a future re_review passes", () => {
