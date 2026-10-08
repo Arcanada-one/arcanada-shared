@@ -203,7 +203,7 @@ importers:
     devDependencies:
       tsup:
         specifier: 'catalog:'
-        version: 8.5.1(postcss@8.5.18)(supports-color@7.2.0)(typescript@5.9.3)(yaml@2.9.0)
+        version: 8.5.1(postcss@8.5.23)(supports-color@7.2.0)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
