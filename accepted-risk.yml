@@ -1,0 +1,39 @@
+# Accepted-risk register (schema v1) for the Shared monorepo.
+# Validator: dev-tools/check-security-policy.sh --validate-yaml accepted-risk.yml
+#
+# Owner of both entries: Auth lane (Arcana agent system). Mechanism: the same GHSA ids are
+# listed in pnpm-workspace.yaml auditConfig.ignoreGhsas so the CI step
+# "pnpm audit --audit-level=high" honours this register; an id appears in one place only
+# if it also appears in the other.
+#
+# Reachability evidence (measured 2026-10-08 on the pinned lockfile):
+#   npm ls braces sprintf-js --omit=dev                         -> (empty)
+#   pnpm ls --prod --recursive --depth Infinity braces sprintf-js -> (empty)
+# Both packages are reached only through @changesets/cli (root devDependency): braces via
+# micromatch 4.0.8, sprintf-js via argparse 1.0.10 / js-yaml 3.15.2 / read-yaml-file.
+#
+# reverse_if (remove the entry and the ignore): a patched release is published
+# (braces >= 3.0.4, sprintf-js >= 1.1.4), OR either package appears in any workspace
+# package's production dependency tree.
+
+schema_version: 1
+
+entries:
+  - id: GHSA-vfj7-8cjw-p6xm
+    pkg: "braces"
+    severity: high
+    scope: devdep
+    reason: "No patched release exists (npm latest 3.0.3, patched range >=3.0.4 unpublished). Reachable only via micromatch from @changesets/cli, a devDependency of release tooling; absent from every workspace package's production tree (npm ls --omit=dev empty). Overriding is impossible without a published version."
+    last_review: 2026-10-08
+    re_review: 2026-11-07
+    reviewed_by: agent
+    upstream_tracking_url: "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm"
+  - id: GHSA-hp3w-g68c-fv3c
+    pkg: "sprintf-js"
+    severity: medium
+    scope: devdep
+    reason: "No patched release exists (npm latest 1.1.3, patched range >=1.1.4 unpublished). Reachable only via argparse and js-yaml 3.x from @changesets/cli, a devDependency of release tooling; absent from every workspace package's production tree (npm ls --omit=dev empty)."
+    last_review: 2026-10-08
+    re_review: 2026-11-07
+    reviewed_by: agent
+    upstream_tracking_url: "https://github.com/advisories/GHSA-hp3w-g68c-fv3c"

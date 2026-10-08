@@ -24,7 +24,12 @@ within 72 hours.
   `gitleaks` runs as a CI merge gate. Consumer configuration (tokens, URLs,
   credentials) is supplied via environment variables at the consuming
   application, never committed here.
-- **Dependency audit.** `pnpm audit --audit-level=high` runs in CI.
+- **Dependency audit.** `pnpm audit --audit-level=high` runs in CI. Advisories with no
+  published patched release are recorded in `accepted-risk.yml` (source of truth) with a
+  re-review date and a reversal condition, and mirrored in `pnpm-workspace.yaml`
+  `auditConfig.ignoreGhsas`. Currently: GHSA-vfj7-8cjw-p6xm (`braces`) and
+  GHSA-hp3w-g68c-fv3c (`sprintf-js`), both reachable only through the `@changesets/cli`
+  devDependency and absent from every package's production tree.
 
 ## Supported versions
 
