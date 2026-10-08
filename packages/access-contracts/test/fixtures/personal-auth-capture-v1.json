@@ -1,0 +1,4141 @@
+{
+  "wire_version": "auth-personal/1-proposed",
+  "profile_id": "organize-me.synthetic/1",
+  "cases": [
+    {
+      "name": "current part exact",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": true
+    },
+    {
+      "name": "current intent exact",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "intent",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "conversation_id": "00000000-0000-4000-8000-000000000003",
+        "message_id": "00000000-0000-4000-8000-000000000004",
+        "expected_conversation_revision": 0,
+        "parts": [
+          {
+            "part_id": "00000000-0000-4000-8000-000000000006",
+            "part_kind": "note",
+            "object_id": "00000000-0000-4000-8000-000000000007",
+            "object_revision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "size_bytes": 2,
+            "media_type": "text/plain;charset=utf-8"
+          },
+          {
+            "part_id": "00000000-0000-4000-8000-000000000009",
+            "part_kind": "attachment",
+            "object_id": "00000000-0000-4000-8000-00000000000a",
+            "object_revision": "00000000-0000-4000-8000-00000000000b",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": true
+    },
+    {
+      "name": "prospective intent exact",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "intent",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": null,
+        "conversation_id": "00000000-0000-4000-8000-000000000003",
+        "message_id": "00000000-0000-4000-8000-000000000004",
+        "expected_conversation_revision": 0,
+        "parts": [
+          {
+            "part_id": "00000000-0000-4000-8000-000000000006",
+            "part_kind": "note",
+            "object_id": "00000000-0000-4000-8000-000000000007",
+            "object_revision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "size_bytes": 2,
+            "media_type": "text/plain;charset=utf-8"
+          },
+          {
+            "part_id": "00000000-0000-4000-8000-000000000009",
+            "part_kind": "attachment",
+            "object_id": "00000000-0000-4000-8000-00000000000a",
+            "object_revision": "00000000-0000-4000-8000-00000000000b",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": null
+      },
+      "expected": true
+    },
+    {
+      "name": "terminal cancellation complete unordered part set",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": true
+    },
+    {
+      "name": "wrong realm",
+      "realmId": "00000000-0000-4000-8000-000000000063",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "prospective part has no current revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": null
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation requires terminal owner state",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "current intent cannot use null revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "intent",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": null,
+        "conversation_id": "00000000-0000-4000-8000-000000000003",
+        "message_id": "00000000-0000-4000-8000-000000000004",
+        "expected_conversation_revision": 0,
+        "parts": [
+          {
+            "part_id": "00000000-0000-4000-8000-000000000006",
+            "part_kind": "note",
+            "object_id": "00000000-0000-4000-8000-000000000007",
+            "object_revision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "size_bytes": 2,
+            "media_type": "text/plain;charset=utf-8"
+          },
+          {
+            "part_id": "00000000-0000-4000-8000-000000000009",
+            "part_kind": "attachment",
+            "object_id": "00000000-0000-4000-8000-00000000000a",
+            "object_revision": "00000000-0000-4000-8000-00000000000b",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "unknown resource unsupported",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "publication",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution kind",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "00000000-0000-4000-8000-000000000063",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing kind",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution intent_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000063",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing intent_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution intent_revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 2,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing intent_revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution part_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000063",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing part_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution part_kind",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "attachment",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing part_kind",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution object_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000063",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing object_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution object_revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000063",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing object_revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution sha256",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing sha256",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution size_bytes",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 3,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing size_bytes",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part substitution media_type",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/html"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part missing media_type",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "part unknown field",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8",
+        "verified": true
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "intent substitution conversation_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "intent",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "conversation_id": "00000000-0000-4000-8000-000000000063",
+        "message_id": "00000000-0000-4000-8000-000000000004",
+        "expected_conversation_revision": 0,
+        "parts": [
+          {
+            "part_id": "00000000-0000-4000-8000-000000000006",
+            "part_kind": "note",
+            "object_id": "00000000-0000-4000-8000-000000000007",
+            "object_revision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "size_bytes": 2,
+            "media_type": "text/plain;charset=utf-8"
+          },
+          {
+            "part_id": "00000000-0000-4000-8000-000000000009",
+            "part_kind": "attachment",
+            "object_id": "00000000-0000-4000-8000-00000000000a",
+            "object_revision": "00000000-0000-4000-8000-00000000000b",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "intent substitution message_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "intent",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "conversation_id": "00000000-0000-4000-8000-000000000003",
+        "message_id": "00000000-0000-4000-8000-000000000063",
+        "expected_conversation_revision": 0,
+        "parts": [
+          {
+            "part_id": "00000000-0000-4000-8000-000000000006",
+            "part_kind": "note",
+            "object_id": "00000000-0000-4000-8000-000000000007",
+            "object_revision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "size_bytes": 2,
+            "media_type": "text/plain;charset=utf-8"
+          },
+          {
+            "part_id": "00000000-0000-4000-8000-000000000009",
+            "part_kind": "attachment",
+            "object_id": "00000000-0000-4000-8000-00000000000a",
+            "object_revision": "00000000-0000-4000-8000-00000000000b",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "intent substitution expected_conversation_revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "intent",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "conversation_id": "00000000-0000-4000-8000-000000000003",
+        "message_id": "00000000-0000-4000-8000-000000000004",
+        "expected_conversation_revision": 1,
+        "parts": [
+          {
+            "part_id": "00000000-0000-4000-8000-000000000006",
+            "part_kind": "note",
+            "object_id": "00000000-0000-4000-8000-000000000007",
+            "object_revision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "size_bytes": 2,
+            "media_type": "text/plain;charset=utf-8"
+          },
+          {
+            "part_id": "00000000-0000-4000-8000-000000000009",
+            "part_kind": "attachment",
+            "object_id": "00000000-0000-4000-8000-00000000000a",
+            "object_revision": "00000000-0000-4000-8000-00000000000b",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "intent substitution parts",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "intent",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "conversation_id": "00000000-0000-4000-8000-000000000003",
+        "message_id": "00000000-0000-4000-8000-000000000004",
+        "expected_conversation_revision": 0,
+        "parts": [
+          {
+            "part_id": "00000000-0000-4000-8000-000000000009",
+            "part_kind": "attachment",
+            "object_id": "00000000-0000-4000-8000-00000000000a",
+            "object_revision": "00000000-0000-4000-8000-00000000000b",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0,
+            "media_type": "text/plain;charset=utf-8"
+          },
+          {
+            "part_id": "00000000-0000-4000-8000-000000000006",
+            "part_kind": "note",
+            "object_id": "00000000-0000-4000-8000-000000000007",
+            "object_revision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "size_bytes": 2,
+            "media_type": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation substitution kind",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "00000000-0000-4000-8000-000000000063",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation substitution intent_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000063",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation substitution terminal_intent_revision",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 3,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation substitution cancellation_generation",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 2,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation substitution owner_outcome_id",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "bad",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation substitution part_ids",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000006",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "cancellation substitution cancellation",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "cancellation",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "terminal_intent_revision": 2,
+        "cancellation_generation": 1,
+        "owner_outcome_id": "00000000-0000-4000-8000-00000000000c",
+        "part_ids": [
+          "00000000-0000-4000-8000-000000000009",
+          "00000000-0000-4000-8000-000000000006"
+        ],
+        "cancellation": {
+          "schemaVersion": "personal-capture/v1",
+          "purpose": "cancel_unpublished_capture",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "requestFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "intentRevision": 2,
+          "cancellationGeneration": 1
+        }
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 2,
+          "state": "cancelled",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          }
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "dual descriptor substitution requestFingerprint",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "dual descriptor substitution messageId",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000063",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "dual descriptor substitution idempotencyKey",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000063",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    },
+    {
+      "name": "changed payload with original claimed fingerprint",
+      "realmId": "00000000-0000-4000-8000-000000000001",
+      "resource": {
+        "kind": "part",
+        "intent_id": "00000000-0000-4000-8000-000000000002",
+        "intent_revision": 1,
+        "part_id": "00000000-0000-4000-8000-000000000006",
+        "part_kind": "note",
+        "object_id": "00000000-0000-4000-8000-000000000007",
+        "object_revision": "00000000-0000-4000-8000-000000000008",
+        "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+        "size_bytes": 2,
+        "media_type": "text/plain;charset=utf-8"
+      },
+      "binding": {
+        "descriptor": {
+          "schemaVersion": "personal-capture/v1",
+          "realmId": "00000000-0000-4000-8000-000000000001",
+          "captureId": "00000000-0000-4000-8000-000000000002",
+          "conversationId": "00000000-0000-4000-8000-000000000003",
+          "messageId": "00000000-0000-4000-8000-000000000004",
+          "expectedConversationRevision": 0,
+          "operation": "append_message",
+          "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+          "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+          "cancellationGeneration": 0,
+          "parts": [
+            {
+              "partId": "00000000-0000-4000-8000-000000000006",
+              "role": "note",
+              "objectId": "00000000-0000-4000-8000-000000000007",
+              "objectRevision": "00000000-0000-4000-8000-000000000008",
+              "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "sizeBytes": 2,
+              "mediaType": "text/plain;charset=utf-8"
+            },
+            {
+              "partId": "00000000-0000-4000-8000-000000000009",
+              "role": "attachment",
+              "objectId": "00000000-0000-4000-8000-00000000000a",
+              "objectRevision": "00000000-0000-4000-8000-00000000000b",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "sizeBytes": 0,
+              "mediaType": "text/plain;charset=utf-8"
+            }
+          ]
+        },
+        "status": {
+          "schemaVersion": "personal-capture/v1",
+          "descriptor": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "conversationId": "00000000-0000-4000-8000-000000000003",
+            "messageId": "00000000-0000-4000-8000-000000000004",
+            "expectedConversationRevision": 0,
+            "operation": "append_message",
+            "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0,
+            "parts": [
+              {
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "role": "note",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8"
+              },
+              {
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "role": "attachment",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8"
+              }
+            ]
+          },
+          "intentRevision": 1,
+          "state": "awaiting_bytes"
+        }
+      },
+      "expected": false
+    }
+  ]
+}

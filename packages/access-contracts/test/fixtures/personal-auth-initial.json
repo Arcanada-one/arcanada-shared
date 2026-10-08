@@ -1,0 +1,107 @@
+{
+  "request": {
+    "wire_version": "auth-personal/1-proposed",
+    "profile_id": "organize-me.synthetic/1",
+    "request_id": "00000000-0000-4000-8000-00000000000c",
+    "idempotency_key": "00000000-0000-4000-8000-00000000000d",
+    "operation_id": "00000000-0000-4000-8000-00000000000e",
+    "authority_kind": "person",
+    "person_proof": {
+      "kind": "oidc_access_token",
+      "token": "synthetic.access.token"
+    },
+    "operation": "intent.create",
+    "purpose": "personal.capture",
+    "resource": {
+      "kind": "intent",
+      "intent_id": "00000000-0000-4000-8000-000000000002",
+      "intent_revision": null,
+      "conversation_id": "00000000-0000-4000-8000-000000000003",
+      "message_id": "00000000-0000-4000-8000-000000000004",
+      "expected_conversation_revision": 0,
+      "parts": [
+        {
+          "part_id": "00000000-0000-4000-8000-000000000006",
+          "part_kind": "note",
+          "object_id": "00000000-0000-4000-8000-000000000007",
+          "object_revision": "00000000-0000-4000-8000-000000000008",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0,
+          "media_type": "text/plain;charset=utf-8"
+        }
+      ]
+    },
+    "capture_binding": {
+      "descriptor": {
+        "schemaVersion": "personal-capture/v1",
+        "realmId": "00000000-0000-4000-8000-000000000001",
+        "captureId": "00000000-0000-4000-8000-000000000002",
+        "conversationId": "00000000-0000-4000-8000-000000000003",
+        "messageId": "00000000-0000-4000-8000-000000000004",
+        "expectedConversationRevision": 0,
+        "operation": "append_message",
+        "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+        "requestFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "cancellationGeneration": 0,
+        "parts": [
+          {
+            "partId": "00000000-0000-4000-8000-000000000006",
+            "role": "note",
+            "objectId": "00000000-0000-4000-8000-000000000007",
+            "objectRevision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "sizeBytes": 0,
+            "mediaType": "text/plain;charset=utf-8"
+          }
+        ]
+      },
+      "status": null
+    },
+    "participant": {
+      "participant_id": "00000000-0000-4000-8000-00000000000a",
+      "role": "product",
+      "process_generation": "1",
+      "boot_id": "00000000-0000-4000-8000-00000000000b",
+      "deployment_generation": "2"
+    }
+  },
+  "context": {
+    "issuer": "https://auth.arcanada.ai",
+    "subject": "00000000-0000-4000-8000-00000000000f",
+    "session": {
+      "kind": "oidc",
+      "session_uid": "uid-not-sid",
+      "client_id": "browser-client",
+      "client_sid": "sid-not-uid",
+      "grant_id": "grant"
+    },
+    "authority_ref": "00000000-0000-4000-8000-000000000010",
+    "authority_version": "1",
+    "actor_client_id": "product-a",
+    "consumer_client_id": "product-a",
+    "realm_id": "00000000-0000-4000-8000-000000000001",
+    "realm_binding_version": "1",
+    "policy_version": "synthetic-v1",
+    "policy_epoch": "2",
+    "deployment_generation": "2",
+    "participant_config_version": "1",
+    "participant": {
+      "participant_id": "00000000-0000-4000-8000-00000000000a",
+      "role": "product",
+      "process_generation": "1",
+      "boot_id": "00000000-0000-4000-8000-00000000000b",
+      "deployment_generation": "2"
+    },
+    "provisioning": {
+      "realm_id": "00000000-0000-4000-8000-000000000001",
+      "product_client_id": "product-a",
+      "disk_client_id": "disk-a",
+      "product_participant_id": "00000000-0000-4000-8000-00000000000a",
+      "disk_participant_id": "00000000-0000-4000-8000-000000000011",
+      "deployment_generation": "2",
+      "participant_config_version": "1"
+    }
+  },
+  "expectedFingerprintSha256": "0e874ca228d537a88d8d7b34e148aabafdb519614aa2b49e908a2955a63a0423",
+  "scope": "Synthetic structural fixture; not authenticated authority."
+}

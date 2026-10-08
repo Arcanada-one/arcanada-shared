@@ -1,0 +1,2536 @@
+{
+  "wire_version": "auth-personal/1-proposed",
+  "profile_id": "organize-me.synthetic/1",
+  "scope": "Synthetic same-generation structural overlap only; no authorization or operation/resource binding",
+  "cases": [
+    {
+      "name": "intent_created matched",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": true
+    },
+    {
+      "name": "intent_staged matched",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_staged",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 2,
+            "state": "staged",
+            "receipts": [
+              {
+                "schemaVersion": "personal-capture/v1",
+                "realmId": "00000000-0000-4000-8000-000000000001",
+                "captureId": "00000000-0000-4000-8000-000000000002",
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8",
+                "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+                "cancellationGeneration": 0
+              },
+              {
+                "schemaVersion": "personal-capture/v1",
+                "realmId": "00000000-0000-4000-8000-000000000001",
+                "captureId": "00000000-0000-4000-8000-000000000002",
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8",
+                "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+                "cancellationGeneration": 0
+              }
+            ]
+          },
+          "storage_receipt_ids": [
+            "00000000-0000-4000-8000-000000000022",
+            "00000000-0000-4000-8000-000000000023"
+          ]
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_stage",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": true
+    },
+    {
+      "name": "disk_stored matched",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "disk_stored",
+          "object_receipt": {
+            "schemaVersion": "personal-capture/v1",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "partId": "00000000-0000-4000-8000-000000000006",
+            "objectId": "00000000-0000-4000-8000-000000000007",
+            "objectRevision": "00000000-0000-4000-8000-000000000008",
+            "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+            "sizeBytes": 2,
+            "mediaType": "text/plain;charset=utf-8",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "cancellationGeneration": 0
+          },
+          "storage_receipt_id": "00000000-0000-4000-8000-000000000022"
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "disk_stage",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": true
+    },
+    {
+      "name": "product_committed matched",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "product_committed",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 3,
+            "state": "committed",
+            "receipts": [
+              {
+                "schemaVersion": "personal-capture/v1",
+                "realmId": "00000000-0000-4000-8000-000000000001",
+                "captureId": "00000000-0000-4000-8000-000000000002",
+                "partId": "00000000-0000-4000-8000-000000000006",
+                "objectId": "00000000-0000-4000-8000-000000000007",
+                "objectRevision": "00000000-0000-4000-8000-000000000008",
+                "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                "sizeBytes": 2,
+                "mediaType": "text/plain;charset=utf-8",
+                "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+                "cancellationGeneration": 0
+              },
+              {
+                "schemaVersion": "personal-capture/v1",
+                "realmId": "00000000-0000-4000-8000-000000000001",
+                "captureId": "00000000-0000-4000-8000-000000000002",
+                "partId": "00000000-0000-4000-8000-000000000009",
+                "objectId": "00000000-0000-4000-8000-00000000000a",
+                "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "sizeBytes": 0,
+                "mediaType": "text/plain;charset=utf-8",
+                "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+                "cancellationGeneration": 0
+              }
+            ],
+            "manifestId": "00000000-0000-4000-8000-000000000024",
+            "conversationRevision": 1
+          },
+          "publication_id": "00000000-0000-4000-8000-000000000024",
+          "manifest_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "storage_receipt_ids": [
+            "00000000-0000-4000-8000-000000000022",
+            "00000000-0000-4000-8000-000000000023"
+          ]
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "product_publish",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": true
+    },
+    {
+      "name": "product_cancelled matched",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "product_cancelled",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 2,
+            "state": "cancelled",
+            "cancellation": {
+              "schemaVersion": "personal-capture/v1",
+              "purpose": "cancel_unpublished_capture",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "intentRevision": 2,
+              "cancellationGeneration": 1
+            }
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_cancel",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": true
+    },
+    {
+      "name": "link_repaired matched",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "link_repaired",
+          "committed_owner_outcome_id": "00000000-0000-4000-8000-000000000025",
+          "storage_receipt_id": "00000000-0000-4000-8000-000000000022",
+          "link_revision": 0,
+          "link_binding_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "repair_link",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": true
+    },
+    {
+      "name": "disk_cleaned matched",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "disk_cleaned",
+          "cancelled_owner_outcome_id": "00000000-0000-4000-8000-000000000026",
+          "cancellation": {
+            "schemaVersion": "personal-capture/v1",
+            "purpose": "cancel_unpublished_capture",
+            "realmId": "00000000-0000-4000-8000-000000000001",
+            "captureId": "00000000-0000-4000-8000-000000000002",
+            "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+            "intentRevision": 2,
+            "cancellationGeneration": 1
+          },
+          "cleaned_objects": [
+            {
+              "part_id": "00000000-0000-4000-8000-000000000006",
+              "object_id": "00000000-0000-4000-8000-000000000007",
+              "object_revision": "00000000-0000-4000-8000-000000000008"
+            },
+            {
+              "part_id": "00000000-0000-4000-8000-000000000009",
+              "object_id": "00000000-0000-4000-8000-00000000000a",
+              "object_revision": "00000000-0000-4000-8000-00000000000b"
+            }
+          ]
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "cleanup_cancelled",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": true
+    },
+    {
+      "name": "missing wire_version",
+      "request": {
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": false,
+      "match": false
+    },
+    {
+      "name": "missing profile_id",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": false,
+      "match": false
+    },
+    {
+      "name": "missing request_id",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": false,
+      "match": false
+    },
+    {
+      "name": "missing idempotency_key",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": false,
+      "match": false
+    },
+    {
+      "name": "missing participant",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": false,
+      "match": false
+    },
+    {
+      "name": "missing lease_id",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": false,
+      "match": false
+    },
+    {
+      "name": "missing outcome",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001"
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": false,
+      "match": false
+    },
+    {
+      "name": "outcome participant_id substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-000000000063",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "outcome process_generation substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "2",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "outcome deployment_generation substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "2",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease participant_id substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-000000000063",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease role substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "disk",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease process_generation substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "2",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease boot_id substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000063",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease deployment_generation substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "2"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease lease_id substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000063",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease realm_id substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000063",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "lease effect substitution",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_stage",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "non-effect access",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "access",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "non-effect release",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "release",
+        "effect": null,
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": {
+          "delivery_id": "00000000-0000-4000-8000-000000000006",
+          "frame_index": 0,
+          "object_revision": null,
+          "representation_binding_id": "00000000-0000-4000-8000-000000000007",
+          "offset_bytes": 0,
+          "length_bytes": 0,
+          "destination": "client",
+          "destination_binding_id": "00000000-0000-4000-8000-000000000008"
+        },
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    },
+    {
+      "name": "replacement generation syntactically valid but no ordinary lease match",
+      "request": {
+        "wire_version": "auth-personal/1-proposed",
+        "profile_id": "organize-me.synthetic/1",
+        "request_id": "00000000-0000-4000-8000-000000000070",
+        "idempotency_key": "00000000-0000-4000-8000-000000000071",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "2",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "outcome": {
+          "owner_receipt_id": "00000000-0000-4000-8000-00000000001e",
+          "realm_id": "00000000-0000-4000-8000-000000000001",
+          "deployment_generation": "1",
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "process_generation": "1",
+          "operation_id": "00000000-0000-4000-8000-000000000020",
+          "intent_id": "00000000-0000-4000-8000-000000000002",
+          "owner_commit_id": "00000000-0000-4000-8000-000000000021",
+          "local_seq": "1",
+          "resource_binding_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "intent_created",
+          "capture_status": {
+            "schemaVersion": "personal-capture/v1",
+            "descriptor": {
+              "schemaVersion": "personal-capture/v1",
+              "realmId": "00000000-0000-4000-8000-000000000001",
+              "captureId": "00000000-0000-4000-8000-000000000002",
+              "conversationId": "00000000-0000-4000-8000-000000000003",
+              "messageId": "00000000-0000-4000-8000-000000000004",
+              "expectedConversationRevision": 0,
+              "operation": "append_message",
+              "idempotencyKey": "00000000-0000-4000-8000-000000000005",
+              "requestFingerprint": "7685bf779aef1bb38981827a505c31aeb5433c70ae2600a091add3fadca6b4e8",
+              "cancellationGeneration": 0,
+              "parts": [
+                {
+                  "partId": "00000000-0000-4000-8000-000000000006",
+                  "role": "note",
+                  "objectId": "00000000-0000-4000-8000-000000000007",
+                  "objectRevision": "00000000-0000-4000-8000-000000000008",
+                  "sha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+                  "sizeBytes": 2,
+                  "mediaType": "text/plain;charset=utf-8"
+                },
+                {
+                  "partId": "00000000-0000-4000-8000-000000000009",
+                  "role": "attachment",
+                  "objectId": "00000000-0000-4000-8000-00000000000a",
+                  "objectRevision": "00000000-0000-4000-8000-00000000000b",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "sizeBytes": 0,
+                  "mediaType": "text/plain;charset=utf-8"
+                }
+              ]
+            },
+            "intentRevision": 1,
+            "state": "awaiting_bytes"
+          }
+        }
+      },
+      "lease": {
+        "lease_id": "00000000-0000-4000-8000-000000000001",
+        "flow_id": "00000000-0000-4000-8000-000000000002",
+        "grant_id": "00000000-0000-4000-8000-000000000003",
+        "participant": {
+          "participant_id": "00000000-0000-4000-8000-00000000001f",
+          "role": "product",
+          "process_generation": "1",
+          "boot_id": "00000000-0000-4000-8000-000000000005",
+          "deployment_generation": "1"
+        },
+        "realm_id": "00000000-0000-4000-8000-000000000001",
+        "policy_epoch": "1",
+        "participant_config_version": "1",
+        "lease_kind": "effect",
+        "effect": "intent_create",
+        "resource_binding_id": "00000000-0000-4000-8000-00000000000a",
+        "release_unit": null,
+        "admitted_seq": "1",
+        "admitted_at": "2001-01-01T00:00:00.000Z",
+        "execute_before": "2001-01-01T00:00:01.000Z",
+        "state": "admitted"
+      },
+      "parse": true,
+      "match": false
+    }
+  ]
+}

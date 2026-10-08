@@ -144,3 +144,88 @@ The separate Auth grant/audience, person/session binding, bounded release-unit,
 lease/fence and restart-recovery protocols remain unfinished. Product and Disk
 integration, cross-language conformance, durable transactions and real restart,
 race, isolation and revocation evidence are required before runtime admission.
+
+### Authorization capture binding adapter
+
+`parsePersonalCaptureBinding` composes the existing descriptor and status
+parsers. Its closed `{descriptor, status}` record accepts `status: null` for
+prospective allocation; otherwise both immutable descriptors must match in
+every field, including allocations and the claimed request fingerprint.
+
+`personalCaptureResourceMatches(realmId, resource, binding)` checks the
+`auth-personal/1-proposed`, `organize-me.synthetic/1` structural mapping for
+exactly three resource kinds: `intent`, `part`, and `cancellation`. Other kinds
+return false. The separately supplied realm must equal the descriptor realm.
+Snake case selectors must match the existing camel case allocations and byte
+identity; current resources require the status revision. Intent parts retain
+note-first order. A null status matches only a prospective intent with a null
+intent revision. Cancellation requires a cancelled status, matching terminal
+revision/generation/proof, a complete unique part-ID set, and a syntactically
+valid owner outcome ID. The set order is immaterial; capture part order is not.
+
+These checks validate decoded structural consistency only. A caller must first
+authenticate and resolve the realm, operation, status and owner outcome from
+current authority. A matching outcome ID is not an authenticated outcome.
+Null status must additionally be restricted to `intent.create`; the adapter
+does not accept an operation or authorize its execution. It does not compute
+or verify a payload digest/fingerprint, issue or validate grants/leases, narrow
+audiences, execute a CAS, authenticate a session, or admit maintenance cleanup.
+Version/profile constants describe this candidate and do not parse an outer
+Auth envelope. Unsupported resource variants and the remaining Auth protocol
+remain unfinished.
+
+The Auth transport boundary must reject noncanonical numeric spellings before
+decoding. These decoded-value checks inherit capture's safe-integer semantics,
+including equality of negative zero and zero; they cannot distinguish `0.0`,
+`0e0`, or numbers rounded by JSON decoding. `parseBoundedJson` rejects duplicate
+keys but is not a canonical-number decoder.
+
+Portable positive and negative JSON vectors are maintained at
+`test/fixtures/personal-auth-capture-v1.json`. Producer and consumer ports should
+pin the same file bytes and compare every case before integration. Passing the
+TypeScript runner alone establishes no Rust or deployed-consumer conformance.
+
+## Bounded JSON decoding reference
+
+`parseBoundedJson(raw: Uint8Array): unknown` is exported from the package root.
+It accepts one JSON value in **1 to 65532 UTF-8 bytes**, including surrounding
+JSON whitespace. The root value has depth **0**; each object member value or
+array element adds one, with maximum depth **16**, including empty containers.
+Keys do not add another level. Callers must also bound transport reads before
+allocating the input. Only the supplied byte view is read.
+
+The parser rejects empty or whitespace-only input, malformed UTF-8, a leading
+BOM, malformed JSON, trailing values or garbage, duplicate **decoded** keys in
+any object, lone Unicode surrogates in keys or string values, and numbers that
+decode to infinity. Escaped and literal spellings of the same key collide;
+Unicode normalization is not performed. Valid surrogate pairs, Unicode strings,
+arrays, objects, booleans and null are preserved. Finite numbers use native
+`JSON.parse` IEEE-754 semantics, including rounding, underflow and negative zero;
+this is not a lossless-number or canonical-serialization API. Domain validators
+must separately enforce safe integers or other numeric constraints.
+
+Invalid input throws `SyntaxError("Invalid bounded JSON")`, without input data
+or an underlying error cause. A private grammar pass validates before native
+`JSON.parse`; bounded input and recursion limit the work and allocation, and
+number matching uses a cursor without repeatedly copying the remaining input.
+The implementation uses ES2022 primitives without Node `Buffer`, DOM types or
+runtime dependencies. The existing ESM/CJS build uses the same public export.
+Parsing authenticates nothing and grants no capabilities; consumers must still
+validate the returned `unknown` against their schema and authenticate evidence.
+
+## Proposed personal owner outcomes
+
+`parsePersonalAuthOwnerOutcome` composes the existing capture parsers into seven
+closed owner assertion variants. `personalAuthOwnerOutcomeEffect` reports their
+source effect spelling; `comparePersonalAuthOwnerOutcome` compares exact retry
+content without authenticating it. See the [owner outcome reference](docs/personal-auth-owner-outcomes.md)
+for fields, conservative vector ordering and required external owner context.
+These proposed exports provide no CAS, durability, effect permission, settlement
+or runtime activation.
+
+## Proposed personal owner outcome requests
+
+`parsePersonalAuthOwnerOutcomeRequest` and its strict JSON wrapper parse the
+closed protected mutation request. The explicitly same-generation lease matcher
+checks structural overlap only; it cannot bind operation/intent/resource fields
+absent from the lease or authenticate recovery. See the [request reference](docs/personal-auth-outcome-requests.md).
