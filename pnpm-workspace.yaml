@@ -41,5 +41,17 @@ overrides:
   # GHSA-2v37-7h3g-55p8 — the previous floor (3.3.17) is itself vulnerable;
   # nanoid is transitive via postcss/vite/tsup, so an override is the only reach.
   "nanoid@<3.3.18": 3.3.18
-  "postcss@<=8.5.17": 8.5.18
+  # GHSA-fxqj-rqcc-2cmp — incomplete fix of GHSA-6g55-p6wh-862q; first patched 8.5.23.
+  "postcss@<=8.5.22": 8.5.23
+  # GHSA-68fv-2mgg-jv7q — event-loop DoS via indexed source-map section offsets.
+  "source-map-js@>=1.0.0 <1.2.2": 1.2.2
   "vite@<=6.4.2": 6.4.3
+
+# Accepted-risk register: see accepted-risk.yml. Both advisories have no
+# published patched release and are reachable only through devDependency
+# release tooling (@changesets/cli); each ignore is listed there with an
+# owner, a re-review date and the condition that reverses it.
+auditConfig:
+  ignoreGhsas:
+    - GHSA-vfj7-8cjw-p6xm
+    - GHSA-hp3w-g68c-fv3c
