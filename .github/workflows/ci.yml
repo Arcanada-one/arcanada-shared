@@ -38,6 +38,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Accepted-risk register covers every ignored advisory
+        run: node scripts/check-accepted-risk.mjs
+
       - name: Audit (high+)
         run: pnpm audit --audit-level=high
 
