@@ -45,7 +45,10 @@ overrides:
   "postcss@<=8.5.22": 8.5.23
   # GHSA-68fv-2mgg-jv7q — event-loop DoS via indexed source-map section offsets.
   "source-map-js@>=1.0.0 <1.2.2": 1.2.2
-  "vite@<=6.4.2": 6.4.3
+  # GHSA-587h-7wmj-h5pm — launch-editor existsSync bypass (high); <=6.4.3 is
+  # patched in 6.4.4, but that release reopens GHSA-8g5g-mxqh-grgj
+  # (server.fs.deny query bypass). 6.4.5 is the patched 6.x vitest accepts.
+  "vite@<=6.4.4": 6.4.5
 
 # Accepted-risk register: see accepted-risk.yml. Both advisories have no
 # published patched release and are reachable only through devDependency
