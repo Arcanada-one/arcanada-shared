@@ -15,7 +15,7 @@ import {
   normalizeShellCommand,
 } from "../scripts/release-policy.mjs";
 
-const RELEASE_NODE_VERSION = "22.23.1";
+const RELEASE_NODE_VERSION = "22.23.4";
 const RELEASE_NPM_VERSION = "11.18.0";
 const NPM_REGISTRY = "https://registry.npmjs.org";
 const RELEASE_ARTIFACT_NAME = "release-plan-${{ github.sha }}";

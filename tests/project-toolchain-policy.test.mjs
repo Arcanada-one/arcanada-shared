@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { parse } from "yaml";
 
-const NODE_VERSION = "22.23.1";
+const NODE_VERSION = "22.23.4";
 const PNPM_VERSION = "11.17.0";
 const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
 const NODE_MAJOR = Number(NODE_VERSION.split(".")[0]);
