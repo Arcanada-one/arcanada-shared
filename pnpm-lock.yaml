@@ -40,8 +40,8 @@ catalogs:
       specifier: ^3.4.2
       version: 3.8.3
     rate-limiter-flexible:
-      specifier: ^11.1.0
-      version: 11.2.0
+      specifier: ^11.2.3
+      version: 11.2.3
     reflect-metadata:
       specifier: ^0.2.2
       version: 0.2.2
@@ -214,7 +214,7 @@ importers:
         version: 8.13.1(@types/ioredis-mock@8.2.8(ioredis@6.0.0(supports-color@7.2.0)))(ioredis@6.0.0(supports-color@7.2.0))
       rate-limiter-flexible:
         specifier: 'catalog:'
-        version: 11.2.0
+        version: 11.2.3
       reflect-metadata:
         specifier: 'catalog:'
         version: 0.2.2
@@ -1780,8 +1780,8 @@ packages:
   quick-format-unescaped@4.0.4:
     resolution: {integrity: sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==}
 
-  rate-limiter-flexible@11.2.0:
-    resolution: {integrity: sha512-L0eIK+BmFMi6NcvmtEg7RSswOFKi9MMD5RhBIypFfOve+G6Jl1Xbb8qEHgK3uRzNtkOFYF0L9f7P4rSf2PnUVw==}
+  rate-limiter-flexible@11.2.3:
+    resolution: {integrity: sha512-w4HX4toAsEbu1VksOauZwI9d6URb6/4WqJJ5Hg1bESihMt2KJfQ2iTwvDkhIg+y2HetLh65DGu/8xIkUz/xNPA==}
 
   read-yaml-file@1.1.0:
     resolution: {integrity: sha512-VIMnQi/Z4HT2Fxuwg5KrY174U1VdUIASQVWXXyqtNRtxSr9IYkn1rsI6Tb6HsrHCmB7gVpNwX6JxPTHcH6IoTA==}
@@ -3680,7 +3680,7 @@ snapshots:
 
   quick-format-unescaped@4.0.4: {}
 
-  rate-limiter-flexible@11.2.0: {}
+  rate-limiter-flexible@11.2.3: {}
 
   read-yaml-file@1.1.0:
     dependencies:
