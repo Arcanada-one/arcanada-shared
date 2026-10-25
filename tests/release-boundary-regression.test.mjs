@@ -106,21 +106,31 @@ test("shell-normalized mutation detection catches multiline global installs", ()
   }
 });
 
-test("the actual logger publish tarball contains no internal task IDs", async (t) => {
-  const packageDirectory = new URL("../packages/logger/", import.meta.url);
-  const packDirectory = await mkdtemp(join(tmpdir(), "arcanada-logger-pack-"));
-  t.after(() => rm(packDirectory, { recursive: true, force: true }));
+/**
+ * `npm pack --json` prints an array of results (npm up to 11) or an object keyed by
+ * package name (npm 12). Anything else, or not exactly one result, is refused.
+ * @param {string} stdout
+ * @returns {string}
+ */
+const packedFilename = (stdout) => {
+  const parsed = JSON.parse(stdout);
+  const results = Array.isArray(parsed)
+    ? parsed
+    : parsed !== null && typeof parsed === "object"
+      ? Object.values(parsed)
+      : [];
+  const filename = results.length === 1 ? results[0]?.filename : undefined;
+  if (typeof filename !== "string" || filename === "") {
+    throw new Error("unexpected npm pack --json result shape");
+  }
+  return filename;
+};
 
-  await execFileAsync("pnpm", ["--dir", packageDirectory.pathname, "build"], {
-    maxBuffer: 10 * 1024 * 1024,
-  });
-  const { stdout } = await execFileAsync(
-    "npm",
-    ["pack", "--ignore-scripts", "--pack-destination", packDirectory, "--json"],
-    { cwd: packageDirectory, maxBuffer: 10 * 1024 * 1024 },
-  );
-  const [{ filename }] = JSON.parse(stdout);
-  const tarball = join(packDirectory, filename);
+/**
+ * Reads every entry of a tarball and fails when one carries an internal task ID.
+ * @param {string} tarball
+ */
+const assertTarballHasNoTaskIds = async (tarball) => {
   const { stdout: entries } = await execFileAsync("tar", ["-tzf", tarball]);
 
   for (const entry of entries.trim().split("\n")) {
@@ -135,6 +145,66 @@ test("the actual logger publish tarball contains no internal task IDs", async (t
       `${entry} leaks an internal task ID into the publish tarball`,
     );
   }
+};
+
+test("npm pack --json parsing accepts the array and the package-keyed object shapes", () => {
+  const result = { filename: "arcanada-logger-0.2.0.tgz" };
+  assert.equal(packedFilename(JSON.stringify([result])), result.filename);
+  assert.equal(
+    packedFilename(JSON.stringify({ "@arcanada/logger": result })),
+    result.filename,
+  );
+  for (const unexpected of [
+    "[]",
+    "{}",
+    "null",
+    "[1]",
+    JSON.stringify([result, result]),
+    JSON.stringify({ a: result, b: result }),
+    JSON.stringify({ "@arcanada/logger": { filename: "" } }),
+    JSON.stringify({ "@arcanada/logger": {} }),
+  ]) {
+    assert.throws(
+      () => packedFilename(unexpected),
+      /unexpected npm pack --json result shape/,
+      `accepted ${unexpected}`,
+    );
+  }
+});
+
+test("the actual logger publish tarball contains no internal task IDs", async (t) => {
+  const packageDirectory = new URL("../packages/logger/", import.meta.url);
+  const packDirectory = await mkdtemp(join(tmpdir(), "arcanada-logger-pack-"));
+  t.after(() => rm(packDirectory, { recursive: true, force: true }));
+
+  await execFileAsync("pnpm", ["--dir", packageDirectory.pathname, "build"], {
+    maxBuffer: 10 * 1024 * 1024,
+  });
+  const { stdout } = await execFileAsync(
+    "npm",
+    ["pack", "--ignore-scripts", "--pack-destination", packDirectory, "--json"],
+    { cwd: packageDirectory, maxBuffer: 10 * 1024 * 1024 },
+  );
+  await assertTarballHasNoTaskIds(join(packDirectory, packedFilename(stdout)));
+});
+
+test("the tarball scan still fails when a tarball contains an internal task ID", async (t) => {
+  const fixture = await mkdtemp(join(tmpdir(), "arcanada-taskid-control-"));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  const packageDirectory = join(fixture, "package");
+  const tarball = join(fixture, "leaky.tgz");
+  await mkdir(packageDirectory);
+  await writeFile(
+    join(packageDirectory, "README.md"),
+    "Internal implementation reference: INFRA-0001.\n",
+    "utf8",
+  );
+  await execFileAsync("tar", ["-czf", tarball, "-C", fixture, "package"]);
+
+  await assert.rejects(
+    assertTarballHasNoTaskIds(tarball),
+    /leaks an internal task ID into the publish tarball/,
+  );
 });
 
 test("release-plan preparation rejects a task ID embedded in a tarball", async (t) => {
