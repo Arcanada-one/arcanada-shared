@@ -155,6 +155,14 @@ export class BrowserIdentity {
       url.searchParams.get("return") ?? this.options.returnPaths[0]!;
     if (!this.options.returnPaths.includes(returnPath))
       return response(400, { error: "invalid_return" });
+    // Presentation hint only: never a return URL, audience, scope or authority.
+    const locales = url.searchParams.getAll("locale");
+    if (
+      locales.length > 1 ||
+      locales.some((value) => value !== "en" && value !== "ru")
+    )
+      return response(400, { error: "invalid_locale" });
+    const locale = locales[0] ?? "en";
     const previousBrowser = cookie(request, LOGIN);
     if (validHandle(previousBrowser))
       await this.store.cancelBrowserLogin(hash(previousBrowser));
@@ -171,6 +179,7 @@ export class BrowserIdentity {
     const target = oidc.buildAuthorizationUrl(this.config, {
       redirect_uri: `${this.options.origin}/api/auth/callback`,
       scope: "openid profile",
+      ui_locales: locale,
       response_type: "code",
       state: transaction.state,
       nonce: transaction.nonce,

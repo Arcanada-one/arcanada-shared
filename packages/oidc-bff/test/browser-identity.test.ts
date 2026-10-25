@@ -200,6 +200,33 @@ async function begin() {
 }
 
 describe("real openid-client code and browser session boundary with synthetic signed issuer", () => {
+  it.each([
+    ["", "en"],
+    ["&locale=en", "en"],
+    ["&locale=ru", "ru"],
+  ])(
+    "forwards only the supported presentation hint %s",
+    async (query, locale) => {
+      const result = await client.handle(
+        req("/api/auth/login?return=/ru/" + query),
+      );
+      expect(result.status).toBe(303);
+      const authorization = new URL(result.headers.get("location")!);
+      expect(authorization.searchParams.get("ui_locales")).toBe(locale);
+      expect(authorization.searchParams.get("scope")).toBe("openid profile");
+    },
+  );
+  it.each(["fr", "", "https://foreign.example/", "ru&locale=en"])(
+    "rejects unsupported or ambiguous browser locale %s",
+    async (locale) => {
+      const result = await client.handle(
+        req("/api/auth/login?return=/ru/&locale=" + locale),
+      );
+      expect(result.status).toBe(400);
+      expect(await result.json()).toEqual({ error: "invalid_locale" });
+      expect(result.headers.get("location")).toBeNull();
+    },
+  );
   it("completes code/S256/signature validation and exposes only canonical subject", async () => {
     const login = await begin();
     const done = await client.handle(req(login.callback, login.browser));
