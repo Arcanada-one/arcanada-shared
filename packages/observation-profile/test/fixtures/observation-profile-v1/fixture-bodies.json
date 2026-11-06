@@ -1,0 +1,538 @@
+{
+  "status": "PREPARED",
+  "runtime_verdict": "NOT_MEASURED",
+  "body_notice": "Top-level bodies except complete_event_records are synthetic producer/preimage examples; complete_event_records preserves the full immutable profile record bytes.",
+  "bodies": {
+    "event-1": {
+      "bytes_utf8": "{\"event_id\":\"101\",\"native_state\":\"in_progress\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "67",
+        "value": "e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f"
+      },
+      "synthetic": true
+    },
+    "event-2": {
+      "bytes_utf8": "{\"event_id\":\"102\",\"native_state\":\"review\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "62",
+        "value": "adc94fb7b55fe281c3e2805ed91ccba2766d956e393d83168dfe3b29a15e6827"
+      },
+      "synthetic": true
+    },
+    "event-3": {
+      "bytes_utf8": "{\"event_id\":\"103\",\"native_state\":\"done\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "60",
+        "value": "9ed8aacd89357e5ce21a42346bb93cb6f32fa513dbc78e287654530c297e64e4"
+      },
+      "synthetic": true
+    },
+    "event-4": {
+      "bytes_utf8": "{\"event_id\":\"104\",\"native_state\":\"done\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "60",
+        "value": "9745b23cd08707b7ada83a19cd25538243eaae66533277a1f689ef19f58500db"
+      },
+      "synthetic": true
+    },
+    "event-5": {
+      "bytes_utf8": "{\"event_id\":\"105\",\"native_state\":\"done\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "60",
+        "value": "705a287a77c08cb90d85674b2f145bedd06c84b95de7b89fb9670ff2ccdd4d2b"
+      },
+      "synthetic": true
+    },
+    "event-1-conflict": {
+      "bytes_utf8": "{\"event_id\":\"101\",\"native_state\":\"cancelled\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "65",
+        "value": "8482c89b45b7262a28953afe9f28eb15d57c6df34447b0ed33dfba874036fc21"
+      },
+      "synthetic": true
+    },
+    "event-late-plan-A": {
+      "bytes_utf8": "{\"event_id\":\"103\",\"native_state\":\"done\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "60",
+        "value": "9ed8aacd89357e5ce21a42346bb93cb6f32fa513dbc78e287654530c297e64e4"
+      },
+      "synthetic": true
+    },
+    "doclab-event-100": {
+      "bytes_utf8": "{\"event_id\":\"100\",\"native_state\":\"RUNNING\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "63",
+        "value": "b1f88eda1a16c48de38abc5c628780a94685ca077f2459c2bcd08418789bde72"
+      },
+      "synthetic": true
+    },
+    "doclab-event-104": {
+      "bytes_utf8": "{\"event_id\":\"104\",\"native_state\":\"SUCCEEDED\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "65",
+        "value": "78021f6a884be017bac49a49e314113f9f6a489f59dbf8d1c2421b3fbba47d6f"
+      },
+      "synthetic": true
+    },
+    "b2-association": {
+      "bytes_utf8": "{\"assembled\":{\"bundle\":\"fixture-bundle\",\"images\":0,\"manifest_sha256\":\"3926e18e54b7d0b474901b0719499d6147a1bdb0203df860313eb81bf358fcec\",\"run_id\":\"fixture-db-b2\",\"transcription_sha256\":\"d2c6a42f84563860fa768d88c3b254d3140e4efdaecf5ca1550efddc0ef43d1f\",\"units\":1},\"chain_id\":\"fixture-chain-b2\",\"document_id\":\"fixture-document\",\"receipt_run_id\":\"unread-fixture-chain-b2\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "369",
+        "value": "e573fe9d03408dbb2f1d2767a75039319477ca6d3b172f21aa7d23f79648606b"
+      },
+      "synthetic": true
+    },
+    "b2-row-withdrawn": {
+      "bytes_utf8": "{\"adapter_observation_id\":\"fixture-read-observation-b2-absent\",\"cause_evidence_ref\":\"fixture:isolated-receipt-write-failure\",\"observation\":\"source_row_absent\",\"queried_run_id\":\"fixture-db-b2\",\"read_scope\":\"fixture-authorized-doclab-read\",\"row_present\":false}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "259",
+        "value": "07f1bf2b5fc0c3a15b78a8d64b9feba2b8c44f056fae7f9f182baed9c0fcdd7d"
+      },
+      "synthetic": true
+    },
+    "command-input": {
+      "bytes_utf8": "{\"operation\":\"run-work-item\",\"task_ref\":{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "151",
+        "value": "f539bff537cfec027c0a24bf1a3c47b2ecb473eef87fd3defc5ff9ce62b7faf7"
+      },
+      "synthetic": true
+    },
+    "authority-refusal": {
+      "bytes_utf8": "{\"reason\":\"CONTRACT_AUTHORITY_UNAVAILABLE\",\"run\":null,\"tool_calls\":[]}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "71",
+        "value": "27e346f61ff6b2b82ef8a345bfba30413fcc09001d2c302260f01f99fd4a91f1"
+      },
+      "synthetic": true
+    },
+    "receipt-capture-1": {
+      "bytes_utf8": "{\"ground_truth\":{\"verification\":\"not_measured\"},\"run\":null,\"schema\":\"ReadinessReceipt/v1\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "110",
+        "value": "03fcea3b4f61180078bce20e70b851e77a6cac8f6e2b8c2a237d09449541612c"
+      },
+      "synthetic": true
+    },
+    "receipt-capture-2": {
+      "bytes_utf8": "{\"fixture_revision\":2,\"ground_truth\":{\"verification\":\"not_measured\"},\"run\":null,\"schema\":\"ReadinessReceipt/v1\",\"task_id\":\"task-1\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "131",
+        "value": "ca16fc5326c896976c6690c32de812e4f36d5b5330169dda22f9c4c83b212582"
+      },
+      "synthetic": true
+    },
+    "canonical-domain-example": {
+      "bytes_utf8": "{}",
+      "preimage_prefix_ascii": "Muneral.TaskActivitySnapshotCanonical/v1",
+      "separator_hex": "00",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "domain_identity",
+        "domain": "Muneral.TaskActivitySnapshotCanonical/v1",
+        "preimage": "ASCII(domain) || 0x00 || JCS_bytes",
+        "representation": "application/json;canonicalization=JCS",
+        "byte_size": "43",
+        "value": "af31fe5d646919b7b5d0df31c1f10c9db99bc6b84821c9d1e0f2621e7a193b19"
+      },
+      "synthetic": true,
+      "note": "Empty object illustrates the digest domain only; not a valid Muneral snapshot codec instance."
+    },
+    "same-json-raw": {
+      "bytes_utf8": "{}",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json;canonicalization=JCS",
+        "byte_size": "2",
+        "value": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      "synthetic": true
+    },
+    "b2-transcription": {
+      "bytes_utf8": "Owned fixture text.\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "text/plain; charset=utf-8",
+        "byte_size": "20",
+        "value": "d2c6a42f84563860fa768d88c3b254d3140e4efdaecf5ca1550efddc0ef43d1f"
+      },
+      "synthetic": true
+    },
+    "b2-manifest": {
+      "bytes_utf8": "{\"profile\":\"converted-text\",\"units\":[{\"text_sha256\":\"d2c6a42f84563860fa768d88c3b254d3140e4efdaecf5ca1550efddc0ef43d1f\"}]}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "122",
+        "value": "3926e18e54b7d0b474901b0719499d6147a1bdb0203df860313eb81bf358fcec"
+      },
+      "synthetic": true
+    },
+    "complete_event_records": {
+      "event-1": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-1\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1686",
+          "value": "e735ca0cd757b5d88477b107602811c65c526cf7b64cdf13c49baea5c87d8cbe"
+        }
+      },
+      "event-2": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"62\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"adc94fb7b55fe281c3e2805ed91ccba2766d956e393d83168dfe3b29a15e6827\"},\"evidence_ref\":\"fixture-body:event-2\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740994\",\"event_id\":\"event-2\",\"evidence_refs\":[\"fixture-body:event-2\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"review\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740994\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"102\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"102\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-2\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1681",
+          "value": "447f41cddd2d48c36a7b9ab7155ef572032ca9d471986b0ea14a2c8129fefab7"
+        }
+      },
+      "event-3": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"60\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"9ed8aacd89357e5ce21a42346bb93cb6f32fa513dbc78e287654530c297e64e4\"},\"evidence_ref\":\"fixture-body:event-3\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740995\",\"event_id\":\"event-3\",\"evidence_refs\":[\"fixture-body:event-3\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"done\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740995\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"103\",\"related_record_ids\":[\"attempt-succeeded\"],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"103\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-3\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1698",
+          "value": "6de86ddd411cc2c1313f0648a33282e5c91f33597b580688117ecd7f648be248"
+        }
+      },
+      "event-4": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"60\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"9745b23cd08707b7ada83a19cd25538243eaae66533277a1f689ef19f58500db\"},\"evidence_ref\":\"fixture-body:event-4\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740996\",\"event_id\":\"event-4\",\"evidence_refs\":[\"fixture-body:event-4\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"done\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740996\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"104\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"104\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-4\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1679",
+          "value": "4259dd451f9313a9c9cdda8a8dbc82e3a238db36780247a0e8bd98228cafc046"
+        }
+      },
+      "event-5": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"60\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"705a287a77c08cb90d85674b2f145bedd06c84b95de7b89fb9670ff2ccdd4d2b\"},\"evidence_ref\":\"fixture-body:event-5\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740997\",\"event_id\":\"event-5\",\"evidence_refs\":[\"fixture-body:event-5\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"done\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740997\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"105\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"105\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-5\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1679",
+          "value": "8e3e87fe7a1211a4668c3746e3e9e1f6d41f10cbe4436e851ba29f664041e00c"
+        }
+      },
+      "event-1-duplicate": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-1\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1686",
+          "value": "e735ca0cd757b5d88477b107602811c65c526cf7b64cdf13c49baea5c87d8cbe"
+        }
+      },
+      "event-1-conflict": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"65\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"8482c89b45b7262a28953afe9f28eb15d57c6df34447b0ed33dfba874036fc21\"},\"evidence_ref\":\"fixture-body:event-1-conflict\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740994\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1-conflict\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"cancelled\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740994\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-1-conflict\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1711",
+          "value": "43b42c7681866dfe48a51a85445d09f92176035edc856ab5819e28b40a448e61"
+        }
+      },
+      "event-wrong-scope": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-wrong-scope\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-B\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1696",
+          "value": "4f7f5ca463440f0dc280fdeeda75ddb657956fa43450bfd9885d72963c373281"
+        }
+      },
+      "event-wrong-project": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-wrong-project\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-other-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1704",
+          "value": "9597d1ddbf7ed3cd62f2e7332db9607155a53b3fe10fdb1bff0cf35f92753f49"
+        }
+      },
+      "event-late-plan-A": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"60\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"9ed8aacd89357e5ce21a42346bb93cb6f32fa513dbc78e287654530c297e64e4\"},\"evidence_ref\":\"fixture-body:event-late-plan-A\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740995\",\"event_id\":\"event-late-plan-A\",\"evidence_refs\":[\"fixture-body:event-late-plan-A\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"done\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740995\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"103\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"103\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-late-plan-A\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1719",
+          "value": "f2408b8c9b50c81f82ff9202d198e290adb0c8bab481252efcc9ac7cecda3239"
+        }
+      },
+      "doclab-event-100": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"63\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"b1f88eda1a16c48de38abc5c628780a94685ca077f2459c2bcd08418789bde72\"},\"evidence_ref\":\"fixture-body:doclab-event-100\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"doclab-event-100\",\"evidence_refs\":[\"fixture-body:doclab-event-100\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"doclab\",\"reason\":null,\"value\":\"RUNNING\"},\"native_versions\":{},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":null,\"producer_event_id\":\"100\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"not_contiguous\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"database\",\"scope_id\":\"fixture-doclab-db\",\"value\":\"100\"},\"subject_refs\":[{\"authority\":\"doclab\",\"graph_kind\":\"processing_execution\",\"local_id\":\"fixture-db-run\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"cd971c1c281853c51d6482eda814ed45b8fc26d7\",\"repository\":\"Arcanada-one/doclab-arcana\"},\"instance_id\":\"fixture-doclab-instance\",\"service\":\"doclab\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"doclab-event-100\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1702",
+          "value": "f907650a6346a84a7d26a31dd45a0474e7b2cae1a986c18a75fe72f184557067"
+        }
+      },
+      "doclab-event-104": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"65\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"78021f6a884be017bac49a49e314113f9f6a489f59dbf8d1c2421b3fbba47d6f\"},\"evidence_ref\":\"fixture-body:doclab-event-104\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740994\",\"event_id\":\"doclab-event-104\",\"evidence_refs\":[\"fixture-body:doclab-event-104\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"doclab\",\"reason\":null,\"value\":\"SUCCEEDED\"},\"native_versions\":{},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":null,\"producer_event_id\":\"104\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"not_contiguous\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"database\",\"scope_id\":\"fixture-doclab-db\",\"value\":\"104\"},\"subject_refs\":[{\"authority\":\"doclab\",\"graph_kind\":\"processing_execution\",\"local_id\":\"fixture-db-run\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"cd971c1c281853c51d6482eda814ed45b8fc26d7\",\"repository\":\"Arcanada-one/doclab-arcana\"},\"instance_id\":\"fixture-doclab-instance\",\"service\":\"doclab\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"doclab-event-104\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1704",
+          "value": "cd034ccf6869225ee399277a4a8208076d74433e4f960ac24b2f4ffafc6d707d"
+        }
+      },
+      "b2-row-withdrawn": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"259\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"07f1bf2b5fc0c3a15b78a8d64b9feba2b8c44f056fae7f9f182baed9c0fcdd7d\"},\"evidence_ref\":\"fixture-body:b2-row-withdrawn\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"b2-row-withdrawn\",\"evidence_refs\":[\"fixture-body:b2-row-withdrawn\",\"fixture:isolated-receipt-write-failure\"],\"kind\":\"record_withdrawn\",\"native_state\":null,\"native_versions\":{},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":null,\"producer_event_id\":\"fixture-read-observation-b2-absent\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":null,\"partition_id\":null,\"scope\":\"unknown\",\"scope_id\":\"fixture-read-adapter\",\"value\":null},\"subject_refs\":[{\"authority\":\"doclab\",\"graph_kind\":\"processing_execution\",\"local_id\":\"fixture-db-b2\",\"namespace\":\"fixture-doclab-db\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"df8756868c6fb0c322f917d00d0612b3eca8e887\",\"repository\":\"Arcanada-one/arcanada-workspace\"},\"instance_id\":\"fixture-lab-instance\",\"service\":\"lab\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"b2-row-withdrawn\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1684",
+          "value": "3d0b9327e7f381c51994fb8535cf398ed2ee0d61999e1636bce5951ba7dd1f6d"
+        }
+      },
+      "authority-refusal": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"71\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"27e346f61ff6b2b82ef8a345bfba30413fcc09001d2c302260f01f99fd4a91f1\"},\"evidence_ref\":\"fixture-body:authority-refusal\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"authority-refusal\",\"evidence_refs\":[\"fixture-body:authority-refusal\"],\"kind\":\"refusal_observed\",\"native_state\":{\"authority\":\"aras\",\"reason\":null,\"value\":\"CONTRACT_AUTHORITY_UNAVAILABLE\"},\"native_versions\":{},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"1\",\"related_record_ids\":[\"command-refused\",\"deployment-unmeasured\"],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"1\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"ed52641bf7979bab48a6468350b147234f55f2f9\",\"repository\":\"Arcanada-one/arcana-agent-system\"},\"instance_id\":\"fixture-aras-instance\",\"service\":\"aras\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"authority-refusal\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1728",
+          "value": "edb12078c6d7486d88e4d05273e8c2176215f053dd26eb0848d24a6e41618680"
+        }
+      },
+      "invalid-numeric-cursor": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":9007199254740993,\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"invalid-numeric-cursor\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1699",
+          "value": "f9db75f2aebfbeec23d98f409f838dc475c1df5909b18b2b2850d4c1a2460a90"
+        }
+      },
+      "invalid-numeric-aggregate-version": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":9007199254740993,\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"invalid-numeric-aggregate-version\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1710",
+          "value": "4af65c4a76626d336b8f35038d3ad641f193a5b0a105ca1dd5befbbba4c4e07b"
+        }
+      },
+      "invalid-unknown-profile": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v999\",\"record_id\":\"invalid-unknown-profile\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1704",
+          "value": "7588cef5576b60cc03ab26e9f41683ccf15478ffc2ddb092e9b5b277969d38cc"
+        }
+      },
+      "invalid-missing-producer": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"invalid-missing-producer\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1490",
+          "value": "947f718e1c9094b0cba5d4974755cbb0091bf8a1cebcdfd9f72d7f969c54aa62"
+        }
+      },
+      "event-wrong-run": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"event-wrong-run\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v1\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-other-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1696",
+          "value": "712d7dfa0d8720bf3cda81553b774a57064559e444de694365a8499a8d3e92fd"
+        }
+      },
+      "invalid-unknown-extension": {
+        "bytes_utf8": "{\"data\":{\"body\":{\"digest\":{\"algorithm\":\"sha256\",\"byte_size\":\"67\",\"domain\":\"raw-bytes\",\"preimage\":\"exact-complete-representation-bytes\",\"representation\":\"application/json; charset=utf-8\",\"role\":\"exact_content\",\"value\":\"e7b06dd4a021f0a30dfc1cf56ce80510afec635c0398fce86f770d92f14a8f0f\"},\"evidence_ref\":\"fixture-body:event-1\"},\"causation_ref\":null,\"correlation_ref\":\"fixture-correlation\",\"cursor\":\"9007199254740993\",\"event_id\":\"event-1\",\"evidence_refs\":[\"fixture-body:event-1\"],\"kind\":\"native_state_observed\",\"native_state\":{\"authority\":\"muneral\",\"reason\":null,\"value\":\"in_progress\"},\"native_versions\":{\"aggregateVersion\":\"9007199254740993\",\"revision\":\"7\"},\"occurred_at\":\"2000-01-01T00:00:00Z\",\"plan_revision\":\"plan-A\",\"producer_event_id\":\"101\",\"related_record_ids\":[],\"source_sequence\":{\"contiguity\":\"unknown\",\"declaration_ref\":\"fixture:source-sequence-contract\",\"partition_id\":null,\"scope\":\"task\",\"scope_id\":\"fixture-task-1\",\"value\":\"101\"},\"subject_refs\":[{\"authority\":\"muneral\",\"graph_kind\":\"work\",\"local_id\":\"task-1\",\"namespace\":\"fixture-project\",\"revision\":null}]},\"evidence_basis\":\"fixture\",\"mode\":\"fixture\",\"observed_at\":\"2000-01-01T00:00:00Z\",\"producer\":{\"build\":{\"adapter_revision\":\"PROPOSED-v1-FIXTURE\",\"commit\":\"6d786dca224c4dfcf13ca14693a032c9ab53343f\",\"repository\":\"Arcanada-one/muneral\"},\"instance_id\":\"fixture-muneral-instance\",\"service\":\"muneral\"},\"profile\":\"knowledge-collective-observation/v1\",\"record_id\":\"invalid-unknown-extension\",\"record_type\":\"event\",\"recorded_at\":\"2000-01-01T00:00:00Z\",\"required_extensions\":[\"lossless-decimal-counters/v999\"],\"view_context\":{\"authorized_view_scope\":\"opaque-view-A\",\"project_id\":\"fixture-project\",\"run_id\":\"fixture-lab-run\",\"stream_epoch\":\"epoch-A\"}}\n",
+        "digest": {
+          "algorithm": "sha256",
+          "role": "exact_content",
+          "domain": "raw-bytes",
+          "preimage": "exact-complete-representation-bytes",
+          "representation": "application/json; charset=utf-8",
+          "byte_size": "1706",
+          "value": "354b2da49e7446b67eaea4a2e72e2d38dbf340220041ba7e6eee324db98b34eb"
+        }
+      }
+    },
+    "b2-native-shape": {
+      "bytes_utf8": "{\"events\":[{\"event_id\":100,\"event_type\":\"run_inserted_finished\",\"payload_json\":{\"document_id\":\"fixture-document\",\"pipeline_hash\":\"fixture-pipeline\",\"profile\":\"converted-text\"},\"run_id\":\"fixture-db-b2\"}],\"read_scope\":\"one-authorized-database-snapshot\",\"run\":{\"profile\":\"converted-text\",\"run_id\":\"fixture-db-b2\",\"status\":\"SUCCEEDED\"},\"stage_attempts\":[],\"stage_tasks\":[]}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "370",
+        "value": "3a778d40fc80dcff29aa12debb29f2d0c6308bff522372f24176b62cc2dfd061"
+      },
+      "synthetic": true
+    },
+    "converted-ordinary-native-shape": {
+      "bytes_utf8": "{\"events\":[{\"event_id\":100,\"event_type\":\"run_created\",\"payload_json\":{\"document_id\":\"fixture-document\",\"forced\":false,\"pipeline_hash\":\"fixture-pipeline\"},\"run_id\":\"fixture-db-b2\"}],\"read_scope\":\"one-authorized-database-snapshot\",\"run\":{\"profile\":\"converted-text\",\"run_id\":\"fixture-db-b2\",\"status\":\"RUNNING\"},\"stage_attempts\":[],\"stage_tasks\":[{\"run_id\":\"fixture-db-b2\",\"stage_name\":\"page\",\"status\":\"RUNNING\",\"task_id\":\"fixture-stage-page\"}]}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "442",
+        "value": "96330857efaa28debe2aed7976f4dd4d26f1362c78be7ddb84b64dc483bf2d74"
+      },
+      "synthetic": true
+    },
+    "b2-final-reconciliation": {
+      "bytes_utf8": "{\"adapter_observation_id\":\"fixture-b2-final-reconciliation\",\"bundle_receipt\":\"not committed\",\"database_row_present\":false,\"database_run_id\":\"fixture-db-b2\",\"observation_notice\":\"Synthetic adapter read evidence, not a native Doclab event or proof of admitted receipt bytes.\",\"read_scope\":\"authorized DB absence and retained partial-chain observations\",\"receipt_run_id\":\"unread-fixture-chain-b2\",\"recognise_receipt\":\"retracted after isolated failure\",\"remaining_canonical_prefix\":[\"intake\",\"classify\",\"convert\"],\"source_atomicity\":\"not_established\"}\n",
+      "digest": {
+        "algorithm": "sha256",
+        "role": "exact_content",
+        "domain": "raw-bytes",
+        "preimage": "exact-complete-representation-bytes",
+        "representation": "application/json; charset=utf-8",
+        "byte_size": "548",
+        "value": "cdbd3c51678b02be6a982296e55747579bb064f2ed7ba153c815a50975e99a93"
+      },
+      "synthetic": true
+    }
+  }
+}

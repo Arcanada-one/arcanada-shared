@@ -1,0 +1,48 @@
+{
+  "name": "@arcanada/observation-profile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Versioned Knowledge Collective Live Lab observation profile: strict decoder, framework-neutral pure reducer and projection shared by both sites. Emits zero commands in live, replay and fixture modes.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/observation-profile"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/observation-profile#readme",
+  "keywords": [
+    "arcanada",
+    "observation",
+    "reducer",
+    "replay",
+    "fail-closed"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "prepare": "pnpm run build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
