@@ -12,10 +12,10 @@ import {
   type ReducerInput,
   type ReducerState,
   type ViewContext,
-} from "../src/index.js";
+} from "./knowledge-observation.api.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-export const FIXTURE_DIR = join(HERE, "fixtures", "observation-profile-v1");
+export const FIXTURE_DIR = join(HERE, "fixtures", "knowledge-observation-v1");
 
 function load<T>(name: string): T {
   return JSON.parse(readFileSync(join(FIXTURE_DIR, name), "utf8")) as T;

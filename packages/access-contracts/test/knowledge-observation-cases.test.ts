@@ -7,7 +7,7 @@ import {
   isExactContentAddress,
   type Digest,
   type ProjectedView,
-} from "../src/index.js";
+} from "./knowledge-observation.api.js";
 import {
   asserted,
   bodies,
@@ -18,7 +18,7 @@ import {
   runCase,
   type Case,
   type Run,
-} from "./harness.js";
+} from "./knowledge-observation.harness.js";
 
 const taskState = (v: ProjectedView): string | null =>
   v.nodes.find((n) => n.graphKind === "work" && n.localId === "task-1")
@@ -762,7 +762,10 @@ describe("all 50 package records through the strict decoder", () => {
 
   it("pins the package manifest to the handed-over sha256 sums", () => {
     const sums = readFileSync(
-      new URL("./fixtures/observation-profile-v1/SHA256SUMS", import.meta.url),
+      new URL(
+        "./fixtures/knowledge-observation-v1/SHA256SUMS",
+        import.meta.url,
+      ),
       "utf8",
     );
     for (const name of [
@@ -776,7 +779,7 @@ describe("all 50 package records through the strict decoder", () => {
         createSha(
           readFileSync(
             new URL(
-              `./fixtures/observation-profile-v1/${name}`,
+              `./fixtures/knowledge-observation-v1/${name}`,
               import.meta.url,
             ),
           ),

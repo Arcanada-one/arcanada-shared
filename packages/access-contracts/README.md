@@ -229,3 +229,9 @@ or runtime activation.
 closed protected mutation request. The explicitly same-generation lease matcher
 checks structural overlap only; it cannot bind operation/intent/resource fields
 absent from the lease or authenticate recovery. See the [request reference](docs/personal-auth-outcome-requests.md).
+
+## Knowledge observation profile (Live Lab)
+
+The package also exports the additive, dependency-free decoder and pure reducer for `knowledge-collective-observation/v1`
+(`parseKnowledgeObservationJson`, `reduceKnowledgeObservation`, `projectKnowledgeObservation`). See
+[docs/knowledge-observation-v1.md](docs/knowledge-observation-v1.md).

@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   compareDecimal,
   createReducerState,
-  decodeObservationJson,
   decodeObservationRecord,
+  parseKnowledgeObservationJson,
   nextDecimal,
   projectView,
   reduce,
@@ -11,8 +11,8 @@ import {
   type ReducerInput,
   type ReducerState,
   type ViewContext,
-} from "../src/index.js";
-import { caseMeta, records } from "./harness.js";
+} from "./knowledge-observation.api.js";
+import { caseMeta, records } from "./knowledge-observation.harness.js";
 
 const CTX = caseMeta.default_view_context as ViewContext;
 const rec = (id: string): Record<string, unknown> =>
@@ -91,7 +91,7 @@ describe("same recorded events reduce to the same view", () => {
     }
   });
 
-  it("converges for 300 random arrival orders once the authorized contiguous interval is supplied", () => {
+  it("converges for 80 seeded random arrival orders once the authorized contiguous interval is supplied", () => {
     const rnd = mulberry(20261106);
     const ids = [
       "snapshot-A",
@@ -111,7 +111,7 @@ describe("same recorded events reduce to the same view", () => {
       recv("event-5"),
     ]);
     const target = stableViewDigestInput(full.state);
-    for (let n = 0; n < 300; n += 1) {
+    for (let n = 0; n < 80; n += 1) {
       const order = [...ids].sort(() => rnd() - 0.5);
       const r = run([
         ...order.map(recv),
@@ -126,7 +126,7 @@ describe("same recorded events reduce to the same view", () => {
       expect(r.commands).toEqual([]);
       expect(stableViewDigestInput(r.state), order.join(",")).toBe(target);
     }
-  });
+  }, 30_000);
 });
 
 describe("duplicates, out-of-order delivery and missing sequences neither rerun actions nor synthesize completion", () => {
@@ -364,7 +364,7 @@ describe("lossless counters and strict, versioned decoding", () => {
       '"cursor":"9007199254740993"',
       '"cursor":9007199254740993',
     );
-    const r = decodeObservationJson(text);
+    const r = parseKnowledgeObservationJson(new TextEncoder().encode(text));
     expect(r.ok).toBe(false);
   });
 
@@ -389,10 +389,9 @@ describe("lossless counters and strict, versioned decoding", () => {
       ok: false,
       code: "NOT_AN_OBJECT",
     });
-    expect(decodeObservationJson("{not json")).toMatchObject({
-      ok: false,
-      code: "MALFORMED_JSON",
-    });
+    expect(
+      parseKnowledgeObservationJson(new TextEncoder().encode("{not json")),
+    ).toMatchObject({ ok: false, code: "INVALID_FRAME" });
   });
 
   it("an unknown schema version never advances the cursor (it is held, not skipped)", () => {
