@@ -76,7 +76,11 @@ export function authorizeScoped(
   principal: ScopedPrincipal | null | undefined,
   request: ScopedRequest,
 ): ScopedDecision {
-  if (!principal || typeof principal.subject !== "string" || !principal.subject) {
+  if (
+    !principal ||
+    typeof principal.subject !== "string" ||
+    !principal.subject
+  ) {
     return { allow: false, code: "unauthenticated" };
   }
   if (principal.revoked) {

@@ -75,9 +75,9 @@ describe("scoped controls — identity is not a grant", () => {
       objectId: "secret-run",
     });
     expect(denied).toEqual({ allow: false, code: "cross_project_forbidden" });
-    expect(JSON.stringify(redactedRefusal("cross_project_forbidden"))).not.toContain(
-      "secret-run",
-    );
+    expect(
+      JSON.stringify(redactedRefusal("cross_project_forbidden")),
+    ).not.toContain("secret-run");
   });
 
   it("rejects object outside grant in same project and action not granted", () => {
@@ -132,7 +132,9 @@ describe("Live Lab site profiles — no invented clients", () => {
     expect(inventory).toHaveLength(2);
     for (const row of inventory) {
       expect(row.envKeys.clientId).toMatch(/^LIVE_LAB_/);
-      expect(JSON.stringify(row)).not.toMatch(/secret_value|sk_|client_secret":"[^"]+/i);
+      expect(JSON.stringify(row)).not.toMatch(
+        /secret_value|sk_|client_secret":"[^"]+/i,
+      );
     }
   });
 
