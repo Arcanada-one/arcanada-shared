@@ -56,24 +56,47 @@ function run(
 }
 
 describe("dependency-free runtime and root export", () => {
-  it("the vendored schema is the unmodified, sha256-pinned Agent-Brain file", () => {
-    const sums = readFileSync(
+  const pinned = (sumsFile: string, name: string): string | undefined =>
+    readFileSync(
       new URL(
-        "./fixtures/knowledge-observation-v1/SHA256SUMS",
+        `./fixtures/knowledge-observation-v1/${sumsFile}`,
         import.meta.url,
       ),
       "utf8",
-    );
-    const line = sums
+    )
       .split("\n")
-      .find((l) => l.endsWith("  observation.schema.json"));
-    expect(line).toBeDefined();
-    const bytes = readFileSync(
-      new URL("../src/knowledge-observation-v1.schema.json", import.meta.url),
+      .find((l) => l.endsWith(`  ${name}`))
+      ?.split(" ")[0];
+  const sha = (url: URL): string =>
+    createHash("sha256").update(readFileSync(url)).digest("hex");
+
+  it("the retained v1 schema is the unmodified, sha256-pinned Agent-Brain file", () => {
+    const expected = pinned("SHA256SUMS", "observation.schema.json");
+    expect(expected).toBeDefined();
+    expect(
+      sha(
+        new URL(
+          "./fixtures/knowledge-observation-v1/observation.schema.json",
+          import.meta.url,
+        ),
+      ),
+    ).toBe(expected);
+  });
+
+  it("the decoder schema is the sha256-pinned amendment-1 schema from the reviewed workspace amendment", () => {
+    const expected = pinned(
+      "amendment-1.SHA256SUMS",
+      "observation.schema.json",
     );
-    expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-      line?.split(" ")[0],
-    );
+    expect(expected).toBeDefined();
+    expect(
+      sha(
+        new URL(
+          "../src/knowledge-observation-v1.amendment-1.schema.json",
+          import.meta.url,
+        ),
+      ),
+    ).toBe(expected);
   });
 
   it("the package still declares no runtime dependencies (ajv is test-only)", () => {
@@ -104,7 +127,10 @@ describe("the in-package schema interpreter agrees with Ajv 2020 (test-only orac
   addFormats(ajv);
   const schema = JSON.parse(
     readFileSync(
-      new URL("../src/knowledge-observation-v1.schema.json", import.meta.url),
+      new URL(
+        "../src/knowledge-observation-v1.amendment-1.schema.json",
+        import.meta.url,
+      ),
       "utf8",
     ),
   ) as object;
@@ -360,117 +386,6 @@ describe("wire frames keep the 65,532-byte / depth-16 bound (parseBoundedJson re
         "9007199254740993",
       );
     }
-  });
-});
-
-describe("page assembly is bounded and verified under one watermark", () => {
-  const split = (
-    id: string,
-    tokens: (string | null)[],
-  ): Record<string, unknown>[] => {
-    const full = rec(id);
-    const data = full["data"] as {
-      graphs: unknown[];
-      coverage: Record<string, unknown>;
-      snapshot_kind: string;
-    };
-    const graphs = data.graphs;
-    const half = Math.ceil(graphs.length / tokens.length);
-    return tokens.map((token, i) => {
-      const page = structuredClone(full) as Record<string, unknown>;
-      page["record_id"] = `${id}-page-${i + 1}`;
-      const d = page["data"] as typeof data;
-      d.snapshot_kind = "partial";
-      d.graphs = graphs.slice(i * half, (i + 1) * half);
-      d.coverage = {
-        ...data.coverage,
-        complete: token === null,
-        next_page_token: token,
-      };
-      return page;
-    });
-  };
-  const send = (page: Record<string, unknown>): ReducerInput => ({
-    kind: "receive",
-    record: page,
-    at: 0,
-  });
-
-  it("pages are pending, move nothing, and assemble into the same view as the full snapshot once the final page arrives", () => {
-    const [p1, p2] = split("snapshot-colliding-ids", ["page-2", null]) as [
-      Record<string, unknown>,
-      Record<string, unknown>,
-    ];
-    expect(
-      decodeObservationRecord(p1).ok && decodeObservationRecord(p2).ok,
-    ).toBe(true);
-    const mid = run([send(p1)]);
-    expect(projectView(mid).projection).toBe("awaiting_snapshot");
-    expect(mid.appliedCursor).toBeNull();
-    expect(projectView(mid).nodes).toEqual([]);
-    const done = run([send(p1), send(p2)]);
-    const whole = run([recv("snapshot-colliding-ids")]);
-    expect(projectView(done).nodes).toEqual(projectView(whole).nodes);
-    expect(projectView(done).crosslinks).toEqual(projectView(whole).crosslinks);
-    expect(done.appliedCursor).toBe(whole.appliedCursor);
-    expect(projectView(done).projection).toBe("current");
-  });
-
-  it("a page set never discharges a gap until it is final and consistent", () => {
-    const [p1] = split("snapshot-ahead", ["page-2", null]) as [
-      Record<string, unknown>,
-    ];
-    const s = run([
-      recv("snapshot-A"),
-      recv("event-1"),
-      recv("event-3"),
-      send(p1),
-    ]);
-    expect(projectView(s).projection).toBe("reconciling");
-    expect(s.appliedCursor).toBe("9007199254740993");
-  });
-
-  it("pages for different watermarks, a missing declared graph kind or a contradicted node discard the assembly and require a full snapshot", () => {
-    const [a1] = split("snapshot-ahead", ["page-2", null]) as [
-      Record<string, unknown>,
-    ];
-    const other = split("snapshot-A", ["page-2", null]) as [
-      Record<string, unknown>,
-      Record<string, unknown>,
-    ];
-    const mixed = run([recv("snapshot-A"), send(a1), send(other[1])]);
-    expect(mixed.holds).toContain("PAGE_ASSEMBLY_INVALID");
-    expect(projectView(mixed).fullSnapshotRequired).toBe(true);
-    // final page arrives but a declared graph kind was never delivered
-    const onlyLast = split("snapshot-A", ["page-2", null]);
-    const missing = run([
-      recv("snapshot-A"),
-      send(onlyLast[1] as Record<string, unknown>),
-    ]);
-    expect(missing.holds).toContain("PAGE_ASSEMBLY_INVALID");
-    expect(missing.appliedCursor).toBe("9007199254740992");
-  });
-
-  it("page count and age are bounded while pending", () => {
-    const [p1] = split("snapshot-ahead", ["page-2", null]) as [
-      Record<string, unknown>,
-    ];
-    const limited = run([recv("snapshot-A"), send(p1), send(p1)], {
-      maxPages: 1,
-    });
-    expect(limited.holds).toContain("PAGE_ASSEMBLY_LIMIT_EXCEEDED");
-    let state = createReducerState({
-      mode: "fixture",
-      limits: { maxAgeMs: 100 },
-    });
-    for (const input of [
-      { kind: "bind_trusted_projection", viewContext: CTX },
-      recv("snapshot-A"),
-      { kind: "receive", record: p1, at: 0 },
-      { kind: "receive", record: p1, at: 1000 },
-    ] as ReducerInput[])
-      state = reduce(state, input).state;
-    expect(state.holds).toContain("PAGE_ASSEMBLY_LIMIT_EXCEEDED");
   });
 });
 

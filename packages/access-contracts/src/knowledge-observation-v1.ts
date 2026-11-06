@@ -3,13 +3,14 @@
  * types, strict versioned decoding and the pure helpers the shared reducer builds on.
  *
  * Placement: additive at the existing `@arcanada/access-contracts` boundary. Dependency-free: the vendored JSON Schema
- * (`knowledge-observation-v1.schema.json`, Agent-Brain observation package, unmodified) is interpreted by a small total
- * validator below instead of a schema library. Frames are bounded by `parseBoundedJson` (1..65532 bytes, depth 16);
+ * (`knowledge-observation-v1.amendment-1.schema.json`, derived from the pinned v1 file by the reviewed workspace
+ * amendment-1 and sha256-pinned; the unmodified v1 file is kept as a test fixture for the compatibility check) is
+ * interpreted by a small total validator below instead of a schema library. Frames are bounded by `parseBoundedJson` (1..65532 bytes, depth 16);
  * this module introduces no second parser. Authenticity of identities, grants, watermarks and acceptance decisions is
  * NOT established here: the caller (the external read adapter) supplies verified context.
  */
 import { parseBoundedJson } from "./bounded-json.js";
-import schemaJson from "./knowledge-observation-v1.schema.json" with { type: "json" };
+import schemaJson from "./knowledge-observation-v1.amendment-1.schema.json" with { type: "json" };
 
 /* ---- types ---- */
 /** Hand-written types for the fields the decoder and reducer read. The JSON Schema stays the structural authority. */
@@ -145,6 +146,12 @@ export interface SnapshotData {
     readonly declared_graph_kinds: readonly GraphKind[];
     readonly complete: boolean;
     readonly next_page_token: string | null;
+    /** Amendment 1: names the immutable page set this page belongs to. A claim, proven only by a trusted manifest. */
+    readonly page_set?: {
+      readonly page_set_ref: string;
+      readonly page_index: string;
+      readonly page_count: string;
+    };
   };
   readonly source_atomicity:
     | "not_established"
@@ -390,6 +397,14 @@ export interface AcceptanceEvaluation {
    * a separately verified, authentic acceptance decision (KCLIVE-22), which a pure projection cannot supply.
    */
   readonly effectiveVerdict: "NOT_MEASURED" | "FAIL";
+  /**
+   * Why `effectiveVerdict` has its value. `source_fail_unverified` is a raw source FAIL that carries an actual failing
+   * checker observation: it is retained and fails closed, but it is NOT independently verified, because the pure
+   * reducer cannot authenticate the checker or bind it to the current subject (KCLIVE-22). `none` is NOT_MEASURED.
+   */
+  readonly basis: "none" | "source_fail_unverified";
+  /** Always false here: independent acceptance needs authenticated checker binding that a pure projection cannot supply. */
+  readonly independentlyVerified: false;
   readonly issues: readonly AcceptanceIssueCode[];
   /** Executed checkers whose own verdict is UNKNOWN or NOT_APPLICABLE; they differ from checks=[] (no observation). */
   readonly executedUndecided: readonly string[];
@@ -430,6 +445,8 @@ export function evaluateAcceptance(
   return {
     sourceVerdict: acceptance.verdict,
     effectiveVerdict: effective,
+    basis: effective === "FAIL" ? "source_fail_unverified" : "none",
+    independentlyVerified: false,
     issues,
     executedUndecided,
     checkersObserved: checks.length > 0,

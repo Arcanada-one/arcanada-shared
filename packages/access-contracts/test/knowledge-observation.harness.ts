@@ -6,7 +6,9 @@ import {
   createReducerState,
   projectView,
   reduce,
+  snapshotPageDigest,
   type ObservationMode,
+  type PageSetManifest,
   type ProjectedView,
   type ReduceOutcome,
   type ReducerInput,
@@ -274,4 +276,80 @@ export function mark(caseId: string, key: string): void {
     asserted.set(caseId, set);
   }
   set.add(key);
+}
+
+/* ---- amendment-1 helpers: paged snapshots with a sealed manifest ---- */
+
+/**
+ * Split a fixture full snapshot into `n` partial pages of ONE immutable page set: graphs distributed round-robin, every
+ * crosslink on the last page, `coverage.page_set` naming the set and the canonical ordinal, tokens/complete coherent.
+ */
+export function splitPages(
+  id: string,
+  n = 2,
+  setRef = `${id}-set`,
+): Record<string, unknown>[] {
+  const full = structuredClone(records[id]) as Record<string, unknown>;
+  const data = full["data"] as {
+    graphs: unknown[];
+    crosslinks: unknown[];
+    coverage: Record<string, unknown>;
+    snapshot_kind: string;
+  };
+  return Array.from({ length: n }, (_, i) => {
+    const page = structuredClone(full) as Record<string, unknown>;
+    page["record_id"] = `${id}-page-${i + 1}`;
+    const d = page["data"] as typeof data;
+    const last = i === n - 1;
+    d.snapshot_kind = "partial";
+    d.graphs = data.graphs.filter((_g, gi) => gi % n === i);
+    d.crosslinks = last ? data.crosslinks : [];
+    d.coverage = {
+      ...data.coverage,
+      complete: last,
+      next_page_token: last ? null : `page-${i + 2}`,
+      page_set: {
+        page_set_ref: setRef,
+        page_index: String(i),
+        page_count: String(n),
+      },
+    };
+    return page;
+  });
+}
+
+/** Seal what a trusted adapter would: canonical digest and byte size of each page, in canonical ordinal order. */
+export function sealManifest(
+  pages: Record<string, unknown>[],
+  overrides: Partial<PageSetManifest> = {},
+): PageSetManifest {
+  const first = pages[0] as {
+    data: {
+      watermark: string;
+      trusted_snapshot_ref: string;
+      plan_revision: string | null;
+      coverage: { page_set: { page_set_ref: string } };
+    };
+  };
+  const sealed = pages.map((page, pageIndex) => {
+    const digest = snapshotPageDigest(page);
+    if (digest === null) throw new Error("page does not decode");
+    return { pageIndex, ...digest };
+  });
+  return {
+    pageSetRef: first.data.coverage.page_set.page_set_ref,
+    viewContext: caseMeta.default_view_context,
+    trustedSnapshotRef: first.data.trusted_snapshot_ref,
+    watermark: first.data.watermark,
+    planRevision: first.data.plan_revision,
+    pageCount: pages.length,
+    pages: sealed.map((p) => ({
+      pageIndex: p.pageIndex,
+      sha256: p.sha256,
+      byteSize: p.byteSize,
+    })),
+    totalBytes: sealed.reduce((n, p) => n + p.byteSize, 0),
+    adapterRef: "adapter:test-fixture",
+    ...overrides,
+  };
 }

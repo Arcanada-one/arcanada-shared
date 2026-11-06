@@ -6,9 +6,11 @@ implementation both sites import; there is no per-site copy.
 
 Sources: Agent-Brain's observation package (`documentation/plans/knowledge-collective-live-lab/observation-profile-v1/`
 in `Arcanada-one/arcanada-workspace`, manifest sha256 `447266fc13b38a5d3a997c885edd349e4efaf84007e0be271af5ddcf4322d09d`)
-and `implementation-contracts/2026-11-06/SHARED-OBSERVATION.md`. The schema is vendored unmodified as
-`src/knowledge-observation-v1.schema.json` and interpreted by a small total validator (no schema library at runtime;
-`ajv` is a test-only oracle).
+and `implementation-contracts/2026-11-06/SHARED-OBSERVATION.md`. The decoder schema is the reviewed **amendment 1**
+(`src/knowledge-observation-v1.amendment-1.schema.json`, derived deterministically from the pinned v1 schema; the
+workspace PR `observation-profile-v1/amendment-1/` carries the semantics) and is interpreted by a small total validator
+(no schema library at runtime; `ajv` is a test-only oracle). The unmodified pinned v1 schema is kept as a test fixture
+and every v1-valid fixture record stays valid. Workspace correction PR: `Arcanada-one/arcanada-workspace#1882`.
 
 ## Frames and decoding
 
@@ -25,9 +27,24 @@ and `implementation-contracts/2026-11-06/SHARED-OBSERVATION.md`. The schema is v
 - Timestamps are RFC 3339 `date-time`; offsets and fractions are kept verbatim. `T`/`t` is required as the separator.
 
 A full graph does not fit one 65,532-byte frame. Transport uses bounded authorized pages (`snapshot_kind: "partial"`),
-which the reducer assembles under one watermark with count, byte and age limits. A page set stays partial until a page
-declares itself final (`next_page_token: null`, `complete: true`) and every declared graph kind has arrived; only then
-does it go through the normal full-snapshot rules.
+each naming its immutable set in `coverage.page_set` (`page_set_ref`, canonical `page_index`, `page_count`). Those fields
+are claims. A page set becomes the current view only when the external read adapter has supplied a **sealed ordered
+manifest** through the trusted `trusted_page_set_manifest` input (same view scope and epoch, snapshot ref, plan,
+watermark, page count, and each page's canonical sha256 and byte size from `knowledgeObservationPageDigest`), every
+ordinal `0..count-1` is present exactly once, and each page matches its entry. A final page with `next_page_token: null`
+and every graph kind present is **not** proof. Without proof a set stays pending (before bootstrap `awaiting_snapshot`,
+afterwards `reconciling`) and nothing becomes current; a page without `page_set` is quarantined as unproven. Missing,
+duplicate (different bytes) and foreign pages discard the assembly. Only a proven set goes through the normal
+full-snapshot rules.
+
+A same-watermark snapshot is accepted as consistent only when its complete normalised projection (plan, native state,
+acceptance, source revisions, atomicity, graph kinds, every node, edge and crosslink) equals the recorded view; anything
+else is quarantined as `SNAPSHOT_CONTRADICTION`. A verified contiguous same-view replay interval can clear a gap; a full
+snapshot is required after buffer expiry or overflow, reset, revocation and a discarded page assembly.
+
+A source `FAIL` needs an actual failing checker but no aggregate decision refs (only `PASS` needs them). It fails closed
+and is exposed as `acceptanceBasis: "source_fail_unverified"` with `independentlyVerified: false`; it is never presented
+as independently verified.
 
 ## Reducer
 

@@ -481,9 +481,11 @@ describe("identity separations and producer-local facts are preserved", () => {
   it("freshness, connection, native state and acceptance are four separate dimensions", () => {
     const v = projectView(run([recv("run"), recv("snapshot-A")]).state);
     expect(Object.keys(v.dimensions).sort()).toEqual([
+      "acceptanceBasis",
       "connection",
       "freshness",
       "independentAcceptance",
+      "independentlyVerified",
       "nativeState",
     ]);
     expect(v.dimensions.connection).toBe("connected");

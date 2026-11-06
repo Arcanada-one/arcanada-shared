@@ -34,6 +34,7 @@ import {
   type SnapshotRecord,
   type ViewContext,
 } from "./knowledge-observation-v1.js";
+import { sha256Hex } from "./knowledge-observation-sha256.js";
 
 const deepClone = <T>(value: T): T => structuredClone(value);
 
@@ -54,6 +55,8 @@ export type HoldCode =
   | "INVALID_FRAME"
   | "PAGE_ASSEMBLY_INVALID"
   | "PAGE_ASSEMBLY_LIMIT_EXCEEDED"
+  | "PAGE_SET_UNPROVEN"
+  | "PAGE_SET_MISMATCH"
   | "GAP"
   | "IDENTITY_BODY_CONFLICT"
   | "CURSOR_BINDING_CONFLICT"
@@ -128,14 +131,62 @@ export interface EventLedgerEntry {
   readonly recordedAt: string;
 }
 
+interface PageEntry {
+  readonly index: number;
+  readonly sha256: string;
+  readonly byteSize: number;
+  readonly record: SnapshotRecord;
+}
+
 interface PageAssembly {
   readonly watermark: string;
   readonly trustedSnapshotRef: string;
   readonly planRevision: string | null;
   readonly declaredKinds: string;
-  readonly records: readonly SnapshotRecord[];
+  /** Immutable page-set identity named by every page; proven only by a trusted adapter manifest. */
+  readonly pageSetRef: string;
+  readonly pageCount: number;
+  /** Pages by canonical ordinal, each with its exact canonical digest and byte size. */
+  readonly pages: readonly PageEntry[];
   readonly bytes: number;
   readonly firstAt: number;
+}
+
+/**
+ * Sealed, ordered page-set manifest. It is supplied ONLY through the trusted `trusted_page_set_manifest` input by the
+ * external read adapter that verified it against the producer; nothing in a page payload can grant it. A page set
+ * becomes a current view only when every page 0..pageCount-1 is present exactly once and each page's canonical digest
+ * and byte size equal the manifest entry (see `snapshotPageDigest`).
+ */
+export interface PageSetManifest {
+  readonly pageSetRef: string;
+  readonly viewContext: ViewContext;
+  readonly trustedSnapshotRef: string;
+  readonly watermark: string;
+  readonly planRevision: string | null;
+  readonly pageCount: number;
+  readonly pages: readonly {
+    readonly pageIndex: number;
+    readonly sha256: string;
+    readonly byteSize: number;
+  }[];
+  readonly totalBytes: number;
+  readonly adapterRef: string;
+}
+
+const MAX_MANIFESTS = 8;
+const SHA256_RE = /^[0-9a-f]{64}$/;
+
+/** Canonical digest of one decoded snapshot page. Adapters use this same function to seal a manifest. */
+export function snapshotPageDigest(
+  page: unknown,
+): { readonly sha256: string; readonly byteSize: number } | null {
+  const decoded = decodeObservationRecord(page, {
+    supportedExtensions: [LOSSLESS_DECIMAL_EXTENSION],
+  });
+  if (!decoded.ok || decoded.record.record_type !== "snapshot") return null;
+  const canon = canonicalJson(decoded.record);
+  return { sha256: sha256Hex(canon), byteSize: byteLength(canon) };
 }
 
 interface Diagnostic {
@@ -210,6 +261,8 @@ export interface ReducerState {
   readonly eventLedger: readonly EventLedgerEntry[];
   /** Pending partial-snapshot pages, bounded; never a current view until a declared-final page completes them. */
   readonly pages: PageAssembly | null;
+  /** Trusted sealed manifests by page-set ref (bounded). Present only via the trusted input, never from a payload. */
+  readonly pageSetManifests: Readonly<Record<string, PageSetManifest>>;
   readonly trustedReset: {
     readonly previousEpoch: string;
     readonly ref: string;
@@ -234,6 +287,11 @@ interface StoredView {
   readonly declaredGraphKinds: readonly GraphKind[];
   readonly nativeState: NativeState | null;
   readonly acceptance: AcceptanceEvaluation;
+  /** Raw source projection data kept so a same-watermark snapshot can be compared against the COMPLETE projection. */
+  readonly acceptanceRecord: SnapshotRecord["data"]["acceptance"];
+  readonly sourceRevisions: readonly unknown[];
+  readonly allowedActions: readonly unknown[];
+  readonly atomicityEvidenceRef: string | null;
   readonly graphs: readonly Graph[];
   readonly crosslinks: readonly Crosslink[];
   readonly withdrawn: readonly string[];
@@ -256,6 +314,11 @@ export type ReducerInput =
       readonly throughCursor: string;
       readonly records: readonly unknown[];
       readonly coverageRef: string;
+      readonly at?: number;
+    }
+  | {
+      readonly kind: "trusted_page_set_manifest";
+      readonly manifest: PageSetManifest;
       readonly at?: number;
     }
   | {
@@ -340,6 +403,7 @@ export function createReducerState(options: ReducerOptions = {}): ReducerState {
     eventLog: [],
     eventLedger: [],
     pages: null,
+    pageSetManifests: {},
     trustedReset: null,
     ancillary: {
       seen: {},
@@ -789,23 +853,93 @@ function receiveEvent(
   };
 }
 
+/** The complete authorized projection, normalised for comparison. Capture metadata (record id, producer build, capture and
+ * storage times, trusted snapshot ref, paging fields) is deliberately excluded; everything a viewer could be shown is in. */
+interface ProjectionParts {
+  readonly plan: string | null;
+  readonly nativeState: NativeState | null;
+  readonly acceptance: unknown;
+  readonly sourceAtomicity: string;
+  readonly atomicityEvidenceRef: string | null;
+  readonly declaredGraphKinds: readonly GraphKind[];
+  readonly sourceRevisions: readonly unknown[];
+  readonly allowedActions: readonly unknown[];
+  readonly graphs: readonly Graph[];
+  readonly crosslinks: readonly Crosslink[];
+}
+
+function sortedBy<T>(items: readonly T[], key: (item: T) => string): T[] {
+  return [...items].sort((a, b) => {
+    const ka = key(a);
+    const kb = key(b);
+    return ka < kb ? -1 : ka > kb ? 1 : 0;
+  });
+}
+
+function completeProjectionCanon(p: ProjectionParts): string {
+  return canonicalJson({
+    plan: p.plan,
+    native_state: p.nativeState,
+    acceptance: p.acceptance,
+    source_atomicity: p.sourceAtomicity,
+    atomicity_evidence_ref: p.atomicityEvidenceRef,
+    declared_graph_kinds: [...p.declaredGraphKinds].sort(),
+    source_revisions: sortedBy(p.sourceRevisions, canonicalJson),
+    allowed_actions: sortedBy(p.allowedActions, canonicalJson),
+    graphs: sortedBy(
+      p.graphs,
+      (g) => `${g.graph_kind}\u0000${g.authority}`,
+    ).map((g) => ({
+      graph_kind: g.graph_kind,
+      authority: g.authority,
+      graph_revision: g.graph_revision,
+      nodes: sortedBy(g.nodes, (n) => nodeKey(n.ref)),
+      edges: sortedBy(g.edges, (e) => e.edge_id),
+    })),
+    crosslinks: sortedBy(p.crosslinks, (l) => l.link_id),
+  });
+}
+
+function snapshotProjectionParts(d: SnapshotRecord["data"]): ProjectionParts {
+  return {
+    plan: d.plan_revision,
+    nativeState: d.native_state,
+    acceptance: d.acceptance,
+    sourceAtomicity: d.source_atomicity,
+    atomicityEvidenceRef:
+      (d as { atomicity_evidence_ref?: string | null })
+        .atomicity_evidence_ref ?? null,
+    declaredGraphKinds: d.coverage.declared_graph_kinds,
+    sourceRevisions: d.source_revisions,
+    allowedActions: d.allowed_actions_observation,
+    graphs: d.graphs,
+    crosslinks: d.crosslinks,
+  };
+}
+
+/**
+ * Same-watermark equality compares the COMPLETE normalised projection: plan, native state, acceptance, source
+ * revisions and atomicity, allowed actions, graph kinds, and node, edge and crosslink membership with their contents.
+ * Anything not proven equal is a contradiction (the caller quarantines it); there is no partial-overlap shortcut.
+ */
 function snapshotConsistent(s: MutableState, snap: SnapshotRecord): boolean {
-  if (s.view === null) return true;
-  const incoming = new Map<string, string | null>();
-  for (const g of snap.data.graphs)
-    for (const n of g.nodes)
-      incoming.set(nodeKey(n.ref), n.native_state?.value ?? null);
-  for (const g of s.view.graphs) {
-    for (const n of g.nodes) {
-      const k = nodeKey(n.ref);
-      if (
-        incoming.has(k) &&
-        incoming.get(k) !== (n.native_state?.value ?? null)
-      )
-        return false;
-    }
-  }
-  return true;
+  const v = s.view;
+  if (v === null) return true;
+  const current = completeProjectionCanon({
+    plan: s.currentPlan,
+    nativeState: v.nativeState,
+    acceptance: v.acceptanceRecord,
+    sourceAtomicity: v.sourceAtomicity,
+    atomicityEvidenceRef: v.atomicityEvidenceRef,
+    declaredGraphKinds: v.declaredGraphKinds,
+    sourceRevisions: v.sourceRevisions,
+    allowedActions: v.allowedActions,
+    graphs: v.graphs,
+    crosslinks: v.crosslinks,
+  });
+  return (
+    current === completeProjectionCanon(snapshotProjectionParts(snap.data))
+  );
 }
 
 function installSnapshot(s: MutableState, snap: SnapshotRecord): void {
@@ -850,6 +984,12 @@ function installSnapshot(s: MutableState, snap: SnapshotRecord): void {
     declaredGraphKinds: d.coverage.declared_graph_kinds,
     nativeState: d.native_state,
     acceptance: evaluateAcceptance(d.acceptance),
+    acceptanceRecord: deepClone(d.acceptance),
+    sourceRevisions: deepClone(d.source_revisions),
+    allowedActions: deepClone(d.allowed_actions_observation),
+    atomicityEvidenceRef:
+      (d as { atomicity_evidence_ref?: string | null })
+        .atomicity_evidence_ref ?? null,
     graphs: deepClone(d.graphs),
     crosslinks: deepClone(d.crosslinks),
     withdrawn: [],
@@ -950,11 +1090,11 @@ function mergePages(pages: readonly SnapshotRecord[]): SnapshotRecord | null {
     data: {
       ...last.data,
       snapshot_kind: "full",
-      coverage: {
-        ...last.data.coverage,
-        complete: true,
-        next_page_token: null,
-      },
+      coverage: (() => {
+        const { page_set: _pageSet, ...rest } = last.data.coverage;
+        void _pageSet;
+        return { ...rest, complete: true, next_page_token: null };
+      })(),
       graphs,
       crosslinks: [...links.entries()]
         .sort((a, b) => (a[0] < b[0] ? -1 : 1))
@@ -969,62 +1109,78 @@ function mergePages(pages: readonly SnapshotRecord[]): SnapshotRecord | null {
     : null;
 }
 
+const NON_INTERVAL_RECOVERABLE = (h: HoldCode): boolean =>
+  h !== "GAP" && h !== "PAGE_SET_UNPROVEN";
+
+function manifestFor(s: MutableState, ref: string): PageSetManifest | null {
+  return s.pageSetManifests[ref] ?? null;
+}
+
+/** True when a page (or a whole assembly entry) disagrees with the sealed manifest: foreign, altered or miscounted. */
+function pageViolatesManifest(
+  m: PageSetManifest,
+  a: Pick<
+    PageAssembly,
+    "watermark" | "trustedSnapshotRef" | "planRevision" | "pageCount"
+  >,
+  entry: PageEntry,
+): boolean {
+  const expected = m.pages.find((p) => p.pageIndex === entry.index);
+  return (
+    m.watermark !== a.watermark ||
+    m.trustedSnapshotRef !== a.trustedSnapshotRef ||
+    m.planRevision !== a.planRevision ||
+    m.pageCount !== a.pageCount ||
+    expected === undefined ||
+    expected.sha256 !== entry.sha256 ||
+    expected.byteSize !== entry.byteSize
+  );
+}
+
 /**
- * Bounded assembly of partial snapshot pages under ONE watermark, trusted snapshot ref, plan and declared projection.
- * A page set never moves the watermark or replaces a view while any page declares a next page token or incompleteness.
- * The set completes only when a page declares itself final (`next_page_token: null` with `complete: true`), every
- * declared graph kind has been delivered and no node/edge/link is contradicted; it then goes through the normal
- * full-snapshot path (older/duplicate/consistency rules apply). Count, byte and age bounds apply while pending.
+ * Complete a pending page set when, and only when, it is PROVEN complete: every ordinal 0..pageCount-1 is present
+ * exactly once AND a trusted sealed manifest binds the set (same scope and epoch, snapshot ref, plan, watermark, count)
+ * and every page's canonical digest and byte size equal their manifest entries. A declared-final page, a payload flag
+ * or the presence of every graph kind is NOT proof. Without proof the set stays pending and nothing becomes current.
  */
-function receivePage(
+function completePageSet(
   s: MutableState,
-  page: SnapshotRecord,
   at: number | undefined,
-  record: (disposition: string) => void,
-): ReduceOutcome {
-  const d = page.data;
-  s.partialPages += 1;
-  if (s.appliedCursor !== null && s.holds.length > 0)
-    s.fullSnapshotRequired = true;
-  const size = byteLength(canonicalJson(page));
-  const prior = s.pages;
-  const declared = canonicalJson(d.coverage.declared_graph_kinds);
-  if (
-    prior !== null &&
-    (prior.watermark !== d.watermark ||
-      prior.trustedSnapshotRef !== d.trusted_snapshot_ref ||
-      prior.planRevision !== d.plan_revision ||
-      prior.declaredKinds !== declared)
-  ) {
-    record("page_assembly_inconsistent");
-    return discardPages(s, "PAGE_ASSEMBLY_INVALID");
-  }
-  const records = [...(prior?.records ?? []), page];
-  const bytes = (prior?.bytes ?? 0) + size;
-  const firstAt = prior?.firstAt ?? at ?? 0;
-  if (
-    records.length > s.limits.maxPages ||
-    bytes > s.limits.maxSerializedBytes ||
-    (at !== undefined && at - firstAt > s.limits.maxAgeMs)
-  ) {
-    record("page_assembly_limit_exceeded");
-    return discardPages(s, "PAGE_ASSEMBLY_LIMIT_EXCEEDED");
-  }
-  const final = d.coverage.next_page_token === null && d.coverage.complete;
-  if (!final) {
-    s.pages = {
-      watermark: d.watermark,
-      trustedSnapshotRef: d.trusted_snapshot_ref,
-      planRevision: d.plan_revision,
-      declaredKinds: declared,
-      records,
-      bytes,
-      firstAt,
-    };
+): ReduceOutcome | null {
+  const a = s.pages;
+  if (a === null) return null;
+  const lastRecord = a.pages[a.pages.length - 1]?.record;
+  const record = (disposition: string): void => {
+    s.snapshotHistory = [
+      ...s.snapshotHistory,
+      {
+        recordId: lastRecord?.record_id ?? a.pageSetRef,
+        watermark: a.watermark,
+        disposition,
+      },
+    ];
+  };
+  if (a.pages.length < a.pageCount) {
     record("partial_page_pending");
     return { disposition: "ignored", code: "PARTIAL_PAGE_PENDING" };
   }
-  const merged = mergePages(records);
+  const m = manifestFor(s, a.pageSetRef);
+  if (m === null) {
+    record("page_set_manifest_pending");
+    return { disposition: "ignored", code: "PAGE_SET_MANIFEST_PENDING" };
+  }
+  const totalBytes = a.pages.reduce((n, e) => n + e.byteSize, 0);
+  if (
+    a.pages.some((e) => pageViolatesManifest(m, a, e)) ||
+    totalBytes !== m.totalBytes
+  ) {
+    record("page_set_manifest_mismatch");
+    return discardPages(s, "PAGE_SET_MISMATCH");
+  }
+  const ordered = [...a.pages]
+    .sort((x, y) => x.index - y.index)
+    .map((e) => e.record);
+  const merged = mergePages(ordered);
   if (merged === null) {
     record("page_assembly_inconsistent");
     return discardPages(s, "PAGE_ASSEMBLY_INVALID");
@@ -1035,6 +1191,188 @@ function receivePage(
   return outcome.disposition === "applied"
     ? { disposition: "applied", code: "PAGES_ASSEMBLED" }
     : outcome;
+}
+
+/**
+ * Bounded assembly of partial snapshot pages under ONE watermark, trusted snapshot ref, plan, declared projection and
+ * page-set identity. A page set never moves the watermark or replaces a view until it is proven complete by
+ * `completePageSet`. A page carrying no `coverage.page_set` cannot be assembled at all (unproven). Count, byte and age
+ * bounds apply while pending. A duplicate ordinal with identical bytes is idempotent; with different bytes it is a
+ * conflict; a page the manifest does not recognise is foreign.
+ */
+function receivePage(
+  s: MutableState,
+  page: SnapshotRecord,
+  at: number | undefined,
+  record: (disposition: string) => void,
+): ReduceOutcome {
+  const d = page.data;
+  s.partialPages += 1;
+  // A verified contiguous same-view replay interval can still recover a GAP, so a gap alone does not demand a full
+  // snapshot. Expiry, overflow, reset, revocation and conflicts already set the flag where they occur.
+  if (s.appliedCursor !== null && s.holds.some(NON_INTERVAL_RECOVERABLE))
+    s.fullSnapshotRequired = true;
+  const set = d.coverage.page_set;
+  if (set === undefined) {
+    record("page_set_proof_missing");
+    push(s.quarantined, {
+      recordId: page.record_id,
+      code: "PAGE_SET_PROOF_MISSING",
+    });
+    if (s.appliedCursor !== null) addHold(s, "PAGE_SET_UNPROVEN");
+    settle(s);
+    return { disposition: "quarantined", code: "PAGE_SET_PROOF_MISSING" };
+  }
+  const index = Number(set.page_index);
+  const count = Number(set.page_count);
+  const lastOrdinal = index === count - 1;
+  const incoherent =
+    !Number.isSafeInteger(index) ||
+    !Number.isSafeInteger(count) ||
+    count < 1 ||
+    index >= count ||
+    lastOrdinal !== (d.coverage.next_page_token === null) ||
+    d.coverage.complete !== lastOrdinal;
+  if (incoherent) {
+    record("page_ordinal_invalid");
+    return discardPages(s, "PAGE_ASSEMBLY_INVALID");
+  }
+  if (count > s.limits.maxPages) {
+    // A set larger than the page bound can never be assembled within it.
+    record("page_assembly_limit_exceeded");
+    return discardPages(s, "PAGE_ASSEMBLY_LIMIT_EXCEEDED");
+  }
+  const canon = canonicalJson(page);
+  const entry: PageEntry = {
+    index,
+    sha256: sha256Hex(canon),
+    byteSize: byteLength(canon),
+    record: page,
+  };
+  const prior = s.pages;
+  const declared = canonicalJson(d.coverage.declared_graph_kinds);
+  if (
+    prior !== null &&
+    (prior.watermark !== d.watermark ||
+      prior.trustedSnapshotRef !== d.trusted_snapshot_ref ||
+      prior.planRevision !== d.plan_revision ||
+      prior.declaredKinds !== declared ||
+      prior.pageSetRef !== set.page_set_ref ||
+      prior.pageCount !== count)
+  ) {
+    record("page_assembly_inconsistent");
+    return discardPages(s, "PAGE_ASSEMBLY_INVALID");
+  }
+  const dup = prior?.pages.find((e) => e.index === index);
+  if (dup !== undefined) {
+    if (dup.sha256 === entry.sha256) {
+      record("page_duplicate_identical");
+      return { disposition: "ignored", code: "PAGE_DUPLICATE_IDENTICAL" };
+    }
+    record("page_duplicate_conflict");
+    return discardPages(s, "PAGE_ASSEMBLY_INVALID");
+  }
+  const base = {
+    watermark: d.watermark,
+    trustedSnapshotRef: d.trusted_snapshot_ref,
+    planRevision: d.plan_revision,
+    pageCount: count,
+  };
+  const manifest = manifestFor(s, set.page_set_ref);
+  if (manifest !== null && pageViolatesManifest(manifest, base, entry)) {
+    record("page_foreign_to_manifest");
+    return discardPages(s, "PAGE_SET_MISMATCH");
+  }
+  const pages = [...(prior?.pages ?? []), entry];
+  const bytes = (prior?.bytes ?? 0) + entry.byteSize;
+  const firstAt = prior?.firstAt ?? at ?? 0;
+  if (
+    pages.length > s.limits.maxPages ||
+    bytes > s.limits.maxSerializedBytes ||
+    (at !== undefined && at - firstAt > s.limits.maxAgeMs)
+  ) {
+    record("page_assembly_limit_exceeded");
+    return discardPages(s, "PAGE_ASSEMBLY_LIMIT_EXCEEDED");
+  }
+  s.pages = {
+    ...base,
+    declaredKinds: declared,
+    pageSetRef: set.page_set_ref,
+    pages,
+    bytes,
+    firstAt,
+  };
+  const outcome = completePageSet(s, at);
+  if (outcome === null) return { disposition: "ignored", code: null };
+  // completePageSet already wrote its own history line; drop the pending marker the caller would add twice.
+  return outcome;
+}
+
+function validManifest(
+  s: MutableState,
+  m: PageSetManifest,
+): m is PageSetManifest {
+  if (s.binding === null || typeof m !== "object" || m === null) return false;
+  if (!sameContext(m.viewContext, s.binding)) return false;
+  const ref = /^[A-Za-z0-9][A-Za-z0-9._:/@+-]{0,255}$/;
+  if (
+    !ref.test(m.pageSetRef) ||
+    !ref.test(m.trustedSnapshotRef) ||
+    !ref.test(m.adapterRef) ||
+    !isCanonicalDecimal(m.watermark) ||
+    !Number.isSafeInteger(m.pageCount) ||
+    m.pageCount < 1 ||
+    m.pageCount > s.limits.maxPages ||
+    !Array.isArray(m.pages) ||
+    m.pages.length !== m.pageCount ||
+    !Number.isSafeInteger(m.totalBytes) ||
+    m.totalBytes < 0
+  )
+    return false;
+  const seen = new Set<number>();
+  let total = 0;
+  for (const p of m.pages) {
+    if (
+      !Number.isSafeInteger(p.pageIndex) ||
+      p.pageIndex < 0 ||
+      p.pageIndex >= m.pageCount ||
+      seen.has(p.pageIndex) ||
+      typeof p.sha256 !== "string" ||
+      !SHA256_RE.test(p.sha256) ||
+      !Number.isSafeInteger(p.byteSize) ||
+      p.byteSize < 1
+    )
+      return false;
+    seen.add(p.pageIndex);
+    total += p.byteSize;
+  }
+  return total === m.totalBytes;
+}
+
+function receivePageSetManifest(
+  s: MutableState,
+  m: PageSetManifest,
+  at: number | undefined,
+): ReduceOutcome {
+  if (!validManifest(s, m)) return reject(s, null, "INVALID_PAGE_SET_MANIFEST");
+  const existing = s.pageSetManifests[m.pageSetRef];
+  if (existing !== undefined && canonicalJson(existing) !== canonicalJson(m)) {
+    // A sealed set is immutable: a different manifest for the same ref is a conflict, never last-writer-wins.
+    push(s.quarantined, { recordId: null, code: "PAGE_SET_MANIFEST_CONFLICT" });
+    if (s.appliedCursor !== null) addHold(s, "PAGE_SET_MISMATCH");
+    settle(s);
+    return { disposition: "quarantined", code: "PAGE_SET_MANIFEST_CONFLICT" };
+  }
+  const keep = Object.entries({
+    ...s.pageSetManifests,
+    [m.pageSetRef]: deepClone(m),
+  }).slice(-MAX_MANIFESTS);
+  s.pageSetManifests = Object.fromEntries(keep);
+  if (s.pages !== null && s.pages.pageSetRef === m.pageSetRef) {
+    const outcome = completePageSet(s, at);
+    if (outcome !== null) return outcome;
+  }
+  return { disposition: "state_changed", code: null };
 }
 
 function receiveSnapshot(
@@ -1348,6 +1686,9 @@ export function reduce(
     case "trusted_replay_interval":
       outcome = replayInterval(s, input);
       break;
+    case "trusted_page_set_manifest":
+      outcome = receivePageSetManifest(s, input.manifest, input.at);
+      break;
     case "trusted_epoch_reset": {
       const o = input.oldViewContext;
       const n = input.newViewContext;
@@ -1374,6 +1715,7 @@ export function reduce(
       s.currentPlan = null;
       s.fullSnapshotRequired = true;
       s.pages = null;
+      s.pageSetManifests = {};
       s.trustedReset = {
         previousEpoch: o.stream_epoch,
         ref: input.authorizationObservationRef,
@@ -1492,7 +1834,12 @@ export interface ProjectedView {
     readonly connection: string;
     readonly freshness: ReducerState["projection"];
     readonly nativeState: string | null;
+    /** Case-reporting token. `FAIL` here is a fail-closed source observation; see `acceptanceBasis`. */
     readonly independentAcceptance: "NOT_MEASURED" | "FAIL";
+    /** `source_fail_unverified`: a raw source FAIL with an actual failing checker, retained but not authenticated. */
+    readonly acceptanceBasis: AcceptanceEvaluation["basis"];
+    /** Always false: the pure reducer never supplies authentic checker binding (KCLIVE-22 does). */
+    readonly independentlyVerified: false;
   };
   readonly declaredGraphKinds: readonly GraphKind[];
   readonly nodes: readonly ProjectedNode[];
@@ -1528,6 +1875,7 @@ export interface ProjectedView {
     readonly attemptKey: string;
     readonly nativeState: string | null;
     readonly acceptance: "NOT_MEASURED" | "FAIL";
+    readonly acceptanceBasis: AcceptanceEvaluation["basis"];
     readonly sourceAcceptance: string;
     readonly issues: readonly string[];
     readonly semanticConflict: boolean;
@@ -1612,6 +1960,7 @@ export function projectView(state: ReducerState): ProjectedView {
       attemptKey: nodeKey(e.record.data.attempt_ref),
       nativeState: e.record.data.native_state?.value ?? null,
       acceptance: e.evaluation.effectiveVerdict,
+      acceptanceBasis: e.evaluation.basis,
       sourceAcceptance: e.record.data.acceptance.verdict,
       issues: e.evaluation.issues,
       semanticConflict: e.semanticConflict,
@@ -1677,6 +2026,8 @@ export function projectView(state: ReducerState): ProjectedView {
       freshness: state.projection,
       nativeState: nativeTop,
       independentAcceptance: v?.acceptance.effectiveVerdict ?? "NOT_MEASURED",
+      acceptanceBasis: v?.acceptance.basis ?? "none",
+      independentlyVerified: false,
     },
     declaredGraphKinds: v?.declaredGraphKinds ?? [],
     nodes,

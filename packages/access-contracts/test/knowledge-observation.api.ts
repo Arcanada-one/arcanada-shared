@@ -15,6 +15,8 @@ export {
   reduceKnowledgeObservation as reduce,
   projectKnowledgeObservation as projectView,
   knowledgeObservationStableDigestInput as stableViewDigestInput,
+  knowledgeObservationPageDigest as snapshotPageDigest,
+  evaluateKnowledgeObservationAcceptance as evaluateAcceptance,
   type KnowledgeObservationViewContext as ViewContext,
   type KnowledgeObservationDigest as Digest,
   type KnowledgeObservationMode as ObservationMode,
@@ -22,4 +24,5 @@ export {
   type KnowledgeObservationInput as ReducerInput,
   type KnowledgeObservationOutcome as ReduceOutcome,
   type KnowledgeObservationView as ProjectedView,
+  type KnowledgeObservationPageSetManifest as PageSetManifest,
 } from "../src/index.js";

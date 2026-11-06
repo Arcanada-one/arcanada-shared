@@ -20,6 +20,30 @@ import {
   type Run,
 } from "./knowledge-observation.harness.js";
 
+const amendments = JSON.parse(
+  readFileSync(
+    new URL(
+      "./fixtures/knowledge-observation-v1/amended-oracles.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+) as {
+  supersedes: {
+    case_id: string;
+    key: string;
+    pinned_value: unknown;
+    amended_value: unknown;
+  }[];
+};
+const amendedOracle = (caseId: string, key: string) => {
+  const hit = amendments.supersedes.find(
+    (a) => a.case_id === caseId && a.key === key,
+  );
+  if (hit === undefined) throw new Error(`no amendment for ${caseId}.${key}`);
+  return hit;
+};
+
 const taskState = (v: ProjectedView): string | null =>
   v.nodes.find((n) => n.graphKind === "work" && n.localId === "task-1")
     ?.nativeState ?? null;
@@ -205,12 +229,19 @@ const checks: Record<string, Check> = {
         r.view.dimensions.independentAcceptance === "NOT_MEASURED",
     );
   },
-  "OBS-11": (_c, r, _ex, eq) => {
+  "OBS-11": (_c, r, ex, eq, m) => {
     eq("first_snapshot", r.trace[0]?.view.projection);
     eq("final_projection", r.view.projection);
     eq("applied_cursor", r.view.appliedCursor);
     eq("buffered", r.view.buffered);
-    eq("full_snapshot_required", r.view.fullSnapshotRequired);
+    // Amendment 1 supersedes exactly this pinned expectation (amended-oracles.json); the pinned file is untouched.
+    m("full_snapshot_required");
+    expect(amendedOracle("OBS-11", "full_snapshot_required").pinned_value).toBe(
+      ex["full_snapshot_required"],
+    );
+    expect(r.view.fullSnapshotRequired).toBe(
+      amendedOracle("OBS-11", "full_snapshot_required").amended_value,
+    );
     eq(
       "partial_pages_may_replace_current_state",
       r.state.partialPages > 0 && r.view.appliedCursor !== "9007199254740992",

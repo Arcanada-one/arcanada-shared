@@ -491,6 +491,7 @@ export {
   nodeKey as knowledgeObservationNodeKey,
   projectView as projectKnowledgeObservation,
   stableViewDigestInput as knowledgeObservationStableDigestInput,
+  snapshotPageDigest as knowledgeObservationPageDigest,
   DEFAULT_BUFFER_LIMITS as DEFAULT_KNOWLEDGE_OBSERVATION_LIMITS,
   type ReducerState as KnowledgeObservationState,
   type ReducerInput as KnowledgeObservationInput,
@@ -502,4 +503,5 @@ export {
   type ReducerOptions as KnowledgeObservationOptions,
   type HoldCode as KnowledgeObservationHold,
   type EventLedgerEntry as KnowledgeObservationLedgerEntry,
+  type PageSetManifest as KnowledgeObservationPageSetManifest,
 } from "./knowledge-observation-reducer.js";
