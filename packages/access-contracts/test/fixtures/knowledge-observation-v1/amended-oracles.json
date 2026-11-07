@@ -1,0 +1,15 @@
+{
+  "schema": "observation-profile-v1-amendment-1-oracles/1",
+  "amends": "reducer-cases.json",
+  "amends_sha256": "8bb869972922c23c75b58ea043ca5c3692afcac3d3c88dd595a8bdadc355a672",
+  "note": "The pinned v1 case file is not edited. Each entry below supersedes exactly one expected observation of one pinned case; every other expectation of every case stays as pinned.",
+  "supersedes": [
+    {
+      "case_id": "OBS-11",
+      "key": "full_snapshot_required",
+      "pinned_value": true,
+      "amended_value": false,
+      "reason": "SEMANTICS 3.6 lets a verified contiguous same-view replay interval clear a gap, so receiving a partial page while only a GAP hold exists must not by itself demand a full snapshot. A full snapshot stays mandatory after buffer expiry or overflow, trusted reset, revocation and an incompatible epoch. A partial page still never moves the watermark and never discharges the gap (final_projection stays reconciling, applied_cursor unchanged)."
+    }
+  ]
+}

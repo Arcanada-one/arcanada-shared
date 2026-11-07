@@ -1,0 +1,1480 @@
+{
+  "profile": "knowledge-collective-observation/v1",
+  "status": "PREPARED",
+  "runtime_verdict": "NOT_MEASURED",
+  "harness_notice": "Step actions describe future local test harness inputs. They are not an implemented reducer or executable commands to services.",
+  "initial_context": "Each case starts independently with an already trusted fixture view binding CONTEXT and negotiated required extension, no applied snapshot and an empty bounded buffer, unless its steps explicitly replace that binding.",
+  "required_supported_extensions": [
+    "lossless-decimal-counters/v1"
+  ],
+  "default_view_context": {
+    "project_id": "fixture-project",
+    "run_id": "fixture-lab-run",
+    "authorized_view_scope": "opaque-view-A",
+    "stream_epoch": "epoch-A"
+  },
+  "default_limits": {
+    "max_records": 256,
+    "max_serialized_bytes": 1048576,
+    "max_age_ms": 30000
+  },
+  "mode_matrix": [
+    "live",
+    "replay",
+    "fixture"
+  ],
+  "mode_notice": "All supplied records are fixture. Replay changes the view mode without rewriting immutable captured event bytes. No real live or replay execution is asserted.",
+  "all_cases_require_zero_emitted_commands": true,
+  "cases": [
+    {
+      "case_id": "OBS-01",
+      "title": "Initial authorized full snapshot and all graph kinds",
+      "claim_ids": [
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "run",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "bind_trusted_projection",
+          "view_context": {
+            "project_id": "fixture-project",
+            "run_id": "fixture-lab-run",
+            "authorized_view_scope": "opaque-view-A",
+            "stream_epoch": "epoch-A"
+          }
+        },
+        {
+          "action": "receive",
+          "record_id": "run"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        }
+      ],
+      "expected_observations": {
+        "projection": "current",
+        "applied_cursor": "9007199254740992",
+        "current_plan": "plan-A",
+        "declared_graph_kinds": [
+          "processing_execution",
+          "contract_receipt_chain",
+          "knowledge",
+          "work"
+        ],
+        "task_native_state": "todo",
+        "acceptance": "NOT_MEASURED",
+        "global_completeness_asserted": false,
+        "cross_source_atomicity_asserted": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-02",
+      "title": "Event before initial snapshot cannot establish a current view",
+      "claim_ids": [
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "run",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "bind_trusted_projection",
+          "view_context": {
+            "project_id": "fixture-project",
+            "run_id": "fixture-lab-run",
+            "authorized_view_scope": "opaque-view-A",
+            "stream_epoch": "epoch-A"
+          }
+        },
+        {
+          "action": "receive",
+          "record_id": "run"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        }
+      ],
+      "expected_observations": {
+        "projection": "awaiting_snapshot",
+        "applied_cursor": null,
+        "buffered": [
+          "event-1"
+        ],
+        "native_execution_inferred": false,
+        "acceptance": "NOT_MEASURED"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-03",
+      "title": "Lossless large cursors and native versions; JSON numbers refused",
+      "claim_ids": [
+        "CL12",
+        "CL08"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-2",
+          "expected_valid": true
+        },
+        {
+          "record_id": "invalid-numeric-cursor",
+          "expected_valid": false
+        },
+        {
+          "record_id": "invalid-numeric-aggregate-version",
+          "expected_valid": false
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-2"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-numeric-cursor"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-numeric-aggregate-version"
+        }
+      ],
+      "expected_observations": {
+        "applied_cursor": "9007199254740994",
+        "native_aggregateVersion": "9007199254740994",
+        "native_revision": "7",
+        "current_plan": "plan-A",
+        "plan_inferred_from_native_versions": false,
+        "invalid_records_rejected": [
+          "invalid-numeric-cursor",
+          "invalid-numeric-aggregate-version"
+        ],
+        "projection": "reconciling",
+        "reason": "SCHEMA_INVALID"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-04",
+      "title": "Exact duplicate observation is ignored",
+      "claim_ids": [
+        "CL12",
+        "CL13"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1-duplicate",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1-duplicate"
+        }
+      ],
+      "expected_observations": {
+        "projection": "current",
+        "applied_cursor": "9007199254740993",
+        "unique_source_events_applied": 1,
+        "ignored": [
+          "event-1-duplicate"
+        ],
+        "reason": "DUPLICATE_SAME_IDENTITY_AND_BODY"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-05",
+      "title": "Same producer identity with conflicting body is quarantined",
+      "claim_ids": [
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1-conflict",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1-conflict"
+        }
+      ],
+      "expected_observations": {
+        "projection": "reconciling",
+        "applied_cursor": "9007199254740993",
+        "task_native_state": "in_progress",
+        "quarantined": [
+          "event-1-conflict"
+        ],
+        "reason": "IDENTITY_BODY_CONFLICT",
+        "automatic_last_writer_wins": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-06",
+      "title": "Reordered delivery freezes until an authorized contiguous replay is proven",
+      "claim_ids": [
+        "CL12"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-2",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-2"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "trusted_replay_interval",
+          "from_cursor": "9007199254740993",
+          "through_cursor": "9007199254740994",
+          "record_ids": [
+            "event-1",
+            "event-2"
+          ],
+          "coverage_ref": "fixture:authorized-replay-interval"
+        }
+      ],
+      "expected_observations": {
+        "after_event_2": {
+          "projection": "reconciling",
+          "applied_cursor": "9007199254740992",
+          "buffered": [
+            "event-2"
+          ]
+        },
+        "after_event_1": {
+          "projection": "reconciling",
+          "applied_cursor": "9007199254740992",
+          "buffered": [
+            "event-1",
+            "event-2"
+          ]
+        },
+        "final": {
+          "projection": "current",
+          "applied_cursor": "9007199254740994",
+          "task_native_state": "review"
+        },
+        "replay_order": "numeric decimal cursor within exact trusted view and epoch"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-07",
+      "title": "A missing authorized projection interval is not silently skipped",
+      "claim_ids": [
+        "CL12"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-3",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-3"
+        }
+      ],
+      "expected_observations": {
+        "projection": "reconciling",
+        "applied_cursor": "9007199254740993",
+        "task_native_state": "in_progress",
+        "buffered": [
+          "event-3"
+        ],
+        "missing_projection_cursor": "9007199254740994",
+        "producer_or_hidden_event_loss_inferred": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-08",
+      "title": "Bounded pending buffer overflows safely",
+      "claim_ids": [
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-3",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-4",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-5",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "set_fixture_buffer_limits",
+          "max_records": 2,
+          "max_serialized_bytes": 65536,
+          "max_age_ms": 1000
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-3"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-4"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-5"
+        }
+      ],
+      "expected_observations": {
+        "projection": "reconciling",
+        "applied_cursor": "9007199254740992",
+        "buffered": [],
+        "reason": "BUFFER_LIMIT_EXCEEDED",
+        "full_snapshot_required": true,
+        "last_trusted_state_preserved": true,
+        "unbounded_browser_history_retained": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-09",
+      "title": "Older snapshot cannot roll back live state",
+      "claim_ids": [
+        "CL12"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-2",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-old",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-2"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-old"
+        }
+      ],
+      "expected_observations": {
+        "projection": "current",
+        "applied_cursor": "9007199254740994",
+        "task_native_state": "review",
+        "ignored_for_current_state": [
+          "snapshot-old"
+        ],
+        "historical_reference_retained": true
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-10",
+      "title": "New full snapshot atomically supersedes a buffered interval",
+      "claim_ids": [
+        "CL12",
+        "CL08"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-3",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-ahead",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-3"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-ahead"
+        }
+      ],
+      "expected_observations": {
+        "projection": "current",
+        "applied_cursor": "9007199254740996",
+        "task_native_state": "review",
+        "buffered": [],
+        "snapshot_swap_atomic_for_local_view": true,
+        "source_transaction_atomicity_asserted": false,
+        "event_3_done_not_inferred_as_accepted_output": true
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-11",
+      "title": "Partial snapshot is not a bootstrap or gap recovery watermark",
+      "claim_ids": [
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-partial",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-3",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-partial"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-3"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-partial"
+        }
+      ],
+      "expected_observations": {
+        "first_snapshot": "awaiting_snapshot",
+        "final_projection": "reconciling",
+        "applied_cursor": "9007199254740992",
+        "buffered": [
+          "event-3"
+        ],
+        "full_snapshot_required": true,
+        "partial_pages_may_replace_current_state": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-12",
+      "title": "Expired cursor needs a trusted epoch reset",
+      "claim_ids": [
+        "CL12",
+        "CL14"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-3",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-epoch-B",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-3"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-epoch-B"
+        },
+        {
+          "action": "trusted_epoch_reset",
+          "old_view_context": {
+            "project_id": "fixture-project",
+            "run_id": "fixture-lab-run",
+            "authorized_view_scope": "opaque-view-A",
+            "stream_epoch": "epoch-A"
+          },
+          "new_view_context": {
+            "project_id": "fixture-project",
+            "run_id": "fixture-lab-run",
+            "authorized_view_scope": "opaque-view-A",
+            "stream_epoch": "epoch-B"
+          },
+          "authorization_observation_ref": "fixture:trusted-epoch-reset"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-epoch-B"
+        }
+      ],
+      "expected_observations": {
+        "before_trusted_reset": {
+          "stream_epoch": "epoch-A",
+          "applied_cursor": "9007199254740992",
+          "projection": "reconciling",
+          "rejected": "UNTRUSTED_EPOCH_CHANGE"
+        },
+        "after_trusted_reset": {
+          "stream_epoch": "epoch-B",
+          "applied_cursor": "0",
+          "projection": "current",
+          "buffered": []
+        },
+        "payload_reset_field_alone_authorizes": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-13",
+      "title": "Wrong project/run/view is isolated; revocation clears private view",
+      "claim_ids": [
+        "CL14",
+        "CL12"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-wrong-project",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-wrong-run",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-wrong-scope",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-wrong-project"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-wrong-run"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-wrong-scope"
+        },
+        {
+          "action": "trusted_authorization_revoked",
+          "view_context": {
+            "project_id": "fixture-project",
+            "run_id": "fixture-lab-run",
+            "authorized_view_scope": "opaque-view-A",
+            "stream_epoch": "epoch-A"
+          }
+        }
+      ],
+      "expected_observations": {
+        "mismatched_records_applied": 0,
+        "denial": "OPAQUE_VIEW_BINDING_MISMATCH",
+        "cross_scope_payload_or_existence_disclosed": false,
+        "after_revocation": "cleared",
+        "private_buffer_and_preview_caches_retained": false,
+        "new_authorized_snapshot_required": true
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-14",
+      "title": "Late event for superseded plan is history only",
+      "claim_ids": [
+        "CL08",
+        "CL12",
+        "CL09"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-plan-B",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-late-plan-A",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-plan-B"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-late-plan-A"
+        }
+      ],
+      "expected_observations": {
+        "projection": "current",
+        "applied_cursor": "9007199254740995",
+        "current_plan": "plan-B",
+        "task_native_state": "in_progress",
+        "historical_only": [
+          "event-late-plan-A"
+        ],
+        "accepted_join_or_success_inferred": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-15",
+      "title": "Qualified graph references do not join on local ID",
+      "claim_ids": [
+        "CL08",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-colliding-ids",
+          "expected_valid": true
+        },
+        {
+          "record_id": "invalid-bare-node",
+          "expected_valid": false
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-colliding-ids"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-bare-node"
+        }
+      ],
+      "expected_observations": {
+        "qualified_nodes_named_node_1": 4,
+        "explicit_crosslinks": 1,
+        "implicit_joins": 0,
+        "invalid_records_rejected": [
+          "invalid-bare-node"
+        ],
+        "work_dependencies_require_muneral_authority": true
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-16",
+      "title": "Doclab database IDs 100 to 104 are valid in a run-filtered projection",
+      "claim_ids": [
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-doclab",
+          "expected_valid": true
+        },
+        {
+          "record_id": "doclab-event-100",
+          "expected_valid": true
+        },
+        {
+          "record_id": "doclab-event-104",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-doclab"
+        },
+        {
+          "action": "receive",
+          "record_id": "doclab-event-100"
+        },
+        {
+          "action": "receive",
+          "record_id": "doclab-event-104"
+        }
+      ],
+      "expected_observations": {
+        "projection": "current",
+        "applied_cursor": "9007199254740994",
+        "native_state": "SUCCEEDED",
+        "native_source_sequence_values": [
+          "100",
+          "104"
+        ],
+        "source_scope": "database",
+        "source_contiguity": "not_contiguous",
+        "lost_events_inferred": false,
+        "hidden_event_count_or_identity_inferred": false,
+        "acceptance": "NOT_MEASURED"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-17",
+      "title": "Native done/succeeded with no checker remains unverified",
+      "claim_ids": [
+        "CL09",
+        "CL08"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-2",
+          "expected_valid": true
+        },
+        {
+          "record_id": "attempt-succeeded",
+          "expected_valid": true
+        },
+        {
+          "record_id": "event-3",
+          "expected_valid": true
+        },
+        {
+          "record_id": "invalid-empty-checker-pass",
+          "expected_valid": false
+        },
+        {
+          "record_id": "conflicting-checker-aggregate",
+          "expected_valid": true
+        },
+        {
+          "record_id": "attempt-checker-unknown",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-2"
+        },
+        {
+          "action": "receive",
+          "record_id": "attempt-succeeded"
+        },
+        {
+          "action": "receive",
+          "record_id": "event-3"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-empty-checker-pass"
+        },
+        {
+          "action": "receive",
+          "record_id": "conflicting-checker-aggregate"
+        },
+        {
+          "action": "semantic_acceptance_evaluation",
+          "record_id": "conflicting-checker-aggregate",
+          "policy_assumption": "Every listed check is mandatory under fixture:all-listed-checks-mandatory."
+        },
+        {
+          "action": "receive",
+          "record_id": "attempt-checker-unknown"
+        }
+      ],
+      "expected_observations": {
+        "applied_cursor": "9007199254740995",
+        "task_native_state": "done",
+        "attempt_native_state": "succeeded",
+        "acceptance": "NOT_MEASURED",
+        "accepted_join_inferred": false,
+        "invalid_records_rejected": [
+          "invalid-empty-checker-pass"
+        ],
+        "aggregate_claim_semantic_rejection": "ACCEPTANCE_POLICY_CONFLICT",
+        "conflicting_aggregate_is_current_PASS": false,
+        "authoritative_acceptance_decision_required": true,
+        "executed_unknown_preserved": true,
+        "absent_checker_equated_with_executed_unknown": false,
+        "mandatory_unknown_satisfied_by_other_positive": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-18",
+      "title": "B2 uses explicit chain/DB association and has no worker/OCR history",
+      "claim_ids": [
+        "CL02",
+        "CL09",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-b2-unassociated",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-b2",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-converted-ordinary",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-b2-unassociated"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-b2"
+        },
+        {
+          "action": "classify_independent_native_shapes",
+          "record_ids": [
+            "snapshot-b2",
+            "snapshot-converted-ordinary"
+          ]
+        }
+      ],
+      "expected_observations": {
+        "database_run_id": "fixture-db-b2",
+        "receipt_run_id": "unread-fixture-chain-b2",
+        "association_requires": "fixture-body:b2-association",
+        "string_equality_or_prefix_join": false,
+        "worker_stage_nodes": 0,
+        "worker_attempt_records": 0,
+        "OCR_execution_observed": false,
+        "text_source": "conversion",
+        "native_state": "SUCCEEDED",
+        "acceptance": "NOT_MEASURED",
+        "finished_shape_requires": [
+          "profile=converted-text",
+          "status=SUCCEEDED",
+          "event run_inserted_finished",
+          "zero stage_tasks in same snapshot"
+        ],
+        "profile_string_alone_proves_B2": false,
+        "ordinary_same_profile_variant": {
+          "worker_stage_nodes": 1,
+          "inferred_no_worker_execution": false,
+          "attempt_absence_remains_not_measured": true
+        }
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-19",
+      "title": "Transient B2 finished row may roll back before final receipts",
+      "claim_ids": [
+        "CL02",
+        "CL15",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-b2-unassociated",
+          "expected_valid": true
+        },
+        {
+          "record_id": "b2-row-withdrawn",
+          "expected_valid": true
+        },
+        {
+          "record_id": "snapshot-b2-reconciled",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-b2-unassociated"
+        },
+        {
+          "action": "receive",
+          "record_id": "b2-row-withdrawn"
+        },
+        {
+          "action": "receive",
+          "record_id": "snapshot-b2-reconciled"
+        }
+      ],
+      "expected_observations": {
+        "applied_cursor": "9007199254740994",
+        "current_finished_row_exists": false,
+        "prior_observation_retained_as_history": true,
+        "irreversible_production_success": false,
+        "cross_database_filesystem_atomicity": false,
+        "acceptance": "NOT_MEASURED",
+        "last_native_observation": "SUCCEEDED (historical only)",
+        "adapter_observation": "source_row_absent",
+        "current_native_state": null,
+        "native_withdrawn_event_invented": false,
+        "partial_receipt_chain_retained": true,
+        "remaining_canonical_prefix": [
+          "intake",
+          "classify",
+          "convert"
+        ],
+        "unobserved_chain_deletion_inferred": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-20",
+      "title": "Authority refusal and command journal observations do not execute",
+      "claim_ids": [
+        "CL05",
+        "CL09",
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "command-intent",
+          "expected_valid": true
+        },
+        {
+          "record_id": "command-refused",
+          "expected_valid": true
+        },
+        {
+          "record_id": "deployment-unmeasured",
+          "expected_valid": true
+        },
+        {
+          "record_id": "authority-refusal",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "command-intent"
+        },
+        {
+          "action": "receive",
+          "record_id": "command-refused"
+        },
+        {
+          "action": "receive",
+          "record_id": "deployment-unmeasured"
+        },
+        {
+          "action": "receive",
+          "record_id": "authority-refusal"
+        },
+        {
+          "action": "replay_same_records",
+          "record_ids": [
+            "command-intent",
+            "command-refused",
+            "deployment-unmeasured",
+            "authority-refusal"
+          ]
+        }
+      ],
+      "expected_observations": {
+        "applied_cursor": "9007199254740993",
+        "command_journal_status": "rejected_observed",
+        "reason": "CONTRACT_AUTHORITY_UNAVAILABLE",
+        "canonical_native_run_id": null,
+        "attempts_created": 0,
+        "tools_invoked": 0,
+        "deployment_inferred_from_source_pin": false,
+        "acceptance": "NOT_MEASURED"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-21",
+      "title": "Mutable ARAS receipt requires immutable capture; unbounded audit is insufficient",
+      "claim_ids": [
+        "CL09",
+        "CL15",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "receipt-mutable",
+          "expected_valid": true
+        },
+        {
+          "record_id": "receipt-captured-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "receipt-captured-2",
+          "expected_valid": true
+        },
+        {
+          "record_id": "attempt-unbounded-audit",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "receipt-mutable"
+        },
+        {
+          "action": "receive",
+          "record_id": "receipt-captured-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "receipt-captured-2"
+        },
+        {
+          "action": "receive",
+          "record_id": "attempt-unbounded-audit"
+        }
+      ],
+      "expected_observations": {
+        "mutable_pointer_is_historical_proof": false,
+        "immutable_captures": [
+          "capture-1",
+          "capture-2"
+        ],
+        "different_receipt_bytes_kept_distinct": true,
+        "unbounded_audit_is_exact_attempt_proof": false,
+        "attempt_to_capture_binding_still_required": true,
+        "acceptance": "NOT_MEASURED"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-22",
+      "title": "Digest domains and truncated fingerprints are not interchangeable",
+      "claim_ids": [
+        "CL15",
+        "CL09"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "artifact-fingerprint-only",
+          "expected_valid": true
+        },
+        {
+          "record_id": "invalid-fingerprint-content-address",
+          "expected_valid": false
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "artifact-fingerprint-only"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-fingerprint-content-address"
+        },
+        {
+          "action": "compare_fixture_digest_domains",
+          "body_ids": [
+            "same-json-raw",
+            "canonical-domain-example"
+          ]
+        }
+      ],
+      "expected_observations": {
+        "fingerprint_role": "fingerprint",
+        "fingerprint_is_content_address": false,
+        "invalid_records_rejected": [
+          "invalid-fingerprint-content-address"
+        ],
+        "raw_vs_domain_digest_comparison": "INCOMPARABLE_DOMAINS",
+        "canonical_example_is_valid_native_snapshot": false,
+        "acceptance": "NOT_MEASURED"
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-23",
+      "title": "Availability and access remain separate; no open link from old metadata",
+      "claim_ids": [
+        "CL14",
+        "CL15"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "receipt-captured-1",
+          "expected_valid": true
+        },
+        {
+          "record_id": "artifact-denied",
+          "expected_valid": true
+        },
+        {
+          "record_id": "artifact-collected",
+          "expected_valid": true
+        },
+        {
+          "record_id": "artifact-missing",
+          "expected_valid": true
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "receipt-captured-1"
+        },
+        {
+          "action": "receive",
+          "record_id": "artifact-denied"
+        },
+        {
+          "action": "receive",
+          "record_id": "artifact-collected"
+        },
+        {
+          "action": "receive",
+          "record_id": "artifact-missing"
+        }
+      ],
+      "expected_observations": {
+        "denied": {
+          "availability": "unknown",
+          "access": "denied",
+          "locator": null,
+          "digests": []
+        },
+        "collected": {
+          "availability": "collected",
+          "access": "allowed",
+          "open_enabled": false
+        },
+        "missing": {
+          "availability": "missing",
+          "access": "allowed",
+          "open_enabled": false
+        },
+        "old_metadata_certifies_current_bytes": false,
+        "unauthorized_existence_disclosed": false
+      },
+      "expected_emitted_commands": []
+    },
+    {
+      "case_id": "OBS-24",
+      "title": "Unknown required schema and missing producer fail explicitly",
+      "claim_ids": [
+        "CL12",
+        "CL17"
+      ],
+      "status": "PREPARED",
+      "runtime_verdict": "NOT_MEASURED",
+      "schema_examples": [
+        {
+          "record_id": "snapshot-A",
+          "expected_valid": true
+        },
+        {
+          "record_id": "invalid-unknown-profile",
+          "expected_valid": false
+        },
+        {
+          "record_id": "invalid-missing-producer",
+          "expected_valid": false
+        },
+        {
+          "record_id": "invalid-unknown-extension",
+          "expected_valid": false
+        }
+      ],
+      "steps": [
+        {
+          "action": "receive",
+          "record_id": "snapshot-A"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-unknown-profile"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-missing-producer"
+        },
+        {
+          "action": "receive",
+          "record_id": "invalid-unknown-extension"
+        }
+      ],
+      "expected_observations": {
+        "projection": "reconciling",
+        "applied_cursor": "9007199254740992",
+        "invalid_records_rejected": [
+          "invalid-unknown-profile",
+          "invalid-missing-producer",
+          "invalid-unknown-extension"
+        ],
+        "reasons": [
+          "UNSUPPORTED_PROFILE",
+          "SCHEMA_INVALID",
+          "UNSUPPORTED_REQUIRED_EXTENSION"
+        ],
+        "unknown_record_skipped_as_success": false,
+        "acceptance": "NOT_MEASURED"
+      },
+      "expected_emitted_commands": []
+    }
+  ]
+}
