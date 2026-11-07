@@ -1,6 +1,6 @@
 {
   "name": "@arcanada/access-contracts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared access and capability contract for Arcanada product surfaces — the closed capability vocabulary, request/response validators, and the fail-closed decision resolver that an authorization service and its consumers must agree on.",
   "license": "MIT",
   "type": "module",
