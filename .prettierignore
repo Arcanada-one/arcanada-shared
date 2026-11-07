@@ -10,3 +10,6 @@ packages/observation-profile/test/fixtures/
 # Verbatim Agent-Brain observation package (sha256-pinned); formatting would change the pinned bytes.
 packages/access-contracts/src/knowledge-observation-v1.amendment-1.schema.json
 packages/access-contracts/test/fixtures/knowledge-observation-v1/
+
+# Verbatim Knowledge Contract e351df0c book-package/2 schema and fixtures (git-blob pinned); formatting would change the pinned bytes.
+packages/book-package-inspector/vendor/

@@ -1,0 +1,39 @@
+{
+  "name": "@arcanada/book-package-inspector",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Read-only structural inspector for Knowledge Contract book-package/2 directories: JSON Schema validation, cross-file hash/identity/relation checks matching the pinned checker, and a manifest/objects/relations/quality/provenance/anchor projection. kc2_admission is always not_measured.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.js",
+      "require": "./dist/node.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/node.ts src/cli.ts --format esm,cjs --dts --clean",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "bin": {
+    "book-package-inspect": "./dist/cli.js"
+  }
+}

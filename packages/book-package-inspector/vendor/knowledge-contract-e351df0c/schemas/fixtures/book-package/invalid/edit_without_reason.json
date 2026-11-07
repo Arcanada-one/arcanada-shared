@@ -1,0 +1,23 @@
+{
+ "actor_type": "tool",
+ "anchor": {
+  "block_id": "blk.1",
+  "kind": "section_block",
+  "representation_id": "rep.synthetic-rle-primer.md",
+  "section_id": "sec.title",
+  "source_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb"
+ },
+ "basis": "other",
+ "depends_on_objects": [],
+ "edit_id": "edit.1",
+ "input_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb",
+ "original_text": "Synthetic primer",
+ "output_sha256": "5d0cca989f9e1d18e14d214134b7825f0b1e84617f0860011d0edd42a3484d52",
+ "package_id": "synthetic-rle-primer",
+ "reason": "",
+ "replacement_text": "Synthetic primer (readable edition)",
+ "reversible": true,
+ "schema": "KCBookEdit/v2",
+ "status": "accepted",
+ "target": "readable_md"
+}

@@ -1,0 +1,20 @@
+{
+ "evidence": [],
+ "from": "obj.rle.definition",
+ "generation": {
+  "generated_at": "2026-11-04T00:00:00Z",
+  "input_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb",
+  "run_id": "run.fixture.1",
+  "tool": "fixture-generator",
+  "tool_version": "0.0.0"
+ },
+ "kc2_admission": "not_measured",
+ "origin": "generated_meaning",
+ "package_id": "synthetic-rle-primer",
+ "presented_as_author": false,
+ "relation_id": "rel.def",
+ "relation_type": "defines",
+ "schema": "KCBookRelation/v2",
+ "status": "reviewed",
+ "to": "obj.rle.meaning"
+}

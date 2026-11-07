@@ -1,0 +1,27 @@
+{
+ "conditions": [
+  "only when the input has long runs"
+ ],
+ "evidence": [
+  {
+   "anchor": {
+    "block_id": "blk.1",
+    "kind": "section_block",
+    "representation_id": "rep.synthetic-rle-primer.md",
+    "section_id": "sec.limits",
+    "source_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb"
+   },
+   "side": "from"
+  }
+ ],
+ "from": "obj.rle.limit",
+ "kc2_admission": "not_measured",
+ "origin": "author_statement",
+ "package_id": "synthetic-rle-primer",
+ "presented_as_author": true,
+ "relation_id": "rel.limit",
+ "relation_type": "contradicts",
+ "schema": "KCBookRelation/v2",
+ "status": "reviewed",
+ "to": "obj.rle.definition"
+}

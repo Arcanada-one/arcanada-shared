@@ -1,0 +1,24 @@
+{
+ "evidence": [
+  {
+   "anchor": {
+    "block_id": "blk.1",
+    "kind": "section_block",
+    "representation_id": "rep.synthetic-rle-primer.md",
+    "section_id": "sec.definition",
+    "source_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb"
+   },
+   "side": "both"
+  }
+ ],
+ "from": "obj.rle.definition",
+ "kc2_admission": "not_measured",
+ "origin": "generated_meaning",
+ "package_id": "synthetic-rle-primer",
+ "presented_as_author": false,
+ "relation_id": "rel.def",
+ "relation_type": "defines",
+ "schema": "KCBookRelation/v2",
+ "status": "reviewed",
+ "to": "obj.rle.meaning"
+}

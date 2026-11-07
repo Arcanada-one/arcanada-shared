@@ -1,0 +1,48 @@
+{
+ "extraction": {
+  "cer": {
+   "metric_status": "not_measured",
+   "value": null
+  },
+  "checks": [
+   {
+    "check_id": "chk.order",
+    "method": "section order compared with source headings",
+    "result": "pass"
+   }
+  ],
+  "status": "pass",
+  "units_expected": 3,
+  "units_seen": 3
+ },
+ "kc2_admission": "not_measured",
+ "package_id": "synthetic-rle-primer",
+ "schema": "KCBookQuality/v2",
+ "semantics": {
+  "objects_count": 4,
+  "relations_count": 2,
+  "review": {
+   "independence_basis": "synthetic identity separation for schema testing; no real review is asserted",
+   "object_ids": [
+    "obj.rle.definition",
+    "obj.rle.limit",
+    "obj.rle.meaning",
+    "obj.fig1.description"
+   ],
+   "producer_id": "fixture.generator",
+   "readable_sha256": "5d0cca989f9e1d18e14d214134b7825f0b1e84617f0860011d0edd42a3484d52",
+   "relation_ids": [
+    "rel.def",
+    "rel.limit"
+   ],
+   "relations_sha256": "efec89289184741af9a5580ea865e1cb0866f8a1504539e1155f690932898186",
+   "result": "supported",
+   "review_id": "review.fixture.semantic",
+   "reviewed_at": "2026-11-04T00:00:00Z",
+   "reviewer_id": "fixture.reviewer",
+   "reviewer_type": "blind_agent",
+   "sample_size": 4
+  },
+  "status": "reviewed"
+ }
+}

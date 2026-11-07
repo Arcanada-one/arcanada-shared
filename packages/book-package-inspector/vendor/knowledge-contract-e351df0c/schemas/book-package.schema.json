@@ -1,0 +1,735 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.place/schemas/book-package.schema.json",
+  "title": "Knowledge Contract book package records, version 2",
+  "description": "Book-package/2 profile: explicit rights, scoped review and integrity observations. Record family v1 is not accepted by this validator. Cross-file obligations are enforced by tools/check_book_package.py.",
+  "oneOf": [
+    {"$ref": "#/$defs/Manifest"},
+    {"$ref": "#/$defs/Object"},
+    {"$ref": "#/$defs/Relation"},
+    {"$ref": "#/$defs/Edit"},
+    {"$ref": "#/$defs/Quality"}
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{1,95}$"},
+    "relpath": {"type": "string", "pattern": "^(?!/)(?!.*(^|/)\\.\\.(/|$))[A-Za-z0-9._/-]{1,200}$"},
+    "timestamp": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$", "format": "date-time"},
+    "text": {"type": "string", "minLength": 1, "maxLength": 20000},
+    "reason": {"type": "string", "minLength": 3, "maxLength": 1000, "pattern": "\\S{3}"},
+    "unavailable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reason"],
+      "properties": {"state": {"enum": ["unknown", "not_applicable", "withheld"]}, "reason": {"$ref": "#/$defs/reason"}}
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "tool_version", "run_id", "input_sha256", "generated_at"],
+      "properties": {
+        "tool": {"type": "string", "minLength": 1, "maxLength": 100},
+        "tool_version": {"type": "string", "minLength": 1, "maxLength": 100},
+        "model_id": {"type": "string", "minLength": 1, "maxLength": 100},
+        "run_id": {"$ref": "#/$defs/id"},
+        "input_sha256": {"$ref": "#/$defs/sha256"},
+        "generated_at": {"$ref": "#/$defs/timestamp"}
+      }
+    },
+    "anchor_common": {
+      "type": "object",
+      "required": ["kind", "representation_id", "source_sha256"],
+      "properties": {"representation_id": {"$ref": "#/$defs/id"}, "source_sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "Anchor": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "representation_id", "source_sha256", "page", "bbox", "bbox_origin", "bbox_unit"],
+          "properties": {
+            "kind": {"const": "page_bbox"},
+            "representation_id": {"$ref": "#/$defs/id"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "page": {"type": "integer", "minimum": 1},
+            "bbox": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number", "minimum": 0}},
+            "bbox_origin": {"enum": ["top_left", "bottom_left"]},
+            "bbox_unit": {"enum": ["pt", "px", "normalized"]}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "representation_id", "source_sha256", "spine_item", "start", "end"],
+          "properties": {
+            "kind": {"const": "spine_offset"},
+            "representation_id": {"$ref": "#/$defs/id"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "spine_item": {"$ref": "#/$defs/relpath"},
+            "element_path": {"type": "string", "minLength": 1, "maxLength": 500},
+            "start": {"type": "integer", "minimum": 0},
+            "end": {"type": "integer", "minimum": 0}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "representation_id", "source_sha256", "section_id", "block_id"],
+          "properties": {
+            "kind": {"const": "section_block"},
+            "representation_id": {"$ref": "#/$defs/id"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "section_id": {"$ref": "#/$defs/id"},
+            "block_id": {"$ref": "#/$defs/id"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "representation_id", "source_sha256", "sheet", "range", "layer"],
+          "properties": {
+            "kind": {"const": "sheet_range"},
+            "representation_id": {"$ref": "#/$defs/id"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "sheet": {"type": "string", "minLength": 1, "maxLength": 100},
+            "range": {"type": "string", "pattern": "^[A-Z]{1,3}[1-9][0-9]*(:[A-Z]{1,3}[1-9][0-9]*)?$"},
+            "layer": {"enum": ["formula", "cached_value", "literal"]}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "representation_id", "source_sha256", "pointer"],
+          "properties": {
+            "kind": {"const": "json_pointer"},
+            "representation_id": {"$ref": "#/$defs/id"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "pointer": {"type": "string", "pattern": "^(/([^~/]|~[01])*)+$"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "representation_id", "source_sha256", "slide", "block_id"],
+          "properties": {
+            "kind": {"const": "slide_block"},
+            "representation_id": {"$ref": "#/$defs/id"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "slide": {"type": "integer", "minimum": 1},
+            "block_id": {"$ref": "#/$defs/id"}
+          }
+        }
+      ]
+    },
+    "origin": {"enum": ["author_statement", "editor_correction", "generated_meaning", "generated_description", "our_experiment", "model_inference"]},
+    "content_kind": {
+      "enum": ["definition", "state_description", "observation_measurement", "generalization", "explanatory_model", "formal_model", "procedure", "structure_configuration", "constraint_norm", "goal_intent", "preference_evaluation", "argument_evidence", "example", "counterexample", "question_problem_gap", "narrative_episode", "analogy_metaphor", "hypothesis_interpretation", "commitment_speech_act"]
+    },
+    "string_list": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "facet_modes": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "value"],
+          "properties": {
+            "state": {"const": "known"},
+            "value": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["text", "image", "audio", "video", "structured_data"]}}
+          }
+        },
+        {"$ref": "#/$defs/unavailable"}
+      ]
+    },
+    "facet_kinds": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "value"],
+          "properties": {"state": {"const": "known"}, "value": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/content_kind"}}}
+        },
+        {"$ref": "#/$defs/unavailable"}
+      ]
+    },
+    "facet_strings": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "value"],
+          "properties": {"state": {"const": "known"}, "value": {"$ref": "#/$defs/string_list"}}
+        },
+        {"$ref": "#/$defs/unavailable"}
+      ]
+    },
+    "facet_position": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "value"],
+          "properties": {"state": {"const": "known"}, "value": {"enum": ["asserts", "presumes", "denies", "asks", "reports_other_position", "hypothesizes"]}}
+        },
+        {"$ref": "#/$defs/unavailable"}
+      ]
+    },
+    "facet_operators": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "value"],
+          "properties": {
+            "state": {"const": "known"},
+            "value": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["family", "value", "scope"],
+                "properties": {
+                  "family": {"enum": ["epistemic", "deontic", "quantifier", "negation", "condition", "exception", "order"]},
+                  "value": {"type": "string", "minLength": 1, "maxLength": 100},
+                  "scope": {"type": "string", "minLength": 1, "maxLength": 300}
+                }
+              }
+            }
+          }
+        },
+        {"$ref": "#/$defs/unavailable"}
+      ]
+    },
+    "facet_refs": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "value"],
+          "properties": {"state": {"const": "known"}, "value": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}}
+        },
+        {"$ref": "#/$defs/unavailable"}
+      ]
+    },
+    "SemanticFacets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["representation_modes", "content_kinds", "discourse_functions", "aboutness", "source_position", "semantic_operators", "assessment_refs", "governance_refs"],
+      "properties": {
+        "representation_modes": {"$ref": "#/$defs/facet_modes"},
+        "content_kinds": {"$ref": "#/$defs/facet_kinds"},
+        "discourse_functions": {"$ref": "#/$defs/facet_strings"},
+        "aboutness": {"$ref": "#/$defs/facet_strings"},
+        "source_position": {"$ref": "#/$defs/facet_position"},
+        "semantic_operators": {"$ref": "#/$defs/facet_operators"},
+        "assessment_refs": {"$ref": "#/$defs/facet_refs"},
+        "governance_refs": {"$ref": "#/$defs/facet_refs"}
+      }
+    },
+    "Manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "package_id", "release_id", "created_at", "work", "edition", "representation", "related_works", "rights", "components", "tooling", "package_status", "kc2_admission", "validation_profile"],
+      "properties": {
+        "schema": {"const": "KCBookPackageManifest/v2"},
+        "package_id": {"$ref": "#/$defs/package_slug"},
+        "release_id": {"$ref": "#/$defs/id"},
+        "created_at": {"$ref": "#/$defs/timestamp"},
+        "work": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["work_id", "title"],
+          "properties": {"work_id": {"$ref": "#/$defs/id"}, "title": {"type": "string", "minLength": 1, "maxLength": 300}}
+        },
+        "edition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["edition_id", "language", "kind"],
+          "properties": {
+            "edition_id": {"$ref": "#/$defs/id"},
+            "language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"},
+            "kind": {"enum": ["original", "translation", "revision"]}
+          }
+        },
+        "representation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["representation_id", "format", "source_sha256", "size_bytes", "integrity", "completeness"],
+          "properties": {
+            "representation_id": {"$ref": "#/$defs/id"},
+            "format": {"enum": ["txt", "md", "html", "epub", "pdf", "djvu", "ps", "xlsx", "ppt", "json", "zip", "tar_gz", "sevenz", "tex", "pptx"]},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "size_bytes": {"type": "integer", "minimum": 0},
+            "retrieved_at": {"$ref": "#/$defs/timestamp"},
+            "locator": {"type": "string", "pattern": "^https://[^\\s]{1,500}$"},
+            "integrity": {"enum": ["verified", "mismatch", "unverified"]},
+            "completeness": {"enum": ["full", "partial", "bibliography_only"]},
+            "integrity_check": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["method", "observer", "checked_at", "expected_sha256", "observed_sha256"],
+              "properties": {
+                "method": {"$ref": "#/$defs/reason"},
+                "observer": {"$ref": "#/$defs/id"},
+                "checked_at": {"$ref": "#/$defs/timestamp"},
+                "expected_sha256": {"$ref": "#/$defs/sha256"},
+                "observed_sha256": {"$ref": "#/$defs/sha256"}
+              }
+            }
+          },
+          "allOf": [{"if": {"properties": {"integrity": {"enum": ["verified", "mismatch"]}}}, "then": {"required": ["integrity_check"]}}]
+        },
+        "related_works": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["work_id", "relation"],
+            "properties": {"work_id": {"$ref": "#/$defs/id"}, "relation": {"enum": ["translation_of", "edition_of", "same_work_as", "packaged_with"]}}
+          }
+        },
+        "rights": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["license_class", "publishable_layers"],
+          "properties": {
+            "license_class": {"enum": ["author_open", "public_domain", "third_party_restricted", "unknown"]},
+            "public_domain": {"$ref": "#/$defs/public_domain"},
+            "holder": {"type": "string", "minLength": 1, "maxLength": 200},
+            "license": {"enum": ["CC-BY-4.0", "Apache-2.0"]},
+            "publishable_layers": {"type": "array", "uniqueItems": true, "items": {"enum": ["document_md", "readable_md", "assets", "knowledge", "quality"]}}
+          },
+          "allOf": [
+            {
+              "if": {"properties": {"license_class": {"enum": ["third_party_restricted", "unknown"]}}},
+              "then": {"not": {"required": ["license"]}, "properties": {"publishable_layers": {"maxItems": 0}}}
+            },
+            {
+              "if": {"properties": {"license_class": {"const": "public_domain"}}},
+              "then": {"required": ["public_domain"], "not": {"required": ["license"]}}
+            },
+            {
+              "if": {"properties": {"license_class": {"enum": ["author_open", "third_party_restricted", "unknown"]}}},
+              "then": {"not": {"required": ["public_domain"]}}
+            }
+          ]
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["edits", "objects", "relations", "quality"],
+          "properties": {
+            "document_md": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "sha256", "input_sha256", "tool", "tool_version", "contains_generated_text"],
+              "properties": {
+                "path": {"$ref": "#/$defs/relpath"},
+                "sha256": {"$ref": "#/$defs/sha256"},
+                "input_sha256": {"$ref": "#/$defs/sha256"},
+                "tool": {"type": "string", "minLength": 1, "maxLength": 100},
+                "tool_version": {"type": "string", "minLength": 1, "maxLength": 100},
+                "contains_generated_text": {"const": false}
+              }
+            },
+            "readable_md": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "sha256", "contains_generated_text"],
+              "properties": {"path": {"$ref": "#/$defs/relpath"}, "sha256": {"$ref": "#/$defs/sha256"}, "contains_generated_text": {"type": "boolean"}}
+            },
+            "assets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["asset_id", "kind", "state"],
+                "properties": {
+                  "asset_id": {"$ref": "#/$defs/id"},
+                  "kind": {"enum": ["image", "table_image", "formula_image", "other"]},
+                  "state": {"enum": ["present", "missing_asset"]},
+                  "path": {"$ref": "#/$defs/relpath"},
+                  "sha256": {"$ref": "#/$defs/sha256"}
+                },
+                "allOf": [
+                  {"if": {"properties": {"state": {"const": "present"}}}, "then": {"required": ["path", "sha256"]}},
+                  {
+                    "if": {"properties": {"state": {"const": "missing_asset"}}},
+                    "then": {"not": {"anyOf": [{"required": ["path"]}, {"required": ["sha256"]}]}}
+                  }
+                ]
+              }
+            },
+            "edits": {"$ref": "#/$defs/counted_file"},
+            "objects": {"$ref": "#/$defs/counted_file"},
+            "relations": {"$ref": "#/$defs/counted_file"},
+            "quality": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "sha256"],
+              "properties": {"path": {"$ref": "#/$defs/relpath"}, "sha256": {"$ref": "#/$defs/sha256"}}
+            }
+          }
+        },
+        "tooling": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["tool", "tool_version"],
+            "properties": {"tool": {"type": "string", "minLength": 1, "maxLength": 100}, "tool_version": {"type": "string", "minLength": 1, "maxLength": 100}}
+          }
+        },
+        "package_status": {"enum": ["knowledge_ready", "structure_only", "partial_pilot", "adapter_required", "blocked_integrity", "bibliography_only"]},
+        "kc2_admission": {"const": "not_measured"},
+        "validation_profile": {"const": "book-package/2"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"representation": {"properties": {"completeness": {"const": "bibliography_only"}, "integrity": {"not": {"const": "mismatch"}}}}}
+          },
+          "then": {
+            "properties": {
+              "package_status": {"const": "bibliography_only"},
+              "components": {"not": {"anyOf": [{"required": ["document_md"]}, {"required": ["readable_md"]}]}}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"representation": {"properties": {"integrity": {"const": "mismatch"}}}}},
+          "then": {"properties": {"package_status": {"const": "blocked_integrity"}}}
+        },
+        {
+          "if": {"properties": {"package_status": {"const": "knowledge_ready"}}},
+          "then": {"properties": {"representation": {"properties": {"integrity": {"const": "verified"}, "completeness": {"const": "full"}}}}}
+        },
+        {
+          "if": {"properties": {"package_status": {"enum": ["structure_only", "partial_pilot", "knowledge_ready"]}}},
+          "then": {"properties": {"components": {"required": ["document_md", "readable_md"]}}}
+        },
+        {
+          "if": {"properties": {"package_status": {"enum": ["adapter_required", "blocked_integrity", "bibliography_only"]}}},
+          "then": {"properties": {"components": {"not": {"anyOf": [{"required": ["document_md"]}, {"required": ["readable_md"]}]}}}}
+        }
+      ]
+    },
+    "counted_file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "count"],
+      "properties": {"path": {"$ref": "#/$defs/relpath"}, "sha256": {"$ref": "#/$defs/sha256"}, "count": {"type": "integer", "minimum": 0}}
+    },
+    "Object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "object_id", "package_id", "work_id", "edition_id", "object_kind", "text", "text_language", "origin", "presented_as_author", "evidence", "semantic_facets", "status", "kc2_admission"],
+      "properties": {
+        "schema": {"const": "KCBookObject/v2"},
+        "object_id": {"$ref": "#/$defs/id"},
+        "package_id": {"$ref": "#/$defs/package_slug"},
+        "work_id": {"$ref": "#/$defs/id"},
+        "edition_id": {"$ref": "#/$defs/id"},
+        "object_kind": {"enum": ["concept", "claim", "procedure", "figure", "table", "formula", "code", "example", "other_structure"]},
+        "claim_class": {"enum": ["general", "benchmark"]},
+        "benchmark_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["corpus", "device", "tool_version", "settings", "units", "mode"],
+          "properties": {
+            "corpus": {"type": "string", "minLength": 1},
+            "device": {"type": "string", "minLength": 1},
+            "tool_version": {"type": "string", "minLength": 1},
+            "settings": {"type": "string", "minLength": 1},
+            "units": {"type": "string", "minLength": 1},
+            "mode": {"enum": ["encode", "decode", "encode_decode"]}
+          }
+        },
+        "text": {"$ref": "#/$defs/text"},
+        "text_language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"},
+        "origin": {"$ref": "#/$defs/origin"},
+        "presented_as_author": {"type": "boolean"},
+        "generation": {"$ref": "#/$defs/generation"},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/Anchor"}},
+        "qualifiers": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "conditions": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 500}},
+            "numbers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["value", "unit"],
+                "properties": {"value": {"type": "string", "minLength": 1, "maxLength": 50}, "unit": {"type": "string", "minLength": 0, "maxLength": 30}}
+              }
+            }
+          }
+        },
+        "semantic_facets": {"$ref": "#/$defs/SemanticFacets"},
+        "status": {"enum": ["candidate", "reviewed", "stale", "rejected"]},
+        "kc2_admission": {"const": "not_measured"},
+        "reviewed_edit_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"origin": {"const": "author_statement"}}},
+          "then": {"not": {"required": ["generation"]}},
+          "else": {"required": ["generation"], "properties": {"presented_as_author": {"const": false}}}
+        },
+        {"if": {"required": ["claim_class"], "properties": {"claim_class": {"const": "benchmark"}}}, "then": {"required": ["benchmark_context"]}},
+        {"if": {"required": ["claim_class"]}, "then": {"properties": {"object_kind": {"const": "claim"}}}}
+      ]
+    },
+    "Relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "relation_id", "package_id", "relation_type", "from", "to", "origin", "presented_as_author", "evidence", "status", "kc2_admission"],
+      "properties": {
+        "schema": {"const": "KCBookRelation/v2"},
+        "relation_id": {"$ref": "#/$defs/id"},
+        "package_id": {"$ref": "#/$defs/package_slug"},
+        "relation_type": {"enum": ["defines", "uses", "variant_of", "requires", "compared_with", "contradicts"]},
+        "from": {"$ref": "#/$defs/id"},
+        "to": {"$ref": "#/$defs/id"},
+        "origin": {"$ref": "#/$defs/origin"},
+        "presented_as_author": {"type": "boolean"},
+        "generation": {"$ref": "#/$defs/generation"},
+        "conditions": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 500}},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["side", "anchor"],
+            "properties": {"side": {"enum": ["from", "to", "both"]}, "anchor": {"$ref": "#/$defs/Anchor"}}
+          }
+        },
+        "status": {"enum": ["candidate", "reviewed", "stale", "rejected"]},
+        "kc2_admission": {"const": "not_measured"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"origin": {"const": "author_statement"}}},
+          "then": {"not": {"required": ["generation"]}},
+          "else": {"required": ["generation"], "properties": {"presented_as_author": {"const": false}}}
+        },
+        {
+          "if": {"properties": {"relation_type": {"const": "contradicts"}}},
+          "then": {
+            "properties": {
+              "evidence": {
+                "allOf": [
+                  {"contains": {"type": "object", "properties": {"side": {"const": "from"}}, "required": ["side"]}},
+                  {"contains": {"type": "object", "properties": {"side": {"const": "to"}}, "required": ["side"]}}
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Edit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "edit_id", "package_id", "target", "anchor", "original_text", "replacement_text", "basis", "reason", "actor_type", "input_sha256", "output_sha256", "reversible", "status", "depends_on_objects"],
+      "properties": {
+        "schema": {"const": "KCBookEdit/v2"},
+        "edit_id": {"$ref": "#/$defs/id"},
+        "package_id": {"$ref": "#/$defs/package_slug"},
+        "target": {"const": "readable_md"},
+        "anchor": {"$ref": "#/$defs/Anchor"},
+        "original_text": {"type": "string", "maxLength": 20000},
+        "replacement_text": {"type": "string", "maxLength": 20000},
+        "basis": {"enum": ["source_layout", "raster_confirmation", "encoding_fix", "formula_restore", "hyphenation", "other"]},
+        "reason": {"$ref": "#/$defs/reason"},
+        "actor_type": {"enum": ["human", "agent", "tool"]},
+        "input_sha256": {"$ref": "#/$defs/sha256"},
+        "output_sha256": {"$ref": "#/$defs/sha256"},
+        "reversible": {"const": true},
+        "status": {"enum": ["pending", "accepted", "rejected", "stale"]},
+        "depends_on_objects": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "result", "method"],
+      "properties": {
+        "check_id": {"$ref": "#/$defs/id"},
+        "result": {"enum": ["pass", "fail", "unknown", "not_applicable"]},
+        "method": {"type": "string", "minLength": 3, "maxLength": 300},
+        "detail": {"type": "string", "maxLength": 1000}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"result": {"const": "not_applicable"}}},
+          "then": {"required": ["detail"], "properties": {"detail": {"$ref": "#/$defs/reason"}}}
+        }
+      ]
+    },
+    "public_domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basis", "jurisdictions", "evidence_urls", "determined_at", "determined_by", "work", "digital_copy"],
+      "properties": {
+        "basis": {"$ref": "#/$defs/reason"},
+        "jurisdictions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^(worldwide|[A-Z]{2})$"}},
+        "worldwide_reason": {"$ref": "#/$defs/reason"},
+        "evidence_urls": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 500}},
+        "determined_at": {"$ref": "#/$defs/timestamp"},
+        "determined_by": {"$ref": "#/$defs/id"},
+        "own_layers_license": {"enum": ["CC-BY-4.0", "Apache-2.0"]},
+        "work": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "basis"],
+          "properties": {"status": {"const": "term_expired"}, "basis": {"$ref": "#/$defs/reason"}}
+        },
+        "digital_copy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "terms", "basis"],
+          "properties": {
+            "status": {"const": "open"},
+            "terms": {"enum": ["CC0-1.0", "PDM-1.0", "public_domain_statement", "no_restriction_stated"]},
+            "basis": {"$ref": "#/$defs/reason"}
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"jurisdictions": {"contains": {"const": "worldwide"}}}},
+          "then": {"required": ["worldwide_reason"], "properties": {"jurisdictions": {"maxItems": 1}}}
+        },
+        {
+          "if": {"required": ["worldwide_reason"]},
+          "then": {"properties": {"jurisdictions": {"contains": {"const": "worldwide"}}}}
+        }
+      ]
+    },
+    "damage_declaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "count", "items"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+        "count": {"type": "integer", "minimum": 1},
+        "items": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["what"],
+            "properties": {
+              "page_id": {"type": "string", "pattern": "^p[0-9]{4,}( p[0-9]{4,})*$"},
+              "block_id": {"type": "string", "pattern": "^b[0-9]{4,}$"},
+              "what": {"type": "string", "minLength": 1, "maxLength": 300},
+              "quote": {"type": "string", "maxLength": 200}
+            }
+          }
+        }
+      }
+    },
+    "damage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "places", "declarations"],
+      "properties": {
+        "status": {"enum": ["none", "declared"]},
+        "places": {"type": "integer", "minimum": 0},
+        "declarations": {"type": "array", "maxItems": 200, "items": {"$ref": "#/$defs/damage_declaration"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "none"}}}, "then": {"properties": {"places": {"const": 0}, "declarations": {"maxItems": 0}}}},
+        {"if": {"properties": {"status": {"const": "declared"}}}, "then": {"properties": {"places": {"minimum": 1}, "declarations": {"minItems": 1}}}}
+      ]
+    },
+    "Quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "package_id", "extraction", "semantics", "kc2_admission"],
+      "properties": {
+        "schema": {"const": "KCBookQuality/v2"},
+        "package_id": {"$ref": "#/$defs/package_slug"},
+        "damage": {"$ref": "#/$defs/damage"},
+        "extraction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "checks", "cer"],
+          "properties": {
+            "status": {"enum": ["pass", "partial", "adapter_required", "failed", "not_measured"]},
+            "units_expected": {"type": "integer", "minimum": 0},
+            "units_seen": {"type": "integer", "minimum": 0},
+            "checks": {"type": "array", "items": {"$ref": "#/$defs/check"}},
+            "cer": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["metric_status", "value", "reference_class", "sample_size"],
+                  "properties": {
+                    "metric_status": {"const": "measured"},
+                    "value": {"type": "number", "minimum": 0},
+                    "reference_class": {"enum": ["gold", "silver"]},
+                    "sample_size": {"type": "integer", "minimum": 1}
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["metric_status", "value"],
+                  "properties": {"metric_status": {"const": "not_measured"}, "value": {"type": "null"}}
+                }
+              ]
+            }
+          }
+        },
+        "semantics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "objects_count", "relations_count"],
+          "properties": {
+            "status": {"enum": ["not_built", "built_unreviewed", "reviewed", "not_measured"]},
+            "objects_count": {"type": "integer", "minimum": 0},
+            "relations_count": {"type": "integer", "minimum": 0},
+            "review": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["reviewer_type", "sample_size", "result", "review_id", "reviewer_id", "producer_id", "independence_basis", "reviewed_at", "object_ids", "relation_ids", "objects_sha256", "relations_sha256", "readable_sha256"],
+              "properties": {
+                "reviewer_type": {"enum": ["human", "blind_agent", "same_session_agent"]},
+                "sample_size": {"type": "integer", "minimum": 1},
+                "result": {"enum": ["supported", "partly_supported", "unsupported"]},
+                "review_id": {"$ref": "#/$defs/id"},
+                "reviewer_id": {"$ref": "#/$defs/id"},
+                "producer_id": {"$ref": "#/$defs/id"},
+                "independence_basis": {"$ref": "#/$defs/reason"},
+                "reviewed_at": {"$ref": "#/$defs/timestamp"},
+                "objects_sha256": {"$ref": "#/$defs/sha256"},
+                "relations_sha256": {"$ref": "#/$defs/sha256"},
+                "readable_sha256": {"$ref": "#/$defs/sha256"},
+                "object_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+                "relation_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": {"properties": {"status": {"enum": ["not_built", "not_measured"]}}},
+              "then": {"properties": {"objects_count": {"const": 0}, "relations_count": {"const": 0}}, "not": {"required": ["review"]}}
+            },
+            {"if": {"properties": {"status": {"const": "reviewed"}}}, "then": {"required": ["review"]}}
+          ]
+        },
+        "kc2_admission": {"const": "not_measured"}
+      }
+    },
+    "package_slug": {"type": "string", "minLength": 3, "maxLength": 96, "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "not": {"pattern": "^[a-z][0-9]+$"}}
+  }
+}

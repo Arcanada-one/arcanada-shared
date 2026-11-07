@@ -1,0 +1,66 @@
+{
+ "claim_class": "benchmark",
+ "edition_id": "ed.synthetic-rle-primer.en",
+ "evidence": [
+  {
+   "block_id": "blk.1",
+   "kind": "section_block",
+   "representation_id": "rep.synthetic-rle-primer.md",
+   "section_id": "sec.definition",
+   "source_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb"
+  }
+ ],
+ "kc2_admission": "not_measured",
+ "object_id": "obj.rle.definition",
+ "object_kind": "concept",
+ "origin": "author_statement",
+ "package_id": "synthetic-rle-primer",
+ "presented_as_author": false,
+ "schema": "KCBookObject/v2",
+ "semantic_facets": {
+  "aboutness": {
+   "state": "known",
+   "value": [
+    "run-length encoding"
+   ]
+  },
+  "assessment_refs": {
+   "state": "known",
+   "value": [
+    "review.fixture.semantic"
+   ]
+  },
+  "content_kinds": {
+   "state": "known",
+   "value": [
+    "definition"
+   ]
+  },
+  "discourse_functions": {
+   "reason": "not annotated in this fixture",
+   "state": "unknown"
+  },
+  "governance_refs": {
+   "state": "known",
+   "value": []
+  },
+  "representation_modes": {
+   "state": "known",
+   "value": [
+    "text"
+   ]
+  },
+  "semantic_operators": {
+   "reason": "no operators in this statement",
+   "state": "not_applicable"
+  },
+  "source_position": {
+   "state": "known",
+   "value": "asserts"
+  }
+ },
+ "status": "reviewed",
+ "text": "Run-length encoding replaces a run of equal symbols by the symbol and the run length.",
+ "text_language": "en",
+ "work_id": "work.synthetic-rle-primer"
+}

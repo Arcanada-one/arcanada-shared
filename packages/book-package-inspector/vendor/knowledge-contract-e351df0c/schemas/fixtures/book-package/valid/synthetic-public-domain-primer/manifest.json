@@ -1,0 +1,120 @@
+{
+ "components": {
+  "assets": [
+   {
+    "asset_id": "asset.fig1",
+    "kind": "image",
+    "path": "assets/fig1.svg",
+    "sha256": "ade38c8ba07ffcc0c23ae204abdb1ee3d6aecc2211e7bdeb1c95754eb8795961",
+    "state": "present"
+   },
+   {
+    "asset_id": "asset.fig2",
+    "kind": "image",
+    "state": "missing_asset"
+   }
+  ],
+  "document_md": {
+   "contains_generated_text": false,
+   "input_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb",
+   "path": "document.md",
+   "sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb",
+   "tool": "fixture-generator",
+   "tool_version": "0.0.0"
+  },
+  "edits": {
+   "count": 1,
+   "path": "edits.jsonl",
+   "sha256": "14301732dbfb8d3ce6b69dcd4e928c9ef14dbf072b7881315d0f3d6f433c6849"
+  },
+  "objects": {
+   "count": 4,
+   "path": "objects.jsonl",
+   "sha256": "e0fc8c5b9f0c01a7e5f3368d656367223310cf753131046cbbf3e992c49517ca"
+  },
+  "quality": {
+   "path": "quality.json",
+   "sha256": "e5c32eb16fa6d7ba7df23ef1e9341c3348fc9d6e457bd6b922dd29463d3b52cb"
+  },
+  "readable_md": {
+   "contains_generated_text": false,
+   "path": "readable.md",
+   "sha256": "5d0cca989f9e1d18e14d214134b7825f0b1e84617f0860011d0edd42a3484d52"
+  },
+  "relations": {
+   "count": 2,
+   "path": "relations.jsonl",
+   "sha256": "efec89289184741af9a5580ea865e1cb0866f8a1504539e1155f690932898186"
+  }
+ },
+ "created_at": "2026-11-04T00:00:00Z",
+ "edition": {
+  "edition_id": "ed.synthetic-rle-primer.en",
+  "kind": "original",
+  "language": "en"
+ },
+ "kc2_admission": "not_measured",
+ "package_id": "synthetic-rle-primer",
+ "package_status": "partial_pilot",
+ "related_works": [],
+ "release_id": "r1",
+ "representation": {
+  "completeness": "full",
+  "format": "md",
+  "integrity": "verified",
+  "integrity_check": {
+   "checked_at": "2026-11-04T00:00:00Z",
+   "expected_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb",
+   "method": "synthetic source-byte digest comparison",
+   "observed_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb",
+   "observer": "fixture.generator"
+  },
+  "representation_id": "rep.synthetic-rle-primer.md",
+  "size_bytes": 245,
+  "source_sha256": "a4e5a6653be6ec8083c0d7fe007af7a06f9a37e6a14faff6f6a09651fd3f6bdb"
+ },
+ "rights": {
+  "holder": "Knowledge Contract Arcana contributors",
+  "license_class": "public_domain",
+  "public_domain": {
+   "basis": "Synthetic determination for schema testing: invented work, invented digitiser; no real rights are asserted.",
+   "determined_at": "2026-11-05T00:00:00Z",
+   "determined_by": "fixture.determiner",
+   "digital_copy": {
+    "basis": "the synthetic digitiser's page states CC0 1.0",
+    "status": "open",
+    "terms": "CC0-1.0"
+   },
+   "evidence_urls": [
+    "https://example.org/synthetic-primer/rights"
+   ],
+   "jurisdictions": [
+    "worldwide"
+   ],
+   "own_layers_license": "CC-BY-4.0",
+   "work": {
+    "basis": "the synthetic author is stated to have died more than seventy years ago",
+    "status": "term_expired"
+   },
+   "worldwide_reason": "the synthetic work is stated to be out of term in every jurisdiction, for testing only"
+  },
+  "publishable_layers": [
+   "document_md",
+   "readable_md",
+   "knowledge",
+   "quality"
+  ]
+ },
+ "schema": "KCBookPackageManifest/v2",
+ "tooling": [
+  {
+   "tool": "fixture-generator",
+   "tool_version": "0.0.0"
+  }
+ ],
+ "validation_profile": "book-package/2",
+ "work": {
+  "title": "Synthetic primer on run-length encoding",
+  "work_id": "work.synthetic-rle-primer"
+ }
+}
