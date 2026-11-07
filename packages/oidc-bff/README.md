@@ -13,9 +13,21 @@ Host or Forwarded header. Preserve every Set-Cookie header. Add the ecosystem's
 HTTP security headers and apply per-IP/session rate limiting at ingress.
 
 Configuration is server-only. Supply the client secret from protected host
-storage, use `https://auth.arcanada.ai` as Organize Me's issuer,
-`arganize_me_prod` as client ID, `https://arganize.me` as origin and explicit
-locale return paths. Identity scopes are fixed to `openid profile`.
+storage. Measure the active issuer via Auth-owner discovery (do not copy an
+unverified README hostname): Live Lab rematch measured both
+`https://auth.arcanada.ai` and `https://auth.arcanada.one` discovery documents;
+mandate + Control prod compose name `.ai`. Site clients are distinct —
+Organize Me (`arganize_me_prod` / `https://arganize.me`) is a reference
+consumer, not a Live Lab client to copy. For Live Lab use
+`loadLiveLabSiteOptions('contract-place' | 'arcanada-ai', env)` which fails
+closed until Auth-owner env keys are bound. Identity scopes remain
+`openid profile`.
+
+`authorizeScoped` enforces project/object/action grants for lab commands,
+snapshots, event subscriptions and downloads. An authenticated subject with
+zero grants is denied (`grant_required`). Cross-project access is refused with
+a redacted reason that does not disclose foreign object existence.
+Revocation/logout uses `revokePrincipal`.
 
 The mandatory store has no permissive or in-memory default. Implement all
 atomic transaction consumption, cancellation and finalization rules before
