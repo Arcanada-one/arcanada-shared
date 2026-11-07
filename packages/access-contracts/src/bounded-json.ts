@@ -13,7 +13,7 @@ function invalid(): never {
 /** Strict UTF-8 without DOM types, Node globals, or replacement decoding. */
 function decodeUtf8(raw: Uint8Array): string {
   const chars: string[] = [];
-  for (let i = 0; i < raw.length; ) {
+  for (let i = 0; i < raw.length;) {
     const first = raw[i++]!;
     if (first < 0x80) {
       chars.push(String.fromCharCode(first));

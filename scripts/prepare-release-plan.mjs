@@ -83,7 +83,7 @@ const parseNameStatus = (output) => {
   const fields = output.split("\0").filter(Boolean);
   const changes = [];
 
-  for (let index = 0; index < fields.length; ) {
+  for (let index = 0; index < fields.length;) {
     const status = fields[index++];
     if (/^[RC]/.test(status)) {
       const from = fields[index++];
@@ -135,13 +135,11 @@ const buildVersionPlan = async ({ rootDir, planDir }) => {
       try {
         assertTaskIdFree(relative(rootDir, path), await readFile(path, "utf8"));
       } catch (error) {
-        if (
-          !(
-            error instanceof Error &&
-            "code" in error &&
-            error.code === "ENOENT"
-          )
-        ) {
+        if (!(
+          error instanceof Error &&
+          "code" in error &&
+          error.code === "ENOENT"
+        )) {
           throw error;
         }
       }
@@ -235,9 +233,11 @@ const extractReleaseNotes = async ({ rootDir, directory, version }) => {
       return changelog.slice(start, next === -1 ? undefined : next).trim();
     }
   } catch (error) {
-    if (
-      !(error instanceof Error && "code" in error && error.code === "ENOENT")
-    ) {
+    if (!(
+      error instanceof Error &&
+      "code" in error &&
+      error.code === "ENOENT"
+    )) {
       throw error;
     }
   }
