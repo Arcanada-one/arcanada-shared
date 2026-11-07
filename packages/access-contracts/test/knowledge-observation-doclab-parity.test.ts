@@ -57,6 +57,8 @@ const B2_FILES = ["3", "5", "7"].map((n) => `events/b2-run-event-${n}.json`);
 const ALL_FILES = [1, 2, 3, 4, 5, 6, 7].map(
   (n) => `events/all-runs-event-${n}.json`,
 );
+/** Every retained Doclab snapshot file; the raw-refusal loop must cover all of them (guarded by a directory check). */
+const RAW_SNAPSHOT_FILES = ["snapshot-b2-run.json", "snapshot-all-runs.json"];
 const native = (rel: string): Json =>
   parseBoundedJson(new Uint8Array(bytesOf(rel))) as Json;
 
@@ -160,7 +162,7 @@ describe("native: what the Doclab adapter output itself preserves", () => {
     }
   });
 
-  it("each body_digest is the sha256 of the exact body bytes Doclab serialized (a real receipt, recomputed here)", () => {
+  it("body-digest: each body_digest is the sha256 of the exact body bytes Doclab serialized (recomputed here; this is not a receipt-chain check)", () => {
     for (const f of [...B2_FILES, ...ALL_FILES]) {
       const e = native(f);
       const body = pyDumps(e.body) + "\n";
@@ -184,7 +186,14 @@ function pyDumps(v: unknown): string {
 /* -- 1. RAW: unchanged bytes through the package decoder and reducer --------------------------------------------------- */
 
 describe("raw: captured Doclab bytes through the package decoder, unchanged", () => {
-  it.each([...B2_FILES, ...ALL_FILES, "snapshot-b2-run.json"])(
+  it("the raw-refusal loop covers every retained snapshot file on disk, so none is skipped", () => {
+    const onDisk = readdirSync(FX)
+      .filter((f) => /^snapshot-.*\.json$/.test(f))
+      .sort();
+    expect([...RAW_SNAPSHOT_FILES].sort()).toEqual(onDisk);
+  });
+
+  it.each([...B2_FILES, ...ALL_FILES, ...RAW_SNAPSHOT_FILES])(
     "%s is refused by the decoder with an explicit code (the envelope is not a profile record)",
     (f) => {
       const r = parseKnowledgeObservationJson(new Uint8Array(bytesOf(f)));
@@ -364,7 +373,10 @@ describe("mismatch table: each Doclab field against the package schema", () => {
 /* -- 3. PREVIEW: real Doclab values carried unchanged through the real reducer ---------------------------------------- */
 
 /**
- * TEST-ONLY. `SUPPLIED` is every value Doclab does not emit or emits outside the profile; each is named here and none
+ * TEST-ONLY. Besides `SUPPLIED`, the preview also supplies synthetic `CTX` (the trusted view context), the baseline
+ * snapshot and its watermark (`snapshot-doclab`), generated record ids and the kind/state mappings. A successful
+ * reduction therefore proves behaviour under that supplied context, not a current native Doclab view.
+ * `SUPPLIED` is every value Doclab does not emit or emits outside the profile; each is named here and none
  * is derived from Doclab data. The real Doclab values (producer_event_id, source_sequence.value/scope/partition_id,
  * occurred_at, evidence_refs, body_digest) are copied byte-for-value from the captured events.
  */
@@ -580,7 +592,7 @@ describe("controls: contradiction and refusal on real Doclab values", () => {
     expect(v.fullSnapshotRequired || v.holds.includes("GAP")).toBe(true);
   });
 
-  it("a broken receipt is refused, not success: a malformed body digest is rejected and advances nothing", () => {
+  it("body-digest: a malformed body digest value is rejected as SCHEMA_INVALID and advances nothing (schema shape only; no receipt-chain validation)", () => {
     const broken = preview(B2_FILES[1]!);
     broken.data.body.digest.value = "not-a-sha256";
     const s0 = play([snap(), recv(preview(B2_FILES[0]!))]);
@@ -595,7 +607,7 @@ describe("controls: contradiction and refusal on real Doclab values", () => {
     expect(v.dimensions.independentAcceptance).toBe("NOT_MEASURED");
   });
 
-  it("a well-formed but wrong receipt is detectable only against the retained body: the recomputation fails closed", () => {
+  it("body-digest: a well-formed but wrong digest is detectable only against the retained body bytes: the recomputation fails closed (no receipt-chain validation)", () => {
     // The reducer does not hold body bytes (a record carries a reference), so it cannot recompute. The caller that holds
     // the Doclab body bytes can, and a tampered body no longer matches the digest Doclab declared.
     const e = native(B2_FILES[1]!);
