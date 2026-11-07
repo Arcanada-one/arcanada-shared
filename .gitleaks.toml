@@ -8,4 +8,8 @@ useDefault = true
 [allowlist]
 description = "Synthetic fixture idempotency key in the sha256-pinned knowledge observation package"
 paths = ['''packages/access-contracts/test/fixtures/knowledge-observation-v1/fixture-records\.json''']
-regexes = ['''fixture-idempotency-1''']
+regexes = [
+  '''fixture-idempotency-1''',
+  # Doclab's own content-derived run idempotency key in the captured adapter output (KCLIVE-01 fixtures); not a secret.
+  '''497e63f74143c6675ff74a980e37b635ccb61ccd6ff42d729634f7aefa42fdf9''',
+]
