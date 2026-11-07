@@ -50,11 +50,9 @@ overrides:
   # (server.fs.deny query bypass). 6.4.5 is the patched 6.x vitest accepts.
   "vite@<=6.4.4": 6.4.5
 
-# Accepted-risk register: see accepted-risk.yml. Both advisories have no
-# published patched release and are reachable only through devDependency
-# release tooling (@changesets/cli); each ignore is listed there with an
-# owner, a re-review date and the condition that reverses it.
+# Accepted-risk register: see accepted-risk.yml. It is currently empty: the two
+# former ignores (GHSA-vfj7-8cjw-p6xm, GHSA-hp3w-g68c-fv3c) were withdrawn upstream
+# (2026-10-22/23) and removed on 2026-11-07. Re-add auditConfig.ignoreGhsas only
+# together with a dated register entry.
 auditConfig:
-  ignoreGhsas:
-    - GHSA-vfj7-8cjw-p6xm
-    - GHSA-hp3w-g68c-fv3c
+  ignoreGhsas: []
