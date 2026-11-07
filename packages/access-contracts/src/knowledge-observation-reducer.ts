@@ -70,7 +70,8 @@ export type HoldCode =
   | "MALFORMED_JSON"
   | "UNTRUSTED_EPOCH_CHANGE"
   | "SNAPSHOT_CONTRADICTION"
-  | "RESET_NOT_AUTHORIZED";
+  | "RESET_NOT_AUTHORIZED"
+  | "RETENTION_LIMIT_EXCEEDED";
 
 export interface BufferLimits {
   readonly maxRecords: number;
@@ -78,6 +79,12 @@ export interface BufferLimits {
   readonly maxAgeMs: number;
   /** Upper bound on pages held while a partial snapshot is being assembled. */
   readonly maxPages: number;
+  /** Lifetime budget: event identities (and their cursor bindings) retained for duplicate/conflict detection. */
+  readonly maxRetainedIdentities: number;
+  /** Lifetime budget: canonical bytes of retained event identities plus retained ancillary records. */
+  readonly maxRetainedBytes: number;
+  /** Lifetime budget: ancillary records (attempt/artifact/command/deployment) retained. */
+  readonly maxAncillaryRecords: number;
 }
 
 export const DEFAULT_BUFFER_LIMITS: BufferLimits = {
@@ -85,6 +92,9 @@ export const DEFAULT_BUFFER_LIMITS: BufferLimits = {
   maxSerializedBytes: 1_048_576,
   maxAgeMs: 30_000,
   maxPages: 64,
+  maxRetainedIdentities: 4096,
+  maxRetainedBytes: 8_388_608,
+  maxAncillaryRecords: 1024,
 };
 const MAX_DIAGNOSTICS = 256;
 const MAX_HISTORY = 512;
@@ -207,6 +217,10 @@ export interface ReducerState {
   readonly extensions: readonly string[];
   readonly limits: BufferLimits;
   readonly binding: ViewContext | null;
+  /** Opaque adapter-supplied principal/session reference the binding was authorized for (null when none supplied). */
+  readonly bindingSession: string | null;
+  /** Applied-event identities dropped by a compaction boundary; keeps `uniqueSourceEventsApplied` truthful. */
+  readonly appliedEventsCompacted: number;
   readonly projection: Projection;
   readonly appliedCursor: string | null;
   readonly holds: readonly HoldCode[];
@@ -306,6 +320,12 @@ export type ReducerInput =
   | {
       readonly kind: "bind_trusted_projection";
       readonly viewContext: ViewContext;
+      /**
+       * Opaque reference to the authenticated principal/session the adapter authorized this view for. The wire tuple has
+       * no principal field, so an adapter that can change principal behind an unchanged tuple MUST supply it; a change
+       * (including unset <-> set) is treated like a changed binding.
+       */
+      readonly sessionRef?: string;
     }
   | { readonly kind: "receive"; readonly record: unknown; readonly at?: number }
   | {
@@ -375,6 +395,8 @@ export function createReducerState(options: ReducerOptions = {}): ReducerState {
     extensions: options.extensions ?? [LOSSLESS_DECIMAL_EXTENSION],
     limits: { ...DEFAULT_BUFFER_LIMITS, ...options.limits },
     binding: null,
+    bindingSession: null,
+    appliedEventsCompacted: 0,
     projection: "unbound",
     appliedCursor: null,
     holds: [],
@@ -528,7 +550,7 @@ function applyEvent(
       status: "applied",
     },
   };
-  s.eventLog = [...s.eventLog, d.event_id];
+  s.eventLog = [...s.eventLog, d.event_id].slice(-MAX_HISTORY);
   s.eventLedger = [
     ...s.eventLedger,
     {
@@ -565,17 +587,17 @@ function applyEvent(
       value: d.source_sequence.value,
       contiguity: d.source_sequence.contiguity,
     },
-  ];
+  ].slice(-MAX_HISTORY);
   for (const related of d.related_record_ids) {
     if (!s.ancillary.joined.includes(related))
       s.ancillary = {
         ...s.ancillary,
-        joined: [...s.ancillary.joined, related],
+        joined: [...s.ancillary.joined, related].slice(-MAX_HISTORY),
       };
   }
   if (d.kind === "plan_observed" && d.plan_revision !== null) {
     if (s.currentPlan !== null && s.currentPlan !== d.plan_revision)
-      s.planHistory = [...s.planHistory, s.currentPlan];
+      s.planHistory = [...s.planHistory, s.currentPlan].slice(-MAX_HISTORY);
     s.currentPlan = d.plan_revision;
     return "applied";
   }
@@ -585,7 +607,7 @@ function applyEvent(
     d.plan_revision !== s.currentPlan
   ) {
     // Superseded plan: retained as historical evidence; the transport cursor may advance, current nodes may not.
-    s.historicalOnly = [...s.historicalOnly, d.event_id];
+    s.historicalOnly = [...s.historicalOnly, d.event_id].slice(-MAX_HISTORY);
     return "historical";
   }
   if (d.kind === "native_state_observed") {
@@ -606,7 +628,9 @@ function applyEvent(
       } else {
         const k = nodeKey(ref);
         if (!s.unassociatedSubjects.includes(k))
-          s.unassociatedSubjects = [...s.unassociatedSubjects, k];
+          s.unassociatedSubjects = [...s.unassociatedSubjects, k].slice(
+            -MAX_HISTORY,
+          );
       }
     }
   } else if (d.kind === "record_withdrawn") {
@@ -644,7 +668,7 @@ function applyEvent(
         service: rec.producer.service,
         state: d.native_state?.value ?? null,
       },
-    ];
+    ].slice(-MAX_HISTORY);
   }
   return "applied";
 }
@@ -676,7 +700,7 @@ function trackSourceSequence(s: MutableState, rec: EventRecord): void {
   s.sourceReconcile = [
     ...s.sourceReconcile.filter((m) => !m.startsWith(`${key}#last:`)),
     `${key}#last:${q.value}`,
-  ];
+  ].slice(-MAX_HISTORY);
 }
 
 function settle(s: MutableState): void {
@@ -751,6 +775,83 @@ function overflowCheck(s: MutableState, at: number | undefined): boolean {
   return true;
 }
 
+/* -- lifetime retention budget (R2) ---------------------------------------------------------------------------------- */
+
+/** Bytes of canonical text retained for duplicate/conflict detection: event identities plus ancillary records. */
+function retainedBytes(s: MutableState): number {
+  const texts = [
+    ...Object.values(s.eventIdentities).map((e) => e.canon),
+    ...Object.values(s.ancillary.seen),
+  ];
+  const units = texts.reduce((n, c) => n + c.length, 0);
+  // UTF-8 needs at most three bytes per UTF-16 unit, so only count exactly when the cheap bound could be exceeded.
+  if (units * 3 <= s.limits.maxRetainedBytes) return units * 3;
+  return texts.reduce((n, c) => n + byteLength(c), 0);
+}
+
+/** True when admitting `addIdentities` new identities, `addAncillary` new ancillary records and `addBytes` would pass a budget. */
+function retentionBlocked(
+  s: MutableState,
+  addIdentities: number,
+  addAncillary: number,
+  addBytes: number,
+): boolean {
+  return (
+    Object.keys(s.eventIdentities).length + addIdentities >
+      s.limits.maxRetainedIdentities ||
+    Object.keys(s.ancillary.seen).length + addAncillary >
+      s.limits.maxAncillaryRecords ||
+    retainedBytes(s) + addBytes > s.limits.maxRetainedBytes
+  );
+}
+
+/**
+ * Retention exhausted: refuse the record, keep the last trusted view, and require a trusted full snapshot. Nothing is
+ * evicted, so no later record can be accepted as "fresh" against a forgotten identity.
+ */
+function retentionRefused(
+  s: MutableState,
+  recordId: string | null,
+): ReduceOutcome {
+  push(s.quarantined, { recordId, code: "RETENTION_LIMIT_EXCEEDED" });
+  addHold(s, "RETENTION_LIMIT_EXCEEDED");
+  s.fullSnapshotRequired = true;
+  settle(s);
+  return { disposition: "quarantined", code: "RETENTION_LIMIT_EXCEEDED" };
+}
+
+/**
+ * Compaction boundary, run only when a trusted full snapshot recovers a retention-exhausted state. Identities and cursor
+ * bindings at or below the snapshot watermark are covered by it (such an event can never be applied again, identical or
+ * conflicting), so they are dropped; identities above it are kept, so duplicate/conflict handling continues there.
+ * Ancillary catalogs are not carried by snapshots: they are dropped and the read side re-delivers what it authorizes.
+ */
+function compactRetention(s: MutableState, watermark: string): void {
+  const identities: Record<string, (typeof s.eventIdentities)[string]> = {};
+  const droppedCursors = new Set<string>();
+  for (const [id, e] of Object.entries(s.eventIdentities)) {
+    if (compareDecimal(e.cursor, watermark) <= 0) {
+      if (e.status === "applied") s.appliedEventsCompacted += 1;
+      droppedCursors.add(e.cursor);
+    } else identities[id] = e;
+  }
+  s.eventIdentities = identities;
+  s.cursorBindings = Object.fromEntries(
+    Object.entries(s.cursorBindings).filter(
+      ([cursor]) =>
+        !droppedCursors.has(cursor) && compareDecimal(cursor, watermark) > 0,
+    ),
+  );
+  s.ancillary = {
+    seen: {},
+    attempts: {},
+    artifacts: {},
+    commands: {},
+    deployments: {},
+    joined: [],
+  };
+}
+
 function receiveEvent(
   s: MutableState,
   rec: EventRecord,
@@ -789,6 +890,8 @@ function receiveEvent(
     settle(s);
     return { disposition: "quarantined", code: "CURSOR_BINDING_CONFLICT" };
   }
+  if (retentionBlocked(s, 1, 0, byteLength(canon)))
+    return retentionRefused(s, rec.record_id);
   s.cursorBindings = { ...s.cursorBindings, [d.cursor]: id };
 
   if (
@@ -944,6 +1047,8 @@ function snapshotConsistent(s: MutableState, snap: SnapshotRecord): boolean {
 
 function installSnapshot(s: MutableState, snap: SnapshotRecord): void {
   const d = snap.data;
+  if (s.holds.includes("RETENTION_LIMIT_EXCEEDED"))
+    compactRetention(s, d.watermark);
   if (s.view !== null) {
     const incoming = new Set(
       d.graphs.flatMap((g) => g.nodes.map((n) => nodeKey(n.ref))),
@@ -974,7 +1079,7 @@ function installSnapshot(s: MutableState, snap: SnapshotRecord): void {
     }
   }
   if (s.currentPlan !== null && s.currentPlan !== d.plan_revision)
-    s.planHistory = [...s.planHistory, s.currentPlan];
+    s.planHistory = [...s.planHistory, s.currentPlan].slice(-MAX_HISTORY);
   s.currentPlan = d.plan_revision;
   s.view = {
     snapshotRecordId: snap.record_id,
@@ -1138,6 +1243,32 @@ function pageViolatesManifest(
 }
 
 /**
+ * The ONE page-age predicate. A pending assembly is expired when strictly more than `maxAgeMs` separate its first page
+ * from `at` (exactly `maxAgeMs` is still live). The reducer reads no clock: without `at` no age can be judged. A trusted
+ * manifest never refreshes the age. Every path that could install or extend an assembly (page, manifest, tick, and
+ * completion itself) calls this first; an expired assembly is discarded with a hold and a full-snapshot requirement.
+ */
+function ageExceeded(
+  firstAt: number,
+  at: number | undefined,
+  maxAgeMs: number,
+): boolean {
+  return at !== undefined && at - firstAt > maxAgeMs;
+}
+
+function pagesExpired(s: MutableState, at: number | undefined): boolean {
+  return (
+    s.pages !== null && ageExceeded(s.pages.firstAt, at, s.limits.maxAgeMs)
+  );
+}
+
+function expirePages(s: MutableState, at: number | undefined): boolean {
+  if (!pagesExpired(s, at)) return false;
+  discardPages(s, "PAGE_ASSEMBLY_LIMIT_EXCEEDED");
+  return true;
+}
+
+/**
  * Complete a pending page set when, and only when, it is PROVEN complete: every ordinal 0..pageCount-1 is present
  * exactly once AND a trusted sealed manifest binds the set (same scope and epoch, snapshot ref, plan, watermark, count)
  * and every page's canonical digest and byte size equal their manifest entries. A declared-final page, a payload flag
@@ -1147,6 +1278,10 @@ function completePageSet(
   s: MutableState,
   at: number | undefined,
 ): ReduceOutcome | null {
+  if (s.pages === null) return null;
+  // Final guard: no completion path may install an assembly older than the limit.
+  if (expirePages(s, at))
+    return { disposition: "rejected", code: "PAGE_ASSEMBLY_LIMIT_EXCEEDED" };
   const a = s.pages;
   if (a === null) return null;
   const lastRecord = a.pages[a.pages.length - 1]?.record;
@@ -1158,7 +1293,7 @@ function completePageSet(
         watermark: a.watermark,
         disposition,
       },
-    ];
+    ].slice(-MAX_HISTORY);
   };
   if (a.pages.length < a.pageCount) {
     record("partial_page_pending");
@@ -1285,7 +1420,7 @@ function receivePage(
   const firstAt = prior?.firstAt ?? at ?? 0;
   if (
     bytes > s.limits.maxSerializedBytes ||
-    (at !== undefined && at - firstAt > s.limits.maxAgeMs)
+    ageExceeded(firstAt, at, s.limits.maxAgeMs)
   ) {
     record("page_assembly_limit_exceeded");
     return discardPages(s, "PAGE_ASSEMBLY_LIMIT_EXCEEDED");
@@ -1384,7 +1519,7 @@ function receiveSnapshot(
     s.snapshotHistory = [
       ...s.snapshotHistory,
       { recordId: snap.record_id, watermark: d.watermark, disposition },
-    ];
+    ].slice(-MAX_HISTORY);
   };
   if (!assembled && (d.snapshot_kind === "partial" || !d.coverage.complete)) {
     return receivePage(s, snap, at, record);
@@ -1420,6 +1555,14 @@ function receiveSnapshot(
         settle(s);
         return { disposition: "quarantined", code: "SNAPSHOT_CONTRADICTION" };
       }
+      // A consistent snapshot at the applied watermark is also a safe compaction boundary, but only when retention
+      // exhaustion is the sole reason the state is held.
+      if (s.holds.length === 1 && s.holds[0] === "RETENTION_LIMIT_EXCEEDED") {
+        installSnapshot(s, snap);
+        record("installed_retention_compaction");
+        settle(s);
+        return { disposition: "applied", code: "RETENTION_COMPACTED" };
+      }
       record("same_watermark_consistent");
       return { disposition: "ignored", code: "SAME_WATERMARK_CONSISTENT" };
     }
@@ -1448,6 +1591,8 @@ function storeAncillary(
     });
     return { disposition: "quarantined", code: "RECORD_ID_CONFLICT" };
   }
+  if (retentionBlocked(s, 0, 1, byteLength(canon)))
+    return retentionRefused(s, rec.record_id);
   const seen = { ...s.ancillary.seen, [seenKey]: canon };
   switch (rec.record_type) {
     case "attempt": {
@@ -1619,6 +1764,20 @@ function replayInterval(
   if (compareDecimal(input.fromCursor, nextDecimal(s.appliedCursor)) > 0)
     return reject(s, null, "INVALID_REPLAY_INTERVAL");
 
+  const unseen = events.filter(
+    (e) => s.eventIdentities[eventIdentity(e)] === undefined,
+  );
+  if (
+    unseen.length > 0 &&
+    retentionBlocked(
+      s,
+      unseen.length,
+      0,
+      unseen.reduce((n, e) => n + byteLength(canonicalJson(e)), 0),
+    )
+  )
+    return retentionRefused(s, null);
+
   // The interval is proven contiguous for this view and epoch: admit its events into the buffer (verifying identities),
   // lift only the GAP hold and let the settle step apply them in cursor order.
   for (const e of events) {
@@ -1671,13 +1830,50 @@ export function reduce(
       s.limits = { ...s.limits, ...input.limits };
       outcome = { disposition: "state_changed", code: null };
       break;
-    case "bind_trusted_projection":
-      s.binding = input.viewContext;
+    case "bind_trusted_projection": {
+      const next = input.viewContext;
+      const session = input.sessionRef ?? null;
+      if (s.binding === null) {
+        s.binding = next;
+        s.bindingSession = session;
+      } else if (sameContext(next, s.binding) && session === s.bindingSession) {
+        // Same binding, same session: idempotent. Nothing private is touched.
+      } else if (
+        !sameContext(next, s.binding) &&
+        next.project_id === s.binding.project_id &&
+        next.run_id === s.binding.run_id &&
+        next.authorized_view_scope === s.binding.authorized_view_scope
+      ) {
+        // Same scope, different epoch: only the trusted epoch-reset protocol may cross an epoch.
+        outcome = reject(s, null, "REBIND_REQUIRES_TRUSTED_EPOCH_RESET");
+        break;
+      } else {
+        // A different project/run/scope, or a different authenticated session: the previous private projection must not
+        // be relabelled as current. Clear every private field atomically and require a fresh authorized full snapshot.
+        const connection = s.connection;
+        const fresh = createReducerState({
+          mode: s.mode,
+          extensions: s.extensions,
+          limits: s.limits,
+        });
+        Object.assign(s, fresh);
+        s.connection = connection;
+        s.binding = next;
+        s.bindingSession = session;
+        s.fullSnapshotRequired = true;
+        settle(s);
+        outcome = {
+          disposition: "state_changed",
+          code: "BINDING_CHANGED_STATE_CLEARED",
+        };
+        break;
+      }
       if (s.projection === "unbound" || s.projection === "cleared")
         s.projection = "awaiting_snapshot";
       settle(s);
       outcome = { disposition: "state_changed", code: null };
       break;
+    }
     case "receive":
       outcome = receive(s, input.record, input.at);
       break;
@@ -1714,6 +1910,28 @@ export function reduce(
       s.fullSnapshotRequired = true;
       s.pages = null;
       s.pageSetManifests = {};
+      // Old-epoch ancillary catalogs and histories carry no epoch provenance in the projection, so none is kept: the new
+      // epoch starts from a clean private store and the read side re-delivers what it still authorizes.
+      s.ancillary = {
+        seen: {},
+        attempts: {},
+        artifacts: {},
+        commands: {},
+        deployments: {},
+        joined: [],
+      };
+      s.history = [];
+      s.snapshotHistory = [];
+      s.planHistory = [];
+      s.historicalOnly = [];
+      s.eventLog = [];
+      s.eventLedger = [];
+      s.sourceSequences = [];
+      s.sourceReconcile = [];
+      s.unassociatedSubjects = [];
+      s.refusals = [];
+      s.appliedEventsCompacted = 0;
+      s.run = null;
       s.trustedReset = {
         previousEpoch: o.stream_epoch,
         ref: input.authorizationObservationRef,
@@ -1776,6 +1994,7 @@ export function reduce(
       break;
     case "tick":
       if (s.buffer.length > 0) overflowCheck(s, input.at);
+      expirePages(s, input.at);
       settle(s);
       outcome = { disposition: "state_changed", code: null };
       break;
@@ -2046,9 +2265,9 @@ export function projectView(state: ReducerState): ProjectedView {
     quarantined: state.quarantined,
     ignored: state.ignored,
     historicalOnly: state.historicalOnly,
-    uniqueSourceEventsApplied: Object.values(state.eventIdentities).filter(
-      (e) => e.status === "applied",
-    ).length,
+    uniqueSourceEventsApplied:
+      Object.values(state.eventIdentities).filter((e) => e.status === "applied")
+        .length + state.appliedEventsCompacted,
     history: state.history,
     unassociatedSubjects: state.unassociatedSubjects,
     refusals: state.refusals,
