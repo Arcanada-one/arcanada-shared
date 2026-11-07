@@ -46,14 +46,8 @@ type Mutation = [string, (m: PageSetManifest) => unknown];
 const MUTATIONS: Mutation[] = [
   ["viewContext null", (m) => ({ ...m, viewContext: null })],
   ["viewContext a string", (m) => ({ ...m, viewContext: "ctx" })],
-  [
-    "first pages entry null",
-    (m) => ({ ...m, pages: [null, m.pages[1]] }),
-  ],
-  [
-    "last pages entry null",
-    (m) => ({ ...m, pages: [m.pages[0], null] }),
-  ],
+  ["first pages entry null", (m) => ({ ...m, pages: [null, m.pages[1]] })],
+  ["last pages entry null", (m) => ({ ...m, pages: [m.pages[0], null] })],
   ["pages entry a number", (m) => ({ ...m, pages: [7, m.pages[1]] })],
   [
     "pageSetRef an object whose toString matches",
