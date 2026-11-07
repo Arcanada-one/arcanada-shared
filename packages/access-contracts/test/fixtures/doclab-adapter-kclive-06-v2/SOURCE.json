@@ -1,0 +1,24 @@
+{
+  "purpose": "KCLIVE-01 Doclab producer alignment: exact bytes emitted by the real Doclab observation adapter against a fresh test database built through Doclab's own insert path. No production Doclab data.",
+  "source_lock": {
+    "lock_document": "Arcanada-one/arcanada-shared PR #122 head 6f6a3bc00769f80a8932674b31975a3b7fbaf558, packages/access-contracts/docs/producer-source-lock.md",
+    "repository": "Arcanada-one/doclab-arcana",
+    "commit": "065072b05a259c5d68da6f7c86b69990324c47ef",
+    "adapter_path": "src/doclab/observation_adapter.py",
+    "adapter_blob": "f849c9953941a5a8eabfdc14ff77162e82ce7748",
+    "adapter_revision": "kclive-06-v2",
+    "adapter_tests": "tests/test_kclive06_observation_adapter.py (12 passed at this commit in the capture environment)"
+  },
+  "capture": {
+    "captured_at_utc": "2026-11-07T17:05:08Z",
+    "python": "Python 3.12.13",
+    "script": "capture_doclab_adapter.py (this directory)",
+    "command": "capture_doclab_adapter.py <doclab>/src <out> /home/dev/aup/claude-work/kclive01doclab/capture/run/state/index.sqlite3",
+    "doclab_clone_state": "read-only checkout at the locked commit; git status clean before and after; PYTHONDONTWRITEBYTECODE=1",
+    "serialization": "The adapter returns Python dicts and defines no wire format. Each file is json.dumps(obj, ensure_ascii=False, sort_keys=True) + newline, UTF-8, written once by the capture script. Timestamps come from Doclab's own clock, so a re-capture is NOT byte-identical; these files are frozen evidence, their sha256 is in SHA256SUMS.",
+    "views": {
+      "b2-run": "capture_runtime_snapshot(run_id='b2-run'): database-wide event_id 3,5,7 (ids 1,2,4,6 belong to another run: legitimate numeric gaps)",
+      "all-runs": "capture_runtime_snapshot(): event_id 1..7"
+    }
+  }
+}

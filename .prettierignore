@@ -10,3 +10,6 @@ packages/observation-profile/test/fixtures/
 # Verbatim Agent-Brain observation package (sha256-pinned); formatting would change the pinned bytes.
 packages/access-contracts/src/knowledge-observation-v1.amendment-1.schema.json
 packages/access-contracts/test/fixtures/knowledge-observation-v1/
+
+# Exact bytes emitted by the real Doclab adapter (KCLIVE-01); formatting would change the captured bytes.
+packages/access-contracts/test/fixtures/doclab-adapter-kclive-06-v2/

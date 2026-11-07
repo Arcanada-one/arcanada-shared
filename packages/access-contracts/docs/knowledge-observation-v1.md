@@ -89,3 +89,24 @@ These notions stay separate:
 
 Structural validity is not authenticity, source authorization, KC admission or deployment. Pending buffer and page limits
 (`DEFAULT_KNOWLEDGE_OBSERVATION_LIMITS`) are test inputs, not approved production budgets.
+
+## Doclab adapter parity (KCLIVE-01, first adapter slice)
+
+`test/fixtures/doclab-adapter-kclive-06-v2/` holds the exact bytes emitted by the real Doclab observation adapter
+(`doclab-arcana` `065072b0`, `observation_adapter.py` blob `f849c995`, adapter revision `kclive-06-v2`) against a fresh test
+database; `SOURCE.json` and `SHA256SUMS` pin them. `test/knowledge-observation-doclab-parity.test.ts` runs them through
+the decoder and reducer unchanged.
+
+Result: the adapter emits a flat native envelope, not a `knowledge-collective-observation/v1` record, so the decoder
+refuses every captured record (`SCHEMA_INVALID`), the reducer rejects it and nothing reaches the ledger. Nothing is
+defaulted or filled in. Doclab changes that would make the records decodable (listed, not done here): wrap in the
+record/`data` structure with `profile`, `record_type`, `record_id`, `mode`, `view_context`, `observed_at`, `recorded_at`,
+`evidence_basis`, `required_extensions`; declare `producer.build` (`repository`, `commit`, `adapter_revision`; today
+`adapter_revision` sits beside `service` and there is no build, so producerBuild is NOT_MEASURED at the source); emit
+`source_sequence.contiguity` as `not_contiguous` instead of `database_wide_not_per_run`; use opaque ids for
+`source_sequence.scope_id` (today an absolute path) and `declaration_ref` (today free text); map `event_type` to the closed
+`kind` enum; send `body` as a `{evidence_ref, digest}` reference.
+
+What already fits: `producer_event_id` and `source_sequence.value` are lossless decimal strings, scope `database`,
+`body_digest` is a valid exact-content digest of the serialized body, and per-run numeric gaps stay legitimate.
+A producer that declares `declared_contiguous` on a run-filtered view would make the reducer report those gaps as losses.
