@@ -54,13 +54,53 @@ const REF = (graph: string, auth: string, id: string): Json => ({
   revision: null,
 });
 
+/** Sets a source-asserted PASS/FAIL on an acceptance record with the checks and observation the contract requires. */
+function setSourceVerdict(acceptance: Json, verdict: "PASS" | "FAIL"): void {
+  const subject = REF("work", "muneral", "task-1");
+  acceptance.verdict = verdict;
+  acceptance.reason = verdict === "FAIL" ? "fixture-fail" : null;
+  acceptance.checks = [
+    {
+      checker_id: "checker-1",
+      checker_revision: "rev-1",
+      method_ref: "fixture:method",
+      verdict,
+      subject_refs: [subject],
+      evidence_refs: ["fixture:check-evidence"],
+      observed_at: "2000-01-01T00:00:00Z",
+      reason: verdict === "FAIL" ? "fixture-check-fail" : null,
+      inapplicability_rule_ref: null,
+    },
+  ];
+  acceptance.decision_evidence_ref = "fixture:decision-evidence";
+  acceptance.decision_policy_ref = "fixture:decision-policy";
+  Object.assign(acceptance.observation, {
+    subject_ref: subject,
+    subject_revision: "rev-1",
+    criterion_revision: "criterion-1",
+    method_ref: "fixture:method",
+    observer_id: "fixture-observer",
+    observed_at: "2000-01-01T00:00:00Z",
+    grounds: ["fixture:ground"],
+    source_unknowns: [],
+  });
+}
+
 interface Variant {
   edgeKind?: string;
   graphRevision?: string;
   nodeEvidence?: string[];
   edgeEvidence?: string[];
   linkEvidence?: string[];
-  sourceVerdict?: "PASS" | "NOT_MEASURED";
+  sourceVerdict?: "PASS" | "FAIL" | "NOT_MEASURED";
+  topSourceVerdict?: "PASS" | "FAIL";
+  knowledgeGraphRevision?: string;
+  edgeToId?: string;
+  edgeToRevision?: string;
+  edgeFromRevision?: string;
+  linkKind?: string;
+  linkAssociation?: string;
+  linkToId?: string;
 }
 
 /** snapshot-A extended with a second work node, one ordinary edge, one crosslink and evidence on all three. */
@@ -69,36 +109,10 @@ function snapshot(v: Variant = {}, reverse = false): Json {
   const work = r.data.graphs.find((g: Json) => g.graph_kind === "work");
   const node1 = work.nodes[0];
   node1.evidence_refs = v.nodeEvidence ?? ["fixture:evidence-node"];
-  if (v.sourceVerdict === "PASS") {
-    const subject = REF("work", "muneral", "task-1");
-    node1.acceptance.verdict = "PASS";
-    node1.acceptance.reason = null;
-    node1.acceptance.checks = [
-      {
-        checker_id: "checker-1",
-        checker_revision: "rev-1",
-        method_ref: "fixture:method",
-        verdict: "PASS",
-        subject_refs: [subject],
-        evidence_refs: ["fixture:check-evidence"],
-        observed_at: "2000-01-01T00:00:00Z",
-        reason: null,
-        inapplicability_rule_ref: null,
-      },
-    ];
-    node1.acceptance.decision_evidence_ref = "fixture:decision-evidence";
-    node1.acceptance.decision_policy_ref = "fixture:decision-policy";
-    Object.assign(node1.acceptance.observation, {
-      subject_ref: subject,
-      subject_revision: "rev-1",
-      criterion_revision: "criterion-1",
-      method_ref: "fixture:method",
-      observer_id: "fixture-observer",
-      observed_at: "2000-01-01T00:00:00Z",
-      grounds: ["fixture:ground"],
-      source_unknowns: [],
-    });
-  }
+  if (v.sourceVerdict === "PASS" || v.sourceVerdict === "FAIL")
+    setSourceVerdict(node1.acceptance, v.sourceVerdict);
+  if (v.topSourceVerdict !== undefined)
+    setSourceVerdict(r.data.acceptance, v.topSourceVerdict);
   const node2 = structuredClone(node1);
   node2.ref = REF("work", "muneral", "task-2");
   node2.evidence_refs = ["fixture:evidence-node-2"];
@@ -111,22 +125,29 @@ function snapshot(v: Variant = {}, reverse = false): Json {
   node3.acceptance.verdict = "NOT_MEASURED";
   know.nodes = [node3];
   work.graph_revision = v.graphRevision ?? work.graph_revision;
+  know.graph_revision = v.knowledgeGraphRevision ?? know.graph_revision;
   work.edges = [
     {
       edge_id: "edge-1",
       kind: v.edgeKind ?? "depends_on",
-      from: REF("work", "muneral", "task-1"),
-      to: REF("work", "muneral", "task-2"),
+      from: {
+        ...REF("work", "muneral", "task-1"),
+        revision: v.edgeFromRevision ?? null,
+      },
+      to: {
+        ...REF("work", "muneral", v.edgeToId ?? "task-2"),
+        revision: v.edgeToRevision ?? null,
+      },
       evidence_refs: v.edgeEvidence ?? ["fixture:evidence-edge"],
     },
   ];
   r.data.crosslinks = [
     {
       link_id: "link-1",
-      kind: "uses",
+      kind: v.linkKind ?? "uses",
       from: REF("work", "muneral", "task-1"),
-      to: REF("knowledge", "kc", "k-1"),
-      association_ref: "fixture:association",
+      to: REF("knowledge", "kc", v.linkToId ?? "k-1"),
+      association_ref: v.linkAssociation ?? "fixture:association",
       evidence_refs: v.linkEvidence ?? ["fixture:evidence-link"],
     },
   ];
@@ -193,6 +214,22 @@ describe("graph presentation: content", () => {
   });
 });
 
+describe("graph presentation: independent acceptance mutation", () => {
+  it("a source FAIL with a failing check is shown as an unverified independent FAIL; a source PASS stays NOT_MEASURED", () => {
+    const fail = projectGraphPresentation(build({ sourceVerdict: "FAIL" }));
+    const n1 = fail.nodes.find((n) => n.localId === "task-1");
+    expect(n1?.acceptance.sourceVerdict).toBe("FAIL");
+    expect(n1?.acceptance.independentVerdict).toBe("FAIL");
+    expect(n1?.acceptance.independentBasis).toBe("source_fail_unverified");
+    expect(n1?.acceptance.independentlyVerified).toBe(false);
+    const pass = projectGraphPresentation(build({ sourceVerdict: "PASS" }));
+    const p1 = pass.nodes.find((n) => n.localId === "task-1");
+    expect(p1?.acceptance.sourceVerdict).toBe("PASS");
+    expect(p1?.acceptance.independentVerdict).toBe("NOT_MEASURED");
+    expect(p1?.acceptance.independentlyVerified).toBe(false);
+  });
+});
+
 describe("graph presentation: order stability", () => {
   it("equal views for equivalent delivery orders (array order, event before/after snapshot)", () => {
     const a = play([recv(snapshot()), recv(evtN(1)), recv(evtN(2))]);
@@ -221,6 +258,20 @@ describe("graph presentation: single-field differences are exposed", () => {
     ["only edge evidence", { edgeEvidence: ["fixture:evidence-other"] }],
     ["only link evidence", { linkEvidence: ["fixture:evidence-other"] }],
     ["only the source acceptance verdict", { sourceVerdict: "PASS" }],
+    ["only the top-level source acceptance", { topSourceVerdict: "FAIL" }],
+    [
+      "only the revision of a graph that has no edges",
+      { knowledgeGraphRevision: "fixture-know-2" },
+    ],
+    ["only the edge target (qualifier)", { edgeToId: "task-1" }],
+    ["only the edge target revision (qualifier)", { edgeToRevision: "r-2" }],
+    ["only the edge source revision (qualifier)", { edgeFromRevision: "r-1" }],
+    ["only the link kind", { linkKind: "derives_from" }],
+    ["only the link association", { linkAssociation: "fixture:association-2" }],
+    [
+      "only the independent acceptance (source FAIL with a failing check)",
+      { sourceVerdict: "FAIL" },
+    ],
   ];
   for (const [name, variant] of cases) {
     it(`changing ${name} changes the presentation and its stable digest`, () => {
