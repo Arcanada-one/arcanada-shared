@@ -1309,12 +1309,16 @@ function validManifest(
   m: PageSetManifest,
 ): m is PageSetManifest {
   if (s.binding === null || typeof m !== "object" || m === null) return false;
+  // Runtime shape guards: the manifest may come from an adapter boundary, so nothing nested is trusted to match its type.
+  if (typeof m.viewContext !== "object" || m.viewContext === null)
+    return false;
   if (!sameContext(m.viewContext, s.binding)) return false;
   const ref = /^[A-Za-z0-9][A-Za-z0-9._:/@+-]{0,255}$/;
+  const isRef = (v: unknown): boolean => typeof v === "string" && ref.test(v);
   if (
-    !ref.test(m.pageSetRef) ||
-    !ref.test(m.trustedSnapshotRef) ||
-    !ref.test(m.adapterRef) ||
+    !isRef(m.pageSetRef) ||
+    !isRef(m.trustedSnapshotRef) ||
+    !isRef(m.adapterRef) ||
     !isCanonicalDecimal(m.watermark) ||
     m.pageCount < 1 ||
     m.pageCount > s.limits.maxPages ||
@@ -1326,6 +1330,8 @@ function validManifest(
   let total = 0;
   for (const p of m.pages) {
     if (
+      typeof p !== "object" ||
+      p === null ||
       !Number.isSafeInteger(p.pageIndex) ||
       p.pageIndex < 0 ||
       p.pageIndex >= m.pageCount ||
