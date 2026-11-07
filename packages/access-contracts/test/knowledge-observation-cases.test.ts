@@ -36,6 +36,40 @@ const amendments = JSON.parse(
     amended_value: unknown;
   }[];
 };
+/**
+ * KCLIVE-01 round 5 (R2): OBS-08's "no unbounded browser history retained" is checked against the reducer's real lifetime
+ * retention policy (identities, cursor bindings, ancillary catalogs, byte budget, every history list and the pending
+ * buffer), not only against whether the pending buffer happens to be empty. The pinned expected value stays `false`.
+ */
+const HISTORY_CAP = 512;
+function retentionExceedsPolicy(state: Run["state"]): boolean {
+  const l = state.limits;
+  const bytes = [
+    ...Object.values(state.eventIdentities).map((e) => e.canon),
+    ...Object.values(state.ancillary.seen),
+  ].reduce((n, c) => n + new TextEncoder().encode(c).length, 0);
+  return (
+    state.buffer.length > l.maxRecords ||
+    Object.keys(state.eventIdentities).length > l.maxRetainedIdentities ||
+    Object.keys(state.cursorBindings).length > l.maxRetainedIdentities ||
+    Object.keys(state.ancillary.seen).length > l.maxAncillaryRecords ||
+    bytes > l.maxRetainedBytes ||
+    [
+      state.eventLog,
+      state.eventLedger,
+      state.sourceSequences,
+      state.history,
+      state.snapshotHistory,
+      state.planHistory,
+      state.historicalOnly,
+      state.refusals,
+      state.sourceReconcile,
+      state.unassociatedSubjects,
+      state.ancillary.joined,
+    ].some((list) => list.length > HISTORY_CAP)
+  );
+}
+
 const amendedOracle = (caseId: string, key: string) => {
   const hit = amendments.supersedes.find(
     (a) => a.case_id === caseId && a.key === key,
@@ -187,7 +221,7 @@ const checks: Record<string, Check> = {
     );
     eq("full_snapshot_required", r.view.fullSnapshotRequired);
     eq("last_trusted_state_preserved", taskState(r.view) === "todo");
-    eq("unbounded_browser_history_retained", r.state.buffer.length > 0);
+    eq("unbounded_browser_history_retained", retentionExceedsPolicy(r.state));
   },
   "OBS-09": (_c, r, _ex, eq) => {
     eq("projection", r.view.projection);
