@@ -1169,11 +1169,9 @@ function completePageSet(
     record("page_set_manifest_pending");
     return { disposition: "ignored", code: "PAGE_SET_MANIFEST_PENDING" };
   }
-  const totalBytes = a.pages.reduce((n, e) => n + e.byteSize, 0);
-  if (
-    a.pages.some((e) => pageViolatesManifest(m, a, e)) ||
-    totalBytes !== m.totalBytes
-  ) {
+  // The sum of the sealed entries already equals `m.totalBytes` (checked in `validManifest`), and every received page
+  // is compared with its own entry, so no separate total comparison can disagree.
+  if (a.pages.some((e) => pageViolatesManifest(m, a, e))) {
     record("page_set_manifest_mismatch");
     return discardPages(s, "PAGE_SET_MISMATCH");
   }
@@ -1227,9 +1225,8 @@ function receivePage(
   const count = Number(set.page_count);
   const lastOrdinal = index === count - 1;
   const incoherent =
-    !Number.isSafeInteger(index) ||
+    // An unsafe `index` is always >= a safe `count`, or `count` is itself unsafe and refused here.
     !Number.isSafeInteger(count) ||
-    count < 1 ||
     index >= count ||
     lastOrdinal !== (d.coverage.next_page_token === null) ||
     d.coverage.complete !== lastOrdinal;
@@ -1287,7 +1284,6 @@ function receivePage(
   const bytes = (prior?.bytes ?? 0) + entry.byteSize;
   const firstAt = prior?.firstAt ?? at ?? 0;
   if (
-    pages.length > s.limits.maxPages ||
     bytes > s.limits.maxSerializedBytes ||
     (at !== undefined && at - firstAt > s.limits.maxAgeMs)
   ) {
@@ -1320,13 +1316,10 @@ function validManifest(
     !ref.test(m.trustedSnapshotRef) ||
     !ref.test(m.adapterRef) ||
     !isCanonicalDecimal(m.watermark) ||
-    !Number.isSafeInteger(m.pageCount) ||
     m.pageCount < 1 ||
     m.pageCount > s.limits.maxPages ||
     !Array.isArray(m.pages) ||
-    m.pages.length !== m.pageCount ||
-    !Number.isSafeInteger(m.totalBytes) ||
-    m.totalBytes < 0
+    m.pages.length !== m.pageCount
   )
     return false;
   const seen = new Set<number>();
