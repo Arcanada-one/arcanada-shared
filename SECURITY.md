@@ -27,9 +27,7 @@ within 72 hours.
 - **Dependency audit.** `pnpm audit --audit-level=high` runs in CI. Advisories with no
   published patched release are recorded in `accepted-risk.yml` (source of truth) with a
   re-review date and a reversal condition, and mirrored in `pnpm-workspace.yaml`
-  `auditConfig.ignoreGhsas`. Currently: GHSA-vfj7-8cjw-p6xm (`braces`) and
-  GHSA-hp3w-g68c-fv3c (`sprintf-js`), both reachable only through the `@changesets/cli`
-  devDependency and absent from every package's production tree.
+  `auditConfig.ignoreGhsas`. Currently none: the register is empty.
 
 ## Supported versions
 
