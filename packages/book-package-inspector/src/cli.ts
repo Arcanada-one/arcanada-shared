@@ -10,7 +10,7 @@
 import { execFileSync, spawnSync } from "node:child_process";
 import { compare } from "./compare.js";
 import { inspectBookPackage } from "./inspect.js";
-import { readPackageDirectory } from "./node.js";
+import { readPackageDirectoryReport, type ReadReport } from "./node.js";
 import { PINS } from "./schema.js";
 
 function git(repo: string, ...args: string[]): string {
@@ -93,15 +93,20 @@ function main(argv: string[]): number {
     return 2;
   }
   let result;
+  let read: ReadReport;
   try {
-    result = inspectBookPackage(readPackageDirectory(dir));
+    read = readPackageDirectoryReport(dir);
+    result = inspectBookPackage(read.files);
   } catch (e) {
     process.stderr.write(
       `cannot read package directory: ${(e as Error).message}\n`,
     );
     return 2;
   }
-  const out: Record<string, unknown> = { ...result };
+  const out: Record<string, unknown> = {
+    ...result,
+    read_limits: { used: read.limits_used, observed: read.observed },
+  };
   if (repo) {
     const { agreement } = runChecker(repo, dir) as {
       agreement: Record<string, unknown>;

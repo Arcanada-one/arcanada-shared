@@ -70,6 +70,21 @@ export interface AnchorRow {
   anchor: Rec;
 }
 
+export interface RightsDetermination {
+  /** Where the determination was found. */
+  source_kind: "manifest" | "stage_receipt" | "classification";
+  /** `class` = a rights class (manifest license_class, receipt rights_class); `own_layers_license` = the licence of the package's own layers. */
+  attribute: "class" | "own_layers_license";
+  file: string;
+  /** JSON pointer of the field inside `file`. */
+  field_path: string;
+  /** The value exactly as the file states it. Never normalised, merged or replaced. */
+  value: string;
+  /** git blob id (sha1 of `blob <n>\0<bytes>`) of the file the value was read from. */
+  file_git_blob: string;
+  file_sha256: string;
+}
+
 export interface BookPackageProjection {
   package_identity: {
     package_id: string;
@@ -84,6 +99,19 @@ export interface BookPackageProjection {
   edition: Rec;
   representation: Rec;
   rights: Rec;
+  /**
+   * Every rights determination found in the package (manifest and stage receipts / classification), each with its provenance.
+   * Listed as found; no determination is chosen, merged or called "effective".
+   */
+  rights_determinations: RightsDetermination[];
+  /** Whether the *class* determinations differ. Only a flag and the literal values: it resolves nothing. */
+  rights_comparison: {
+    class_values: string[];
+    disagree: boolean;
+    note: string;
+  };
+  /** Rights-bearing files that could not be read as JSON; not guessed, not a refusal. */
+  rights_unreadable: { file: string; reason: string }[];
   manifest: Rec;
   objects: Rec[];
   relations: Rec[];
@@ -194,6 +222,97 @@ const PY_WS =
   "\\t\\n\\v\\f\\r \\x1c-\\x1f\\x85\\xa0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000";
 const pyStrip = (s: string): string =>
   s.replace(new RegExp(`^[${PY_WS}]+|[${PY_WS}]+$`, "gu"), "");
+
+function gitBlobId(bytes: Uint8Array): string {
+  return createHash("sha1")
+    .update(`blob ${bytes.length}\0`)
+    .update(bytes)
+    .digest("hex");
+}
+
+/** Collect every rights determination with provenance. Receipts are read tolerantly: a bad file is reported, never fatal. */
+function collectRights(
+  files: Map<string, Uint8Array>,
+  manifest: Rec,
+  manifestBytes: Uint8Array,
+): Pick<
+  BookPackageProjection,
+  "rights_determinations" | "rights_comparison" | "rights_unreadable"
+> {
+  const rows: RightsDetermination[] = [];
+  const unreadable: { file: string; reason: string }[] = [];
+  const add = (
+    source_kind: RightsDetermination["source_kind"],
+    attribute: RightsDetermination["attribute"],
+    file: string,
+    field_path: string,
+    value: unknown,
+    bytes: Uint8Array,
+  ): void => {
+    if (typeof value !== "string") return;
+    rows.push({
+      source_kind,
+      attribute,
+      file,
+      field_path,
+      value,
+      file_git_blob: gitBlobId(bytes),
+      file_sha256: sha256(bytes),
+    });
+  };
+  add(
+    "manifest",
+    "class",
+    "manifest.json",
+    "/rights/license_class",
+    manifest.rights?.license_class,
+    manifestBytes,
+  );
+  add(
+    "manifest",
+    "own_layers_license",
+    "manifest.json",
+    "/rights/public_domain/own_layers_license",
+    manifest.rights?.public_domain?.own_layers_license,
+    manifestBytes,
+  );
+  const candidates = [...files.keys()]
+    .filter(
+      (k) => k === "classification.json" || /^receipts\/[^/]+\.json$/.test(k),
+    )
+    .sort();
+  for (const file of candidates) {
+    const bytes = files.get(file)!;
+    let doc: unknown;
+    try {
+      doc = parseStrictJson(decodeStrict(bytes, file));
+    } catch (e) {
+      unreadable.push({ file, reason: (e as Error).name });
+      continue;
+    }
+    if (doc && typeof doc === "object" && !Array.isArray(doc))
+      add(
+        file === "classification.json" ? "classification" : "stage_receipt",
+        "class",
+        file,
+        "/rights_class",
+        (doc as Rec).rights_class,
+        bytes,
+      );
+  }
+  const classValues = [
+    ...new Set(rows.filter((r) => r.attribute === "class").map((r) => r.value)),
+  ];
+  return {
+    rights_determinations: rows,
+    rights_comparison: {
+      class_values: classValues,
+      disagree: classValues.length > 1,
+      note: "determinations are listed as found; the inspector does not choose, merge or rank them",
+    },
+    rights_unreadable: unreadable,
+  };
+}
 
 function normalise(files: PackageFiles): Map<string, Uint8Array> {
   const out = new Map<string, Uint8Array>();
@@ -1254,6 +1373,7 @@ function project(
     edition: manifest.edition,
     representation: manifest.representation,
     rights: manifest.rights,
+    ...collectRights(files, manifest, manifestBytes),
     manifest,
     objects,
     relations,

@@ -69,3 +69,7 @@ a file/byte limit. Hashing uses `node:crypto`, so this package is Node-only.
 - Python's `\d` matches Unicode digits in schema patterns; JavaScript's matches ASCII only (ajv compiles patterns with the `u` flag).
 - Invalid UTF-8 reports no byte offset; decoder error wording differs.
 - A symlink cannot exist in a bytes map; `readPackageDirectory` omits symlinks, which surfaces as `component_missing`.
+
+## Rights determinations and read limits
+
+`projection.rights_determinations` lists every rights value found (manifest `license_class` / `own_layers_license`, `rights_class` in `receipts/*.json` and `classification.json`) with its file, JSON-pointer field path, git blob id and sha256. `projection.rights_comparison` only flags whether the class values differ (`disagree`) and lists them; the inspector never merges the values or names an "effective" one. The directory reader checks per-file, total and file-count limits from file sizes before reading and the CLI prints `read_limits` (used and observed).
