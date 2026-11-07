@@ -2317,3 +2317,191 @@ export function stableViewDigestInput(state: ReducerState): string {
     commands: view.commands,
   });
 }
+
+/* ---- graph presentation projection (KCLIVE-01 slice 6) ---- */
+
+/** A fully qualified node reference as shown to a consumer; never a bare local id. */
+export interface PresentedRef {
+  readonly key: string;
+  readonly graphKind: GraphKind;
+  readonly authority: string;
+  readonly namespace: string;
+  readonly localId: string;
+  readonly revision: string | null;
+}
+
+/** Source acceptance is reported as observed; independent acceptance is kept apart and is never promoted from it. */
+export interface PresentedAcceptance {
+  /** The raw verdict the source asserted. A source PASS is only that, never an independent PASS. */
+  readonly sourceVerdict: "PASS" | "FAIL" | "NOT_MEASURED";
+  readonly independentVerdict: "NOT_MEASURED" | "FAIL";
+  readonly independentBasis: AcceptanceEvaluation["basis"];
+  readonly independentlyVerified: false;
+  readonly issues: readonly string[];
+}
+
+export interface PresentedGraph {
+  readonly graphKind: GraphKind;
+  readonly authority: string;
+  readonly graphRevision: string;
+  readonly nodeCount: number;
+  readonly edgeCount: number;
+}
+
+export interface PresentedNode extends PresentedRef {
+  readonly nodeType: string;
+  readonly nativeState: string | null;
+  readonly acceptance: PresentedAcceptance;
+  readonly evidenceRefs: readonly string[];
+}
+
+export interface PresentedEdge {
+  /** `[graphKind, edgeId]`: edge ids are only unique within their graph, so the graph is part of the identity. */
+  readonly edgeKey: string;
+  readonly edgeId: string;
+  readonly graphKind: GraphKind;
+  readonly graphAuthority: string;
+  readonly graphRevision: string;
+  readonly kind: string;
+  readonly from: PresentedRef;
+  readonly to: PresentedRef;
+  readonly evidenceRefs: readonly string[];
+}
+
+export interface PresentedCrosslink {
+  readonly linkId: string;
+  readonly kind: string;
+  readonly from: PresentedRef;
+  readonly to: PresentedRef;
+  readonly associationRef: string;
+  readonly evidenceRefs: readonly string[];
+}
+
+export interface GraphPresentation {
+  readonly viewKind: ViewKind;
+  readonly projection: ReducerState["projection"];
+  readonly stale: boolean;
+  readonly appliedCursor: string | null;
+  readonly currentPlan: string | null;
+  /** Authority revisions of the source projection, as observed (canonical order); never interpreted or merged. */
+  readonly sourceRevisions: readonly unknown[];
+  readonly topAcceptance: PresentedAcceptance | null;
+  readonly graphs: readonly PresentedGraph[];
+  readonly nodes: readonly PresentedNode[];
+  readonly edges: readonly PresentedEdge[];
+  readonly crosslinks: readonly PresentedCrosslink[];
+  readonly implicitJoins: 0;
+}
+
+const cmp = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
+
+function presentedRef(r: QualifiedRef): PresentedRef {
+  return {
+    key: nodeKey(r),
+    graphKind: r.graph_kind,
+    authority: r.authority,
+    namespace: r.namespace,
+    localId: r.local_id,
+    revision: r.revision,
+  };
+}
+
+function presentedAcceptance(a: GraphNode["acceptance"]): PresentedAcceptance {
+  const e = evaluateAcceptance(a);
+  return {
+    sourceVerdict: a.verdict,
+    independentVerdict: e.effectiveVerdict,
+    independentBasis: e.basis,
+    independentlyVerified: false,
+    issues: e.issues,
+  };
+}
+
+/**
+ * The one shared graph presentation for site mounts: qualified typed ordinary edges, graph identity and revision, and
+ * the evidence associations of nodes, edges and links, with source acceptance kept apart from independent acceptance.
+ * Pure and derived 1:1 from the retained view: it adds no join, no cross product and no local reconstruction, so its size
+ * is bounded by the already-bounded view. Revocation, epoch reset and context clearing empty `view`, which empties it.
+ */
+export function projectGraphPresentation(
+  state: ReducerState,
+): GraphPresentation {
+  const v = state.view;
+  const graphs = v?.graphs ?? [];
+  const base = projectView(state);
+  return {
+    viewKind: base.viewKind,
+    projection: base.projection,
+    stale: base.stale,
+    appliedCursor: base.appliedCursor,
+    currentPlan: base.currentPlan,
+    sourceRevisions: deepClone(
+      sortedBy(v?.sourceRevisions ?? [], canonicalJson),
+    ),
+    topAcceptance: v === null ? null : presentedAcceptance(v.acceptanceRecord),
+    graphs: graphs
+      .map((g) => ({
+        graphKind: g.graph_kind,
+        authority: g.authority,
+        graphRevision: g.graph_revision,
+        nodeCount: g.nodes.length,
+        edgeCount: g.edges.length,
+      }))
+      .sort((a, b) => cmp(a.graphKind, b.graphKind)),
+    nodes: graphs
+      .flatMap((g) =>
+        g.nodes.map((n) => ({
+          ...presentedRef(n.ref),
+          nodeType: n.node_type,
+          nativeState: n.native_state?.value ?? null,
+          acceptance: presentedAcceptance(n.acceptance),
+          evidenceRefs: [...n.evidence_refs].sort(cmp),
+        })),
+      )
+      .sort((a, b) => cmp(a.key, b.key)),
+    edges: graphs
+      .flatMap((g) =>
+        g.edges.map((e) => ({
+          edgeKey: JSON.stringify([g.graph_kind, e.edge_id]),
+          edgeId: e.edge_id,
+          graphKind: g.graph_kind,
+          graphAuthority: g.authority,
+          graphRevision: g.graph_revision,
+          kind: e.kind,
+          from: presentedRef(e.from),
+          to: presentedRef(e.to),
+          evidenceRefs: [...e.evidence_refs].sort(cmp),
+        })),
+      )
+      .sort((a, b) => cmp(a.edgeKey, b.edgeKey)),
+    crosslinks: (v?.crosslinks ?? [])
+      .map((c) => ({
+        linkId: c.link_id,
+        kind: c.kind,
+        from: presentedRef(c.from),
+        to: presentedRef(c.to),
+        associationRef: c.association_ref,
+        evidenceRefs: [...c.evidence_refs].sort(cmp),
+      }))
+      .sort((a, b) => cmp(a.linkId, b.linkId)),
+    implicitJoins: 0,
+  };
+}
+
+/**
+ * Order-stable comparison input for the presentation. It extends the existing stable view input with the pieces that
+ * input omits (edges, graph revision, source revisions, node/edge/link evidence, source acceptance), so an edge-only or evidence-only
+ * difference changes it. `stableViewDigestInput` itself is unchanged.
+ */
+export function graphPresentationDigestInput(state: ReducerState): string {
+  const p = projectGraphPresentation(state);
+  return canonicalJson({
+    stable: JSON.parse(stableViewDigestInput(state)) as unknown,
+    graphs: p.graphs,
+    nodes: p.nodes,
+    edges: p.edges,
+    crosslinks: p.crosslinks,
+    topAcceptance: p.topAcceptance,
+    sourceRevisions: p.sourceRevisions,
+  });
+}
