@@ -1,0 +1,332 @@
+{
+  "check_scope": "Offline schema/fixture/reference/hash/Markdown consistency only; no reducer or producer/runtime execution.",
+  "static_status": "PASS",
+  "corpus_status": "PREPARED",
+  "runtime_verdict": "NOT_MEASURED",
+  "reducer_execution": "NOT_MEASURED",
+  "independent_semantic_acceptance": "NOT_MEASURED",
+  "checked_at_utc": "2026-11-06T16:24:11.964931+00:00",
+  "interpreter": "/workspace/scratch/ef83e9866fac/implementation-audit/kc/verification-env/bin/python",
+  "python_version": "3.12.14",
+  "validator": {
+    "package": "jsonschema",
+    "version": "4.26.0",
+    "class": "Draft202012Validator",
+    "metaschema": "PASS",
+    "format_checker": "FormatChecker",
+    "date_time_checker_available": false
+  },
+  "command": "/workspace/scratch/ef83e9866fac/implementation-audit/kc/verification-env/bin/python /workspace/scratch/ef83e9866fac/continuation-20261106T1539/observation-profile/check_fixtures.py --write-report --write-manifest",
+  "counts": {
+    "json_files_parsed": 5,
+    "schema_local_refs": 86,
+    "records": 50,
+    "expected_valid": 42,
+    "expected_invalid": 8,
+    "unexpected_classifications": 0,
+    "prepared_cases": 24,
+    "raw_or_canonical_body_digests": 22,
+    "complete_event_byte_digests": 20,
+    "markdown_files_checked": 5
+  },
+  "per_record_schema_classification": {
+    "run": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-A": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-1": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-2": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-3": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-4": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-5": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-1-duplicate": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-1-conflict": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-old": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-ahead": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-partial": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-epoch-B": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-wrong-scope": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-wrong-project": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-plan-B": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-late-plan-A": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-colliding-ids": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "invalid-bare-node": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "doclab-event-100": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "doclab-event-104": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "attempt-succeeded": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "invalid-empty-checker-pass": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "snapshot-b2": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-b2-unassociated": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "b2-row-withdrawn": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-b2-reconciled": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "command-intent": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "command-refused": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "deployment-unmeasured": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "authority-refusal": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "receipt-mutable": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "receipt-captured-1": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "receipt-captured-2": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "attempt-unbounded-audit": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "artifact-fingerprint-only": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "invalid-fingerprint-content-address": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "artifact-denied": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "artifact-collected": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "artifact-missing": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "invalid-numeric-cursor": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "invalid-numeric-aggregate-version": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "invalid-unknown-profile": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "invalid-missing-producer": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "snapshot-doclab": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "event-wrong-run": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "invalid-unknown-extension": {
+      "expected_valid": false,
+      "observed_valid": false
+    },
+    "conflicting-checker-aggregate": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "snapshot-converted-ordinary": {
+      "expected_valid": true,
+      "observed_valid": true
+    },
+    "attempt-checker-unknown": {
+      "expected_valid": true,
+      "observed_valid": true
+    }
+  },
+  "relative_link_checks": [
+    {
+      "document": "KC-CROSSWALK.md",
+      "target": "../CLAIM-ACCEPTANCE-CORPUS.md",
+      "result": "target present in reviewed programme source cache"
+    },
+    {
+      "document": "KC-CROSSWALK.md",
+      "target": "reducer-cases.json",
+      "result": "local target exists"
+    },
+    {
+      "document": "README.md",
+      "target": "SEMANTICS.md",
+      "result": "local target exists"
+    },
+    {
+      "document": "README.md",
+      "target": "KC-CROSSWALK.md",
+      "result": "local target exists"
+    },
+    {
+      "document": "SEMANTICS.md",
+      "target": "PRODUCER-EVIDENCE.md",
+      "result": "local target exists"
+    }
+  ],
+  "fixture_frame_observations": {
+    "max_compact_valid_record_utf8_bytes": 8222,
+    "max_fixture_json_container_depth": 9,
+    "limit": "Describes these small fixture records only; does not certify parseBoundedJson compatibility or large live snapshots."
+  },
+  "not_executed": [
+    "Reducer cases/zero-side-effect property",
+    "Producer runtime and schema conformance",
+    "Auth/grant/revocation service checks",
+    "KC semantic/profile conformance",
+    "Actual storage byte availability",
+    "Browser/deployment/end-to-end acceptance"
+  ],
+  "inputs": [
+    {
+      "path": "KC-CROSSWALK.md",
+      "byte_size": "9966",
+      "sha256": "454e09ae847052e8526b81d1a5609ce214ffa1e1c91499618dd9482d22605f31"
+    },
+    {
+      "path": "PRODUCER-EVIDENCE.md",
+      "byte_size": "17128",
+      "sha256": "50386f83e810c75c28f69ee0927c55e7f9b385a70f010cdd1413a4c488233bb0"
+    },
+    {
+      "path": "README.md",
+      "byte_size": "8409",
+      "sha256": "8fcb8b1a9d347187005b7b25ddcbb304498bc0f57f78e3964b23a39cd65a7dd7"
+    },
+    {
+      "path": "REDUCER-CASES.md",
+      "byte_size": "5827",
+      "sha256": "5de74afebfe8d083793537d4023f5590156b05f55f51dc4e1603dd78abbf3bed"
+    },
+    {
+      "path": "SEMANTICS.md",
+      "byte_size": "21075",
+      "sha256": "2c48840824562683d2157a2ec3da749b25eaffed4faa511217703f7ad1fa002b"
+    },
+    {
+      "path": "SOURCE-LOCK.json",
+      "byte_size": "4294",
+      "sha256": "cc4742a872ba296563d3dfc6f0d80499e5970a6c47b60172e74c6ad9d2643d02"
+    },
+    {
+      "path": "check_fixtures.py",
+      "byte_size": "11431",
+      "sha256": "14e35a1e087e720ac02bae9dad7d5d954ebc5d1e8dc446ceb2b7cea6fdaf64ac"
+    },
+    {
+      "path": "fixture-bodies.json",
+      "byte_size": "60356",
+      "sha256": "f0315513d2287c2e7a2223df4d3be5e976637f573681f33e8aa232f78b113ac6"
+    },
+    {
+      "path": "fixture-records.json",
+      "byte_size": "228764",
+      "sha256": "5abb896ee922306e434d27ac7b3374dfb0d082331ed5c88ecd08a7ee870162a3"
+    },
+    {
+      "path": "observation.schema.json",
+      "byte_size": "73843",
+      "sha256": "342e407fae9afb91d258aa31744390354530484f05cfb9a25efcd49cba53c8b5"
+    },
+    {
+      "path": "reducer-cases.json",
+      "byte_size": "39075",
+      "sha256": "8bb869972922c23c75b58ea043ca5c3692afcac3d3c88dd595a8bdadc355a672"
+    }
+  ],
+  "errors": []
+}

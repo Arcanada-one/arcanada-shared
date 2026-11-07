@@ -2,3 +2,11 @@ pnpm-lock.yaml
 dist/
 coverage/
 *.tsbuildinfo
+
+# Verbatim Agent-Brain observation package (sha256-pinned); formatting would change the pinned bytes.
+packages/observation-profile/src/observation.schema.json
+packages/observation-profile/test/fixtures/
+
+# Verbatim Agent-Brain observation package (sha256-pinned); formatting would change the pinned bytes.
+packages/access-contracts/src/knowledge-observation-v1.amendment-1.schema.json
+packages/access-contracts/test/fixtures/knowledge-observation-v1/
