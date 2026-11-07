@@ -45,12 +45,21 @@ const result = inspectBookPackage(readPackageDirectory("/path/to/package")); // 
 
 ```sh
 book-package-inspect <package-dir> [--checker-repo <knowledge-contract checkout>]
-# exit 0 pass, 1 refused, 2 usage/read error. With --checker-repo the pinned checker runs on the same directory and an `agreement`
+# exit 0 pass, 1 refused, 2 usage/read error. With --checker-repo the pinned checker runs on a private snapshot of the very bytes the inspector judged and an `agreement`
 # record (AGREE / DISAGREE / NOT_MEASURED) is added; a checkout that is not at the pinned commit/blobs yields NOT_MEASURED.
 ```
 
-`readPackageDirectory` is read-only, does not follow symlinks (a linked component is reported missing, as `safe_file` does) and stops at
-a file/byte limit. Hashing uses `node:crypto`, so this package is Node-only.
+`readPackageDirectory` is read-only and Linux-only (it needs `/proc`; otherwise it refuses with `read_anchor_unavailable`). The root is
+resolved once; every entry is opened once with `O_NOFOLLOW` relative to its already-open parent descriptor and typed by `fstat` on that
+descriptor, so a symlink swapped in for a file or a parent after the walk started is not followed. Symlinks and special files are not read
+(they are listed in `skipped`; the component is reported missing, as `safe_file` does). Bytes are read in bounded chunks and charged per
+file and in total against the bytes actually read, stopping at limit+1; a file that grew, shrank or changed while read is a typed
+`ReadRefusal` (`read_file_grew`, `read_file_shrunk`, `read_file_changed`, `read_file_too_large`, `read_total_too_large`,
+`read_too_many_files`). Hashing uses `node:crypto`, so this package is Node-only.
+
+With `--checker-repo`, the inspector copies the bytes it judged into a fresh private directory (0700/0600), runs the checker on that copy,
+and re-hashes the copy before and after; any difference yields `NOT_MEASURED`, never `AGREE`. The `agreement.snapshot` record carries the
+per-file SHA-256 of the judged bytes.
 
 ## How agreement with the pinned checker is established
 

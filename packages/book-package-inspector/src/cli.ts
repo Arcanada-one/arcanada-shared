@@ -3,14 +3,19 @@
  * book-package-inspect <package-dir> [--checker-repo <knowledge-contract checkout>]
  *
  * Reads one book-package/2 directory (read-only), prints the InspectionResult as JSON on stdout and exits 0 (pass) / 1 (refused) /
- * 2 (usage or read error). With --checker-repo it also runs the PINNED checker (`python3 -I tools/check_book_package.py <dir>`) on the
- * same directory and prints an `agreement` record; the checkout must be at the pinned commit and its schema/checker blobs must match,
+ * 2 (usage or read error). With --checker-repo it also runs the PINNED checker (`python3 -I tools/check_book_package.py <dir>`) on a
+ * private snapshot of the very bytes it judged (hashes re-verified before and after) and prints an `agreement` record; the checkout must be at the pinned commit and its schema/checker blobs must match,
  * otherwise the agreement is reported NOT_MEASURED rather than guessed.
  */
 import { execFileSync, spawnSync } from "node:child_process";
+import { checkOnSnapshot } from "./agree.js";
 import { compare } from "./compare.js";
 import { inspectBookPackage } from "./inspect.js";
-import { readPackageDirectoryReport, type ReadReport } from "./node.js";
+import {
+  ReadRefusal,
+  readPackageDirectoryReport,
+  type ReadReport,
+} from "./node.js";
 import { PINS } from "./schema.js";
 
 function git(repo: string, ...args: string[]): string {
@@ -98,8 +103,9 @@ function main(argv: string[]): number {
     read = readPackageDirectoryReport(dir);
     result = inspectBookPackage(read.files);
   } catch (e) {
+    const code = e instanceof ReadRefusal ? e.code : "read_error";
     process.stderr.write(
-      `cannot read package directory: ${(e as Error).message}\n`,
+      `cannot read package directory [${code}]: ${(e as Error).message}\n`,
     );
     return 2;
   }
@@ -108,9 +114,10 @@ function main(argv: string[]): number {
     read_limits: { used: read.limits_used, observed: read.observed },
   };
   if (repo) {
-    const { agreement } = runChecker(repo, dir) as {
-      agreement: Record<string, unknown>;
-    };
+    // The checker never sees the mutable directory: it runs on a private snapshot of the bytes judged above.
+    const { agreement } = checkOnSnapshot(read.files, dir, (snap) =>
+      runChecker(repo, snap),
+    );
     if (!("verdict" in agreement)) {
       const problems = agreement["checker_problems"] as string[];
       const c = compare(problems, result.refusals);
