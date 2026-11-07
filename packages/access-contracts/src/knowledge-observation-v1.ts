@@ -101,6 +101,80 @@ export interface Producer {
   };
 }
 
+/**
+ * What the ledger knows about the build that produced one event.
+ *
+ * `OBSERVED` carries exactly the three fields the producer declared in `producer.build`; `NOT_MEASURED` means the
+ * producer declared nothing (or the retained state predates this field). A missing build is never inferred from Git,
+ * from a deployment record or from another event. The three fields name an *adapter source build* only:
+ * - `commit` is the source commit of the producer repository (40 hex), not a native executable/build ID;
+ * - a native executable or build ID has no field here and is not invented; if a producer needs one it travels in
+ *   `adapter_revision` only when the producer itself declares it so, otherwise it is NOT_MEASURED;
+ * - the deployed version of a running service is a different observation (`DeploymentData.actual_build`, shown as
+ *   `deployments[].observedBuild`) and is never copied into this field.
+ */
+export type ProducerBuildObservation =
+  | {
+      readonly status: "OBSERVED";
+      readonly repository: string;
+      readonly commit: string;
+      readonly adapterRevision: string;
+    }
+  | { readonly status: "NOT_MEASURED" };
+
+export const PRODUCER_BUILD_NOT_MEASURED: ProducerBuildObservation =
+  Object.freeze({
+    status: "NOT_MEASURED",
+  });
+
+export type ProducerBuildFailureCode = "PRODUCER_BUILD_MALFORMED";
+
+export type ProducerBuildResult =
+  | { readonly ok: true; readonly build: ProducerBuildObservation }
+  | {
+      readonly ok: false;
+      readonly code: ProducerBuildFailureCode;
+      readonly detail: string;
+    };
+
+const COMMIT_40_HEX = /^[0-9a-f]{40}$/;
+
+/**
+ * Validates an optional producer build. `undefined` or `null` is NOT_MEASURED; anything else must be exactly
+ * `{repository, commit, adapter_revision}` with non-empty strings and a 40-hex commit, mirroring the pinned schema's
+ * `build` definition. Extra or missing fields are a typed failure, never silently dropped.
+ */
+export function observeProducerBuild(value: unknown): ProducerBuildResult {
+  if (value === undefined || value === null)
+    return { ok: true, build: PRODUCER_BUILD_NOT_MEASURED };
+  const bad = (detail: string): ProducerBuildResult => ({
+    ok: false,
+    code: "PRODUCER_BUILD_MALFORMED",
+    detail,
+  });
+  if (typeof value !== "object" || Array.isArray(value))
+    return bad("producer build must be an object");
+  const o = value as Record<string, unknown>;
+  const keys = Object.keys(o).sort();
+  if (keys.join(",") !== "adapter_revision,commit,repository")
+    return bad(
+      "producer build must have exactly repository, commit and adapter_revision",
+    );
+  const repository = o["repository"];
+  const commit = o["commit"];
+  const adapterRevision = o["adapter_revision"];
+  if (typeof repository !== "string" || repository.length === 0)
+    return bad("repository must be a non-empty string");
+  if (typeof commit !== "string" || !COMMIT_40_HEX.test(commit))
+    return bad("commit must be 40 lowercase hex characters");
+  if (typeof adapterRevision !== "string" || adapterRevision.length === 0)
+    return bad("adapter_revision must be a non-empty string");
+  return {
+    ok: true,
+    build: { status: "OBSERVED", repository, commit, adapterRevision },
+  };
+}
+
 export interface GraphNode {
   readonly ref: QualifiedRef;
   readonly node_type: string;

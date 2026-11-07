@@ -14,7 +14,9 @@ import {
   evaluateAcceptance,
   isCanonicalDecimal,
   nextDecimal,
+  observeProducerBuild,
   parseKnowledgeObservationJson,
+  PRODUCER_BUILD_NOT_MEASURED,
   type AcceptanceEvaluation,
   type AcceptancePolicy,
   type ArtifactRecord,
@@ -29,6 +31,7 @@ import {
   type NativeState,
   type ObservationMode,
   type ObservationRecord,
+  type ProducerBuildObservation,
   type QualifiedRef,
   type RunRecord,
   type SnapshotRecord,
@@ -139,6 +142,12 @@ export interface EventLedgerEntry {
   readonly occurredAt: string;
   readonly observedAt: string;
   readonly recordedAt: string;
+  /**
+   * Optional and additive: the build the producer declared for this event. Absent on state retained before this field
+   * existed; `projectView` presents absence as NOT_MEASURED and never infers it. It is not part of event identity or
+   * of any existing digest input.
+   */
+  readonly producerBuild?: ProducerBuildObservation;
 }
 
 interface PageEntry {
@@ -482,6 +491,12 @@ function eventIdentity(rec: EventRecord): string {
   ]);
 }
 
+/** The decoder has already validated `producer.build` against the pinned schema; a failure here is not reachable. */
+function declaredProducerBuild(rec: EventRecord): ProducerBuildObservation {
+  const r = observeProducerBuild(rec.producer.build);
+  return r.ok ? r.build : PRODUCER_BUILD_NOT_MEASURED;
+}
+
 function byteLength(text: string): number {
   return new TextEncoder().encode(text).length;
 }
@@ -575,6 +590,7 @@ function applyEvent(
       occurredAt: d.occurred_at,
       observedAt: rec.observed_at,
       recordedAt: rec.recorded_at,
+      producerBuild: declaredProducerBuild(rec),
     },
   ].slice(-MAX_HISTORY);
   trackSourceSequence(s, rec);
@@ -2131,7 +2147,9 @@ export interface ProjectedView {
       readonly status: string;
     }[];
   }[];
-  readonly eventLedger: ReducerState["eventLedger"];
+  readonly eventLedger: readonly (EventLedgerEntry & {
+    readonly producerBuild: ProducerBuildObservation;
+  })[];
   readonly sourceSequences: ReducerState["sourceSequences"];
   readonly sourceReconcile: readonly string[];
   readonly snapshotAtomicity: string;
@@ -2293,7 +2311,10 @@ export function projectView(state: ReducerState): ProjectedView {
         capabilities: d.data.capabilities,
       }))
       .sort((a, b) => (a.recordId < b.recordId ? -1 : 1)),
-    eventLedger: state.eventLedger,
+    eventLedger: state.eventLedger.map((e) => ({
+      ...e,
+      producerBuild: e.producerBuild ?? PRODUCER_BUILD_NOT_MEASURED,
+    })),
     sourceSequences: state.sourceSequences,
     sourceReconcile: state.sourceReconcile,
     snapshotAtomicity: v?.sourceAtomicity ?? "not_established",

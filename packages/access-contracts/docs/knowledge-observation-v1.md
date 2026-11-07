@@ -56,6 +56,35 @@ never promotes a source `PASS` to independent acceptance and never issues a comm
 Create state with `createKnowledgeObservationState`, read it with `projectKnowledgeObservation` (deterministic; four
 separate dimensions: connection, freshness, native state, independent acceptance).
 
+## Producer build on the event ledger (additive)
+
+Each `projectView().eventLedger` entry carries `producerBuild`:
+
+- `{ status: "OBSERVED", repository, commit, adapterRevision }` — exactly the three fields the producer declared in
+  `producer.build`, copied verbatim from the validated event.
+- `{ status: "NOT_MEASURED" }` — nothing was declared (or the retained state predates the field). It is never derived
+  from Git, a deployment record or another event.
+
+`observeProducerBuild(value)` is the validator: `undefined`/`null` is `NOT_MEASURED`; anything else must be exactly
+`repository`, `commit` (40 lowercase hex) and `adapter_revision`, otherwise it returns
+`{ ok: false, code: "PRODUCER_BUILD_MALFORMED" }`. The decoder still refuses a record whose `producer.build` is missing
+or malformed (`SCHEMA_INVALID`), so such an event never reaches the ledger.
+
+What does not change: the schema (sha256-pinned), the record bytes, event identity (service, instance, producer event
+id) and every existing digest input (`stableViewDigestInput`, `graphPresentationDigestInput`). `producerBuild` is not in
+any of them; two events that differ only in build have the same identity and the same view digests, and stay
+distinguishable in the ledger. A second delivery of the same event with a different build is a conflicting duplicate
+and does not rewrite the first retained build.
+
+These notions stay separate:
+
+| Notion                                           | Where it is carried                                                   | In `producerBuild`? |
+| ------------------------------------------------ | --------------------------------------------------------------------- | ------------------- |
+| Source commit of the producer/adapter repository | `producerBuild.commit` (with `repository`)                            | yes                 |
+| Adapter revision declared by the producer        | `producerBuild.adapterRevision`                                       | yes                 |
+| Native executable / build ID of a running binary | no field today; a producer that has one needs a profile amendment     | no, not invented    |
+| Deployed version of a service                    | `DeploymentData.actual_build`, shown as `deployments[].observedBuild` | no, never copied    |
+
 ## Limits
 
 Structural validity is not authenticity, source authorization, KC admission or deployment. Pending buffer and page limits
