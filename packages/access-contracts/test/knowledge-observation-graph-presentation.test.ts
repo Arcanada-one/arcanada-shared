@@ -93,6 +93,7 @@ interface Variant {
   edgeEvidence?: string[];
   linkEvidence?: string[];
   sourceVerdict?: "PASS" | "FAIL" | "NOT_MEASURED";
+  sourceRevision?: string;
   topSourceVerdict?: "PASS" | "FAIL";
   knowledgeGraphRevision?: string;
   edgeToId?: string;
@@ -141,6 +142,8 @@ function snapshot(v: Variant = {}, reverse = false): Json {
       evidence_refs: v.edgeEvidence ?? ["fixture:evidence-edge"],
     },
   ];
+  if (v.sourceRevision !== undefined)
+    r.data.source_revisions[0].versions.revision = v.sourceRevision;
   r.data.crosslinks = [
     {
       link_id: "link-1",
@@ -199,6 +202,12 @@ describe("graph presentation: content", () => {
       associationRef: "fixture:association",
       evidenceRefs: ["fixture:evidence-link"],
     });
+    expect(p.sourceRevisions).toEqual([
+      expect.objectContaining({
+        authority: "muneral",
+        versions: { revision: "7", aggregateVersion: "9007199254740992" },
+      }),
+    ]);
     expect(p.implicitJoins).toBe(0);
   });
 
@@ -258,6 +267,7 @@ describe("graph presentation: single-field differences are exposed", () => {
     ["only edge evidence", { edgeEvidence: ["fixture:evidence-other"] }],
     ["only link evidence", { linkEvidence: ["fixture:evidence-other"] }],
     ["only the source acceptance verdict", { sourceVerdict: "PASS" }],
+    ["only the source revision", { sourceRevision: "8" }],
     ["only the top-level source acceptance", { topSourceVerdict: "FAIL" }],
     [
       "only the revision of a graph that has no edges",
@@ -316,6 +326,7 @@ describe("graph presentation: clearing and bounds", () => {
     expect(p.nodes).toEqual([]);
     expect(p.crosslinks).toEqual([]);
     expect(p.topAcceptance).toBeNull();
+    expect(p.sourceRevisions).toEqual([]);
     expect(p.projection).toBe("cleared");
   });
 
@@ -345,6 +356,7 @@ describe("graph presentation: clearing and bounds", () => {
     expect(p.edges).toEqual([]);
     expect(p.nodes).toEqual([]);
     expect(p.crosslinks).toEqual([]);
+    expect(p.sourceRevisions).toEqual([]);
   });
 
   it("the empty state projects to the empty presentation", () => {

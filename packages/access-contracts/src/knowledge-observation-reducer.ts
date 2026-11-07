@@ -2383,6 +2383,8 @@ export interface GraphPresentation {
   readonly stale: boolean;
   readonly appliedCursor: string | null;
   readonly currentPlan: string | null;
+  /** Authority revisions of the source projection, as observed (canonical order); never interpreted or merged. */
+  readonly sourceRevisions: readonly unknown[];
   readonly topAcceptance: PresentedAcceptance | null;
   readonly graphs: readonly PresentedGraph[];
   readonly nodes: readonly PresentedNode[];
@@ -2433,6 +2435,9 @@ export function projectGraphPresentation(
     stale: base.stale,
     appliedCursor: base.appliedCursor,
     currentPlan: base.currentPlan,
+    sourceRevisions: deepClone(
+      sortedBy(v?.sourceRevisions ?? [], canonicalJson),
+    ),
     topAcceptance: v === null ? null : presentedAcceptance(v.acceptanceRecord),
     graphs: graphs
       .map((g) => ({
@@ -2485,7 +2490,7 @@ export function projectGraphPresentation(
 
 /**
  * Order-stable comparison input for the presentation. It extends the existing stable view input with the pieces that
- * input omits (edges, graph revision, node/edge/link evidence, source acceptance), so an edge-only or evidence-only
+ * input omits (edges, graph revision, source revisions, node/edge/link evidence, source acceptance), so an edge-only or evidence-only
  * difference changes it. `stableViewDigestInput` itself is unchanged.
  */
 export function graphPresentationDigestInput(state: ReducerState): string {
@@ -2497,5 +2502,6 @@ export function graphPresentationDigestInput(state: ReducerState): string {
     edges: p.edges,
     crosslinks: p.crosslinks,
     topAcceptance: p.topAcceptance,
+    sourceRevisions: p.sourceRevisions,
   });
 }
