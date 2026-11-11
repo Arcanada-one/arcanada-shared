@@ -1,0 +1,14 @@
+{
+  "trusted": {
+    "question": "What is the change?",
+    "context_labels": {
+      "namespace_group": "arcanada",
+      "coverage_pass": 1,
+      "budget_class": "normal",
+      "security_review_status": "approved"
+    }
+  },
+  "untrusted": {
+    "candidates": []
+  }
+}

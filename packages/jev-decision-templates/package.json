@@ -1,0 +1,51 @@
+{
+  "name": "@arcanada/jev-decision-templates",
+  "version": "0.1.0",
+  "description": "Versioned English JEV decision templates, state field whitelists/deny-list, and the static validate(template, state) gate for AC-08/AC-24.",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcanada-one/arcanada-shared.git",
+    "directory": "packages/jev-decision-templates"
+  },
+  "homepage": "https://github.com/Arcanada-one/arcanada-shared/tree/main/packages/jev-decision-templates#readme",
+  "keywords": [
+    "arcanada",
+    "jev",
+    "decision-templates",
+    "validator",
+    "deny-list"
+  ],
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "prepare": "pnpm run build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "yaml": "catalog:"
+  },
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

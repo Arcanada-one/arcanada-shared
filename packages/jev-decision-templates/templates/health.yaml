@@ -1,0 +1,21 @@
+id: health
+version: 1
+primitive: choice
+instructions: >
+  Classify the health of the diagnosed surface from the string diagnostic
+  state produced by jev_client.diagnose.
+options:
+  - id: healthy
+    description: The surface is operating within expected bounds.
+  - id: degraded
+    description: The surface is available but impaired.
+  - id: unavailable
+    description: The surface cannot serve requests.
+  - id: other
+    description: None of the listed health classes fits.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: health
+allow_non_ascii: []

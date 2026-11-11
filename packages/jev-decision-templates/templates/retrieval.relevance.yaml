@@ -1,0 +1,20 @@
+id: retrieval.relevance
+version: 1
+primitive: noul
+instructions: >
+  Decide whether the candidate fragment contains knowledge that is necessary
+  to answer the question in state.trusted.question.
+criteria:
+  true: The fragment contains knowledge necessary to answer the question.
+  false: The fragment does not contain knowledge necessary to answer the question.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties:
+    candidate_k:
+      type: string
+      pattern: "^[a-z0-9][a-z0-9_.-]{0,63}$"
+  required:
+    - candidate_k
+state_schema_ref: retrieval
+allow_non_ascii: []
