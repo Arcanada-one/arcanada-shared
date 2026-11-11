@@ -1,6 +1,6 @@
 {
   "name": "@arcanada/jev-decision-templates",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Versioned English JEV decision templates, state field whitelists/deny-list, and the static validate(template, state) gate for AC-08/AC-24.",
   "license": "MIT",
   "type": "module",
