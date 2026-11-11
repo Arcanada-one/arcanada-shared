@@ -15,6 +15,8 @@ export {
   reduceKnowledgeObservation as reduce,
   projectKnowledgeObservation as projectView,
   knowledgeObservationStableDigestInput as stableViewDigestInput,
+  projectKnowledgeObservationGraph as projectGraphPresentation,
+  knowledgeObservationGraphDigestInput as graphPresentationDigestInput,
   knowledgeObservationPageDigest as snapshotPageDigest,
   evaluateKnowledgeObservationAcceptance as evaluateAcceptance,
   type KnowledgeObservationViewContext as ViewContext,

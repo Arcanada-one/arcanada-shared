@@ -6,6 +6,35 @@ export type {
   LoginTransaction,
   IdentitySession,
 } from "./store.js";
+export {
+  authorizeScoped,
+  revokePrincipal,
+  redactedRefusal,
+  isLabAction,
+  LAB_ACTIONS,
+  REFUSAL_CODES,
+} from "./scoped-controls.js";
+export type {
+  LabAction,
+  RefusalCode,
+  ScopeGrant,
+  ScopedPrincipal,
+  ScopedRequest,
+  ScopedDecision,
+} from "./scoped-controls.js";
+export {
+  LIVE_LAB_SITES,
+  LIVE_LAB_SITE_PROFILES,
+  loadLiveLabSiteOptions,
+  liveLabSiteInventory,
+} from "./live-lab-sites.js";
+export type {
+  LiveLabSiteId,
+  LiveLabSiteProfile,
+  LiveLabSiteEnv,
+  LoadLiveLabSiteResult,
+  LiveLabBrowserIdentityOptions,
+} from "./live-lab-sites.js";
 
 export interface BrowserIdentityOptions {
   issuer: string;
