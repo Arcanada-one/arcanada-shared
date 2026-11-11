@@ -5,7 +5,7 @@
     "superseded_self_rule": "DEC-AUP-0035: the entity a receipt can never verify is the PREVIOUS VERSION OF ITSELF. When a receipt is re-issued at the same path for the same work item — the ordinary case after a rebase or a second commit on a card — the copy of it standing in the tree is superseded by construction: this run is the measurement that replaces it, so the only verdict it could carry is I14 `not_measured` about a document that no longer exists at that path once the run finishes. It is excluded with the work item and the output path that identify it, both re-derived from Git by impact_pair.receipt_problems, never asserted.",
     "verdict": "admitted"
   },
-  "captured_at_utc": "2026-11-11T04:52:54Z",
+  "captured_at_utc": "2026-11-11T04:53:24Z",
   "change_set": {
     "base": "9af89919d949c6219719980283c20f9bc00714d9",
     "files": [
@@ -83,7 +83,7 @@
         "status": "A"
       }
     ],
-    "head": "e904e828e857669089d0917369c1d21a30ccb275",
+    "head": "7dfa751c184a74361348679f35c258df57975486",
     "mode": "diff"
   },
   "decision_ref": "DEC-AUP-0008",
@@ -298,7 +298,7 @@
               "status": "A"
             }
           ],
-          "graph_digest": "sha256:1684a70e6b924d5af706c8bcaf1143483e65c07bd82555f584113639987f3f4c",
+          "graph_digest": "sha256:7d9b8df54ce0bc2cef67676af306c6026c7954fb3416d1ce1eb91b7d0eeda6c5",
           "internal_reverse_edges": 11,
           "language_coverage": [
             "typescript",
@@ -321,7 +321,7 @@
             "document:eval/README.md",
             "receipt:receipts/graph/arca-jev-03-canary-stand.json"
           ],
-          "source_commit": "e904e828e857669089d0917369c1d21a30ccb275"
+          "source_commit": "7dfa751c184a74361348679f35c258df57975486"
         }
       },
       "scope": "graph_non_seed_dependents"
@@ -333,17 +333,17 @@
     "builder_version": "1.0.6",
     "built_at_utc": "2026-09-05T00:00:00Z",
     "graph_digest": "sha256:60cabe23716bac93106c2a21167faef59c8616bfeaa1dac4337cf6c6bb23e07e",
-    "path": "/tmp/arcana-verify-edsqspqy/verifier-out/graph-9af89919d949.json",
+    "path": "/tmp/arcana-verify-1yyx5ry_/verifier-out/graph-9af89919d949.json",
     "source_commit": "9af89919d949c6219719980283c20f9bc00714d9"
   },
   "head_graph": {
     "builder_version": "1.0.6",
     "built_at_utc": "2026-09-05T00:00:00Z",
-    "graph_digest": "sha256:1684a70e6b924d5af706c8bcaf1143483e65c07bd82555f584113639987f3f4c",
-    "path": "/tmp/arcana-verify-edsqspqy/verifier-out/graph-head-e904e828e857.json",
-    "source_commit": "e904e828e857669089d0917369c1d21a30ccb275",
+    "graph_digest": "sha256:7d9b8df54ce0bc2cef67676af306c6026c7954fb3416d1ce1eb91b7d0eeda6c5",
+    "path": "/tmp/arcana-verify-1yyx5ry_/verifier-out/graph-head-7dfa751c184a.json",
+    "source_commit": "7dfa751c184a74361348679f35c258df57975486",
     "staleness": {
-      "checked_at_utc": "2026-11-11T04:52:57Z",
+      "checked_at_utc": "2026-11-11T04:53:31Z",
       "checked_nodes": 132,
       "method": "manifest.dirty must be false; manifest.source_commit == change_set.head; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at head (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
       "mismatched_nodes": [],
@@ -370,7 +370,7 @@
     "tool": "tools/graph/verify.py",
     "version": "1.4.1"
   },
-  "receipt_id": "car-verify-20261111T045254Z-e904e828",
+  "receipt_id": "car-verify-20261111T045324Z-7dfa751c",
   "receipt_path": "receipts/graph/arca-jev-03-canary-stand.json",
   "repo": {
     "name": "Arcanada-one/arcanada-shared",
@@ -392,7 +392,7 @@
   },
   "schema": "ChangeAdmissionReceipt/v1",
   "staleness": {
-    "checked_at_utc": "2026-11-11T04:52:57Z",
+    "checked_at_utc": "2026-11-11T04:53:31Z",
     "method": "manifest.dirty must be false; manifest.source_commit == change_set.base; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at base (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
     "mismatched_nodes": [],
     "verdict": "fresh"
@@ -401,7 +401,7 @@
     {
       "content_hash": {
         "base": null,
-        "head": "sha256:5b48dca1c7a095c2fad283d1f5a44af220e02455caf51cce499ea8fa63a47970"
+        "head": "sha256:f1771750cc8951af40e8a54c381003e13446a9482b2c11f6fa9af213299c0f87"
       },
       "entity": "receipt:receipts/graph/arca-jev-03-canary-stand.json",
       "node_type": "receipt",
@@ -415,7 +415,7 @@
     }
   ],
   "tree": {
-    "commit": "e904e828e857669089d0917369c1d21a30ccb275",
+    "commit": "7dfa751c184a74361348679f35c258df57975486",
     "dirty": false
   },
   "verdicts": [
@@ -464,8 +464,8 @@
   },
   "verifiers": [
     {
-      "command": "/home/dev/aup/claude-work/d5-next-7dc800cf-arca-jev-03-cur-20261111T0438Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-7dc800cf-arca-jev-03-cur-20261111T0438Z/arcanada-shared/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-edsqspqy/verifier-out/type-check-ucaa637s/check.tsbuildinfo --listFiles",
-      "duration_s": 3.68,
+      "command": "/home/dev/aup/claude-work/d5-next-7dc800cf-arca-jev-03-cur-20261111T0438Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-7dc800cf-arca-jev-03-cur-20261111T0438Z/arcanada-shared/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-1yyx5ry_/verifier-out/type-check-q42ae_6p/check.tsbuildinfo --listFiles",
+      "duration_s": 5.14,
       "entities": ["code_unit:tests/canary.test.mjs"],
       "entity_verdicts": {
         "code_unit:tests/canary.test.mjs": "verified"
@@ -473,8 +473,8 @@
       "exit_code": 0,
       "id": "v-type-check-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-edsqspqy/verifier-out/v-type-check-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:52:59Z",
+      "output_ref": "/tmp/arcana-verify-1yyx5ry_/verifier-out/v-type-check-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:53:33Z",
       "summary": "tsconfig.json: exit 0, 0 error(s), 467 files listed"
     },
     {
@@ -497,13 +497,13 @@
       "exit_code": 0,
       "id": "v-fitness",
       "kind": "fitness_rules",
-      "output_ref": "/tmp/arcana-verify-edsqspqy/verifier-out/v-fitness.json",
-      "started_at_utc": "2026-11-11T04:53:02Z",
+      "output_ref": "/tmp/arcana-verify-1yyx5ry_/verifier-out/v-fitness.json",
+      "started_at_utc": "2026-11-11T04:53:39Z",
       "summary": "0 finding(s): 0 new / 0 frozen; 0 entity(ies) failed"
     },
     {
       "command": "verify.py doc_reference: path / route / model references of affected documents resolve at head",
-      "duration_s": 0.0,
+      "duration_s": 0.01,
       "entities": ["document:eval/README.md"],
       "entity_verdicts": {
         "document:eval/README.md": "verified"
@@ -511,8 +511,8 @@
       "exit_code": 0,
       "id": "v-doc-reference",
       "kind": "doc_reference",
-      "output_ref": "/tmp/arcana-verify-edsqspqy/verifier-out/v-doc-reference.txt",
-      "started_at_utc": "2026-11-11T04:53:02Z",
+      "output_ref": "/tmp/arcana-verify-1yyx5ry_/verifier-out/v-doc-reference.txt",
+      "started_at_utc": "2026-11-11T04:53:39Z",
       "summary": "1 document(s), 0 failed"
     }
   ],
@@ -554,9 +554,9 @@
       "receipt:receipts/graph/arca-jev-03-canary-stand.json": []
     },
     "seconds": {
-      "prepare": 0.89,
-      "total": 8.52,
-      "verifiers": 3.73
+      "prepare": 1.05,
+      "total": 14.6,
+      "verifiers": 5.2
     }
   },
   "work_item": "ARCA-JEV-03"
