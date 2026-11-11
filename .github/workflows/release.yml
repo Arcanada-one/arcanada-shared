@@ -200,6 +200,7 @@ jobs:
             case "$package_name" in
               "@arcanada/access-contracts" | \
               "@arcanada/eslint-config" | \
+              "@arcanada/jev-decision-templates" | \
               "@arcanada/logger" | \
               "@arcanada/nest-common" | \
               "@arcanada/throttle" | \

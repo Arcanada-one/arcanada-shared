@@ -19,6 +19,7 @@ dependency bump, or a new pattern rolls out everywhere at once.
 | --------------------------------------------------- | ------------------------------------------------------------- | --------- |
 | [`@arcanada/tsconfig`](packages/tsconfig)           | Shared TypeScript base configs (`base` / `nestjs` / `react`). | available |
 | [`@arcanada/eslint-config`](packages/eslint-config) | Flat ESLint config factories (`nestjs()` / `react()`).        | available |
+| [`@arcanada/jev-decision-templates`](packages/jev-decision-templates) | English JEV decision templates, state whitelists/deny-list, and `validate(template, state)`. | available |
 
 More packages (`@arcanada/throttle`, `@arcanada/nest-common`,
 `@arcanada/logger`, `@arcanada/ui`, …) land as the ecosystem extracts further
