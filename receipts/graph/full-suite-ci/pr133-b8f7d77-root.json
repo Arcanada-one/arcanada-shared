@@ -5,7 +5,7 @@
   "deployable": ".",
   "command": ["pnpm", "test"],
   "source_commit": "b8f7d77752149c64795e54ef9956132e99338b58",
-  "checkout_commit": "b8f7d77752149c64795e54ef9956132e99338b58",
+  "checkout_commit": "05571fdefc8f07f6866d5d387a7ed7aeffa54b9e",
   "run_id": 42959729224,
   "job_id": 130323154690,
   "run_attempt": 1,
