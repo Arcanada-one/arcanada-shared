@@ -21,7 +21,7 @@ catalog:
   eslint: ^10.13.0
   prettier: ^3.4.2
   reflect-metadata: ^0.2.2
-  tsup: ^8.3.5
+  tsup: ^9.0.0
   typescript: ^5.7.2
   vitest: ^5.1.0
   yaml: ^2.9.1
