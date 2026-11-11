@@ -10,7 +10,35 @@ updates:
       - "/packages/*"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 3
+    groups:
+      nestjs:
+        patterns:
+          - "@nestjs/*"
+      eslint-typescript:
+        patterns:
+          - "@typescript-eslint/*"
+          - eslint
+      tooling:
+        patterns:
+          - prettier
+          - tsup
+          - typescript
+          - vitest
+          - yaml
+          - "@changesets/cli"
+          - "@types/node"
+      runtime-libs:
+        patterns:
+          - rate-limiter-flexible
+          - ioredis
+          - ioredis-mock
+          - reflect-metadata
+          - zod
+          - openid-client
+          - pino
+          - pino-http
+          - nestjs-pino
     ignore:
       # `@types/node` majors track the Node major they describe, so the types
       # must follow `engines.node` (>=22.14.0) — not npm's `latest`. A newer
@@ -23,7 +51,23 @@ updates:
       # test; do not let it ride in on a routine dependency bump.
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
+      # Majors need a deliberate migration PR, not a weekly storm.
+      - dependency-name: "@nestjs/common"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nestjs/core"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nestjs/throttler"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: tsup
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@changesets/cli"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 3
+    groups:
+      github-actions:
+        patterns:
+          - "*"
