@@ -45,11 +45,7 @@ const deepClone = <T>(value: T): T => structuredClone(value);
  * ---------------------------------------------------------------------------------------------------------------- */
 
 export type Projection =
-  | "unbound"
-  | "awaiting_snapshot"
-  | "current"
-  | "reconciling"
-  | "cleared";
+  "unbound" | "awaiting_snapshot" | "current" | "reconciling" | "cleared";
 
 export type HoldCode =
   | "INVALID_FRAME"

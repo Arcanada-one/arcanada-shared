@@ -444,10 +444,7 @@ function descriptorIdentity(d: PersonalCaptureDescriptor): string {
 }
 
 export type PersonalCaptureRetryDecision =
-  | "same_intent"
-  | "conflict"
-  | "different_scope"
-  | "invalid";
+  "same_intent" | "conflict" | "different_scope" | "invalid";
 
 /** Never use a caller's claimed fingerprint alone to establish retry identity. */
 export function comparePersonalCaptureRetry(
