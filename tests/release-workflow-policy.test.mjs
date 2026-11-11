@@ -215,7 +215,7 @@ const PRIVILEGED_STEP_ALLOWLIST = {
       keys: ["env", "name", "run"],
       name: "Publish only validated package tarballs",
       runSha256:
-        "89b0d9c4b9d130750242ad41c86d0773465dbfbf2eb0362425cb44cce2a3c6df",
+        "5b0e0e109f24abb7253b0ff5854182d2f947df034e3d0d1ef21e122fe562c52e",
       env: {
         GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
         GH_REPO: "${{ github.repository }}",

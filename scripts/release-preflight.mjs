@@ -19,6 +19,10 @@ export const RELEASE_PACKAGES = Object.freeze(
       directory: "packages/eslint-config",
     },
     {
+      name: "@arcanada/jev-decision-templates",
+      directory: "packages/jev-decision-templates",
+    },
+    {
       name: "@arcanada/logger",
       directory: "packages/logger",
     },

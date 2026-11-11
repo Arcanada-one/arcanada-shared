@@ -1,0 +1,20 @@
+id: kc.skill_relevance
+version: 1
+primitive: noul
+instructions: >
+  Given the task and the selected role, decide whether the candidate skill is
+  necessary. Candidates are supplied by the deterministic shortlist.
+criteria:
+  true: The skill is necessary for the task under the selected role.
+  false: The skill is not necessary for the task under the selected role.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties:
+    skill_id:
+      type: string
+      pattern: "^[a-z][a-z0-9_]{0,63}$"
+  required:
+    - skill_id
+state_schema_ref: kc
+allow_non_ascii: []

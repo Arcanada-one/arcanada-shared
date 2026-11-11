@@ -1,0 +1,28 @@
+id: task.intent
+version: 1
+primitive: choice
+instructions: >
+  Classify the primary intent of the task described in state.trusted.task_text.
+options:
+  - id: implement
+    description: Build or extend a feature or capability.
+  - id: fix
+    description: Correct a defect or regression.
+  - id: research
+    description: Investigate and report without shipping product code.
+  - id: review
+    description: Review existing work for quality or compliance.
+  - id: operate
+    description: Run or repair an operational procedure.
+  - id: document
+    description: Author or update documentation.
+  - id: migrate
+    description: Move data, config, or code between systems.
+  - id: other
+    description: None of the listed intents fits.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: task
+allow_non_ascii: []

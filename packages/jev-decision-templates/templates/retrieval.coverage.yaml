@@ -1,0 +1,15 @@
+id: retrieval.coverage
+version: 1
+primitive: noul
+instructions: >
+  Decide whether the currently selected fragment set is sufficient to answer
+  the question in state.trusted.question.
+criteria:
+  true: The selected set is sufficient to answer the question.
+  false: The selected set is not sufficient to answer the question.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: retrieval
+allow_non_ascii: []

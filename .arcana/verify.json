@@ -18,7 +18,15 @@
       "full_test": ["pnpm", "test"],
       "full_test_timeout_seconds": 900
     },
+    "packages/jev-decision-templates": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
     "packages/nest-common": {
+      "full_test": ["pnpm", "test"],
+      "full_test_timeout_seconds": 900
+    },
+    "packages/oidc-bff": {
       "full_test": ["pnpm", "test"],
       "full_test_timeout_seconds": 900
     },

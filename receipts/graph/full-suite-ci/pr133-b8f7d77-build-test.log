@@ -1,0 +1,948 @@
+﻿2026-11-11T04:31:00.0882816Z Current runner version: '2.338.2'
+2026-11-11T04:31:00.0903225Z ##[group]Runner Image Provisioner
+2026-11-11T04:31:00.0903986Z Hosted Compute Agent
+2026-11-11T04:31:00.0904476Z Version: 20261028.624
+2026-11-11T04:31:00.0904986Z Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+2026-11-11T04:31:00.0905628Z Build Date: 2026-10-28T21:51:42Z
+2026-11-11T04:31:00.0906183Z Worker ID: {b9a16f2d-5abb-42cc-98a7-91e1ffdfcb2d}
+2026-11-11T04:31:00.0906752Z Region: centralus
+2026-11-11T04:31:00.0907239Z Cloud: Azure
+2026-11-11T04:31:00.0907705Z ##[endgroup]
+2026-11-11T04:31:00.0909098Z ##[group]Operating System
+2026-11-11T04:31:00.0909617Z Ubuntu
+2026-11-11T04:31:00.0910032Z 26.04.1
+2026-11-11T04:31:00.0910474Z LTS
+2026-11-11T04:31:00.0910892Z ##[endgroup]
+2026-11-11T04:31:00.0911363Z ##[group]Runner Image
+2026-11-11T04:31:00.0912169Z Image: ubuntu-26.04
+2026-11-11T04:31:00.0912657Z Version: 20261101.186.1
+2026-11-11T04:31:00.0913715Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261101.186/images/ubuntu/Ubuntu2604-Readme.md
+2026-11-11T04:31:00.0914963Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261101.186
+2026-11-11T04:31:00.0915752Z ##[endgroup]
+2026-11-11T04:31:00.0916664Z ##[group]GITHUB_TOKEN Permissions
+2026-11-11T04:31:00.0918465Z Contents: read
+2026-11-11T04:31:00.0919022Z Metadata: read
+2026-11-11T04:31:00.0919554Z ##[endgroup]
+2026-11-11T04:31:00.0921271Z Secret source: Actions
+2026-11-11T04:31:00.0922405Z Cache mode: write
+2026-11-11T04:31:00.0923218Z Prepare workflow directory
+2026-11-11T04:31:00.1239263Z Prepare all required actions
+2026-11-11T04:31:00.1282642Z Getting action download info
+2026-11-11T04:31:00.4063747Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-11T04:31:00.5426434Z Download action repository 'pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271' (SHA:0ebf47130e4866e96fce0953f49152a61190b271)
+2026-11-11T04:31:00.8250686Z Download action repository 'actions/setup-node@820762786026740c76f36085b0efc47a31fe5020' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+2026-11-11T04:31:01.0288287Z Complete job name: build-test
+2026-11-11T04:31:01.1002125Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-11T04:31:01.1003233Z with:
+2026-11-11T04:31:01.1003676Z   persist-credentials: false
+2026-11-11T04:31:01.1004229Z   repository: Arcanada-one/arcanada-shared
+2026-11-11T04:31:01.1007704Z   token: ***
+2026-11-11T04:31:01.1008141Z   ssh-strict: true
+2026-11-11T04:31:01.1008666Z   ssh-user: git
+2026-11-11T04:31:01.1009133Z   clean: true
+2026-11-11T04:31:01.1009629Z   sparse-checkout-cone-mode: true
+2026-11-11T04:31:01.1010171Z   fetch-depth: 1
+2026-11-11T04:31:01.1010650Z   fetch-tags: false
+2026-11-11T04:31:01.1011138Z   show-progress: true
+2026-11-11T04:31:01.1011585Z   lfs: false
+2026-11-11T04:31:01.1012151Z   submodules: false
+2026-11-11T04:31:01.1012630Z   set-safe-directory: true
+2026-11-11T04:31:01.1013168Z   allow-unsafe-pr-checkout: false
+2026-11-11T04:31:01.1013926Z ##[endgroup]
+2026-11-11T04:31:01.3457994Z Syncing repository: Arcanada-one/arcanada-shared
+2026-11-11T04:31:01.3460497Z ##[group]Getting Git version info
+2026-11-11T04:31:01.3461590Z Working directory is '/home/runner/work/arcanada-shared/arcanada-shared'
+2026-11-11T04:31:01.3463342Z [command]/usr/bin/git version
+2026-11-11T04:31:01.3463954Z git version 2.56.0
+2026-11-11T04:31:01.3466090Z ##[endgroup]
+2026-11-11T04:31:01.3472700Z Temporarily overriding HOME='/home/runner/work/_temp/71e44865-50c8-4e50-a021-b11734851365' before making global git config changes
+2026-11-11T04:31:01.3474656Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-11T04:31:01.3476421Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/arcanada-shared/arcanada-shared
+2026-11-11T04:31:01.3543830Z Deleting the contents of '/home/runner/work/arcanada-shared/arcanada-shared'
+2026-11-11T04:31:01.3554913Z ##[group]Determining repository object format
+2026-11-11T04:31:01.3556789Z ##[endgroup]
+2026-11-11T04:31:01.3563888Z ##[group]Initializing the repository
+2026-11-11T04:31:01.3565144Z [command]/usr/bin/git init /home/runner/work/arcanada-shared/arcanada-shared
+2026-11-11T04:31:01.3639058Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-11T04:31:01.3640418Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-11T04:31:01.3641447Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-11T04:31:01.3642538Z hint: call:
+2026-11-11T04:31:01.3643006Z hint:
+2026-11-11T04:31:01.3643699Z hint: 	git config --global init.defaultBranch <name>
+2026-11-11T04:31:01.3644614Z hint:
+2026-11-11T04:31:01.3645258Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-11T04:31:01.3646306Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-11T04:31:01.3647230Z hint:
+2026-11-11T04:31:01.3647771Z hint: 	git branch -m <name>
+2026-11-11T04:31:01.3648380Z hint:
+2026-11-11T04:31:01.3649309Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-11T04:31:01.3651043Z Initialized empty Git repository in /home/runner/work/arcanada-shared/arcanada-shared/.git/
+2026-11-11T04:31:01.3664421Z [command]/usr/bin/git remote add origin https://github.com/Arcanada-one/arcanada-shared
+2026-11-11T04:31:01.3704163Z ##[endgroup]
+2026-11-11T04:31:01.3705249Z ##[group]Disabling automatic garbage collection
+2026-11-11T04:31:01.3706613Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-11T04:31:01.3735200Z ##[endgroup]
+2026-11-11T04:31:01.3736456Z ##[group]Setting up auth
+2026-11-11T04:31:01.3737441Z Removing SSH command configuration
+2026-11-11T04:31:01.3738537Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-11T04:31:01.3763450Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-11T04:31:01.4129504Z Removing HTTP extra header
+2026-11-11T04:31:01.4135442Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-11T04:31:01.4161644Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-11T04:31:01.4362722Z Removing includeIf entries pointing to credentials config files
+2026-11-11T04:31:01.4367332Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-11T04:31:01.4391176Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-11T04:31:01.4581685Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-11T04:31:01.4613984Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git.path /home/runner/work/_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.4638466Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.4664973Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.4690108Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.4714539Z ##[endgroup]
+2026-11-11T04:31:01.4715679Z ##[group]Fetching the repository
+2026-11-11T04:31:01.4721171Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +05571fdefc8f07f6866d5d387a7ed7aeffa54b9e:refs/remotes/pull/133/merge
+2026-11-11T04:31:01.8533487Z From https://github.com/Arcanada-one/arcanada-shared
+2026-11-11T04:31:01.8535821Z  * [new ref]         05571fdefc8f07f6866d5d387a7ed7aeffa54b9e -> pull/133/merge
+2026-11-11T04:31:01.8539525Z ##[endgroup]
+2026-11-11T04:31:01.8541162Z ##[group]Determining the checkout info
+2026-11-11T04:31:01.8543167Z ##[endgroup]
+2026-11-11T04:31:01.8544001Z [command]/usr/bin/git sparse-checkout disable
+2026-11-11T04:31:01.8585942Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-11T04:31:01.8610697Z ##[group]Checking out the ref
+2026-11-11T04:31:01.8613272Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/133/merge
+2026-11-11T04:31:01.8747375Z Note: switching to 'refs/remotes/pull/133/merge'.
+2026-11-11T04:31:01.8748528Z 
+2026-11-11T04:31:01.8749380Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-11T04:31:01.8751444Z changes and commit them, and you can discard any commits you make in this
+2026-11-11T04:31:01.8753950Z state without impacting any branches by switching back to a branch.
+2026-11-11T04:31:01.8755104Z 
+2026-11-11T04:31:01.8755916Z If you want to create a new branch to retain commits you create, you may
+2026-11-11T04:31:01.8757977Z do so (now or later) by using -c with the switch command. Example:
+2026-11-11T04:31:01.8759163Z 
+2026-11-11T04:31:01.8759576Z   git switch -c <new-branch-name>
+2026-11-11T04:31:01.8760281Z 
+2026-11-11T04:31:01.8760698Z Or undo this operation with:
+2026-11-11T04:31:01.8761393Z 
+2026-11-11T04:31:01.8762104Z   git switch -
+2026-11-11T04:31:01.8762935Z 
+2026-11-11T04:31:01.8763855Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-11T04:31:01.8765194Z 
+2026-11-11T04:31:01.8766540Z HEAD is now at 05571fd Merge b8f7d77752149c64795e54ef9956132e99338b58 into 9af89919d949c6219719980283c20f9bc00714d9
+2026-11-11T04:31:01.8771653Z ##[endgroup]
+2026-11-11T04:31:01.8790591Z [command]/usr/bin/git log -1 --format=%H
+2026-11-11T04:31:01.8809555Z 05571fdefc8f07f6866d5d387a7ed7aeffa54b9e
+2026-11-11T04:31:01.8819495Z ##[group]Removing auth
+2026-11-11T04:31:01.8821104Z Removing SSH command configuration
+2026-11-11T04:31:01.8824078Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-11T04:31:01.8848714Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-11T04:31:01.9045678Z Removing HTTP extra header
+2026-11-11T04:31:01.9048491Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-11T04:31:01.9071730Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-11T04:31:01.9263663Z Removing includeIf entries pointing to credentials config files
+2026-11-11T04:31:01.9266267Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-11T04:31:01.9282619Z includeif.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git.path
+2026-11-11T04:31:01.9285858Z includeif.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git/worktrees/*.path
+2026-11-11T04:31:01.9287900Z includeif.gitdir:/github/workspace/.git.path
+2026-11-11T04:31:01.9289412Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-11T04:31:01.9293638Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git.path
+2026-11-11T04:31:01.9307747Z /home/runner/work/_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.9317514Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-a016c5c9\-8673\-458f\-b0ce\-9650207c720d\.config
+2026-11-11T04:31:01.9347369Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git/worktrees/*.path
+2026-11-11T04:31:01.9363825Z /home/runner/work/_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.9373407Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/arcanada-shared/arcanada-shared/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-a016c5c9\-8673\-458f\-b0ce\-9650207c720d\.config
+2026-11-11T04:31:01.9402478Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-11T04:31:01.9419394Z /github/runner_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.9428854Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-a016c5c9\-8673\-458f\-b0ce\-9650207c720d\.config
+2026-11-11T04:31:01.9461221Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-11T04:31:01.9478531Z /github/runner_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config
+2026-11-11T04:31:01.9485346Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-a016c5c9\-8673\-458f\-b0ce\-9650207c720d\.config
+2026-11-11T04:31:01.9509727Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-11T04:31:01.9705439Z Removing credentials config '/home/runner/work/_temp/git-credentials-a016c5c9-8673-458f-b0ce-9650207c720d.config'
+2026-11-11T04:31:01.9712892Z ##[endgroup]
+2026-11-11T04:31:01.9991273Z ##[group]Run pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
+2026-11-11T04:31:01.9992867Z with:
+2026-11-11T04:31:01.9993678Z   dest: ~/setup-pnpm
+2026-11-11T04:31:01.9994563Z   run_install: null
+2026-11-11T04:31:01.9995455Z   cache: false
+2026-11-11T04:31:01.9996341Z   cache_dependency_path: pnpm-lock.yaml
+2026-11-11T04:31:01.9997488Z   package_json_file: package.json
+2026-11-11T04:31:01.9998535Z   standalone: false
+2026-11-11T04:31:01.9999379Z ##[endgroup]
+2026-11-11T04:31:02.1318372Z ##[group]Running self-installer...
+2026-11-11T04:31:04.9652522Z 
+2026-11-11T04:31:04.9653689Z added 1 package, and audited 2 packages in 2s
+2026-11-11T04:31:04.9655139Z 
+2026-11-11T04:31:04.9657628Z 1 package is looking for funding
+2026-11-11T04:31:04.9658579Z   run `npm fund` for details
+2026-11-11T04:31:04.9757832Z 
+2026-11-11T04:31:04.9758611Z 1 high severity vulnerability
+2026-11-11T04:31:04.9759495Z 
+2026-11-11T04:31:04.9760570Z To address all issues, run:
+2026-11-11T04:31:04.9761985Z   npm audit fix --force
+2026-11-11T04:31:04.9762357Z 
+2026-11-11T04:31:04.9762769Z Run `npm audit` for details.
+2026-11-11T04:31:05.5024642Z Checking for updates...
+2026-11-11T04:31:05.6674750Z Switching pnpm from v11.7.0 to v11.17.0...
+2026-11-11T04:31:06.2222914Z .../.bin/global/v11/915-1a1c8dfb358      | Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-11-11T04:31:06.2236983Z .../.bin/global/v11/915-1a1c8dfb358      |   +1 +
+2026-11-11T04:31:06.5057794Z .../.bin/global/v11/915-1a1c8dfb358      | Progress: resolved 1, reused 0, downloaded 1, added 1, done
+2026-11-11T04:31:06.5331318Z [WARN] Detected a pnpm v10 installation layout at PNPM_HOME. The pnpm shims at PNPM_HOME have been refreshed so the new version is active, but pnpm v11 expects bins in PNPM_HOME/bin. Run "pnpm setup" to migrate your PATH to the v11 layout.
+2026-11-11T04:31:06.5363008Z Successfully updated pnpm to v11.17.0
+2026-11-11T04:31:06.7696354Z ##[endgroup]
+2026-11-11T04:31:06.7697373Z Installation Completed!
+2026-11-11T04:31:06.7887884Z ##[group]Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+2026-11-11T04:31:06.7888466Z with:
+2026-11-11T04:31:06.7888760Z   node-version: 22.23.4
+2026-11-11T04:31:06.7889070Z   cache: pnpm
+2026-11-11T04:31:06.7889348Z   check-latest: false
+2026-11-11T04:31:06.7891538Z   token: ***
+2026-11-11T04:31:06.7892001Z   package-manager-cache: true
+2026-11-11T04:31:06.7892329Z env:
+2026-11-11T04:31:06.7892650Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:06.7893055Z ##[endgroup]
+2026-11-11T04:31:06.8997692Z Found in cache @ /opt/hostedtoolcache/node/22.23.4/x64
+2026-11-11T04:31:06.9000576Z ##[group]Environment details
+2026-11-11T04:31:07.2580914Z node: v22.23.4
+2026-11-11T04:31:07.2582760Z npm: 10.9.9
+2026-11-11T04:31:07.2583652Z yarn: 1.22.22
+2026-11-11T04:31:07.2585230Z ##[endgroup]
+2026-11-11T04:31:07.2599047Z [command]/home/runner/setup-pnpm/node_modules/.bin/bin/pnpm store path --silent
+2026-11-11T04:31:07.7746228Z /home/runner/setup-pnpm/node_modules/.bin/store/v11
+2026-11-11T04:31:07.9445408Z Cache hit for: node-cache-Linux-x64-pnpm-d536222ca2c28e377fc5e318c099ffee447628dd5baf85bb24da349329bf6300
+2026-11-11T04:31:08.6394984Z Received 42535960 of 42535960 (100.0%), 74.3 MBs/sec
+2026-11-11T04:31:08.6395770Z Cache Size: ~41 MB (42535960 B)
+2026-11-11T04:31:08.6426293Z [command]/usr/bin/tar -xf /home/runner/work/_temp/be616b81-2a62-46df-b095-debfe3346e45/cache.tzst -P -C /home/runner/work/arcanada-shared/arcanada-shared --use-compress-program unzstd
+2026-11-11T04:31:08.9552819Z Cache restored successfully
+2026-11-11T04:31:08.9575774Z Cache restored from key: node-cache-Linux-x64-pnpm-d536222ca2c28e377fc5e318c099ffee447628dd5baf85bb24da349329bf6300
+2026-11-11T04:31:08.9733866Z ##[group]Run pnpm install --frozen-lockfile
+2026-11-11T04:31:08.9734350Z [36;1mpnpm install --frozen-lockfile[0m
+2026-11-11T04:31:08.9774577Z shell: /usr/bin/bash -e {0}
+2026-11-11T04:31:08.9775016Z env:
+2026-11-11T04:31:08.9775381Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:08.9775741Z ##[endgroup]
+2026-11-11T04:31:09.3850926Z Scope: all 9 workspace projects
+2026-11-11T04:31:09.4675579Z ? Verifying lockfile against supply-chain policies (394 entries)...
+2026-11-11T04:31:09.4738988Z Lockfile is up to date, resolution step is skipped
+2026-11-11T04:31:09.5497027Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-11-11T04:31:09.5922308Z Packages: +319
+2026-11-11T04:31:09.5923409Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-11-11T04:31:10.5528670Z Progress: resolved 319, reused 319, downloaded 0, added 288
+2026-11-11T04:31:10.5807534Z Progress: resolved 319, reused 319, downloaded 0, added 319, done
+2026-11-11T04:31:11.9360398Z ✓ Lockfile passes supply-chain policies (394 entries in 2.4s)
+2026-11-11T04:31:12.0057665Z 
+2026-11-11T04:31:12.0058618Z devDependencies:
+2026-11-11T04:31:12.0059351Z + @arcanada/eslint-config 0.2.0 <- packages/eslint-config
+2026-11-11T04:31:12.0060172Z + @changesets/cli 2.31.1
+2026-11-11T04:31:12.0060632Z + @types/node 22.20.5
+2026-11-11T04:31:12.0061233Z + @typescript-eslint/eslint-plugin 8.69.0
+2026-11-11T04:31:12.0062011Z + @typescript-eslint/parser 8.72.1
+2026-11-11T04:31:12.0062520Z + eslint 10.13.0
+2026-11-11T04:31:12.0062938Z + prettier 3.8.3
+2026-11-11T04:31:12.0063377Z + typescript 5.9.3
+2026-11-11T04:31:12.0063844Z + vitest 5.1.0
+2026-11-11T04:31:12.0064226Z + yaml 2.9.0
+2026-11-11T04:31:12.0064446Z 
+2026-11-11T04:31:12.0209884Z packages/access-contracts prepare$ pnpm run build
+2026-11-11T04:31:12.0216780Z packages/jev-decision-templates prepare$ pnpm run build
+2026-11-11T04:31:12.4090379Z packages/access-contracts prepare: $ tsup src/index.ts --format esm,cjs --dts --clean
+2026-11-11T04:31:12.4116331Z packages/jev-decision-templates prepare: $ tsup src/index.ts --format esm,cjs --dts --clean
+2026-11-11T04:31:12.6847754Z packages/jev-decision-templates prepare: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:12.6849348Z packages/jev-decision-templates prepare: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:12.6850873Z packages/jev-decision-templates prepare: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:12.6913702Z packages/jev-decision-templates prepare: [34mCLI[39m Target: es2022
+2026-11-11T04:31:12.6930708Z packages/jev-decision-templates prepare: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:12.6943402Z packages/jev-decision-templates prepare: [34mESM[39m Build start
+2026-11-11T04:31:12.6958054Z packages/jev-decision-templates prepare: [34mCJS[39m Build start
+2026-11-11T04:31:12.6959135Z packages/access-contracts prepare: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:12.6960388Z packages/access-contracts prepare: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:12.6961415Z packages/access-contracts prepare: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:12.7053030Z packages/access-contracts prepare: [34mCLI[39m Target: es2022
+2026-11-11T04:31:12.7093213Z packages/access-contracts prepare: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:12.7106746Z packages/access-contracts prepare: [34mESM[39m Build start
+2026-11-11T04:31:12.7111110Z packages/access-contracts prepare: [34mCJS[39m Build start
+2026-11-11T04:31:12.7311912Z packages/jev-decision-templates prepare: [warn] [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1m"import.meta" is not available with the "cjs" output format and will be empty[0m [empty-import-meta]
+2026-11-11T04:31:12.7320295Z packages/jev-decision-templates prepare:     src/load.ts:28:31:
+2026-11-11T04:31:12.7322214Z packages/jev-decision-templates prepare: [37m      28 │   return dirname(fileURLToPath([32mimport.meta[37m.url));
+2026-11-11T04:31:12.7327366Z packages/jev-decision-templates prepare:          ╵                                [32m~~~~~~~~~~~[0m
+2026-11-11T04:31:12.7328967Z packages/jev-decision-templates prepare:   You need to set the output format to "esm" for "import.meta" to work correctly.
+2026-11-11T04:31:12.7330531Z packages/jev-decision-templates prepare: [32mESM[39m [1mdist/index.js [22m[32m12.76 KB[39m
+2026-11-11T04:31:12.7331942Z packages/jev-decision-templates prepare: [32mESM[39m ⚡️ Build success in 40ms
+2026-11-11T04:31:12.7354685Z packages/jev-decision-templates prepare: [32mCJS[39m [1mdist/index.cjs [22m[32m14.78 KB[39m
+2026-11-11T04:31:12.7356358Z packages/jev-decision-templates prepare: [32mCJS[39m ⚡️ Build success in 42ms
+2026-11-11T04:31:12.7858321Z packages/access-contracts prepare: [32mCJS[39m [1mdist/index.cjs [22m[32m195.69 KB[39m
+2026-11-11T04:31:12.7859340Z packages/access-contracts prepare: [32mCJS[39m ⚡️ Build success in 75ms
+2026-11-11T04:31:12.7860323Z packages/access-contracts prepare: [32mESM[39m [1mdist/index.js [22m[32m190.88 KB[39m
+2026-11-11T04:31:12.7861137Z packages/access-contracts prepare: [32mESM[39m ⚡️ Build success in 75ms
+2026-11-11T04:31:12.9799832Z packages/jev-decision-templates prepare: [34mDTS[39m Build start
+2026-11-11T04:31:12.9839129Z packages/access-contracts prepare: [34mDTS[39m Build start
+2026-11-11T04:31:14.2893384Z packages/jev-decision-templates prepare: [32mDTS[39m ⚡️ Build success in 1310ms
+2026-11-11T04:31:14.2896354Z packages/jev-decision-templates prepare: [32mDTS[39m [1mdist/index.d.ts  [22m[32m4.43 KB[39m
+2026-11-11T04:31:14.2897175Z packages/jev-decision-templates prepare: [32mDTS[39m [1mdist/index.d.cts [22m[32m4.43 KB[39m
+2026-11-11T04:31:14.3363946Z packages/jev-decision-templates prepare: Done
+2026-11-11T04:31:14.9141632Z packages/access-contracts prepare: [32mDTS[39m ⚡️ Build success in 1931ms
+2026-11-11T04:31:14.9142693Z packages/access-contracts prepare: [32mDTS[39m [1mdist/index.d.ts  [22m[32m57.48 KB[39m
+2026-11-11T04:31:14.9143509Z packages/access-contracts prepare: [32mDTS[39m [1mdist/index.d.cts [22m[32m57.48 KB[39m
+2026-11-11T04:31:14.9421858Z packages/access-contracts prepare: Done
+2026-11-11T04:31:14.9674125Z Done in 5.9s using pnpm v11.17.0
+2026-11-11T04:31:15.0026286Z ##[group]Run pnpm lint
+2026-11-11T04:31:15.0026708Z [36;1mpnpm lint[0m
+2026-11-11T04:31:15.0057279Z shell: /usr/bin/bash -e {0}
+2026-11-11T04:31:15.0057639Z env:
+2026-11-11T04:31:15.0058123Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:15.0058569Z ##[endgroup]
+2026-11-11T04:31:15.3959555Z $ pnpm -r --if-present lint && prettier --check "**/*.{ts,mjs,md,json,yml,yaml}"
+2026-11-11T04:31:15.7785484Z Scope: 8 of 9 workspace projects
+2026-11-11T04:31:15.8839958Z Checking formatting...
+2026-11-11T04:31:18.3469735Z All matched files use Prettier code style!
+2026-11-11T04:31:18.3873414Z ##[group]Run pnpm typecheck
+2026-11-11T04:31:18.3873767Z [36;1mpnpm typecheck[0m
+2026-11-11T04:31:18.3906120Z shell: /usr/bin/bash -e {0}
+2026-11-11T04:31:18.3906688Z env:
+2026-11-11T04:31:18.3907100Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:18.3907560Z ##[endgroup]
+2026-11-11T04:31:18.7935063Z $ tsc --noEmit && pnpm -r exec tsc --noEmit
+2026-11-11T04:31:27.3265466Z ##[group]Run pnpm build
+2026-11-11T04:31:27.3265973Z [36;1mpnpm build[0m
+2026-11-11T04:31:27.3308994Z shell: /usr/bin/bash -e {0}
+2026-11-11T04:31:27.3309487Z env:
+2026-11-11T04:31:27.3309979Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:27.3310651Z ##[endgroup]
+2026-11-11T04:31:27.7592989Z $ pnpm -r build
+2026-11-11T04:31:28.1772553Z Scope: 8 of 9 workspace projects
+2026-11-11T04:31:28.1917286Z packages/access-contracts build$ tsup src/index.ts --format esm,cjs --dts --clean
+2026-11-11T04:31:28.1953524Z packages/eslint-config build$ tsup src/index.ts --format esm --dts --clean
+2026-11-11T04:31:28.2017624Z packages/jev-decision-templates build$ tsup src/index.ts --format esm,cjs --dts --clean
+2026-11-11T04:31:28.2046795Z packages/logger build$ tsup src/index.ts --format esm,cjs --dts --clean
+2026-11-11T04:31:28.6594560Z packages/access-contracts build: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:28.6596153Z packages/access-contracts build: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:28.6623188Z packages/access-contracts build: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:28.6769404Z packages/access-contracts build: [34mCLI[39m Target: es2022
+2026-11-11T04:31:28.6819270Z packages/access-contracts build: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:28.6846130Z packages/access-contracts build: [34mESM[39m Build start
+2026-11-11T04:31:28.6863337Z packages/access-contracts build: [34mCJS[39m Build start
+2026-11-11T04:31:28.6874860Z packages/jev-decision-templates build: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:28.6924273Z packages/jev-decision-templates build: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:28.6982054Z packages/jev-decision-templates build: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:28.7073007Z packages/jev-decision-templates build: [34mCLI[39m Target: es2022
+2026-11-11T04:31:28.7103463Z packages/jev-decision-templates build: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:28.7179353Z packages/jev-decision-templates build: [34mESM[39m Build start
+2026-11-11T04:31:28.7293233Z packages/jev-decision-templates build: [34mCJS[39m Build start
+2026-11-11T04:31:28.7765091Z packages/jev-decision-templates build: [warn] [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1m"import.meta" is not available with the "cjs" output format and will be empty[0m [empty-import-meta]
+2026-11-11T04:31:28.7772886Z packages/jev-decision-templates build:     src/load.ts:28:31:
+2026-11-11T04:31:28.7833361Z packages/jev-decision-templates build: [37m      28 │   return dirname(fileURLToPath([32mimport.meta[37m.url));
+2026-11-11T04:31:28.7893414Z packages/jev-decision-templates build:          ╵                                [32m~~~~~~~~~~~[0m
+2026-11-11T04:31:28.7922897Z packages/jev-decision-templates build:   You need to set the output format to "esm" for "import.meta" to work correctly.
+2026-11-11T04:31:28.7953053Z packages/jev-decision-templates build: [32mCJS[39m [1mdist/index.cjs [22m[32m14.78 KB[39m
+2026-11-11T04:31:28.8003690Z packages/jev-decision-templates build: [32mCJS[39m ⚡️ Build success in 83ms
+2026-11-11T04:31:28.8063291Z packages/jev-decision-templates build: [32mESM[39m [1mdist/index.js [22m[32m12.76 KB[39m
+2026-11-11T04:31:28.8115487Z packages/jev-decision-templates build: [32mESM[39m ⚡️ Build success in 84ms
+2026-11-11T04:31:28.8186813Z packages/logger build: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:28.8232928Z packages/logger build: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:28.8263434Z packages/logger build: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:28.8323048Z packages/logger build: [34mCLI[39m Target: es2022
+2026-11-11T04:31:28.8364149Z packages/logger build: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:28.8365147Z packages/logger build: [34mESM[39m Build start
+2026-11-11T04:31:28.8366083Z packages/logger build: [34mCJS[39m Build start
+2026-11-11T04:31:28.8367719Z packages/logger build: [33mESM[39m [33mYou have emitDecoratorMetadata enabled but @swc/core was not installed, skipping swc plugin[39m
+2026-11-11T04:31:28.8369552Z packages/logger build: [33mCJS[39m [33mYou have emitDecoratorMetadata enabled but @swc/core was not installed, skipping swc plugin[39m
+2026-11-11T04:31:28.8371081Z packages/access-contracts build: [32mCJS[39m [1mdist/index.cjs [22m[32m195.69 KB[39m
+2026-11-11T04:31:28.8372494Z packages/access-contracts build: [32mCJS[39m ⚡️ Build success in 143ms
+2026-11-11T04:31:28.8373670Z packages/access-contracts build: [32mESM[39m [1mdist/index.js [22m[32m190.88 KB[39m
+2026-11-11T04:31:28.8374840Z packages/access-contracts build: [32mESM[39m ⚡️ Build success in 151ms
+2026-11-11T04:31:28.8375970Z packages/logger build: [32mESM[39m [1mdist/index.js [22m[32m1.23 KB[39m
+2026-11-11T04:31:28.8377024Z packages/logger build: [32mESM[39m ⚡️ Build success in 33ms
+2026-11-11T04:31:28.8532839Z packages/logger build: [32mCJS[39m [1mdist/index.cjs [22m[32m2.32 KB[39m
+2026-11-11T04:31:28.8563283Z packages/logger build: [32mCJS[39m ⚡️ Build success in 49ms
+2026-11-11T04:31:29.0943852Z packages/eslint-config build: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:29.0945287Z packages/eslint-config build: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:29.0973262Z packages/eslint-config build: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:29.1060708Z packages/eslint-config build: [34mCLI[39m Target: es2022
+2026-11-11T04:31:29.1117859Z packages/access-contracts build: [34mDTS[39m Build start
+2026-11-11T04:31:29.1134671Z packages/eslint-config build: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:29.1139497Z packages/eslint-config build: [34mESM[39m Build start
+2026-11-11T04:31:29.1473567Z packages/eslint-config build: [32mESM[39m [1mdist/index.js [22m[32m1.24 KB[39m
+2026-11-11T04:31:29.1503184Z packages/eslint-config build: [32mESM[39m ⚡️ Build success in 28ms
+2026-11-11T04:31:29.3153721Z packages/jev-decision-templates build: [34mDTS[39m Build start
+2026-11-11T04:31:29.3844907Z packages/logger build: [34mDTS[39m Build start
+2026-11-11T04:31:29.8823958Z packages/eslint-config build: [34mDTS[39m Build start
+2026-11-11T04:31:31.8779596Z packages/jev-decision-templates build: [32mDTS[39m ⚡️ Build success in 2565ms
+2026-11-11T04:31:31.8794788Z packages/jev-decision-templates build: [32mDTS[39m [1mdist/index.d.ts  [22m[32m4.43 KB[39m
+2026-11-11T04:31:31.8796351Z packages/jev-decision-templates build: [32mDTS[39m [1mdist/index.d.cts [22m[32m4.43 KB[39m
+2026-11-11T04:31:31.9853205Z packages/jev-decision-templates build: Done
+2026-11-11T04:31:31.9898328Z packages/nest-common build$ tsup src/index.ts --format esm,cjs --dts --clean
+2026-11-11T04:31:32.3774058Z packages/eslint-config build: [32mDTS[39m ⚡️ Build success in 2508ms
+2026-11-11T04:31:32.3803431Z packages/eslint-config build: [32mDTS[39m [1mdist/index.d.ts [22m[32m1.28 KB[39m
+2026-11-11T04:31:32.4612992Z packages/eslint-config build: Done
+2026-11-11T04:31:32.4658088Z packages/oidc-bff build$ tsup src/index.ts --format esm --dts --clean
+2026-11-11T04:31:32.8817183Z packages/logger build: [32mDTS[39m ⚡️ Build success in 3503ms
+2026-11-11T04:31:32.8843942Z packages/logger build: [32mDTS[39m [1mdist/index.d.ts  [22m[32m1.77 KB[39m
+2026-11-11T04:31:32.8875331Z packages/logger build: [32mDTS[39m [1mdist/index.d.cts [22m[32m1.77 KB[39m
+2026-11-11T04:31:32.8945368Z packages/nest-common build: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:32.8987467Z packages/nest-common build: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:32.8988820Z packages/nest-common build: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:32.9031724Z packages/nest-common build: [34mCLI[39m Target: es2022
+2026-11-11T04:31:32.9062855Z packages/nest-common build: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:32.9092925Z packages/nest-common build: [34mESM[39m Build start
+2026-11-11T04:31:32.9099801Z packages/nest-common build: [34mCJS[39m Build start
+2026-11-11T04:31:32.9276938Z packages/nest-common build: [33mESM[39m [33mYou have emitDecoratorMetadata enabled but @swc/core was not installed, skipping swc plugin[39m
+2026-11-11T04:31:32.9290540Z packages/nest-common build: [33mCJS[39m [33mYou have emitDecoratorMetadata enabled but @swc/core was not installed, skipping swc plugin[39m
+2026-11-11T04:31:32.9647690Z packages/nest-common build: [32mCJS[39m [1mdist/index.cjs [22m[32m6.75 KB[39m
+2026-11-11T04:31:32.9683250Z packages/nest-common build: [32mCJS[39m ⚡️ Build success in 59ms
+2026-11-11T04:31:32.9725354Z packages/nest-common build: [32mESM[39m [1mdist/index.js [22m[32m5.51 KB[39m
+2026-11-11T04:31:32.9773440Z packages/nest-common build: [32mESM[39m ⚡️ Build success in 61ms
+2026-11-11T04:31:32.9862615Z packages/logger build: Done
+2026-11-11T04:31:32.9910957Z packages/throttle build$ tsup src/index.ts --format esm,cjs --dts --clean
+2026-11-11T04:31:33.2073697Z packages/access-contracts build: [32mDTS[39m ⚡️ Build success in 4095ms
+2026-11-11T04:31:33.2143885Z packages/access-contracts build: [32mDTS[39m [1mdist/index.d.ts  [22m[32m57.48 KB[39m
+2026-11-11T04:31:33.2173517Z packages/access-contracts build: [32mDTS[39m [1mdist/index.d.cts [22m[32m57.48 KB[39m
+2026-11-11T04:31:33.2583575Z packages/oidc-bff build: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:33.2634712Z packages/oidc-bff build: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:33.2653312Z packages/oidc-bff build: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:33.2673938Z packages/oidc-bff build: [34mCLI[39m Target: es2022
+2026-11-11T04:31:33.2736459Z packages/oidc-bff build: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:33.2751830Z packages/oidc-bff build: [34mESM[39m Build start
+2026-11-11T04:31:33.2802929Z packages/access-contracts build: Done
+2026-11-11T04:31:33.2832701Z packages/tsconfig build$ true
+2026-11-11T04:31:33.2915802Z packages/tsconfig build: Done
+2026-11-11T04:31:33.3142959Z packages/oidc-bff build: [32mESM[39m [1mdist/index.js [22m[32m8.61 KB[39m
+2026-11-11T04:31:33.3162778Z packages/oidc-bff build: [32mESM[39m ⚡️ Build success in 38ms
+2026-11-11T04:31:33.3883525Z packages/nest-common build: [34mDTS[39m Build start
+2026-11-11T04:31:33.4867976Z packages/throttle build: [34mCLI[39m Building entry: src/index.ts
+2026-11-11T04:31:33.4886596Z packages/throttle build: [34mCLI[39m Using tsconfig: tsconfig.json
+2026-11-11T04:31:33.4936902Z packages/throttle build: [34mCLI[39m tsup v8.5.1
+2026-11-11T04:31:33.4993249Z packages/throttle build: [34mCLI[39m Target: es2022
+2026-11-11T04:31:33.5013921Z packages/throttle build: [34mCLI[39m Cleaning output folder
+2026-11-11T04:31:33.5053254Z packages/throttle build: [34mESM[39m Build start
+2026-11-11T04:31:33.5079819Z packages/throttle build: [34mCJS[39m Build start
+2026-11-11T04:31:33.5100558Z packages/throttle build: [33mESM[39m [33mYou have emitDecoratorMetadata enabled but @swc/core was not installed, skipping swc plugin[39m
+2026-11-11T04:31:33.5122133Z packages/throttle build: [33mCJS[39m [33mYou have emitDecoratorMetadata enabled but @swc/core was not installed, skipping swc plugin[39m
+2026-11-11T04:31:33.5423227Z packages/throttle build: [32mCJS[39m [1mdist/index.cjs [22m[32m7.42 KB[39m
+2026-11-11T04:31:33.5443199Z packages/throttle build: [32mCJS[39m ⚡️ Build success in 49ms
+2026-11-11T04:31:33.5473320Z packages/throttle build: [32mESM[39m [1mdist/index.js [22m[32m6.35 KB[39m
+2026-11-11T04:31:33.5503023Z packages/throttle build: [32mESM[39m ⚡️ Build success in 50ms
+2026-11-11T04:31:33.7834000Z packages/oidc-bff build: [34mDTS[39m Build start
+2026-11-11T04:31:34.0614286Z packages/throttle build: [34mDTS[39m Build start
+2026-11-11T04:31:35.3603994Z packages/nest-common build: [32mDTS[39m ⚡️ Build success in 1977ms
+2026-11-11T04:31:35.3653587Z packages/nest-common build: [32mDTS[39m [1mdist/index.d.ts  [22m[32m6.77 KB[39m
+2026-11-11T04:31:35.3682562Z packages/nest-common build: [32mDTS[39m [1mdist/index.d.cts [22m[32m6.77 KB[39m
+2026-11-11T04:31:35.4008804Z packages/nest-common build: Done
+2026-11-11T04:31:35.4979632Z packages/oidc-bff build: [32mDTS[39m ⚡️ Build success in 1720ms
+2026-11-11T04:31:35.5003442Z packages/oidc-bff build: [32mDTS[39m [1mdist/index.d.ts [22m[32m1.99 KB[39m
+2026-11-11T04:31:35.5271410Z packages/oidc-bff build: Done
+2026-11-11T04:31:35.7299638Z packages/throttle build: [32mDTS[39m ⚡️ Build success in 1670ms
+2026-11-11T04:31:35.7300395Z packages/throttle build: [32mDTS[39m [1mdist/index.d.ts  [22m[32m6.45 KB[39m
+2026-11-11T04:31:35.7301034Z packages/throttle build: [32mDTS[39m [1mdist/index.d.cts [22m[32m6.45 KB[39m
+2026-11-11T04:31:35.7607035Z packages/throttle build: Done
+2026-11-11T04:31:35.7856976Z ##[group]Run pnpm test
+2026-11-11T04:31:35.7857330Z [36;1mpnpm test[0m
+2026-11-11T04:31:35.7887654Z shell: /usr/bin/bash -e {0}
+2026-11-11T04:31:35.7888035Z env:
+2026-11-11T04:31:35.7888410Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:35.7888766Z ##[endgroup]
+2026-11-11T04:31:36.1933854Z $ pnpm test:workflow && pnpm -r test
+2026-11-11T04:31:36.5516066Z $ node --test tests/*.test.mjs
+2026-11-11T04:31:36.6048384Z TAP version 13
+2026-11-11T04:31:36.6658621Z # Subtest: a covered ignore with a future re_review passes
+2026-11-11T04:31:36.6659836Z ok 1 - a covered ignore with a future re_review passes
+2026-11-11T04:31:36.6660669Z   ---
+2026-11-11T04:31:36.6661203Z   duration_ms: 1.242374
+2026-11-11T04:31:36.6661918Z   type: 'test'
+2026-11-11T04:31:36.6662414Z   ...
+2026-11-11T04:31:36.6663247Z # Subtest: red control: an expired register entry fails, including on the day itself
+2026-11-11T04:31:36.6664487Z ok 2 - red control: an expired register entry fails, including on the day itself
+2026-11-11T04:31:36.6665251Z   ---
+2026-11-11T04:31:36.6665773Z   duration_ms: 0.322715
+2026-11-11T04:31:36.6666739Z   type: 'test'
+2026-11-11T04:31:36.6667273Z   ...
+2026-11-11T04:31:36.6668021Z # Subtest: red control: an ignored id missing from the register fails
+2026-11-11T04:31:36.6668958Z ok 3 - red control: an ignored id missing from the register fails
+2026-11-11T04:31:36.6669619Z   ---
+2026-11-11T04:31:36.6670081Z   duration_ms: 0.340657
+2026-11-11T04:31:36.6670606Z   type: 'test'
+2026-11-11T04:31:36.6671126Z   ...
+2026-11-11T04:31:36.6672082Z # Subtest: a malformed or missing re_review fails instead of passing silently
+2026-11-11T04:31:36.6673096Z ok 4 - a malformed or missing re_review fails instead of passing silently
+2026-11-11T04:31:36.6673852Z   ---
+2026-11-11T04:31:36.6674325Z   duration_ms: 0.232433
+2026-11-11T04:31:36.6674823Z   type: 'test'
+2026-11-11T04:31:36.6675389Z   ...
+2026-11-11T04:31:36.6676099Z # Subtest: a register entry for an id that is not ignored is not an error
+2026-11-11T04:31:36.6677061Z ok 5 - a register entry for an id that is not ignored is not an error
+2026-11-11T04:31:36.6677832Z   ---
+2026-11-11T04:31:36.6678317Z   duration_ms: 0.153327
+2026-11-11T04:31:36.6678811Z   type: 'test'
+2026-11-11T04:31:36.6679281Z   ...
+2026-11-11T04:31:36.6679883Z # Subtest: a malformed today is rejected
+2026-11-11T04:31:36.6680620Z ok 6 - a malformed today is rejected
+2026-11-11T04:31:36.6681228Z   ---
+2026-11-11T04:31:36.6681726Z   duration_ms: 0.486984
+2026-11-11T04:31:36.6682509Z   type: 'test'
+2026-11-11T04:31:36.6683372Z   ...
+2026-11-11T04:31:36.6894012Z # Subtest: project and CI pin the Node 22 and pnpm 11 audit toolchain
+2026-11-11T04:31:36.6923421Z ok 7 - project and CI pin the Node 22 and pnpm 11 audit toolchain
+2026-11-11T04:31:36.6924410Z   ---
+2026-11-11T04:31:36.6925257Z   duration_ms: 13.870944
+2026-11-11T04:31:36.6925885Z   type: 'test'
+2026-11-11T04:31:36.6926405Z   ...
+2026-11-11T04:31:36.6945183Z # Subtest: @types/node major tracks the supported Node major
+2026-11-11T04:31:36.6968798Z ok 8 - @types/node major tracks the supported Node major
+2026-11-11T04:31:36.6971975Z   ---
+2026-11-11T04:31:36.6972612Z   duration_ms: 4.16621
+2026-11-11T04:31:36.6973212Z   type: 'test'
+2026-11-11T04:31:36.6973848Z   ...
+2026-11-11T04:31:36.6974609Z # Subtest: toolchain major comparison reads the leading major of a range
+2026-11-11T04:31:36.6975596Z ok 9 - toolchain major comparison reads the leading major of a range
+2026-11-11T04:31:36.6976318Z   ---
+2026-11-11T04:31:36.6976856Z   duration_ms: 0.26194
+2026-11-11T04:31:36.6977502Z   type: 'test'
+2026-11-11T04:31:36.6978084Z   ...
+2026-11-11T04:31:36.6978853Z # Subtest: CI pinning rejects mutable reusable sibling workflows
+2026-11-11T04:31:36.6979849Z ok 10 - CI pinning rejects mutable reusable sibling workflows
+2026-11-11T04:31:36.6980647Z   ---
+2026-11-11T04:31:36.6981194Z   duration_ms: 0.769059
+2026-11-11T04:31:36.6982049Z   type: 'test'
+2026-11-11T04:31:36.6982679Z   ...
+2026-11-11T04:31:36.7161009Z # Subtest: write-capable release jobs never install or execute repository dependencies
+2026-11-11T04:31:36.7175092Z ok 11 - write-capable release jobs never install or execute repository dependencies
+2026-11-11T04:31:36.7182770Z   ---
+2026-11-11T04:31:36.7183312Z   duration_ms: 23.74659
+2026-11-11T04:31:36.7183899Z   type: 'test'
+2026-11-11T04:31:36.7184415Z   ...
+2026-11-11T04:31:36.7185204Z # Subtest: shell-normalized mutation detection catches multiline global installs
+2026-11-11T04:31:36.7186289Z ok 12 - shell-normalized mutation detection catches multiline global installs
+2026-11-11T04:31:36.7187121Z   ---
+2026-11-11T04:31:36.7187647Z   duration_ms: 0.854154
+2026-11-11T04:31:36.7188150Z   type: 'test'
+2026-11-11T04:31:36.7188653Z   ...
+2026-11-11T04:31:36.7189430Z # Subtest: npm pack --json parsing accepts the array and the package-keyed object shapes
+2026-11-11T04:31:36.7190540Z ok 13 - npm pack --json parsing accepts the array and the package-keyed object shapes
+2026-11-11T04:31:36.7191252Z   ---
+2026-11-11T04:31:36.7191696Z   duration_ms: 0.685336
+2026-11-11T04:31:36.7192434Z   type: 'test'
+2026-11-11T04:31:36.7192885Z   ...
+2026-11-11T04:31:39.4795683Z # Subtest: the actual logger publish tarball contains no internal task IDs
+2026-11-11T04:31:39.4796463Z ok 14 - the actual logger publish tarball contains no internal task IDs
+2026-11-11T04:31:39.4796977Z   ---
+2026-11-11T04:31:39.4797291Z   duration_ms: 2764.853344
+2026-11-11T04:31:39.4797659Z   type: 'test'
+2026-11-11T04:31:39.4797925Z   ...
+2026-11-11T04:31:39.4915769Z # Subtest: the tarball scan still fails when a tarball contains an internal task ID
+2026-11-11T04:31:39.4916696Z ok 15 - the tarball scan still fails when a tarball contains an internal task ID
+2026-11-11T04:31:39.4917123Z   ---
+2026-11-11T04:31:39.4917475Z   duration_ms: 11.894591
+2026-11-11T04:31:39.4917774Z   type: 'test'
+2026-11-11T04:31:39.4918127Z   ...
+2026-11-11T04:31:39.5051649Z # Subtest: release-plan preparation rejects a task ID embedded in a tarball
+2026-11-11T04:31:39.5053203Z ok 16 - release-plan preparation rejects a task ID embedded in a tarball
+2026-11-11T04:31:39.5054180Z   ---
+2026-11-11T04:31:39.5054734Z   duration_ms: 13.687579
+2026-11-11T04:31:39.5055827Z   type: 'test'
+2026-11-11T04:31:39.5056140Z   ...
+2026-11-11T04:31:39.5114100Z # Subtest: release allowlist covers the actual workspace manifests
+2026-11-11T04:31:39.5114924Z ok 17 - release allowlist covers the actual workspace manifests
+2026-11-11T04:31:39.5115428Z   ---
+2026-11-11T04:31:39.5116067Z   duration_ms: 14.882964
+2026-11-11T04:31:39.5116915Z   type: 'test'
+2026-11-11T04:31:39.5117357Z   ...
+2026-11-11T04:31:39.5118224Z # Subtest: pending changesets select Version-PR mode without querying npm
+2026-11-11T04:31:39.5119049Z ok 18 - pending changesets select Version-PR mode without querying npm
+2026-11-11T04:31:39.5119829Z   ---
+2026-11-11T04:31:39.5120392Z   duration_ms: 10.832553
+2026-11-11T04:31:39.5120806Z   type: 'test'
+2026-11-11T04:31:39.5121105Z   ...
+2026-11-11T04:31:39.5122446Z # Subtest: publish mode fails closed when any allowlisted package is absent
+2026-11-11T04:31:39.5123054Z ok 19 - publish mode fails closed when any allowlisted package is absent
+2026-11-11T04:31:39.5123447Z   ---
+2026-11-11T04:31:39.5123781Z   duration_ms: 11.642762
+2026-11-11T04:31:39.5124122Z   type: 'test'
+2026-11-11T04:31:39.5124413Z   ...
+2026-11-11T04:31:39.5124828Z # Subtest: publish mode reports only allowlisted unpublished versions
+2026-11-11T04:31:39.5125504Z ok 20 - publish mode reports only allowlisted unpublished versions
+2026-11-11T04:31:39.5126234Z   ---
+2026-11-11T04:31:39.5126554Z   duration_ms: 8.748812
+2026-11-11T04:31:39.5127247Z   type: 'test'
+2026-11-11T04:31:39.5127644Z   ...
+2026-11-11T04:31:39.5128391Z # Subtest: allowlist manifest mismatch fails before registry access
+2026-11-11T04:31:39.5129196Z ok 21 - allowlist manifest mismatch fails before registry access
+2026-11-11T04:31:39.5129705Z   ---
+2026-11-11T04:31:39.5130029Z   duration_ms: 4.574575
+2026-11-11T04:31:39.5130487Z   type: 'test'
+2026-11-11T04:31:39.5131088Z   ...
+2026-11-11T04:31:39.5131628Z # Subtest: registry errors fail closed instead of being treated as absence
+2026-11-11T04:31:39.5132584Z ok 22 - registry errors fail closed instead of being treated as absence
+2026-11-11T04:31:39.5133133Z   ---
+2026-11-11T04:31:39.5133500Z   duration_ms: 11.21671
+2026-11-11T04:31:39.5133933Z   type: 'test'
+2026-11-11T04:31:39.5134317Z   ...
+2026-11-11T04:31:39.5134943Z # Subtest: registry transport failures use a fail-closed diagnostic
+2026-11-11T04:31:39.5135752Z ok 23 - registry transport failures use a fail-closed diagnostic
+2026-11-11T04:31:39.5136356Z   ---
+2026-11-11T04:31:39.5136855Z   duration_ms: 4.106521
+2026-11-11T04:31:39.5137348Z   type: 'test'
+2026-11-11T04:31:39.5137638Z   ...
+2026-11-11T04:31:39.5138315Z # Subtest: operator bootstrap boundary is documented without a stored token
+2026-11-11T04:31:39.5139321Z ok 24 - operator bootstrap boundary is documented without a stored token
+2026-11-11T04:31:39.5139830Z   ---
+2026-11-11T04:31:39.5140198Z   duration_ms: 0.77237
+2026-11-11T04:31:39.5140573Z   type: 'test'
+2026-11-11T04:31:39.5141124Z   ...
+2026-11-11T04:31:39.5142211Z # Subtest: release workflow prepares code read-only and publishes without repo dependencies
+2026-11-11T04:31:39.5143496Z ok 25 - release workflow prepares code read-only and publishes without repo dependencies
+2026-11-11T04:31:39.5144208Z   ---
+2026-11-11T04:31:39.5144679Z   duration_ms: 38.039584
+2026-11-11T04:31:39.5145220Z   type: 'test'
+2026-11-11T04:31:39.5145622Z   ...
+2026-11-11T04:31:39.5146255Z # Subtest: publish shell guard admits exactly the reviewed release packages
+2026-11-11T04:31:39.5147309Z ok 26 - publish shell guard admits exactly the reviewed release packages
+2026-11-11T04:31:39.5148146Z   ---
+2026-11-11T04:31:39.5148597Z   duration_ms: 20.154188
+2026-11-11T04:31:39.5149249Z   type: 'test'
+2026-11-11T04:31:39.5149689Z   ...
+2026-11-11T04:31:39.5150216Z # Subtest: duplicate Node setup cannot shadow either release toolchain
+2026-11-11T04:31:39.5151271Z ok 27 - duplicate Node setup cannot shadow either release toolchain
+2026-11-11T04:31:39.5152082Z   ---
+2026-11-11T04:31:39.5152405Z   duration_ms: 15.015048
+2026-11-11T04:31:39.5152900Z   type: 'test'
+2026-11-11T04:31:39.5153272Z   ...
+2026-11-11T04:31:39.5153829Z # Subtest: reordered npm global flags cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5154589Z ok 28 - reordered npm global flags cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5155151Z   ---
+2026-11-11T04:31:39.5155501Z   duration_ms: 10.1799
+2026-11-11T04:31:39.5155876Z   type: 'test'
+2026-11-11T04:31:39.5156681Z   ...
+2026-11-11T04:31:39.5157241Z # Subtest: leading npm global flag cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5158023Z ok 29 - leading npm global flag cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5158783Z   ---
+2026-11-11T04:31:39.5159193Z   duration_ms: 9.556592
+2026-11-11T04:31:39.5159642Z   type: 'test'
+2026-11-11T04:31:39.5160167Z   ...
+2026-11-11T04:31:39.5160667Z # Subtest: npm global location cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5161439Z ok 30 - npm global location cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5162174Z   ---
+2026-11-11T04:31:39.5162569Z   duration_ms: 11.183392
+2026-11-11T04:31:39.5162906Z   type: 'test'
+2026-11-11T04:31:39.5163221Z   ...
+2026-11-11T04:31:39.5164145Z # Subtest: sudo npm global install cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5164827Z ok 31 - sudo npm global install cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5165568Z   ---
+2026-11-11T04:31:39.5165905Z   duration_ms: 6.322262
+2026-11-11T04:31:39.5166567Z   type: 'test'
+2026-11-11T04:31:39.5167046Z   ...
+2026-11-11T04:31:39.5167738Z # Subtest: pnpm global add cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5168420Z ok 32 - pnpm global add cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5168807Z   ---
+2026-11-11T04:31:39.5169120Z   duration_ms: 7.519787
+2026-11-11T04:31:39.5169448Z   type: 'test'
+2026-11-11T04:31:39.5169843Z   ...
+2026-11-11T04:31:39.5170670Z # Subtest: leading pnpm global flag cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5171413Z ok 33 - leading pnpm global flag cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5172254Z   ---
+2026-11-11T04:31:39.5172630Z   duration_ms: 6.644516
+2026-11-11T04:31:39.5173058Z   type: 'test'
+2026-11-11T04:31:39.5173479Z   ...
+2026-11-11T04:31:39.5174126Z # Subtest: corepack activation cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5174916Z ok 34 - corepack activation cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5175578Z   ---
+2026-11-11T04:31:39.5175870Z   duration_ms: 4.968021
+2026-11-11T04:31:39.5176162Z   type: 'test'
+2026-11-11T04:31:39.5176585Z   ...
+2026-11-11T04:31:39.5177104Z # Subtest: multiline npm continuation cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5177989Z ok 35 - multiline npm continuation cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5178713Z   ---
+2026-11-11T04:31:39.5179078Z   duration_ms: 10.38667
+2026-11-11T04:31:39.5179480Z   type: 'test'
+2026-11-11T04:31:39.5179948Z   ...
+2026-11-11T04:31:39.5180569Z # Subtest: multiline npm location cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5181279Z ok 36 - multiline npm location cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5182173Z   ---
+2026-11-11T04:31:39.5182584Z   duration_ms: 4.398286
+2026-11-11T04:31:39.5182886Z   type: 'test'
+2026-11-11T04:31:39.5183194Z   ...
+2026-11-11T04:31:39.5183675Z # Subtest: multiline pnpm continuation cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5184304Z ok 37 - multiline pnpm continuation cannot shadow the publishing toolchain
+2026-11-11T04:31:39.5184733Z   ---
+2026-11-11T04:31:39.5185030Z   duration_ms: 6.316059
+2026-11-11T04:31:39.5185360Z   type: 'test'
+2026-11-11T04:31:39.5185635Z   ...
+2026-11-11T04:31:39.5186131Z # Subtest: publish cannot bypass the read-only release-plan dependency
+2026-11-11T04:31:39.5186684Z ok 38 - publish cannot bypass the read-only release-plan dependency
+2026-11-11T04:31:39.5187068Z   ---
+2026-11-11T04:31:39.5187401Z   duration_ms: 12.283815
+2026-11-11T04:31:39.5187727Z   type: 'test'
+2026-11-11T04:31:39.5188015Z   ...
+2026-11-11T04:31:39.5188471Z # Subtest: mutable actions in sibling release jobs cannot bypass pinning
+2026-11-11T04:31:39.5189035Z ok 39 - mutable actions in sibling release jobs cannot bypass pinning
+2026-11-11T04:31:39.5189444Z   ---
+2026-11-11T04:31:39.5189797Z   duration_ms: 15.032564
+2026-11-11T04:31:39.5190145Z   type: 'test'
+2026-11-11T04:31:39.5190421Z   ...
+2026-11-11T04:31:39.5191183Z # Subtest: mutable reusable sibling workflows cannot bypass pinning
+2026-11-11T04:31:39.5191936Z ok 40 - mutable reusable sibling workflows cannot bypass pinning
+2026-11-11T04:31:39.5192341Z   ---
+2026-11-11T04:31:39.5192646Z   duration_ms: 9.610926
+2026-11-11T04:31:39.5193035Z   type: 'test'
+2026-11-11T04:31:39.5193406Z   ...
+2026-11-11T04:31:39.5193937Z # Subtest: arbitrary curl run cannot enter a privileged job
+2026-11-11T04:31:39.5194619Z ok 41 - arbitrary curl run cannot enter a privileged job
+2026-11-11T04:31:39.5195086Z   ---
+2026-11-11T04:31:39.5195438Z   duration_ms: 8.220497
+2026-11-11T04:31:39.5195874Z   type: 'test'
+2026-11-11T04:31:39.5196258Z   ...
+2026-11-11T04:31:39.5196727Z # Subtest: arbitrary bash run cannot enter a privileged job
+2026-11-11T04:31:39.5197428Z ok 42 - arbitrary bash run cannot enter a privileged job
+2026-11-11T04:31:39.5197907Z   ---
+2026-11-11T04:31:39.5198337Z   duration_ms: 7.235425
+2026-11-11T04:31:39.5198745Z   type: 'test'
+2026-11-11T04:31:39.5199221Z   ...
+2026-11-11T04:31:39.5199756Z # Subtest: unknown pinned action cannot enter a privileged job
+2026-11-11T04:31:39.5200366Z ok 43 - unknown pinned action cannot enter a privileged job
+2026-11-11T04:31:39.5200917Z   ---
+2026-11-11T04:31:39.5201228Z   duration_ms: 3.439634
+2026-11-11T04:31:39.5201552Z   type: 'test'
+2026-11-11T04:31:39.5202002Z   ...
+2026-11-11T04:31:39.5202620Z # Subtest: extra npm publish cannot enter a privileged job
+2026-11-11T04:31:39.5203498Z ok 44 - extra npm publish cannot enter a privileged job
+2026-11-11T04:31:39.5204081Z   ---
+2026-11-11T04:31:39.5204583Z   duration_ms: 5.411864
+2026-11-11T04:31:39.5204878Z   type: 'test'
+2026-11-11T04:31:39.5205228Z   ...
+2026-11-11T04:31:39.5205729Z # Subtest: reordered allowed steps cannot enter a privileged job
+2026-11-11T04:31:39.5206526Z ok 45 - reordered allowed steps cannot enter a privileged job
+2026-11-11T04:31:39.5206975Z   ---
+2026-11-11T04:31:39.5207244Z   duration_ms: 4.731405
+2026-11-11T04:31:39.5207580Z   type: 'test'
+2026-11-11T04:31:39.5207860Z   ...
+2026-11-11T04:31:39.5208349Z # Subtest: credential-bearing changes cannot enter an allowed privileged step
+2026-11-11T04:31:39.5209068Z ok 46 - credential-bearing changes cannot enter an allowed privileged step
+2026-11-11T04:31:39.5209503Z   ---
+2026-11-11T04:31:39.5209803Z   duration_ms: 3.865762
+2026-11-11T04:31:39.5210131Z   type: 'test'
+2026-11-11T04:31:39.5210416Z   ...
+2026-11-11T04:31:39.5210811Z # Subtest: privileged sibling cannot enter the release workflow
+2026-11-11T04:31:39.5211380Z ok 47 - privileged sibling cannot enter the release workflow
+2026-11-11T04:31:39.5211929Z   ---
+2026-11-11T04:31:39.5212292Z   duration_ms: 2.865796
+2026-11-11T04:31:39.5212602Z   type: 'test'
+2026-11-11T04:31:39.5212910Z   ...
+2026-11-11T04:31:39.5213351Z # Subtest: direct-publish sibling cannot enter the release workflow
+2026-11-11T04:31:39.5213898Z ok 48 - direct-publish sibling cannot enter the release workflow
+2026-11-11T04:31:39.5214300Z   ---
+2026-11-11T04:31:39.5214600Z   duration_ms: 3.012307
+2026-11-11T04:31:39.5214908Z   type: 'test'
+2026-11-11T04:31:39.5215241Z   ...
+2026-11-11T04:31:39.5215708Z # Subtest: workflow secret environment cannot expand the release workflow
+2026-11-11T04:31:39.5216268Z ok 49 - workflow secret environment cannot expand the release workflow
+2026-11-11T04:31:39.5216731Z   ---
+2026-11-11T04:31:39.5217023Z   duration_ms: 4.05073
+2026-11-11T04:31:39.5217333Z   type: 'test'
+2026-11-11T04:31:39.5217636Z   ...
+2026-11-11T04:31:39.5218035Z # Subtest: workflow defaults cannot expand the release workflow
+2026-11-11T04:31:39.5218560Z ok 50 - workflow defaults cannot expand the release workflow
+2026-11-11T04:31:39.5218958Z   ---
+2026-11-11T04:31:39.5219269Z   duration_ms: 8.347193
+2026-11-11T04:31:39.5219611Z   type: 'test'
+2026-11-11T04:31:39.5219885Z   ...
+2026-11-11T04:31:39.5220370Z # Subtest: plan mutation run cannot alter release-plan preparation
+2026-11-11T04:31:39.5220888Z ok 51 - plan mutation run cannot alter release-plan preparation
+2026-11-11T04:31:39.5221470Z   ---
+2026-11-11T04:31:39.5221910Z   duration_ms: 9.478027
+2026-11-11T04:31:39.5222362Z   type: 'test'
+2026-11-11T04:31:39.5222701Z   ...
+2026-11-11T04:31:39.5223276Z # Subtest: unknown prepare action cannot alter release-plan preparation
+2026-11-11T04:31:39.5224108Z ok 52 - unknown prepare action cannot alter release-plan preparation
+2026-11-11T04:31:39.5224753Z   ---
+2026-11-11T04:31:39.5225163Z   duration_ms: 4.160885
+2026-11-11T04:31:39.5225480Z   type: 'test'
+2026-11-11T04:31:39.5225780Z   ...
+2026-11-11T04:31:39.5226247Z # Subtest: reordered prepare steps cannot alter release-plan preparation
+2026-11-11T04:31:39.5226749Z ok 53 - reordered prepare steps cannot alter release-plan preparation
+2026-11-11T04:31:39.5227267Z   ---
+2026-11-11T04:31:39.5227554Z   duration_ms: 3.392461
+2026-11-11T04:31:39.5227840Z   type: 'test'
+2026-11-11T04:31:39.5228093Z   ...
+2026-11-11T04:31:39.5228501Z # Subtest: prepare credential environment cannot alter release-plan preparation
+2026-11-11T04:31:39.5229188Z ok 54 - prepare credential environment cannot alter release-plan preparation
+2026-11-11T04:31:39.5229593Z   ---
+2026-11-11T04:31:39.5229854Z   duration_ms: 2.955927
+2026-11-11T04:31:39.5230157Z   type: 'test'
+2026-11-11T04:31:39.5230408Z   ...
+2026-11-11T04:31:39.5230789Z # Subtest: corepack enable is a blocked toolchain mutation
+2026-11-11T04:31:39.5231254Z ok 55 - corepack enable is a blocked toolchain mutation
+2026-11-11T04:31:39.5231616Z   ---
+2026-11-11T04:31:39.5232146Z   duration_ms: 0.124462
+2026-11-11T04:31:39.5232494Z   type: 'test'
+2026-11-11T04:31:39.5232744Z   ...
+2026-11-11T04:31:39.5233083Z # Subtest: corepack disable is a blocked toolchain mutation
+2026-11-11T04:31:39.5233582Z ok 56 - corepack disable is a blocked toolchain mutation
+2026-11-11T04:31:39.5233935Z   ---
+2026-11-11T04:31:39.5234195Z   duration_ms: 0.033828
+2026-11-11T04:31:39.5234465Z   type: 'test'
+2026-11-11T04:31:39.5234745Z   ...
+2026-11-11T04:31:39.5235141Z # Subtest: sudo corepack \\\\n    enable is a blocked toolchain mutation
+2026-11-11T04:31:39.5235665Z ok 57 - sudo corepack \\\\n    enable is a blocked toolchain mutation
+2026-11-11T04:31:39.5236063Z   ---
+2026-11-11T04:31:39.5236314Z   duration_ms: 0.031058
+2026-11-11T04:31:39.5236588Z   type: 'test'
+2026-11-11T04:31:39.5236883Z   ...
+2026-11-11T04:31:39.5237261Z # Subtest: corepack \\\\n    disable is a blocked toolchain mutation
+2026-11-11T04:31:39.5237771Z ok 58 - corepack \\\\n    disable is a blocked toolchain mutation
+2026-11-11T04:31:39.5238156Z   ---
+2026-11-11T04:31:39.5238421Z   duration_ms: 0.025139
+2026-11-11T04:31:39.5238691Z   type: 'test'
+2026-11-11T04:31:39.5239059Z   ...
+2026-11-11T04:31:39.5239464Z # Subtest: every declared universal and Arcanada task prefix is rejected
+2026-11-11T04:31:39.5240054Z ok 59 - every declared universal and Arcanada task prefix is rejected
+2026-11-11T04:31:39.5240458Z   ---
+2026-11-11T04:31:39.5240723Z   duration_ms: 0.351219
+2026-11-11T04:31:39.5240988Z   type: 'test'
+2026-11-11T04:31:39.5241270Z   ...
+2026-11-11T04:31:39.5241640Z # Subtest: previously omitted task-ID families cannot bypass detection
+2026-11-11T04:31:39.5242478Z ok 60 - previously omitted task-ID families cannot bypass detection
+2026-11-11T04:31:39.5242917Z   ---
+2026-11-11T04:31:39.5243189Z   duration_ms: 0.099117
+2026-11-11T04:31:39.5243514Z   type: 'test'
+2026-11-11T04:31:39.5243805Z   ...
+2026-11-11T04:31:39.5244267Z # Subtest: pending public changesets do not expose internal task IDs
+2026-11-11T04:31:39.5244884Z ok 61 - pending public changesets do not expose internal task IDs
+2026-11-11T04:31:39.5245339Z   ---
+2026-11-11T04:31:39.5245691Z   duration_ms: 4.67338
+2026-11-11T04:31:39.5246050Z   type: 'test'
+2026-11-11T04:31:39.5246416Z   ...
+2026-11-11T04:31:39.5246759Z 1..61
+2026-11-11T04:31:39.5247104Z # tests 61
+2026-11-11T04:31:39.5247443Z # suites 0
+2026-11-11T04:31:39.5247815Z # pass 61
+2026-11-11T04:31:39.5248143Z # fail 0
+2026-11-11T04:31:39.5248437Z # cancelled 0
+2026-11-11T04:31:39.5248788Z # skipped 0
+2026-11-11T04:31:39.5249147Z # todo 0
+2026-11-11T04:31:39.5249632Z # duration_ms 2924.420123
+2026-11-11T04:31:39.9233658Z Scope: 8 of 9 workspace projects
+2026-11-11T04:31:39.9259623Z packages/access-contracts test$ vitest run
+2026-11-11T04:31:39.9267479Z packages/eslint-config test$ vitest run
+2026-11-11T04:31:39.9272718Z packages/jev-decision-templates test$ vitest run
+2026-11-11T04:31:39.9276089Z packages/logger test$ vitest run
+2026-11-11T04:31:40.3844583Z packages/access-contracts test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/access-contracts[39m
+2026-11-11T04:31:40.3921544Z packages/logger test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/logger[39m
+2026-11-11T04:31:40.4096922Z packages/eslint-config test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/eslint-config[39m
+2026-11-11T04:31:40.4202370Z packages/jev-decision-templates test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/jev-decision-templates[39m
+2026-11-11T04:31:40.8466649Z packages/logger test:  [32m✓[39m test/redact-behavior.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+2026-11-11T04:31:41.0221300Z packages/logger test:  [32m✓[39m test/redact-paths.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+2026-11-11T04:31:41.2716053Z packages/jev-decision-templates test:  [32m✓[39m test/validator.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 82[2mms[22m[39m
+2026-11-11T04:31:41.2807697Z packages/jev-decision-templates test: [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+2026-11-11T04:31:41.2876826Z packages/jev-decision-templates test: [2m      Tests [22m [1m[32m7 passed[39m[22m[90m (7)[39m
+2026-11-11T04:31:41.2883030Z packages/jev-decision-templates test: [2m   Start at [22m 04:31:40
+2026-11-11T04:31:41.2908412Z packages/jev-decision-templates test: [2m   Duration [22m 849ms[2m (transform 59%, tests 20%, import 19%, worker 2%)[22m
+2026-11-11T04:31:41.3207629Z packages/jev-decision-templates test: Done
+2026-11-11T04:31:41.3261135Z packages/nest-common test$ vitest run
+2026-11-11T04:31:41.4232114Z packages/logger test:  [32m✓[39m test/create-logger-module.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+2026-11-11T04:31:41.4303835Z packages/logger test: [2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+2026-11-11T04:31:41.4353438Z packages/logger test: [2m      Tests [22m [1m[32m15 passed[39m[22m[90m (15)[39m
+2026-11-11T04:31:41.4392233Z packages/logger test: [2m   Start at [22m 04:31:40
+2026-11-11T04:31:41.4405131Z packages/logger test: [2m   Duration [22m 1.03s[2m (import 67%, transform 24%, tests 5%, worker 4%)[22m
+2026-11-11T04:31:41.4832805Z packages/logger test: Done
+2026-11-11T04:31:41.4865493Z packages/oidc-bff test$ vitest run
+2026-11-11T04:31:41.8614485Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-amendment-1.test.ts [2m([22m[2m47 tests[22m[2m)[22m[33m 356[2mms[22m[39m
+2026-11-11T04:31:42.0474520Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-cases.test.ts [2m([22m[2m126 tests[22m[2m)[22m[33m 565[2mms[22m[39m
+2026-11-11T04:31:42.1744487Z packages/nest-common test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/nest-common[39m
+2026-11-11T04:31:42.2193156Z packages/access-contracts test:  [32m✓[39m test/personal-capture.test.ts [2m([22m[2m37 tests[22m[2m)[22m[32m 125[2mms[22m[39m
+2026-11-11T04:31:42.3874390Z packages/oidc-bff test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/oidc-bff[39m
+2026-11-11T04:31:43.2634101Z packages/nest-common test:  [32m✓[39m test/abstract-api-key.guard.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+2026-11-11T04:31:43.4144815Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-invariants.test.ts [2m([22m[2m29 tests[22m[2m)[22m[33m 937[2mms[22m[39m
+2026-11-11T04:31:43.4204008Z packages/access-contracts test:    [32m✓[39m same recorded events reduce to the same view [2m(2)[22m
+2026-11-11T04:31:43.4241066Z packages/access-contracts test:      [33m[2m✓[22m[39m converges for 80 seeded random arrival orders once the authorized contiguous interval is supplied[33m 733[2mms[22m[39m
+2026-11-11T04:31:43.5129282Z packages/nest-common test:  [32m✓[39m test/zod-validation.pipe.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 74[2mms[22m[39m
+2026-11-11T04:31:43.5247941Z packages/nest-common test:  [32m✓[39m test/rfc7807-exception.filter.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 52[2mms[22m[39m
+2026-11-11T04:31:43.6044404Z packages/nest-common test:  [32m✓[39m test/extract-bearer.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+2026-11-11T04:31:43.6134062Z packages/eslint-config test:  [32m✓[39m test/factories.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+2026-11-11T04:31:43.6363715Z packages/nest-common test: [2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+2026-11-11T04:31:43.6383800Z packages/nest-common test: [2m      Tests [22m [1m[32m33 passed[39m[22m[90m (33)[39m
+2026-11-11T04:31:43.6393225Z packages/nest-common test: [2m   Start at [22m 04:31:42
+2026-11-11T04:31:43.6423547Z packages/nest-common test: [2m   Duration [22m 1.43s[2m (import 66%, transform 26%, tests 6%, worker 2%)[22m
+2026-11-11T04:31:43.6453212Z packages/eslint-config test: [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+2026-11-11T04:31:43.6475072Z packages/eslint-config test: [2m      Tests [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+2026-11-11T04:31:43.6482952Z packages/eslint-config test: [2m   Start at [22m 04:31:40
+2026-11-11T04:31:43.6513239Z packages/eslint-config test: [2m   Duration [22m 3.22s[2m (import 94%, transform 5%, tests 1%)[22m
+2026-11-11T04:31:43.6543748Z packages/oidc-bff test:  [32m✓[39m test/browser-identity.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 343[2mms[22m[39m
+2026-11-11T04:31:43.6672410Z packages/oidc-bff test: [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+2026-11-11T04:31:43.6673833Z packages/oidc-bff test: [2m      Tests [22m [1m[32m10 passed[39m[22m[90m (10)[39m
+2026-11-11T04:31:43.6692872Z packages/oidc-bff test: [2m   Start at [22m 04:31:42
+2026-11-11T04:31:43.6730066Z packages/oidc-bff test: [2m   Duration [22m 1.26s[2m (tests 39%, transform 38%, import 22%, worker 1%)[22m
+2026-11-11T04:31:43.6762753Z packages/nest-common test: Done
+2026-11-11T04:31:43.6792866Z packages/throttle test$ vitest run
+2026-11-11T04:31:43.7060528Z packages/eslint-config test: Done
+2026-11-11T04:31:43.7061371Z packages/tsconfig test$ vitest run
+2026-11-11T04:31:43.7162878Z packages/oidc-bff test: Done
+2026-11-11T04:31:44.1741700Z packages/throttle test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/throttle[39m
+2026-11-11T04:31:44.4154441Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-manifest-sweep.test.ts [2m([22m[2m48 tests[22m[2m)[22m[33m 386[2mms[22m[39m
+2026-11-11T04:31:44.5864796Z packages/tsconfig test: [1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90m/home/runner/work/arcanada-shared/arcanada-shared/packages/tsconfig[39m
+2026-11-11T04:31:44.6571289Z packages/throttle test:  [32m✓[39m test/fibonacci.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+2026-11-11T04:31:44.8460713Z packages/access-contracts test:  [32m✓[39m test/personal-auth-v1.test.ts [2m([22m[2m48 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+2026-11-11T04:31:44.9831074Z packages/throttle test:  [32m✓[39m test/throttler-options.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+2026-11-11T04:31:45.0435360Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-consumer-review.test.ts [2m([22m[2m28 tests[22m[2m)[22m[33m 3542[2mms[22m[39m
+2026-11-11T04:31:45.0450380Z packages/access-contracts test:    [32m✓[39m R2 — lifetime retained state is bounded and exhaustion fails closed [2m(10)[22m
+2026-11-11T04:31:45.0452836Z packages/access-contracts test:      [33m[2m✓[22m[39m every history list is bounded however many events are applied[33m 3091[2mms[22m[39m
+2026-11-11T04:31:45.0454901Z packages/tsconfig test:  [32m✓[39m test/profiles.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+2026-11-11T04:31:45.0516985Z packages/tsconfig test: [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+2026-11-11T04:31:45.0533356Z packages/tsconfig test: [2m      Tests [22m [1m[32m6 passed[39m[22m[90m (6)[39m
+2026-11-11T04:31:45.0547413Z packages/tsconfig test: [2m   Start at [22m 04:31:44
+2026-11-11T04:31:45.0548970Z packages/tsconfig test: [2m   Duration [22m 456ms[2m (transform 73%, import 10%, worker 8%, tests 5%, environment 3%)[22m
+2026-11-11T04:31:45.0872467Z packages/tsconfig test: Done
+2026-11-11T04:31:45.1724260Z packages/throttle test:  [32m✓[39m test/escalating-ban.guard.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+2026-11-11T04:31:45.1793385Z packages/throttle test: [2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+2026-11-11T04:31:45.1823736Z packages/throttle test: [2m      Tests [22m [1m[32m19 passed[39m[22m[90m (19)[39m
+2026-11-11T04:31:45.1836253Z packages/throttle test: [2m   Start at [22m 04:31:44
+2026-11-11T04:31:45.1837719Z packages/throttle test: [2m   Duration [22m 985ms[2m (import 69%, transform 26%, worker 3%, tests 2%)[22m
+2026-11-11T04:31:45.1839528Z packages/access-contracts test:  [32m✓[39m test/contract.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+2026-11-11T04:31:45.2030100Z packages/throttle test: Done
+2026-11-11T04:31:45.2837552Z packages/access-contracts test:  [32m✓[39m test/personal-auth-owner-outcome.test.ts [2m([22m[2m179 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+2026-11-11T04:31:45.4396114Z packages/access-contracts test:  [32m✓[39m test/bounded-json.test.ts [2m([22m[2m81 tests[22m[2m)[22m[32m 56[2mms[22m[39m
+2026-11-11T04:31:45.4961055Z packages/access-contracts test:  [32m✓[39m test/personal-auth-lease-v1.test.ts [2m([22m[2m85 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+2026-11-11T04:31:45.6869400Z packages/access-contracts test:  [32m✓[39m test/personal-auth-capture-binding.test.ts [2m([22m[2m52 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+2026-11-11T04:31:45.7264366Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-gates.test.ts [2m([22m[2m26 tests[22m[2m)[22m[33m 1976[2mms[22m[39m
+2026-11-11T04:31:45.7293495Z packages/access-contracts test:    [32m✓[39m the in-package schema interpreter agrees with Ajv 2020 (test-only oracle) [2m(3)[22m
+2026-11-11T04:31:45.7333535Z packages/access-contracts test:      [33m[2m✓[22m[39m classifies every single-point mutation of the selected records identically[33m 1750[2mms[22m[39m
+2026-11-11T04:31:45.7511263Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-manifest-guards.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 124[2mms[22m[39m
+2026-11-11T04:31:45.8685780Z packages/access-contracts test:  [32m✓[39m test/personal-auth-outcome-request.test.ts [2m([22m[2m34 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+2026-11-11T04:31:45.9799333Z packages/access-contracts test:  [32m✓[39m test/knowledge-observation-manifest-shape.test.ts [2m([22m[2m23 tests[22m[2m)[22m[32m 99[2mms[22m[39m
+2026-11-11T04:31:45.9857246Z packages/access-contracts test: [2m Test Files [22m [1m[32m16 passed[39m[22m[90m (16)[39m
+2026-11-11T04:31:45.9858748Z packages/access-contracts test: [2m      Tests [22m [1m[32m867 passed[39m[22m[90m (867)[39m
+2026-11-11T04:31:45.9860171Z packages/access-contracts test: [2m   Start at [22m 04:31:40
+2026-11-11T04:31:45.9863430Z packages/access-contracts test: [2m   Duration [22m 5.59s[2m (tests 66%, import 18%, transform 16%, worker 1%)[22m
+2026-11-11T04:31:45.9876739Z packages/access-contracts test: [2m    Isolate [22m [33m16 workers spawned[39m[2m · ~209ms startup each (spawn + environment, per file)[22m
+2026-11-11T04:31:45.9877973Z packages/access-contracts test: [2m            [22m [2mat least ~905ms faster with [22m[33misolate: false[39m[2m — reuses workers across files instead of one per file[22m
+2026-11-11T04:31:46.0050950Z packages/access-contracts test: Done
+2026-11-11T04:31:46.0359944Z ##[group]Run node scripts/check-accepted-risk.mjs
+2026-11-11T04:31:46.0360402Z [36;1mnode scripts/check-accepted-risk.mjs[0m
+2026-11-11T04:31:46.0390146Z shell: /usr/bin/bash -e {0}
+2026-11-11T04:31:46.0390535Z env:
+2026-11-11T04:31:46.0390859Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:46.0391246Z ##[endgroup]
+2026-11-11T04:31:46.1002598Z accepted-risk register covers 0 ignored advisories as of 2026-11-11
+2026-11-11T04:31:46.1066128Z ##[group]Run pnpm audit --audit-level=high
+2026-11-11T04:31:46.1066535Z [36;1mpnpm audit --audit-level=high[0m
+2026-11-11T04:31:46.1096487Z shell: /usr/bin/bash -e {0}
+2026-11-11T04:31:46.1096898Z env:
+2026-11-11T04:31:46.1097232Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-11T04:31:46.1097611Z ##[endgroup]
+2026-11-11T04:31:46.7661142Z 1 vulnerabilities found
+2026-11-11T04:31:46.7662476Z Severity: 1 moderate
+2026-11-11T04:31:46.7987257Z Post job cleanup.
+2026-11-11T04:31:46.9014549Z Cache hit occurred on the primary key node-cache-Linux-x64-pnpm-d536222ca2c28e377fc5e318c099ffee447628dd5baf85bb24da349329bf6300, not saving cache.
+2026-11-11T04:31:46.9112849Z Post job cleanup.
+2026-11-11T04:31:47.0422861Z Pruning is unnecessary.
+2026-11-11T04:31:47.0575233Z Post job cleanup.
+2026-11-11T04:31:47.1463002Z [command]/usr/bin/git version
+2026-11-11T04:31:47.1511521Z git version 2.56.0
+2026-11-11T04:31:47.1551552Z Temporarily overriding HOME='/home/runner/work/_temp/74243c14-4b7f-4a2a-8d2e-6b05745f067d' before making global git config changes
+2026-11-11T04:31:47.1554287Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-11T04:31:47.1559027Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/arcanada-shared/arcanada-shared
+2026-11-11T04:31:47.1599874Z Removing SSH command configuration
+2026-11-11T04:31:47.1607150Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-11T04:31:47.1651117Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-11T04:31:47.1939719Z Removing HTTP extra header
+2026-11-11T04:31:47.1944382Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-11T04:31:47.1972986Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-11T04:31:47.2186150Z Removing includeIf entries pointing to credentials config files
+2026-11-11T04:31:47.2190658Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-11T04:31:47.2215758Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-11T04:31:47.2558852Z Cleaning up orphan processes
