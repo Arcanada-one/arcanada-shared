@@ -6,6 +6,9 @@ useDefault = true
 # The Agent-Brain observation package ships a synthetic, non-secret idempotency key as a fixture value.
 # Uses the single-table form, which gitleaks 8.21.x (the CI-pinned version) understands.
 [allowlist]
-description = "Synthetic fixture idempotency key in the sha256-pinned knowledge observation package"
-paths = ['''packages/access-contracts/test/fixtures/knowledge-observation-v1/fixture-records\.json''']
+description = "Synthetic fixture idempotency keys in sha256-pinned access-contracts test fixtures (not live secrets)"
+paths = [
+  '''packages/access-contracts/test/fixtures/knowledge-observation-v1/fixture-records\.json''',
+  '''packages/access-contracts/test/fixtures/doclab-adapter-kclive-06-v2/snapshot-.*\.json''',
+]
 regexes = ['''fixture-idempotency-1''']
