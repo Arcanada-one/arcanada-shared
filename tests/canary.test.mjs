@@ -6,6 +6,7 @@ import test from "node:test";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
+/** @param {string[]} args */
 function run(args) {
   return spawnSync("python3", ["eval/canary/run.py", ...args], {
     cwd: root,
