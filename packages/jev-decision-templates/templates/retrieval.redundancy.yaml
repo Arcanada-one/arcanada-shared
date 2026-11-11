@@ -1,0 +1,21 @@
+id: retrieval.redundancy
+version: 1
+primitive: noul
+instructions: >
+  Decide whether the candidate fragment adds knowledge beyond the already
+  selected fragments in state.trusted.selected. Exact duplicates are removed
+  by content_hash before this question runs.
+criteria:
+  true: The fragment adds knowledge relative to the selected set.
+  false: The fragment does not add knowledge relative to the selected set.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties:
+    candidate_k:
+      type: string
+      pattern: "^[a-z0-9][a-z0-9_.-]{0,63}$"
+  required:
+    - candidate_k
+state_schema_ref: retrieval
+allow_non_ascii: []

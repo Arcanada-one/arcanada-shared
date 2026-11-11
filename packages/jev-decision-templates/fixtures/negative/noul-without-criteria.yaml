@@ -1,0 +1,10 @@
+id: fixture.noul_without_criteria
+version: 1
+primitive: noul
+instructions: A noul question missing criteria true/false.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: retrieval
+allow_non_ascii: []

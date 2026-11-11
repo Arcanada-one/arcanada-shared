@@ -1,0 +1,15 @@
+id: fixture.cyrillic_option_description
+version: 1
+primitive: choice
+instructions: English instructions with one Cyrillic letter in an option description.
+options:
+  - id: relevant
+    description: The fragment is relevаnt.
+  - id: other
+    description: None of the listed options fits.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: retrieval
+allow_non_ascii: []

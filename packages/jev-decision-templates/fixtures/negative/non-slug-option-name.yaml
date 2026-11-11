@@ -1,0 +1,15 @@
+id: fixture.non_slug_option_name
+version: 1
+primitive: choice
+instructions: Option ids must be ASCII slugs.
+options:
+  - id: Relevant
+    description: Capitalized option id that must fail the slug rule.
+  - id: other
+    description: None of the listed options fits.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: retrieval
+allow_non_ascii: []

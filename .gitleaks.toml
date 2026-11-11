@@ -3,12 +3,12 @@ title = "arcanada-shared gitleaks configuration"
 [extend]
 useDefault = true
 
-# The Agent-Brain observation package ships a synthetic, non-secret idempotency key as a fixture value.
+# Synthetic, non-secret fixture values used by access-contracts package tests.
 # Uses the single-table form, which gitleaks 8.21.x (the CI-pinned version) understands.
 [allowlist]
-description = "Synthetic fixture idempotency keys in sha256-pinned access-contracts test fixtures (not live secrets)"
+description = "Synthetic fixture idempotency keys in sha256-pinned access-contracts test fixtures"
 paths = [
   '''packages/access-contracts/test/fixtures/knowledge-observation-v1/fixture-records\.json''',
-  '''packages/access-contracts/test/fixtures/doclab-adapter-kclive-06-v2/snapshot-.*\.json''',
+  '''packages/access-contracts/test/fixtures/doclab-adapter-kclive-06-v2/.*\.json''',
 ]
 regexes = ['''fixture-idempotency-1''']

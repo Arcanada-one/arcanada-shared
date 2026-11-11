@@ -1,0 +1,35 @@
+id: task.domain
+version: 1
+primitive: choice
+instructions: >
+  Choose the single best project or area domain for the task. Domains are
+  mutually exclusive; prefer a project prefix when one fits.
+options:
+  - id: arca
+    description: Arcanada ecosystem core work.
+  - id: auth
+    description: Auth Arcana identity and access work.
+  - id: mun
+    description: Muneral work-item platform work.
+  - id: conn
+    description: Model Connector work.
+  - id: shared
+    description: Shared @arcanada package library work.
+  - id: talo
+    description: Talomnia product work.
+  - id: col
+    description: Collective / agent mailbox work.
+  - id: infra
+    description: Infrastructure and host operations area.
+  - id: web
+    description: Web / frontend area work.
+  - id: research
+    description: Research area work.
+  - id: other
+    description: None of the listed domains fits.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: task
+allow_non_ascii: []

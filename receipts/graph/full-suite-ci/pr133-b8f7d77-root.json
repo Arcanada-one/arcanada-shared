@@ -1,0 +1,19 @@
+{
+  "schema": "GitHubFullSuiteEvidence/v1",
+  "scope": "global_fallback_full_suite",
+  "repository": "Arcanada-one/arcanada-shared",
+  "deployable": ".",
+  "command": ["pnpm", "test"],
+  "source_commit": "b8f7d77752149c64795e54ef9956132e99338b58",
+  "checkout_commit": "05571fdefc8f07f6866d5d387a7ed7aeffa54b9e",
+  "run_id": 42959729224,
+  "job_id": 130323154690,
+  "run_attempt": 1,
+  "workflow": ".github/workflows/ci.yml",
+  "job_key": "build-test",
+  "step": "Test",
+  "log": {
+    "path": "receipts/graph/full-suite-ci/pr133-b8f7d77-build-test.log",
+    "sha256": "sha256:8afdb94da0deac2e38d213da9c95f6ce087b5f754001fbcd06e5f566c14ae41a"
+  }
+}

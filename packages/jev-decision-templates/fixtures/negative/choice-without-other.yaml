@@ -1,0 +1,15 @@
+id: fixture.choice_without_other
+version: 1
+primitive: choice
+instructions: Classify relevance without an other option.
+options:
+  - id: relevant
+    description: The fragment is relevant.
+  - id: irrelevant
+    description: The fragment is irrelevant.
+params_schema:
+  type: object
+  additionalProperties: false
+  properties: {}
+state_schema_ref: retrieval
+allow_non_ascii: []
