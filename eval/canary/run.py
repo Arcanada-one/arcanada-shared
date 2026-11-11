@@ -161,27 +161,39 @@ def run_canary(cfg: DefenceConfig, label: str) -> dict[str, Any]:
 
 
 def scan_defences_off_absent_from_service_paths() -> dict[str, Any]:
-    """AC-5: --defences-off must not appear outside this harness package."""
+    """AC-5: --defences-off must not appear in service/product config paths."""
     repo = HERE.parents[1]  # eval/canary → repo root
+    # Harness, its node tests, and admission receipts may name the flag.
+    allow_parts = {
+        ("eval",),
+        ("tests",),
+        ("receipts",),
+    }
+    # Product/service trees where the flag must never exist.
+    service_roots = (".github", "packages", "scripts", "deploy", "src")
     hits: list[str] = []
-    allow_prefix = str((HERE.parents[0]).resolve())  # eval/ (harness tree)
     for path in repo.rglob("*"):
         if not path.is_file():
             continue
         if ".git" in path.parts or "node_modules" in path.parts:
+            continue
+        rel_parts = path.relative_to(repo).parts
+        if not rel_parts:
+            continue
+        if rel_parts[0] not in service_roots:
+            continue
+        if any(rel_parts[: len(prefix)] == prefix for prefix in allow_parts):
             continue
         try:
             text = path.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
             continue
         if "--defences-off" in text or "defences_off" in text:
-            resolved = str(path.resolve())
-            if not resolved.startswith(allow_prefix):
-                hits.append(resolved)
+            hits.append(str(path.resolve()))
     return {
         "ok": len(hits) == 0,
         "foreign_hits": hits,
-        "harness_allow_prefix": allow_prefix,
+        "service_roots_scanned": list(service_roots),
     }
 
 

@@ -7,7 +7,7 @@ import test from "node:test";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 function run(args) {
-  return spawnSync("python3", ["canary/run.py", ...args], {
+  return spawnSync("python3", ["eval/canary/run.py", ...args], {
     cwd: root,
     encoding: "utf8",
   });

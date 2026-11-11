@@ -5,7 +5,7 @@ Offline class-(a)/(b) canary corpus, harness-only `--defences-off` /
 
 ## Commands
 
-From repository root:
+From the repository root:
 
 ```sh
 python3 eval/canary/run.py --defences-on
@@ -13,12 +13,9 @@ python3 eval/canary/run.py --defences-off
 python3 eval/canary/run.py --mutation-stand
 ```
 
-From `eval/`:
+Node coverage lives in `tests/canary.test.mjs` (picked up by root `pnpm test`
+via `tests/*.test.mjs`).
 
-```sh
-python3 canary/run.py --defences-on
-```
-
-A stand that does not redden with defences off is not a stand (fail).
-Live provider metrics remain `NOT_MEASURED` without an authorized route key.
+A stand that does not redden with defences off is not a stand (fail). Live
+provider metrics remain `NOT_MEASURED` without an authorized route key.
 `--defences-off` exists only under `eval/`; it is absent from service config.
