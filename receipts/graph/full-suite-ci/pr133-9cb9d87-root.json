@@ -3,10 +3,7 @@
   "scope": "global_fallback_full_suite",
   "repository": "Arcanada-one/arcanada-shared",
   "deployable": ".",
-  "command": [
-    "pnpm",
-    "test"
-  ],
+  "command": ["pnpm", "test"],
   "source_commit": "9cb9d870b89813ce66274239da0aba7f99cfba91",
   "checkout_commit": "9cb9d870b89813ce66274239da0aba7f99cfba91",
   "run_id": 42959083000,
