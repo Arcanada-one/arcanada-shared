@@ -20,10 +20,7 @@ export const LOSSLESS_DECIMAL_EXTENSION =
   "lossless-decimal-counters/v1" as const;
 
 export type GraphKind =
-  | "processing_execution"
-  | "contract_receipt_chain"
-  | "knowledge"
-  | "work";
+  "processing_execution" | "contract_receipt_chain" | "knowledge" | "work";
 export type ObservationMode = "live" | "replay" | "fixture";
 export type RecordType =
   | "run"
@@ -154,8 +151,7 @@ export interface SnapshotData {
     };
   };
   readonly source_atomicity:
-    | "not_established"
-    | "source_asserted_with_evidence";
+    "not_established" | "source_asserted_with_evidence";
   readonly graphs: readonly Graph[];
   readonly crosslinks: readonly Crosslink[];
   readonly reset: {
@@ -230,11 +226,7 @@ export interface ArtifactData {
   readonly locator: unknown;
   readonly storage_identity: "immutable" | "versioned" | "mutable" | "unknown";
   readonly availability:
-    | "retained"
-    | "missing"
-    | "collected"
-    | "quarantined"
-    | "unknown";
+    "retained" | "missing" | "collected" | "quarantined" | "unknown";
   readonly access: "allowed" | "denied" | "unknown";
   readonly supersedes: ArtifactKey | null;
   readonly acceptance: Acceptance;
@@ -245,10 +237,7 @@ export interface CommandData {
   readonly command_id: string;
   readonly operation: string;
   readonly journal_status:
-    | "intent_observed"
-    | "accepted_observed"
-    | "rejected_observed"
-    | "unknown";
+    "intent_observed" | "accepted_observed" | "rejected_observed" | "unknown";
   readonly reason: string | null;
   readonly canonical_run_id: string | null;
   readonly canonical_task_ref: QualifiedRef | null;
@@ -455,9 +444,7 @@ export function evaluateAcceptance(
 
 /* ---- Doclab native shape ---- */
 export type DoclabNativeShape =
-  | "b2_finished_converted_text"
-  | "ordinary"
-  | "unrecognized";
+  "b2_finished_converted_text" | "ordinary" | "unrecognized";
 
 export interface DoclabNativeClassification {
   readonly shape: DoclabNativeShape;

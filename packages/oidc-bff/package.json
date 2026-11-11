@@ -19,7 +19,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "openid-client": "6.8.8"
+    "openid-client": "6.8.9"
   },
   "devDependencies": {
     "tsup": "catalog:",
