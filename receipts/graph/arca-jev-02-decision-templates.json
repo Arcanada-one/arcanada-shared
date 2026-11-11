@@ -1,0 +1,4557 @@
+{
+ "admission": {
+  "rule": "admitted requires every verdict = verified; failed without exemption ⇒ refused; not_measured without exemption ⇒ paused_safe; exemptions (owner + expiry) are attached by the admitting agent, never by the verifier (DEC-AUP-0008, matrix P1/P4)",
+  "structural_exclusion_rule": "DEC-AUP-0034: an affected entity is NOT verdict-owing when all three hold — the verifier matrix declares neither a mandatory nor a selectable verifier for its node type (so the only verdict it could ever carry states a property of the MATRIX, not of this change), the change set does not contain it, and its bytes are identical at base and head. Each one is listed in structural_exclusions with the content hash at both revisions that proves the byte-identity, and impact_pair.receipt_problems re-derives that proof from Git rather than believing the receipt.",
+  "superseded_self_rule": "DEC-AUP-0035: the entity a receipt can never verify is the PREVIOUS VERSION OF ITSELF. When a receipt is re-issued at the same path for the same work item — the ordinary case after a rebase or a second commit on a card — the copy of it standing in the tree is superseded by construction: this run is the measurement that replaces it, so the only verdict it could carry is I14 `not_measured` about a document that no longer exists at that path once the run finishes. It is excluded with the work item and the output path that identify it, both re-derived from Git by impact_pair.receipt_problems, never asserted.",
+  "verdict": "paused_safe"
+ },
+ "captured_at_utc": "2026-11-11T04:33:37Z",
+ "change_set": {
+  "base": "9af89919d949c6219719980283c20f9bc00714d9",
+  "files": [
+   {
+    "kind": "config",
+    "path": ".arcana/verify.json",
+    "status": "M",
+    "uncovered": true
+   },
+   {
+    "kind": "doc",
+    "node_id": "document:.changeset/arca-jev-02-decision-templates.md",
+    "node_ids": [
+     "document:.changeset/arca-jev-02-decision-templates.md"
+    ],
+    "path": ".changeset/arca-jev-02-decision-templates.md",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "node_id": "code_unit:.github/workflows/release.yml",
+    "node_ids": [
+     "code_unit:.github/workflows/release.yml"
+    ],
+    "path": ".github/workflows/release.yml",
+    "status": "M"
+   },
+   {
+    "kind": "config",
+    "path": ".gitleaks.toml",
+    "status": "M",
+    "uncovered": true
+   },
+   {
+    "kind": "doc",
+    "node_id": "document:README.md",
+    "node_ids": [
+     "document:README.md"
+    ],
+    "path": "README.md",
+    "status": "M"
+   },
+   {
+    "kind": "doc",
+    "node_id": "document:packages/jev-decision-templates/README.md",
+    "node_ids": [
+     "document:packages/jev-decision-templates/README.md"
+    ],
+    "path": "packages/jev-decision-templates/README.md",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/fixtures/negative/choice-without-other.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/fixtures/negative/cyrillic-option-description.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/fixtures/negative/non-slug-option-name.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/fixtures/negative/noul-without-criteria.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/fixtures/negative/state-deny-listed.json",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "node_id": "deployable_unit:packages/jev-decision-templates",
+    "node_ids": [
+     "deployable_unit:packages/jev-decision-templates"
+    ],
+    "path": "packages/jev-decision-templates/package.json",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/ascii.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/ascii.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/ascii.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/deny-list.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/deny-list.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/deny-list.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/digest.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/digest.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/digest.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/index.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/index.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/index.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/load.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/load.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/load.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/state-schemas.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/state-schemas.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/state-schemas.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/types.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/types.ts",
+     "contract:packages/jev-decision-templates/src/types.ts#DecisionPrimitive",
+     "contract:packages/jev-decision-templates/src/types.ts#ValidationCode"
+    ],
+    "path": "packages/jev-decision-templates/src/types.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/validate-state.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/validate-state.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/validate-state.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/validate-template.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/validate-template.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/validate-template.ts",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/src/validate.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/src/validate.ts"
+    ],
+    "path": "packages/jev-decision-templates/src/validate.ts",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/health.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/kc.role_relevance.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/kc.skill_relevance.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/retrieval.coverage.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/retrieval.redundancy.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/retrieval.relevance.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/task.domain.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "new": true,
+    "path": "packages/jev-decision-templates/templates/task.intent.yaml",
+    "status": "A"
+   },
+   {
+    "kind": "test",
+    "node_id": "code_unit:packages/jev-decision-templates/test/validator.test.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/test/validator.test.ts"
+    ],
+    "path": "packages/jev-decision-templates/test/validator.test.ts",
+    "status": "A"
+   },
+   {
+    "kind": "config",
+    "node_id": "deployable_unit:packages/jev-decision-templates",
+    "node_ids": [
+     "deployable_unit:packages/jev-decision-templates"
+    ],
+    "path": "packages/jev-decision-templates/tsconfig.json",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:packages/jev-decision-templates/vitest.config.ts",
+    "node_ids": [
+     "code_unit:packages/jev-decision-templates/vitest.config.ts"
+    ],
+    "path": "packages/jev-decision-templates/vitest.config.ts",
+    "status": "A"
+   },
+   {
+    "kind": "lockfile",
+    "path": "pnpm-lock.yaml",
+    "status": "M"
+   },
+   {
+    "kind": "other",
+    "new": true,
+    "path": "receipts/graph/full-suite-ci/pr133-9cb9d87-build-test.log",
+    "status": "A"
+   },
+   {
+    "kind": "receipt",
+    "new": true,
+    "path": "receipts/graph/full-suite-ci/pr133-9cb9d87-root.json",
+    "status": "A"
+   },
+   {
+    "kind": "other",
+    "new": true,
+    "path": "receipts/graph/full-suite-ci/pr133-b8f7d77-build-test.log",
+    "status": "A"
+   },
+   {
+    "kind": "receipt",
+    "new": true,
+    "path": "receipts/graph/full-suite-ci/pr133-b8f7d77-root.json",
+    "status": "A"
+   },
+   {
+    "kind": "code",
+    "node_id": "code_unit:scripts/release-preflight.mjs",
+    "node_ids": [
+     "code_unit:scripts/release-preflight.mjs"
+    ],
+    "path": "scripts/release-preflight.mjs",
+    "status": "M"
+   },
+   {
+    "kind": "test",
+    "node_id": "code_unit:tests/release-workflow-policy.test.mjs",
+    "node_ids": [
+     "code_unit:tests/release-workflow-policy.test.mjs"
+    ],
+    "path": "tests/release-workflow-policy.test.mjs",
+    "status": "M"
+   }
+  ],
+  "head": "3fad1e3f800832dcd217f5a97fcc218af77001d5",
+  "mode": "diff"
+ },
+ "decision_ref": "DEC-AUP-0008",
+ "exemptions": [],
+ "graph": {
+  "builder_version": "1.0.6",
+  "built_at_utc": "2026-09-05T00:00:00Z",
+  "graph_digest": "sha256:60cabe23716bac93106c2a21167faef59c8616bfeaa1dac4337cf6c6bb23e07e",
+  "path": "/tmp/arcana-verify-cxzfes29/verifier-out/graph-9af89919d949.json",
+  "source_commit": "9af89919d949c6219719980283c20f9bc00714d9"
+ },
+ "head_graph": {
+  "builder_version": "1.0.6",
+  "built_at_utc": "2026-09-05T00:00:00Z",
+  "graph_digest": "sha256:0397fec4053b9b71ed368f50b75425e94f7e5de1a3ae0f5b4175bcaae6047fb3",
+  "path": "/tmp/arcana-verify-cxzfes29/verifier-out/graph-head-3fad1e3f8008.json",
+  "source_commit": "3fad1e3f800832dcd217f5a97fcc218af77001d5",
+  "staleness": {
+   "checked_at_utc": "2026-11-11T04:33:38Z",
+   "checked_nodes": 140,
+   "method": "manifest.dirty must be false; manifest.source_commit == change_set.head; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at head (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
+   "mismatched_nodes": [],
+   "verdict": "fresh"
+  }
+ },
+ "host": "arcana-devs",
+ "impact_set": {
+  "deterministic_core": [
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:.github/workflows/ci.yml",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:.github/workflows/ci.yml",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:.github/workflows/governance.yml",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:.github/workflows/governance.yml",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:eslint.config.js",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:eslint.config.js",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/bounded-json.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/bounded-json.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/index.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/index.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/knowledge-observation-reducer.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/knowledge-observation-reducer.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/knowledge-observation-sha256.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/knowledge-observation-sha256.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/knowledge-observation-v1.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/knowledge-observation-v1.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/personal-auth-capture-binding.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/personal-auth-capture-binding.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/personal-auth-json.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/personal-auth-json.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/personal-auth-lease-v1.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/personal-auth-outcome-request.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/personal-auth-outcome-request.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/personal-auth-owner-outcome.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/personal-auth-owner-outcome.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/personal-auth-v1.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/personal-auth-v1.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/personal-capture.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/personal-capture.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/src/wire-snapshot.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/src/wire-snapshot.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/bounded-json.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/bounded-json.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/contract.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/contract.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-amendment-1.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-amendment-1.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-cases.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-cases.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-consumer-review.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-consumer-review.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-gates.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-gates.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-invariants.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-invariants.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-manifest-guards.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-manifest-guards.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-manifest-shape.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-manifest-shape.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation-manifest-sweep.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation-manifest-sweep.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation.api.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation.api.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/knowledge-observation.harness.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/knowledge-observation.harness.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/personal-auth-capture-binding.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/personal-auth-capture-binding.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/personal-auth-lease-v1.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/personal-auth-lease-v1.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/personal-auth-outcome-request.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/personal-auth-outcome-request.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/personal-auth-owner-outcome.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/personal-auth-owner-outcome.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/personal-auth-v1.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/personal-auth-v1.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/test/personal-capture.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/test/personal-capture.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/access-contracts/vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/access-contracts/vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/eslint-config/src/index.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/eslint-config/src/index.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/eslint-config/test/factories.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/eslint-config/test/factories.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/eslint-config/vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/eslint-config/vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/logger/src/create-logger-module.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/logger/src/create-logger-module.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/logger/src/index.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/logger/src/index.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/logger/src/redact-paths.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/logger/src/redact-paths.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/logger/test/create-logger-module.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/logger/test/create-logger-module.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/logger/test/redact-behavior.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/logger/test/redact-behavior.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/logger/test/redact-paths.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/logger/test/redact-paths.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/logger/vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/logger/vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/src/guards/abstract-api-key.guard.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/src/guards/abstract-api-key.guard.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/src/guards/extract-bearer.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/src/guards/extract-bearer.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/src/index.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/src/index.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/src/rfc7807/problem-details.types.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/src/rfc7807/problem-details.types.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/src/rfc7807/problem-exception.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/src/rfc7807/problem-exception.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/src/rfc7807/rfc7807-exception.filter.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/src/rfc7807/rfc7807-exception.filter.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/src/zod-validation.pipe.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/src/zod-validation.pipe.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/test/abstract-api-key.guard.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/test/abstract-api-key.guard.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/test/extract-bearer.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/test/extract-bearer.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/test/rfc7807-exception.filter.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/test/rfc7807-exception.filter.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/test/zod-validation.pipe.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/test/zod-validation.pipe.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/nest-common/vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/nest-common/vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/oidc-bff/src/index.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/oidc-bff/src/index.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/oidc-bff/src/store.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/oidc-bff/src/store.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/oidc-bff/test/browser-identity.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/oidc-bff/test/browser-identity.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/oidc-bff/vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/oidc-bff/vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/src/escalating-ban.guard.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/src/escalating-ban.guard.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/src/fibonacci.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/src/fibonacci.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/src/index.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/src/index.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/src/throttler-options.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/src/throttler-options.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/test/escalating-ban.guard.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/test/escalating-ban.guard.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/test/fibonacci.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/test/fibonacci.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/test/throttler-options.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/test/throttler-options.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/throttle/vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/throttle/vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/tsconfig/test/profiles.test.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/tsconfig/test/profiles.test.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:packages/tsconfig/vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:packages/tsconfig/vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:scripts/check-accepted-risk.mjs",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:scripts/check-accepted-risk.mjs",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 1,
+    "entity": "code_unit:scripts/prepare-release-plan.mjs",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "imports",
+      "from": "code_unit:scripts/prepare-release-plan.mjs",
+      "provenance": "deterministic",
+      "to": "code_unit:scripts/release-preflight.mjs",
+      "via": "relative"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "type-check / compile of the importer"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:scripts/release-policy.mjs",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:scripts/release-policy.mjs",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:tests/accepted-risk-register.test.mjs",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:tests/accepted-risk-register.test.mjs",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:tests/project-toolchain-policy.test.mjs",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 2,
+    "entity": "code_unit:tests/release-boundary-regression.test.mjs",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "imports",
+      "from": "code_unit:scripts/prepare-release-plan.mjs",
+      "provenance": "deterministic",
+      "to": "code_unit:scripts/release-preflight.mjs",
+      "via": "relative"
+     },
+     {
+      "edge_type": "imports",
+      "from": "code_unit:tests/release-boundary-regression.test.mjs",
+      "provenance": "deterministic",
+      "to": "code_unit:scripts/prepare-release-plan.mjs",
+      "via": "relative"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "type-check / compile of the importer"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 1,
+    "entity": "code_unit:tests/release-preflight.test.mjs",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "imports",
+      "from": "code_unit:tests/release-preflight.test.mjs",
+      "provenance": "deterministic",
+      "to": "code_unit:scripts/release-preflight.mjs",
+      "via": "relative"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "type-check / compile of the importer"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:tests/workflow-types.d.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:tests/workflow-types.d.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "code_unit:vitest.config.ts",
+    "node_type": "code_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "code_unit:vitest.config.ts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "config_key:GITHUB_OUTPUT",
+    "node_type": "config_key",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "config_key:GITHUB_OUTPUT",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "config_key:LOG_LEVEL",
+    "node_type": "config_key",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "config_key:LOG_LEVEL",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "config_key:NODE_ENV",
+    "node_type": "config_key",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "config_key:NODE_ENV",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "config_key:OBS_COVERAGE_OUT",
+    "node_type": "config_key",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "config_key:OBS_COVERAGE_OUT",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "config_key:OBS_FULL_DIFFERENTIAL",
+    "node_type": "config_key",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "config_key:OBS_FULL_DIFFERENTIAL",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "config_key:RELEASE_PLAN_DIR",
+    "node_type": "config_key",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "config_key:RELEASE_PLAN_DIR",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#Disposition",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#Disposition",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#HoldCode",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#HoldCode",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#Projection",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#Projection",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#ViewKind",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-reducer.ts#ViewKind",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#AcceptanceIssueCode",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#AcceptanceIssueCode",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#DecodeFailureCode",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#DecodeFailureCode",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#DigestComparison",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#DigestComparison",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#DoclabNativeShape",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#DoclabNativeShape",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#GraphKind",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#GraphKind",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#ObservationMode",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#ObservationMode",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#RecordType",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/knowledge-observation-v1.ts#RecordType",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/personal-auth-lease-v1.ts#PersonalAuthEffect",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/personal-auth-lease-v1.ts#PersonalAuthEffect",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureRetryDecision",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureRetryDecision",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureTransitionDecision",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/access-contracts/src/personal-capture.ts#PersonalCaptureTransitionDecision",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/nest-common/test/rfc7807-exception.filter.test.ts#err",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/nest-common/test/rfc7807-exception.filter.test.ts#err",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#nested",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#nested",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#schema",
+    "node_type": "contract",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "contract:packages/nest-common/test/zod-validation.pipe.test.ts#schema",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "deployable_unit:packages/access-contracts",
+    "node_type": "deployable_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "deployable_unit:packages/access-contracts",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "deployable_unit:packages/eslint-config",
+    "node_type": "deployable_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "deployable_unit:packages/eslint-config",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "deployable_unit:packages/logger",
+    "node_type": "deployable_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "deployable_unit:packages/logger",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "deployable_unit:packages/nest-common",
+    "node_type": "deployable_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "deployable_unit:packages/nest-common",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "deployable_unit:packages/oidc-bff",
+    "node_type": "deployable_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "deployable_unit:packages/oidc-bff",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "deployable_unit:packages/throttle",
+    "node_type": "deployable_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "deployable_unit:packages/throttle",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "deployable_unit:packages/tsconfig",
+    "node_type": "deployable_unit",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "deployable_unit:packages/tsconfig",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 1,
+    "entity": "document:.changeset/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "documents",
+      "from": "document:.changeset/README.md",
+      "provenance": "deterministic",
+      "to": "code_unit:scripts/release-preflight.mjs",
+      "via": "explicit-path"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "doc reference check (path/id still resolves)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/bounded-json-decoder.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/bounded-json-decoder.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/knowledge-observation-consumer-review.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/knowledge-observation-consumer-review.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/knowledge-observation-v1.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/knowledge-observation-v1.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/personal-auth-capture-binding.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/personal-auth-capture-binding.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/personal-auth-lease-wire.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/personal-auth-lease-wire.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/personal-auth-outcome-requests.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/personal-auth-outcome-requests.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/personal-auth-owner-outcomes.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/personal-auth-owner-outcomes.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/personal-capture-contract.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/personal-capture-contract.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:.changeset/throttle-initial.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:.changeset/throttle-initial.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:SECURITY.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:SECURITY.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/access-contracts/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/access-contracts/README.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/access-contracts/docs/knowledge-observation-v1.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/access-contracts/docs/knowledge-observation-v1.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/access-contracts/docs/personal-auth-leases.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/access-contracts/docs/personal-auth-leases.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/access-contracts/docs/personal-auth-outcome-requests.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/access-contracts/docs/personal-auth-outcome-requests.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/access-contracts/docs/personal-auth-owner-outcomes.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/access-contracts/docs/personal-auth-owner-outcomes.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/access-contracts/docs/personal-auth-slice.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/access-contracts/docs/personal-auth-slice.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/eslint-config/CHANGELOG.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/eslint-config/CHANGELOG.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/eslint-config/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/eslint-config/README.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/logger/CHANGELOG.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/logger/CHANGELOG.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/logger/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/logger/README.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/nest-common/CHANGELOG.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/nest-common/CHANGELOG.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/nest-common/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/nest-common/README.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/oidc-bff/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/oidc-bff/README.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/throttle/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/throttle/README.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/tsconfig/CHANGELOG.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/tsconfig/CHANGELOG.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "document:packages/tsconfig/README.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "document:packages/tsconfig/README.md",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 1,
+    "entity": "document:provenance/component-provenance.md",
+    "node_type": "document",
+    "path": [
+     {
+      "edge_type": "documents",
+      "from": "document:provenance/component-provenance.md",
+      "provenance": "deterministic",
+      "to": "code_unit:.github/workflows/release.yml",
+      "via": "explicit-path"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "doc reference check (path/id still resolves)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 1,
+    "entity": "receipt:receipts/graph/persist-foundation-audit.json",
+    "node_type": "receipt",
+    "path": [
+     {
+      "edge_type": "verifies",
+      "from": "receipt:receipts/graph/persist-foundation-audit.json",
+      "provenance": "deterministic",
+      "to": "code_unit:.github/workflows/release.yml",
+      "via": "explicit-path"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "selectable: run the targeted test / re-read the receipt"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "receipt:receipts/graph/personal-auth-lease-issuance.json",
+    "node_type": "receipt",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "receipt:receipts/graph/personal-auth-lease-issuance.json",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "receipt:receipts/graph/personal-auth-outcome-requests.json",
+    "node_type": "receipt",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "receipt:receipts/graph/personal-auth-outcome-requests.json",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "receipt:receipts/graph/personal-auth-owner-outcomes.json",
+    "node_type": "receipt",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "receipt:receipts/graph/personal-auth-owner-outcomes.json",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   },
+   {
+    "boundary": "intra_unit",
+    "depth": 0,
+    "entity": "receipt:receipts/graph/personal-capture-auth-binding.json",
+    "node_type": "receipt",
+    "path": [
+     {
+      "edge_type": "deploys_to",
+      "from": "code_unit:pnpm-lock.yaml",
+      "provenance": "deterministic",
+      "to": "receipt:receipts/graph/personal-capture-auth-binding.json",
+      "via": "global-fallback"
+     }
+    ],
+    "revisions": [
+     "base",
+     "head"
+    ],
+    "verifier_hint": "can-i-deploy gate (GRAPH-008)"
+   }
+  ],
+  "edge_types": "all",
+  "global_fallback": {
+   "files": [
+    "pnpm-lock.yaml"
+   ],
+   "reason": "pnpm-lock.yaml changed ⇒ every node affected (lockfile / global config / env schema: safe fallback, Bazel/Nx practice)",
+   "triggered": true
+  },
+  "inferred_tail": [],
+  "max_depth": 3,
+  "method": "Union of independently revision-bound base/head traversals; global fallback: every node of the graph is affected (depth 0, synthetic containment hop); reverse traversal (dependents) + forward declared-by hops (provides_route, implements_contract, maps_model of the same file, deploys_to); best path = fewest inferred/observed hops, then shortest; max_depth 3",
+  "total": 144
+ },
+ "notes": [
+  "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.4.1) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
+  "profile: .arcana/verify.json at verified head; baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: none; disabled: none"
+ ],
+ "producer": {
+  "tool": "tools/graph/verify.py",
+  "version": "1.4.1"
+ },
+ "receipt_id": "car-verify-20261111T043337Z-3fad1e3f",
+ "repo": {
+  "name": "Arcanada-one/arcanada-shared",
+  "path": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared"
+ },
+ "revision_selection": {
+  "base": [
+   "code_unit:.github/workflows/ci.yml",
+   "code_unit:.github/workflows/dependabot-auto-merge.yml",
+   "code_unit:.github/workflows/governance.yml",
+   "code_unit:.github/workflows/release.yml",
+   "code_unit:eslint.config.js",
+   "code_unit:scripts/check-accepted-risk.mjs",
+   "code_unit:scripts/prepare-release-plan.mjs",
+   "code_unit:scripts/release-policy.mjs",
+   "code_unit:scripts/release-preflight.mjs",
+   "code_unit:tests/accepted-risk-register.test.mjs",
+   "code_unit:tests/project-toolchain-policy.test.mjs",
+   "code_unit:tests/release-boundary-regression.test.mjs",
+   "code_unit:tests/release-preflight.test.mjs",
+   "code_unit:tests/release-workflow-policy.test.mjs",
+   "code_unit:tests/workflow-types.d.ts",
+   "code_unit:vitest.config.ts",
+   "deployable_unit:packages/access-contracts",
+   "deployable_unit:packages/eslint-config",
+   "deployable_unit:packages/logger",
+   "deployable_unit:packages/nest-common",
+   "deployable_unit:packages/oidc-bff",
+   "deployable_unit:packages/throttle",
+   "deployable_unit:packages/tsconfig",
+   "document:.changeset/README.md",
+   "document:README.md",
+   "document:provenance/component-provenance.md",
+   "receipt:receipts/graph/persist-foundation-audit.json"
+  ],
+  "head": [
+   "code_unit:.github/workflows/ci.yml",
+   "code_unit:.github/workflows/dependabot-auto-merge.yml",
+   "code_unit:.github/workflows/governance.yml",
+   "code_unit:.github/workflows/release.yml",
+   "code_unit:eslint.config.js",
+   "code_unit:packages/jev-decision-templates/src/ascii.ts",
+   "code_unit:packages/jev-decision-templates/src/deny-list.ts",
+   "code_unit:packages/jev-decision-templates/src/digest.ts",
+   "code_unit:packages/jev-decision-templates/src/index.ts",
+   "code_unit:packages/jev-decision-templates/src/load.ts",
+   "code_unit:packages/jev-decision-templates/src/state-schemas.ts",
+   "code_unit:packages/jev-decision-templates/src/types.ts",
+   "code_unit:packages/jev-decision-templates/src/validate-state.ts",
+   "code_unit:packages/jev-decision-templates/src/validate-template.ts",
+   "code_unit:packages/jev-decision-templates/src/validate.ts",
+   "code_unit:packages/jev-decision-templates/test/validator.test.ts",
+   "code_unit:packages/jev-decision-templates/vitest.config.ts",
+   "code_unit:scripts/check-accepted-risk.mjs",
+   "code_unit:scripts/prepare-release-plan.mjs",
+   "code_unit:scripts/release-policy.mjs",
+   "code_unit:scripts/release-preflight.mjs",
+   "code_unit:tests/accepted-risk-register.test.mjs",
+   "code_unit:tests/project-toolchain-policy.test.mjs",
+   "code_unit:tests/release-boundary-regression.test.mjs",
+   "code_unit:tests/release-preflight.test.mjs",
+   "code_unit:tests/release-workflow-policy.test.mjs",
+   "code_unit:tests/workflow-types.d.ts",
+   "code_unit:vitest.config.ts",
+   "contract:packages/jev-decision-templates/src/types.ts#DecisionPrimitive",
+   "contract:packages/jev-decision-templates/src/types.ts#ValidationCode",
+   "deployable_unit:packages/access-contracts",
+   "deployable_unit:packages/eslint-config",
+   "deployable_unit:packages/jev-decision-templates",
+   "deployable_unit:packages/logger",
+   "deployable_unit:packages/nest-common",
+   "deployable_unit:packages/oidc-bff",
+   "deployable_unit:packages/throttle",
+   "deployable_unit:packages/tsconfig",
+   "document:.changeset/README.md",
+   "document:.changeset/arca-jev-02-decision-templates.md",
+   "document:README.md",
+   "document:packages/jev-decision-templates/README.md",
+   "document:provenance/component-provenance.md",
+   "receipt:receipts/graph/persist-foundation-audit.json"
+  ],
+  "schema": "RevisionImpactSelection/v1",
+  "unmeasured_head_files": []
+ },
+ "schema": "ChangeAdmissionReceipt/v1",
+ "staleness": {
+  "checked_at_utc": "2026-11-11T04:33:38Z",
+  "method": "manifest.dirty must be false; manifest.source_commit == change_set.base; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at base (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
+  "mismatched_nodes": [],
+  "verdict": "fresh"
+ },
+ "structural_exclusions": [
+  {
+   "content_hash": {
+    "base": "sha256:e882b1ddf4b49f8ca030b8897a708b3f092e8ff6aa737e89b2f9392a6e38e193",
+    "head": "sha256:e882b1ddf4b49f8ca030b8897a708b3f092e8ff6aa737e89b2f9392a6e38e193"
+   },
+   "entity": "receipt:receipts/graph/persist-foundation-audit.json",
+   "node_type": "receipt",
+   "path": "receipts/graph/persist-foundation-audit.json",
+   "reason": "historical receipt: asserted, never re-verified (I14); a new receipt supersedes it",
+   "rule": "DEC-AUP-0034"
+  }
+ ],
+ "tree": {
+  "commit": "3fad1e3f800832dcd217f5a97fcc218af77001d5",
+  "dirty": false
+ },
+ "verdicts": [
+  {
+   "entity": "code_unit:.github/workflows/ci.yml",
+   "reason": "v-workflow-config-b803fcb7f17ed923: workflow shell caller closure not measured: job build-test step 8: line 1: unsupported interpreter script/module/stdin dispatch closure; job secret-scan step 1: line 4: missing literal helper ./gitleaks; 2 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence; v-fitness: no new fitness violation; workflow actionlint NOT_MEASURED: pinned actionlint binary unavailable",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-workflow-config-b803fcb7f17ed923"
+   ]
+  },
+  {
+   "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+   "reason": "v-workflow-config-2fe48d1021006468: workflow shell caller closure not measured: job auto-merge step 0: opaque input/interpolated workflow source; 1 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence; v-fitness: no new fitness violation; workflow actionlint NOT_MEASURED: pinned actionlint binary unavailable",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-workflow-config-2fe48d1021006468"
+   ]
+  },
+  {
+   "entity": "code_unit:.github/workflows/governance.yml",
+   "reason": "v-fitness: no new fitness violation; workflow actionlint NOT_MEASURED: pinned actionlint binary unavailable",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-workflow-config-5844296ae241614c"
+   ]
+  },
+  {
+   "entity": "code_unit:.github/workflows/release.yml",
+   "reason": "v-workflow-config-87db21a973eed4fe: workflow shell caller closure not measured: job prepare step 10: heredoc/group/function/brace expansion closure is unresolved; job prepare step 9: line 1: unsupported interpreter script/module/stdin dispatch closure; job publish step 3: command/process substitution closure is unresolved; job publish step 4: heredoc/group/function/brace expansion closure is unresolved; job version-pr step 2: command/process substitution closure is unresolved; job version-pr step 3: command/process substitution closure is unresolved; 6 workflow shell-caller uncertainty item(s)",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-workflow-config-87db21a973eed4fe"
+   ]
+  },
+  {
+   "entity": "code_unit:eslint.config.js",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/ascii.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/deny-list.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/digest.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/index.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-contract-diff: 2 contract edge(s) verified (consumer ⊆ provider); v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-contract-diff",
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/load.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/state-schemas.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/types.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-contract-diff: 2 contract edge(s) verified (consumer ⊆ provider); v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-contract-diff",
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/validate-state.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/validate-template.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/src/validate.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/test/validator.test.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:packages/jev-decision-templates/vitest.config.ts",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:scripts/check-accepted-risk.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:scripts/prepare-release-plan.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:scripts/release-policy.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:scripts/release-preflight.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:tests/accepted-risk-register.test.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:tests/release-boundary-regression.test.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:tests/release-preflight.test.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:tests/release-workflow-policy.test.mjs",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:tests/workflow-types.d.ts",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "code_unit:vitest.config.ts",
+   "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-root",
+    "v-type-check-tsconfig"
+   ]
+  },
+  {
+   "entity": "contract:packages/jev-decision-templates/src/types.ts#DecisionPrimitive",
+   "reason": "v-contract-diff: added: no breaking change (1 change(s))",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-contract-diff"
+   ]
+  },
+  {
+   "entity": "contract:packages/jev-decision-templates/src/types.ts#ValidationCode",
+   "reason": "v-contract-diff: added: no breaking change (1 change(s))",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-contract-diff"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/access-contracts",
+   "reason": "v-global-fallback-test-packages-access-contracts: complete fallback suite CI: not_measured",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-packages-access-contracts",
+    "v-type-check-packages-access-contracts-tsconfig"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/eslint-config",
+   "reason": "v-global-fallback-test-packages-eslint-config: complete fallback suite CI: not_measured",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-packages-eslint-config",
+    "v-type-check-packages-eslint-config-tsconfig"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/jev-decision-templates",
+   "reason": "v-type-check-packages-jev-decision-templates-tsconfig: packages/jev-decision-templates/tsconfig.json: 0 errors; v-fitness: no new violation in packages/jev-decision-templates",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-fitness",
+    "v-type-check-packages-jev-decision-templates-tsconfig"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/logger",
+   "reason": "v-global-fallback-test-packages-logger: complete fallback suite CI: not_measured",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-packages-logger",
+    "v-type-check-packages-logger-tsconfig"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/nest-common",
+   "reason": "v-global-fallback-test-packages-nest-common: complete fallback suite CI: not_measured",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-packages-nest-common",
+    "v-type-check-packages-nest-common-tsconfig"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/oidc-bff",
+   "reason": "v-global-fallback-test-packages-oidc-bff: complete fallback suite CI: not_measured",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-packages-oidc-bff",
+    "v-type-check-packages-oidc-bff-tsconfig"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/throttle",
+   "reason": "v-global-fallback-test-packages-throttle: complete fallback suite CI: not_measured",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-packages-throttle",
+    "v-type-check-packages-throttle-tsconfig"
+   ]
+  },
+  {
+   "entity": "deployable_unit:packages/tsconfig",
+   "reason": "v-global-fallback-test-packages-tsconfig: complete fallback suite CI: not_measured",
+   "verdict": "not_measured",
+   "verifier_ids": [
+    "v-fitness",
+    "v-global-fallback-test-packages-tsconfig",
+    "v-type-check-packages-tsconfig-tsconfig"
+   ]
+  },
+  {
+   "entity": "document:.changeset/README.md",
+   "reason": "v-doc-reference: 0 reference(s) resolve at head",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-doc-reference"
+   ]
+  },
+  {
+   "entity": "document:.changeset/arca-jev-02-decision-templates.md",
+   "reason": "v-doc-reference: 0 reference(s) resolve at head",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-doc-reference"
+   ]
+  },
+  {
+   "entity": "document:README.md",
+   "reason": "v-doc-reference: 0 reference(s) resolve at head",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-doc-reference"
+   ]
+  },
+  {
+   "entity": "document:packages/jev-decision-templates/README.md",
+   "reason": "v-doc-reference: 0 reference(s) resolve at head",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-doc-reference"
+   ]
+  },
+  {
+   "entity": "document:provenance/component-provenance.md",
+   "reason": "v-doc-reference: 0 reference(s) resolve at head",
+   "verdict": "verified",
+   "verifier_ids": [
+    "v-doc-reference"
+   ]
+  }
+ ],
+ "verifier_selection": {
+  "applied": {},
+  "not_applied": [],
+  "requested": [],
+  "schema": "VerifierSelection/v1"
+ },
+ "verifiers": [
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-l3bk6w_m/check.tsbuildinfo --listFiles",
+   "duration_s": 1.8,
+   "entities": [
+    "code_unit:eslint.config.js",
+    "code_unit:scripts/check-accepted-risk.mjs",
+    "code_unit:scripts/prepare-release-plan.mjs",
+    "code_unit:scripts/release-policy.mjs",
+    "code_unit:scripts/release-preflight.mjs",
+    "code_unit:tests/accepted-risk-register.test.mjs",
+    "code_unit:tests/project-toolchain-policy.test.mjs",
+    "code_unit:tests/release-boundary-regression.test.mjs",
+    "code_unit:tests/release-preflight.test.mjs",
+    "code_unit:tests/release-workflow-policy.test.mjs",
+    "code_unit:tests/workflow-types.d.ts",
+    "code_unit:vitest.config.ts"
+   ],
+   "entity_verdicts": {
+    "code_unit:eslint.config.js": "verified",
+    "code_unit:scripts/check-accepted-risk.mjs": "verified",
+    "code_unit:scripts/prepare-release-plan.mjs": "verified",
+    "code_unit:scripts/release-policy.mjs": "verified",
+    "code_unit:scripts/release-preflight.mjs": "verified",
+    "code_unit:tests/accepted-risk-register.test.mjs": "verified",
+    "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
+    "code_unit:tests/release-boundary-regression.test.mjs": "verified",
+    "code_unit:tests/release-preflight.test.mjs": "verified",
+    "code_unit:tests/release-workflow-policy.test.mjs": "verified",
+    "code_unit:tests/workflow-types.d.ts": "verified",
+    "code_unit:vitest.config.ts": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:33:39Z",
+   "summary": "tsconfig.json: exit 0, 0 error(s), 466 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/access-contracts/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/access-contracts/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-wkerqoc2/check.tsbuildinfo --listFiles",
+   "duration_s": 3.24,
+   "entities": [
+    "deployable_unit:packages/access-contracts"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/access-contracts": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-access-contracts-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:33:41Z",
+   "summary": "packages/access-contracts/tsconfig.json: exit 0, 0 error(s), 311 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/eslint-config/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/eslint-config/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-6k435a58/check.tsbuildinfo --listFiles",
+   "duration_s": 3.47,
+   "entities": [
+    "deployable_unit:packages/eslint-config"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/eslint-config": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-eslint-config-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-eslint-config-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:33:45Z",
+   "summary": "packages/eslint-config/tsconfig.json: exit 0, 0 error(s), 415 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/jev-decision-templates/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/jev-decision-templates/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-5w8oopy8/check.tsbuildinfo --listFiles",
+   "duration_s": 3.82,
+   "entities": [
+    "code_unit:packages/jev-decision-templates/src/ascii.ts",
+    "code_unit:packages/jev-decision-templates/src/deny-list.ts",
+    "code_unit:packages/jev-decision-templates/src/digest.ts",
+    "code_unit:packages/jev-decision-templates/src/index.ts",
+    "code_unit:packages/jev-decision-templates/src/load.ts",
+    "code_unit:packages/jev-decision-templates/src/state-schemas.ts",
+    "code_unit:packages/jev-decision-templates/src/types.ts",
+    "code_unit:packages/jev-decision-templates/src/validate-state.ts",
+    "code_unit:packages/jev-decision-templates/src/validate-template.ts",
+    "code_unit:packages/jev-decision-templates/src/validate.ts",
+    "code_unit:packages/jev-decision-templates/test/validator.test.ts",
+    "code_unit:packages/jev-decision-templates/vitest.config.ts",
+    "deployable_unit:packages/jev-decision-templates"
+   ],
+   "entity_verdicts": {
+    "code_unit:packages/jev-decision-templates/src/ascii.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/deny-list.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/digest.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/index.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/load.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/state-schemas.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/types.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/validate-state.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/validate-template.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/validate.ts": "verified",
+    "code_unit:packages/jev-decision-templates/test/validator.test.ts": "verified",
+    "code_unit:packages/jev-decision-templates/vitest.config.ts": "verified",
+    "deployable_unit:packages/jev-decision-templates": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-jev-decision-templates-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-jev-decision-templates-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:33:48Z",
+   "summary": "packages/jev-decision-templates/tsconfig.json: exit 0, 0 error(s), 282 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/logger/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/logger/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-9kwxplub/check.tsbuildinfo --listFiles",
+   "duration_s": 5.02,
+   "entities": [
+    "deployable_unit:packages/logger"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/logger": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-logger-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-logger-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:33:52Z",
+   "summary": "packages/logger/tsconfig.json: exit 0, 0 error(s), 698 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/nest-common/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/nest-common/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-pgmz18m0/check.tsbuildinfo --listFiles",
+   "duration_s": 6.04,
+   "entities": [
+    "deployable_unit:packages/nest-common"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/nest-common": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-nest-common-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-nest-common-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:33:58Z",
+   "summary": "packages/nest-common/tsconfig.json: exit 0, 0 error(s), 690 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/oidc-bff/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/oidc-bff/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-298fpw95/check.tsbuildinfo --listFiles",
+   "duration_s": 4.38,
+   "entities": [
+    "deployable_unit:packages/oidc-bff"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/oidc-bff": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-oidc-bff-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-oidc-bff-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:34:04Z",
+   "summary": "packages/oidc-bff/tsconfig.json: exit 0, 0 error(s), 235 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/throttle/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/throttle/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-9wxxluwn/check.tsbuildinfo --listFiles",
+   "duration_s": 5.93,
+   "entities": [
+    "deployable_unit:packages/throttle"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/throttle": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-throttle-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-throttle-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:34:09Z",
+   "summary": "packages/throttle/tsconfig.json: exit 0, 0 error(s), 698 files listed"
+  },
+  {
+   "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/tsconfig/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-cxzfes29/verifier-out/type-check-63kod0wx/check.tsbuildinfo --listFiles",
+   "duration_s": 3.03,
+   "entities": [
+    "deployable_unit:packages/tsconfig"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/tsconfig": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-type-check-packages-tsconfig-tsconfig",
+   "kind": "type_check",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-type-check-packages-tsconfig-tsconfig.txt",
+   "started_at_utc": "2026-11-11T04:34:15Z",
+   "summary": "packages/tsconfig/tsconfig.json: exit 0, 0 error(s), 231 files listed"
+  },
+  {
+   "command": "tools/graph/contract_diff.py.run_diff(base=9af89919d949, head=3fad1e3f8008, graph=head graph)",
+   "duration_s": 2.4,
+   "entities": [
+    "code_unit:packages/jev-decision-templates/src/index.ts",
+    "code_unit:packages/jev-decision-templates/src/types.ts",
+    "contract:packages/jev-decision-templates/src/types.ts#DecisionPrimitive",
+    "contract:packages/jev-decision-templates/src/types.ts#ValidationCode"
+   ],
+   "entity_verdicts": {
+    "code_unit:packages/jev-decision-templates/src/index.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/types.ts": "verified",
+    "contract:packages/jev-decision-templates/src/types.ts#DecisionPrimitive": "verified",
+    "contract:packages/jev-decision-templates/src/types.ts#ValidationCode": "verified"
+   },
+   "exit_code": 1,
+   "id": "v-contract-diff",
+   "kind": "contract_diff",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-contract-diff.json",
+   "started_at_utc": "2026-11-11T04:34:18Z",
+   "summary": "17→19 contracts, breaking 0, edges {'not_measured': 2, 'verified': 25}"
+  },
+  {
+   "command": "workflow_config.validate exact head bytes",
+   "duration_s": 0.0,
+   "entities": [
+    "code_unit:.github/workflows/ci.yml"
+   ],
+   "entity_verdicts": {
+    "code_unit:.github/workflows/ci.yml": "not_measured"
+   },
+   "exit_code": 1,
+   "id": "v-workflow-config-b803fcb7f17ed923",
+   "kind": "config_schema",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-workflow-config-b803fcb7f17ed923.txt",
+   "started_at_utc": "2026-11-11T04:34:21Z",
+   "summary": "workflow shell caller closure not measured: job build-test step 8: line 1: unsupported interpreter script/module/stdin dispatch closure; job secret-scan step 1: line 4: missing literal helper ./gitleaks; 2 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence"
+  },
+  {
+   "command": "workflow_config.validate exact head bytes",
+   "duration_s": 0.0,
+   "entities": [
+    "code_unit:.github/workflows/dependabot-auto-merge.yml"
+   ],
+   "entity_verdicts": {
+    "code_unit:.github/workflows/dependabot-auto-merge.yml": "not_measured"
+   },
+   "exit_code": 1,
+   "id": "v-workflow-config-2fe48d1021006468",
+   "kind": "config_schema",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-workflow-config-2fe48d1021006468.txt",
+   "started_at_utc": "2026-11-11T04:34:21Z",
+   "summary": "workflow shell caller closure not measured: job auto-merge step 0: opaque input/interpolated workflow source; 1 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence"
+  },
+  {
+   "command": "workflow_config.validate exact head bytes",
+   "duration_s": 0.0,
+   "entities": [
+    "code_unit:.github/workflows/governance.yml"
+   ],
+   "entity_verdicts": {
+    "code_unit:.github/workflows/governance.yml": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-workflow-config-5844296ae241614c",
+   "kind": "config_schema",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-workflow-config-5844296ae241614c.txt",
+   "started_at_utc": "2026-11-11T04:34:21Z",
+   "summary": "bounded workflow configuration shape valid; expressions, shell, actions, callee interface compatibility and hosted execution NOT_MEASURED"
+  },
+  {
+   "command": "workflow_config.validate exact head bytes",
+   "duration_s": 0.0,
+   "entities": [
+    "code_unit:.github/workflows/release.yml"
+   ],
+   "entity_verdicts": {
+    "code_unit:.github/workflows/release.yml": "not_measured"
+   },
+   "exit_code": 1,
+   "id": "v-workflow-config-87db21a973eed4fe",
+   "kind": "config_schema",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-workflow-config-87db21a973eed4fe.txt",
+   "started_at_utc": "2026-11-11T04:34:21Z",
+   "summary": "workflow shell caller closure not measured: job prepare step 10: heredoc/group/function/brace expansion closure is unresolved; job prepare step 9: line 1: unsupported interpreter script/module/stdin dispatch closure; job publish step 3: command/process substitution closure is unresolved; job publish step 4: heredoc/group/function/brace expansion closure is unresolved; job version-pr step 2: command/process substitution closure is unresolved; job version-pr step 3: command/process substitution closure is unresolved; 6 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence"
+  },
+  {
+   "command": "verify.py fitness_rules FR-01..FR-05 over the head graph + head sources",
+   "duration_s": 0.07,
+   "entities": [
+    "code_unit:.github/workflows/ci.yml",
+    "code_unit:.github/workflows/dependabot-auto-merge.yml",
+    "code_unit:.github/workflows/governance.yml",
+    "code_unit:.github/workflows/release.yml",
+    "code_unit:eslint.config.js",
+    "code_unit:packages/jev-decision-templates/src/ascii.ts",
+    "code_unit:packages/jev-decision-templates/src/deny-list.ts",
+    "code_unit:packages/jev-decision-templates/src/digest.ts",
+    "code_unit:packages/jev-decision-templates/src/index.ts",
+    "code_unit:packages/jev-decision-templates/src/load.ts",
+    "code_unit:packages/jev-decision-templates/src/state-schemas.ts",
+    "code_unit:packages/jev-decision-templates/src/types.ts",
+    "code_unit:packages/jev-decision-templates/src/validate-state.ts",
+    "code_unit:packages/jev-decision-templates/src/validate-template.ts",
+    "code_unit:packages/jev-decision-templates/src/validate.ts",
+    "code_unit:packages/jev-decision-templates/test/validator.test.ts",
+    "code_unit:packages/jev-decision-templates/vitest.config.ts",
+    "code_unit:scripts/check-accepted-risk.mjs",
+    "code_unit:scripts/prepare-release-plan.mjs",
+    "code_unit:scripts/release-policy.mjs",
+    "code_unit:scripts/release-preflight.mjs",
+    "code_unit:tests/accepted-risk-register.test.mjs",
+    "code_unit:tests/project-toolchain-policy.test.mjs",
+    "code_unit:tests/release-boundary-regression.test.mjs",
+    "code_unit:tests/release-preflight.test.mjs",
+    "code_unit:tests/release-workflow-policy.test.mjs",
+    "code_unit:tests/workflow-types.d.ts",
+    "code_unit:vitest.config.ts",
+    "deployable_unit:packages/access-contracts",
+    "deployable_unit:packages/eslint-config",
+    "deployable_unit:packages/jev-decision-templates",
+    "deployable_unit:packages/logger",
+    "deployable_unit:packages/nest-common",
+    "deployable_unit:packages/oidc-bff",
+    "deployable_unit:packages/throttle",
+    "deployable_unit:packages/tsconfig"
+   ],
+   "entity_verdicts": {
+    "code_unit:.github/workflows/ci.yml": "not_measured",
+    "code_unit:.github/workflows/dependabot-auto-merge.yml": "not_measured",
+    "code_unit:.github/workflows/governance.yml": "not_measured",
+    "code_unit:.github/workflows/release.yml": "not_measured",
+    "code_unit:eslint.config.js": "verified",
+    "code_unit:packages/jev-decision-templates/src/ascii.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/deny-list.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/digest.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/index.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/load.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/state-schemas.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/types.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/validate-state.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/validate-template.ts": "verified",
+    "code_unit:packages/jev-decision-templates/src/validate.ts": "verified",
+    "code_unit:packages/jev-decision-templates/test/validator.test.ts": "verified",
+    "code_unit:packages/jev-decision-templates/vitest.config.ts": "verified",
+    "code_unit:scripts/check-accepted-risk.mjs": "verified",
+    "code_unit:scripts/prepare-release-plan.mjs": "verified",
+    "code_unit:scripts/release-policy.mjs": "verified",
+    "code_unit:scripts/release-preflight.mjs": "verified",
+    "code_unit:tests/accepted-risk-register.test.mjs": "verified",
+    "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
+    "code_unit:tests/release-boundary-regression.test.mjs": "verified",
+    "code_unit:tests/release-preflight.test.mjs": "verified",
+    "code_unit:tests/release-workflow-policy.test.mjs": "verified",
+    "code_unit:tests/workflow-types.d.ts": "verified",
+    "code_unit:vitest.config.ts": "verified",
+    "deployable_unit:packages/access-contracts": "verified",
+    "deployable_unit:packages/eslint-config": "verified",
+    "deployable_unit:packages/jev-decision-templates": "verified",
+    "deployable_unit:packages/logger": "verified",
+    "deployable_unit:packages/nest-common": "verified",
+    "deployable_unit:packages/oidc-bff": "verified",
+    "deployable_unit:packages/throttle": "verified",
+    "deployable_unit:packages/tsconfig": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-fitness",
+   "kind": "fitness_rules",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-fitness.json",
+   "started_at_utc": "2026-11-11T04:34:21Z",
+   "summary": "0 finding(s): 0 new / 0 frozen; 0 entity(ies) failed"
+  },
+  {
+   "command": "verify.py doc_reference: path / route / model references of affected documents resolve at head",
+   "duration_s": 0.0,
+   "entities": [
+    "document:.changeset/README.md",
+    "document:.changeset/arca-jev-02-decision-templates.md",
+    "document:README.md",
+    "document:packages/jev-decision-templates/README.md",
+    "document:provenance/component-provenance.md"
+   ],
+   "entity_verdicts": {
+    "document:.changeset/README.md": "verified",
+    "document:.changeset/arca-jev-02-decision-templates.md": "verified",
+    "document:README.md": "verified",
+    "document:packages/jev-decision-templates/README.md": "verified",
+    "document:provenance/component-provenance.md": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-doc-reference",
+   "kind": "doc_reference",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-doc-reference.txt",
+   "started_at_utc": "2026-11-11T04:34:21Z",
+   "summary": "5 document(s), 0 failed"
+  },
+  {
+   "ci_evidence": [
+    "receipts/graph/full-suite-ci/pr133-b8f7d77-root.json"
+   ],
+   "ci_source_commit": "b8f7d77752149c64795e54ef9956132e99338b58",
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 11.0,
+   "entities": [
+    "code_unit:.github/workflows/ci.yml",
+    "code_unit:.github/workflows/dependabot-auto-merge.yml",
+    "code_unit:.github/workflows/governance.yml",
+    "code_unit:eslint.config.js",
+    "code_unit:scripts/check-accepted-risk.mjs",
+    "code_unit:scripts/prepare-release-plan.mjs",
+    "code_unit:scripts/release-policy.mjs",
+    "code_unit:tests/accepted-risk-register.test.mjs",
+    "code_unit:tests/project-toolchain-policy.test.mjs",
+    "code_unit:tests/release-boundary-regression.test.mjs",
+    "code_unit:tests/release-preflight.test.mjs",
+    "code_unit:tests/workflow-types.d.ts",
+    "code_unit:vitest.config.ts"
+   ],
+   "entity_verdicts": {
+    "code_unit:.github/workflows/ci.yml": "verified",
+    "code_unit:.github/workflows/dependabot-auto-merge.yml": "verified",
+    "code_unit:.github/workflows/governance.yml": "verified",
+    "code_unit:eslint.config.js": "verified",
+    "code_unit:scripts/check-accepted-risk.mjs": "verified",
+    "code_unit:scripts/prepare-release-plan.mjs": "verified",
+    "code_unit:scripts/release-policy.mjs": "verified",
+    "code_unit:tests/accepted-risk-register.test.mjs": "verified",
+    "code_unit:tests/project-toolchain-policy.test.mjs": "verified",
+    "code_unit:tests/release-boundary-regression.test.mjs": "verified",
+    "code_unit:tests/release-preflight.test.mjs": "verified",
+    "code_unit:tests/workflow-types.d.ts": "verified",
+    "code_unit:vitest.config.ts": "verified"
+   },
+   "exit_code": 0,
+   "id": "v-global-fallback-test-root",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-root.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:21Z",
+   "summary": "complete fallback suite CI: verified",
+   "timeout_seconds": 900
+  },
+  {
+   "ci_evidence": [],
+   "ci_source_commit": null,
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 0.0,
+   "entities": [
+    "deployable_unit:packages/access-contracts"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/access-contracts": "not_measured"
+   },
+   "exit_code": 125,
+   "id": "v-global-fallback-test-packages-access-contracts",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-packages-access-contracts.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:25Z",
+   "summary": "complete fallback suite CI: not_measured",
+   "timeout_seconds": 900
+  },
+  {
+   "ci_evidence": [],
+   "ci_source_commit": null,
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 0.0,
+   "entities": [
+    "deployable_unit:packages/eslint-config"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/eslint-config": "not_measured"
+   },
+   "exit_code": 125,
+   "id": "v-global-fallback-test-packages-eslint-config",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-packages-eslint-config.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:25Z",
+   "summary": "complete fallback suite CI: not_measured",
+   "timeout_seconds": 900
+  },
+  {
+   "ci_evidence": [],
+   "ci_source_commit": null,
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 0.0,
+   "entities": [
+    "deployable_unit:packages/logger"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/logger": "not_measured"
+   },
+   "exit_code": 125,
+   "id": "v-global-fallback-test-packages-logger",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-packages-logger.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:25Z",
+   "summary": "complete fallback suite CI: not_measured",
+   "timeout_seconds": 900
+  },
+  {
+   "ci_evidence": [],
+   "ci_source_commit": null,
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 0.0,
+   "entities": [
+    "deployable_unit:packages/nest-common"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/nest-common": "not_measured"
+   },
+   "exit_code": 125,
+   "id": "v-global-fallback-test-packages-nest-common",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-packages-nest-common.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:25Z",
+   "summary": "complete fallback suite CI: not_measured",
+   "timeout_seconds": 900
+  },
+  {
+   "ci_evidence": [],
+   "ci_source_commit": null,
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 0.0,
+   "entities": [
+    "deployable_unit:packages/oidc-bff"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/oidc-bff": "not_measured"
+   },
+   "exit_code": 125,
+   "id": "v-global-fallback-test-packages-oidc-bff",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-packages-oidc-bff.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:25Z",
+   "summary": "complete fallback suite CI: not_measured",
+   "timeout_seconds": 900
+  },
+  {
+   "ci_evidence": [],
+   "ci_source_commit": null,
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 0.0,
+   "entities": [
+    "deployable_unit:packages/throttle"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/throttle": "not_measured"
+   },
+   "exit_code": 125,
+   "id": "v-global-fallback-test-packages-throttle",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-packages-throttle.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:25Z",
+   "summary": "complete fallback suite CI: not_measured",
+   "timeout_seconds": 900
+  },
+  {
+   "ci_evidence": [],
+   "ci_source_commit": null,
+   "command": "authenticated committed CI: pnpm test",
+   "duration_s": 0.0,
+   "entities": [
+    "deployable_unit:packages/tsconfig"
+   ],
+   "entity_verdicts": {
+    "deployable_unit:packages/tsconfig": "not_measured"
+   },
+   "exit_code": 125,
+   "id": "v-global-fallback-test-packages-tsconfig",
+   "kind": "targeted_test",
+   "measurement_origin": "authenticated_github_ci",
+   "output_ref": "/tmp/arcana-verify-cxzfes29/verifier-out/v-global-fallback-test-packages-tsconfig.txt",
+   "scope": "global_fallback_full_suite",
+   "started_at_utc": "2026-11-11T04:34:25Z",
+   "summary": "complete fallback suite CI: not_measured",
+   "timeout_seconds": 900
+  }
+ ],
+ "verify": {
+  "events": [
+   {
+    "code": "STRUCTURAL_EXCLUSION",
+    "rule": "DEC-AUP-0034",
+    "text": "1 affected entity(ies) owe no verdict (receipt: 1): unchanged at both revisions and given no verifier by the matrix"
+   }
+  ],
+  "required_by_entity": {
+   "code_unit:.github/workflows/ci.yml": [
+    "config_schema",
+    "fitness_rules",
+    "full_fallback_test"
+   ],
+   "code_unit:.github/workflows/dependabot-auto-merge.yml": [
+    "config_schema",
+    "fitness_rules",
+    "full_fallback_test"
+   ],
+   "code_unit:.github/workflows/governance.yml": [
+    "config_schema",
+    "fitness_rules",
+    "full_fallback_test"
+   ],
+   "code_unit:.github/workflows/release.yml": [
+    "config_schema",
+    "fitness_rules"
+   ],
+   "code_unit:eslint.config.js": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/ascii.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/deny-list.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/digest.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/index.ts": [
+    "contract_diff",
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/load.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/state-schemas.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/types.ts": [
+    "contract_diff",
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/validate-state.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/validate-template.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/src/validate.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/test/validator.test.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:packages/jev-decision-templates/vitest.config.ts": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:scripts/check-accepted-risk.mjs": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:scripts/prepare-release-plan.mjs": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:scripts/release-policy.mjs": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:scripts/release-preflight.mjs": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:tests/accepted-risk-register.test.mjs": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:tests/project-toolchain-policy.test.mjs": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:tests/release-boundary-regression.test.mjs": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:tests/release-preflight.test.mjs": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:tests/release-workflow-policy.test.mjs": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "code_unit:tests/workflow-types.d.ts": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "code_unit:vitest.config.ts": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "contract:packages/jev-decision-templates/src/types.ts#DecisionPrimitive": [
+    "contract_diff"
+   ],
+   "contract:packages/jev-decision-templates/src/types.ts#ValidationCode": [
+    "contract_diff"
+   ],
+   "deployable_unit:packages/access-contracts": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "deployable_unit:packages/eslint-config": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "deployable_unit:packages/jev-decision-templates": [
+    "fitness_rules",
+    "type_check"
+   ],
+   "deployable_unit:packages/logger": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "deployable_unit:packages/nest-common": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "deployable_unit:packages/oidc-bff": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "deployable_unit:packages/throttle": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "deployable_unit:packages/tsconfig": [
+    "fitness_rules",
+    "full_fallback_test",
+    "type_check"
+   ],
+   "document:.changeset/README.md": [
+    "doc_reference"
+   ],
+   "document:.changeset/arca-jev-02-decision-templates.md": [
+    "doc_reference"
+   ],
+   "document:README.md": [
+    "doc_reference"
+   ],
+   "document:packages/jev-decision-templates/README.md": [
+    "doc_reference"
+   ],
+   "document:provenance/component-provenance.md": [
+    "doc_reference"
+   ],
+   "receipt:receipts/graph/persist-foundation-audit.json": []
+  },
+  "seconds": {
+   "prepare": 0.52,
+   "total": 48.62,
+   "verifiers": 50.2
+  }
+ },
+ "work_item": "ARCA-JEV-02"
+}
