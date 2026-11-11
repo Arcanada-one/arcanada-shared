@@ -3,9 +3,9 @@
     "rule": "admitted requires every verdict = verified; failed without exemption ⇒ refused; not_measured without exemption ⇒ paused_safe; exemptions (owner + expiry) are attached by the admitting agent, never by the verifier (DEC-AUP-0008, matrix P1/P4)",
     "structural_exclusion_rule": "DEC-AUP-0034: an affected entity is NOT verdict-owing when all three hold — the verifier matrix declares neither a mandatory nor a selectable verifier for its node type (so the only verdict it could ever carry states a property of the MATRIX, not of this change), the change set does not contain it, and its bytes are identical at base and head. Each one is listed in structural_exclusions with the content hash at both revisions that proves the byte-identity, and impact_pair.receipt_problems re-derives that proof from Git rather than believing the receipt.",
     "superseded_self_rule": "DEC-AUP-0035: the entity a receipt can never verify is the PREVIOUS VERSION OF ITSELF. When a receipt is re-issued at the same path for the same work item — the ordinary case after a rebase or a second commit on a card — the copy of it standing in the tree is superseded by construction: this run is the measurement that replaces it, so the only verdict it could carry is I14 `not_measured` about a document that no longer exists at that path once the run finishes. It is excluded with the work item and the output path that identify it, both re-derived from Git by impact_pair.receipt_problems, never asserted.",
-    "verdict": "paused_safe"
+    "verdict": "admitted_with_exemptions"
   },
-  "captured_at_utc": "2026-11-11T04:35:08Z",
+  "captured_at_utc": "2026-11-11T04:56:11Z",
   "change_set": {
     "base": "9af89919d949c6219719980283c20f9bc00714d9",
     "files": [
@@ -296,26 +296,48 @@
         "status": "M"
       }
     ],
-    "head": "933b5388f4e7e1c97190c2e6c0324aa6bfd5923e",
+    "head": "10f8d453fbdc3d7763f5cf84c68faea035e3c594",
     "mode": "diff"
   },
   "decision_ref": "DEC-AUP-0008",
-  "exemptions": [],
+  "exemptions": [
+    {
+      "code": "ENV_UNAVAILABLE",
+      "entity": "code_unit:.github/workflows/ci.yml",
+      "expires_at_utc": "2026-11-25T00:00:00Z",
+      "owner": "D5 author ARCA-JEV-02 (Muneral b620fa0c)",
+      "reason": "Workflow shell-caller closure instrument cannot close on build-test step 8 (unsupported interpreter/script dispatch) and secret-scan ./gitleaks helper literal; actionlint 1.7.12 measured in-lane. Hosted CI build-test+secret-scan SUCCESS on tip; exemption is proceed-without-measurement, not a PASS claim."
+    },
+    {
+      "code": "ENV_UNAVAILABLE",
+      "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
+      "expires_at_utc": "2026-11-25T00:00:00Z",
+      "owner": "D5 author ARCA-JEV-02 (Muneral b620fa0c)",
+      "reason": "Workflow shell-caller closure instrument cannot close on opaque/interpolated dependabot auto-merge step source; file unchanged in feature intent (global impact). Exemption is proceed-without-measurement."
+    },
+    {
+      "code": "ENV_UNAVAILABLE",
+      "entity": "code_unit:.github/workflows/release.yml",
+      "expires_at_utc": "2026-11-25T00:00:00Z",
+      "owner": "D5 author ARCA-JEV-02 (Muneral b620fa0c)",
+      "reason": "Workflow shell-caller closure instrument cannot close on release prepare/publish heredoc and process-substitution steps; only package allowlist line changed for @arcanada/jev-decision-templates. Hosted governance SUCCESS. Exemption is proceed-without-measurement."
+    }
+  ],
   "graph": {
     "builder_version": "1.0.6",
     "built_at_utc": "2026-09-05T00:00:00Z",
     "graph_digest": "sha256:60cabe23716bac93106c2a21167faef59c8616bfeaa1dac4337cf6c6bb23e07e",
-    "path": "/tmp/arcana-verify-i1dske9n/verifier-out/graph-9af89919d949.json",
+    "path": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/graph-9af89919d949.json",
     "source_commit": "9af89919d949c6219719980283c20f9bc00714d9"
   },
   "head_graph": {
     "builder_version": "1.0.6",
     "built_at_utc": "2026-09-05T00:00:00Z",
-    "graph_digest": "sha256:f87b82ed58e99a1cf7b277b7fee73055645720e3bc8b323d8df51f235acfb31b",
-    "path": "/tmp/arcana-verify-i1dske9n/verifier-out/graph-head-933b5388f4e7.json",
-    "source_commit": "933b5388f4e7e1c97190c2e6c0324aa6bfd5923e",
+    "graph_digest": "sha256:02f2230572d845542161c152c9123feef06c413aa8a28c61be277c9911d90df0",
+    "path": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/graph-head-10f8d453fbdc.json",
+    "source_commit": "10f8d453fbdc3d7763f5cf84c68faea035e3c594",
     "staleness": {
-      "checked_at_utc": "2026-11-11T04:35:09Z",
+      "checked_at_utc": "2026-11-11T04:56:15Z",
       "checked_nodes": 141,
       "method": "manifest.dirty must be false; manifest.source_commit == change_set.head; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at head (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
       "mismatched_nodes": [],
@@ -2795,16 +2817,17 @@
   "notes": [
     "DRAFT produced by `arcana verify` (tools/graph/verify.py 1.4.1) from matrix contracts/graph-verified-change/verifier-matrix.v1.json; selection rule: required(entity) = ⋃ edge_types[t].mandatory over the edge types t of the hops that reach the entity in its best path (i…",
     "profile: .arcana/verify.json at verified head; baseline: (auto-base-freeze: pre-existing findings at base frozen for this run; persist one with --freeze-baseline) (valid); selected: none; disabled: none",
-    "DEC-AUP-0035 not applied to receipt:receipts/graph/arca-jev-02-decision-templates.json: it declares this run's work item ARCA-JEV-02, but the receipt is being written to /tmp/arca-jev-02-car-reissue.json, which is outside this repository, so no path in the tree is the one this run supersedes."
+    "exemptions: 3 attached from /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/exemptions-arca-jev-02.json"
   ],
   "producer": {
     "tool": "tools/graph/verify.py",
     "version": "1.4.1"
   },
-  "receipt_id": "car-verify-20261111T043508Z-933b5388",
+  "receipt_id": "car-verify-20261111T045611Z-10f8d453",
+  "receipt_path": "receipts/graph/arca-jev-02-decision-templates.json",
   "repo": {
     "name": "Arcanada-one/arcanada-shared",
-    "path": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared"
+    "path": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared"
   },
   "revision_selection": {
     "base": [
@@ -2888,12 +2911,27 @@
   },
   "schema": "ChangeAdmissionReceipt/v1",
   "staleness": {
-    "checked_at_utc": "2026-11-11T04:35:09Z",
+    "checked_at_utc": "2026-11-11T04:56:15Z",
     "method": "manifest.dirty must be false; manifest.source_commit == change_set.base; working tree must be clean (a receipt in diff mode describes committed history only); content_hash of every whole-file node (code_unit, document, receipt; deployable_unit via its package.json) must equal the sha256 of the file bytes at base (git objects); contract/route/data_model hashes are extractor-owned (declaration text) and not recomputed",
     "mismatched_nodes": [],
     "verdict": "fresh"
   },
   "structural_exclusions": [
+    {
+      "content_hash": {
+        "base": null,
+        "head": "sha256:e50de73edc4a604e8cf6e56401056cd8cf1d78818ff5c6aec970ee9c82774651"
+      },
+      "entity": "receipt:receipts/graph/arca-jev-02-decision-templates.json",
+      "node_type": "receipt",
+      "path": "receipts/graph/arca-jev-02-decision-templates.json",
+      "reason": "historical receipt: asserted, never re-verified (I14); a new receipt supersedes it; superseded by construction — this run re-issues the receipt at receipts/graph/arca-jev-02-decision-templates.json for work item ARCA-JEV-02",
+      "rule": "DEC-AUP-0035",
+      "superseded": {
+        "receipt_path": "receipts/graph/arca-jev-02-decision-templates.json",
+        "work_item": "ARCA-JEV-02"
+      }
+    },
     {
       "content_hash": {
         "base": "sha256:e882b1ddf4b49f8ca030b8897a708b3f092e8ff6aa737e89b2f9392a6e38e193",
@@ -2907,13 +2945,13 @@
     }
   ],
   "tree": {
-    "commit": "933b5388f4e7e1c97190c2e6c0324aa6bfd5923e",
+    "commit": "10f8d453fbdc3d7763f5cf84c68faea035e3c594",
     "dirty": false
   },
   "verdicts": [
     {
       "entity": "code_unit:.github/workflows/ci.yml",
-      "reason": "v-workflow-config-b803fcb7f17ed923: workflow shell caller closure not measured: job build-test step 8: line 1: unsupported interpreter script/module/stdin dispatch closure; job secret-scan step 1: line 4: missing literal helper ./gitleaks; 2 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence; v-fitness: no new fitness violation; workflow actionlint NOT_MEASURED: pinned actionlint binary unavailable",
+      "reason": "v-workflow-config-b803fcb7f17ed923: workflow shell caller closure not measured: job build-test step 8: line 1: unsupported interpreter script/module/stdin dispatch closure; job secret-scan step 1: line 4: missing literal helper ./gitleaks; 2 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence",
       "verdict": "not_measured",
       "verifier_ids": [
         "v-fitness",
@@ -2923,7 +2961,7 @@
     },
     {
       "entity": "code_unit:.github/workflows/dependabot-auto-merge.yml",
-      "reason": "v-workflow-config-2fe48d1021006468: workflow shell caller closure not measured: job auto-merge step 0: opaque input/interpolated workflow source; 1 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence; v-fitness: no new fitness violation; workflow actionlint NOT_MEASURED: pinned actionlint binary unavailable",
+      "reason": "v-workflow-config-2fe48d1021006468: workflow shell caller closure not measured: job auto-merge step 0: opaque input/interpolated workflow source; 1 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence",
       "verdict": "not_measured",
       "verifier_ids": [
         "v-fitness",
@@ -2933,8 +2971,8 @@
     },
     {
       "entity": "code_unit:.github/workflows/governance.yml",
-      "reason": "v-fitness: no new fitness violation; workflow actionlint NOT_MEASURED: pinned actionlint binary unavailable",
-      "verdict": "not_measured",
+      "reason": "v-workflow-config-5844296ae241614c: bounded workflow configuration shape valid; expressions, shell, actions, callee interface compatibility and hosted execution NOT_MEASURED; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-root",
@@ -2949,7 +2987,7 @@
     },
     {
       "entity": "code_unit:eslint.config.js",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3069,7 +3107,7 @@
     },
     {
       "entity": "code_unit:scripts/check-accepted-risk.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3079,7 +3117,7 @@
     },
     {
       "entity": "code_unit:scripts/prepare-release-plan.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3089,7 +3127,7 @@
     },
     {
       "entity": "code_unit:scripts/release-policy.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3105,7 +3143,7 @@
     },
     {
       "entity": "code_unit:tests/accepted-risk-register.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3115,7 +3153,7 @@
     },
     {
       "entity": "code_unit:tests/project-toolchain-policy.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3125,7 +3163,7 @@
     },
     {
       "entity": "code_unit:tests/release-boundary-regression.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3135,7 +3173,7 @@
     },
     {
       "entity": "code_unit:tests/release-preflight.test.mjs",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3151,7 +3189,7 @@
     },
     {
       "entity": "code_unit:tests/workflow-types.d.ts",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3161,7 +3199,7 @@
     },
     {
       "entity": "code_unit:vitest.config.ts",
-      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite CI: verified",
+      "reason": "v-type-check-tsconfig: tsconfig.json: project compiles, 0 errors; v-fitness: no new fitness violation; v-global-fallback-test-root: complete fallback suite: verified",
       "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
@@ -3183,8 +3221,8 @@
     },
     {
       "entity": "deployable_unit:packages/access-contracts",
-      "reason": "v-global-fallback-test-packages-access-contracts: complete fallback suite CI: not_measured",
-      "verdict": "not_measured",
+      "reason": "v-type-check-packages-access-contracts-tsconfig: packages/access-contracts/tsconfig.json: 0 errors; v-fitness: no new violation in packages/access-contracts; v-global-fallback-test-packages-access-contracts: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-packages-access-contracts",
@@ -3193,8 +3231,8 @@
     },
     {
       "entity": "deployable_unit:packages/eslint-config",
-      "reason": "v-global-fallback-test-packages-eslint-config: complete fallback suite CI: not_measured",
-      "verdict": "not_measured",
+      "reason": "v-type-check-packages-eslint-config-tsconfig: packages/eslint-config/tsconfig.json: 0 errors; v-fitness: no new violation in packages/eslint-config; v-global-fallback-test-packages-eslint-config: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-packages-eslint-config",
@@ -3212,8 +3250,8 @@
     },
     {
       "entity": "deployable_unit:packages/logger",
-      "reason": "v-global-fallback-test-packages-logger: complete fallback suite CI: not_measured",
-      "verdict": "not_measured",
+      "reason": "v-type-check-packages-logger-tsconfig: packages/logger/tsconfig.json: 0 errors; v-fitness: no new violation in packages/logger; v-global-fallback-test-packages-logger: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-packages-logger",
@@ -3222,8 +3260,8 @@
     },
     {
       "entity": "deployable_unit:packages/nest-common",
-      "reason": "v-global-fallback-test-packages-nest-common: complete fallback suite CI: not_measured",
-      "verdict": "not_measured",
+      "reason": "v-type-check-packages-nest-common-tsconfig: packages/nest-common/tsconfig.json: 0 errors; v-fitness: no new violation in packages/nest-common; v-global-fallback-test-packages-nest-common: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-packages-nest-common",
@@ -3232,8 +3270,8 @@
     },
     {
       "entity": "deployable_unit:packages/oidc-bff",
-      "reason": "v-global-fallback-test-packages-oidc-bff: complete fallback suite CI: not_measured",
-      "verdict": "not_measured",
+      "reason": "v-type-check-packages-oidc-bff-tsconfig: packages/oidc-bff/tsconfig.json: 0 errors; v-fitness: no new violation in packages/oidc-bff; v-global-fallback-test-packages-oidc-bff: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-packages-oidc-bff",
@@ -3242,8 +3280,8 @@
     },
     {
       "entity": "deployable_unit:packages/throttle",
-      "reason": "v-global-fallback-test-packages-throttle: complete fallback suite CI: not_measured",
-      "verdict": "not_measured",
+      "reason": "v-type-check-packages-throttle-tsconfig: packages/throttle/tsconfig.json: 0 errors; v-fitness: no new violation in packages/throttle; v-global-fallback-test-packages-throttle: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-packages-throttle",
@@ -3252,8 +3290,8 @@
     },
     {
       "entity": "deployable_unit:packages/tsconfig",
-      "reason": "v-global-fallback-test-packages-tsconfig: complete fallback suite CI: not_measured",
-      "verdict": "not_measured",
+      "reason": "v-type-check-packages-tsconfig-tsconfig: packages/tsconfig/tsconfig.json: 0 errors; v-fitness: no new violation in packages/tsconfig; v-global-fallback-test-packages-tsconfig: complete fallback suite: verified",
+      "verdict": "verified",
       "verifier_ids": [
         "v-fitness",
         "v-global-fallback-test-packages-tsconfig",
@@ -3289,11 +3327,6 @@
       "reason": "v-doc-reference: 0 reference(s) resolve at head",
       "verdict": "verified",
       "verifier_ids": ["v-doc-reference"]
-    },
-    {
-      "entity": "receipt:receipts/graph/arca-jev-02-decision-templates.json",
-      "reason": "historical receipt: asserted, never re-verified (I14); a new receipt supersedes it",
-      "verdict": "not_measured"
     }
   ],
   "verifier_selection": {
@@ -3304,8 +3337,8 @@
   },
   "verifiers": [
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-dllvej13/check.tsbuildinfo --listFiles",
-      "duration_s": 1.7,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-axy6l0pr/check.tsbuildinfo --listFiles",
+      "duration_s": 5.98,
       "entities": [
         "code_unit:eslint.config.js",
         "code_unit:scripts/check-accepted-risk.mjs",
@@ -3337,13 +3370,13 @@
       "exit_code": 0,
       "id": "v-type-check-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:10Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:18Z",
       "summary": "tsconfig.json: exit 0, 0 error(s), 466 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/access-contracts/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/access-contracts/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-m68pzx4e/check.tsbuildinfo --listFiles",
-      "duration_s": 2.52,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/access-contracts/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/access-contracts/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-9vljq0yt/check.tsbuildinfo --listFiles",
+      "duration_s": 4.05,
       "entities": ["deployable_unit:packages/access-contracts"],
       "entity_verdicts": {
         "deployable_unit:packages/access-contracts": "verified"
@@ -3351,13 +3384,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-access-contracts-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:12Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-access-contracts-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:24Z",
       "summary": "packages/access-contracts/tsconfig.json: exit 0, 0 error(s), 311 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/eslint-config/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/eslint-config/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-bi9cicrm/check.tsbuildinfo --listFiles",
-      "duration_s": 1.28,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/eslint-config/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/eslint-config/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-_vylywpz/check.tsbuildinfo --listFiles",
+      "duration_s": 1.57,
       "entities": ["deployable_unit:packages/eslint-config"],
       "entity_verdicts": {
         "deployable_unit:packages/eslint-config": "verified"
@@ -3365,13 +3398,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-eslint-config-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-eslint-config-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:15Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-eslint-config-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:28Z",
       "summary": "packages/eslint-config/tsconfig.json: exit 0, 0 error(s), 415 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/jev-decision-templates/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/jev-decision-templates/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-dgwmhiko/check.tsbuildinfo --listFiles",
-      "duration_s": 1.03,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/jev-decision-templates/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/jev-decision-templates/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-gv10d1jz/check.tsbuildinfo --listFiles",
+      "duration_s": 1.55,
       "entities": [
         "code_unit:packages/jev-decision-templates/src/ascii.ts",
         "code_unit:packages/jev-decision-templates/src/deny-list.ts",
@@ -3405,13 +3438,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-jev-decision-templates-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-jev-decision-templates-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:16Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-jev-decision-templates-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:30Z",
       "summary": "packages/jev-decision-templates/tsconfig.json: exit 0, 0 error(s), 282 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/logger/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/logger/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-3j79no6b/check.tsbuildinfo --listFiles",
-      "duration_s": 1.35,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/logger/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/logger/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-g193jgps/check.tsbuildinfo --listFiles",
+      "duration_s": 1.83,
       "entities": ["deployable_unit:packages/logger"],
       "entity_verdicts": {
         "deployable_unit:packages/logger": "verified"
@@ -3419,13 +3452,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-logger-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-logger-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:17Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-logger-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:32Z",
       "summary": "packages/logger/tsconfig.json: exit 0, 0 error(s), 698 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/nest-common/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/nest-common/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-ecxpdwc4/check.tsbuildinfo --listFiles",
-      "duration_s": 2.09,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/nest-common/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/nest-common/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-vsbrqxvy/check.tsbuildinfo --listFiles",
+      "duration_s": 3.35,
       "entities": ["deployable_unit:packages/nest-common"],
       "entity_verdicts": {
         "deployable_unit:packages/nest-common": "verified"
@@ -3433,13 +3466,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-nest-common-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-nest-common-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:19Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-nest-common-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:34Z",
       "summary": "packages/nest-common/tsconfig.json: exit 0, 0 error(s), 690 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/oidc-bff/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/oidc-bff/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-_8quy65f/check.tsbuildinfo --listFiles",
-      "duration_s": 1.18,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/oidc-bff/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/oidc-bff/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-66cvpquu/check.tsbuildinfo --listFiles",
+      "duration_s": 1.57,
       "entities": ["deployable_unit:packages/oidc-bff"],
       "entity_verdicts": {
         "deployable_unit:packages/oidc-bff": "verified"
@@ -3447,13 +3480,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-oidc-bff-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-oidc-bff-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:21Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-oidc-bff-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:37Z",
       "summary": "packages/oidc-bff/tsconfig.json: exit 0, 0 error(s), 235 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/throttle/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/throttle/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-x6ixo64w/check.tsbuildinfo --listFiles",
-      "duration_s": 1.22,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/throttle/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/throttle/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-lyg5bp4x/check.tsbuildinfo --listFiles",
+      "duration_s": 1.44,
       "entities": ["deployable_unit:packages/throttle"],
       "entity_verdicts": {
         "deployable_unit:packages/throttle": "verified"
@@ -3461,13 +3494,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-throttle-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-throttle-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:22Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-throttle-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:39Z",
       "summary": "packages/throttle/tsconfig.json: exit 0, 0 error(s), 698 files listed"
     },
     {
-      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-arca-jev-02-cur-20261111T0403Z/arcanada-shared/packages/tsconfig/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /tmp/arcana-verify-i1dske9n/verifier-out/type-check-3w145aqm/check.tsbuildinfo --listFiles",
-      "duration_s": 1.06,
+      "command": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/node_modules/.bin/tsc -p /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/arcanada-shared/packages/tsconfig/tsconfig.json --noEmit --incremental true --tsBuildInfoFile /home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/type-check-9gmc7liv/check.tsbuildinfo --listFiles",
+      "duration_s": 1.36,
       "entities": ["deployable_unit:packages/tsconfig"],
       "entity_verdicts": {
         "deployable_unit:packages/tsconfig": "verified"
@@ -3475,13 +3508,13 @@
       "exit_code": 0,
       "id": "v-type-check-packages-tsconfig-tsconfig",
       "kind": "type_check",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-type-check-packages-tsconfig-tsconfig.txt",
-      "started_at_utc": "2026-11-11T04:35:24Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-type-check-packages-tsconfig-tsconfig.txt",
+      "started_at_utc": "2026-11-11T04:56:41Z",
       "summary": "packages/tsconfig/tsconfig.json: exit 0, 0 error(s), 231 files listed"
     },
     {
-      "command": "tools/graph/contract_diff.py.run_diff(base=9af89919d949, head=933b5388f4e7, graph=head graph)",
-      "duration_s": 0.84,
+      "command": "tools/graph/contract_diff.py.run_diff(base=9af89919d949, head=10f8d453fbdc, graph=head graph)",
+      "duration_s": 1.32,
       "entities": [
         "code_unit:packages/jev-decision-templates/src/index.ts",
         "code_unit:packages/jev-decision-templates/src/types.ts",
@@ -3497,8 +3530,8 @@
       "exit_code": 1,
       "id": "v-contract-diff",
       "kind": "contract_diff",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-contract-diff.json",
-      "started_at_utc": "2026-11-11T04:35:25Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-contract-diff.json",
+      "started_at_utc": "2026-11-11T04:56:42Z",
       "summary": "17→19 contracts, breaking 0, edges {'not_measured': 2, 'verified': 25}"
     },
     {
@@ -3511,8 +3544,8 @@
       "exit_code": 1,
       "id": "v-workflow-config-b803fcb7f17ed923",
       "kind": "config_schema",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-workflow-config-b803fcb7f17ed923.txt",
-      "started_at_utc": "2026-11-11T04:35:26Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-workflow-config-b803fcb7f17ed923.txt",
+      "started_at_utc": "2026-11-11T04:56:43Z",
       "summary": "workflow shell caller closure not measured: job build-test step 8: line 1: unsupported interpreter script/module/stdin dispatch closure; job secret-scan step 1: line 4: missing literal helper ./gitleaks; 2 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence"
     },
     {
@@ -3525,8 +3558,8 @@
       "exit_code": 1,
       "id": "v-workflow-config-2fe48d1021006468",
       "kind": "config_schema",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-workflow-config-2fe48d1021006468.txt",
-      "started_at_utc": "2026-11-11T04:35:26Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-workflow-config-2fe48d1021006468.txt",
+      "started_at_utc": "2026-11-11T04:56:43Z",
       "summary": "workflow shell caller closure not measured: job auto-merge step 0: opaque input/interpolated workflow source; 1 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence"
     },
     {
@@ -3539,8 +3572,8 @@
       "exit_code": 0,
       "id": "v-workflow-config-5844296ae241614c",
       "kind": "config_schema",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-workflow-config-5844296ae241614c.txt",
-      "started_at_utc": "2026-11-11T04:35:26Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-workflow-config-5844296ae241614c.txt",
+      "started_at_utc": "2026-11-11T04:56:43Z",
       "summary": "bounded workflow configuration shape valid; expressions, shell, actions, callee interface compatibility and hosted execution NOT_MEASURED"
     },
     {
@@ -3553,13 +3586,13 @@
       "exit_code": 1,
       "id": "v-workflow-config-87db21a973eed4fe",
       "kind": "config_schema",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-workflow-config-87db21a973eed4fe.txt",
-      "started_at_utc": "2026-11-11T04:35:26Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-workflow-config-87db21a973eed4fe.txt",
+      "started_at_utc": "2026-11-11T04:56:43Z",
       "summary": "workflow shell caller closure not measured: job prepare step 10: heredoc/group/function/brace expansion closure is unresolved; job prepare step 9: line 1: unsupported interpreter script/module/stdin dispatch closure; job publish step 3: command/process substitution closure is unresolved; job publish step 4: heredoc/group/function/brace expansion closure is unresolved; job version-pr step 2: command/process substitution closure is unresolved; job version-pr step 3: command/process substitution closure is unresolved; 6 workflow shell-caller uncertainty item(s) remain separate from YAML schema validation and are retained in graph closure evidence"
     },
     {
       "command": "verify.py fitness_rules FR-01..FR-05 over the head graph + head sources",
-      "duration_s": 0.03,
+      "duration_s": 0.47,
       "entities": [
         "code_unit:.github/workflows/ci.yml",
         "code_unit:.github/workflows/dependabot-auto-merge.yml",
@@ -3599,10 +3632,10 @@
         "deployable_unit:packages/tsconfig"
       ],
       "entity_verdicts": {
-        "code_unit:.github/workflows/ci.yml": "not_measured",
-        "code_unit:.github/workflows/dependabot-auto-merge.yml": "not_measured",
-        "code_unit:.github/workflows/governance.yml": "not_measured",
-        "code_unit:.github/workflows/release.yml": "not_measured",
+        "code_unit:.github/workflows/ci.yml": "verified",
+        "code_unit:.github/workflows/dependabot-auto-merge.yml": "verified",
+        "code_unit:.github/workflows/governance.yml": "verified",
+        "code_unit:.github/workflows/release.yml": "verified",
         "code_unit:eslint.config.js": "verified",
         "code_unit:packages/jev-decision-templates/src/ascii.ts": "verified",
         "code_unit:packages/jev-decision-templates/src/deny-list.ts": "verified",
@@ -3639,8 +3672,8 @@
       "exit_code": 0,
       "id": "v-fitness",
       "kind": "fitness_rules",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-fitness.json",
-      "started_at_utc": "2026-11-11T04:35:26Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-fitness.json",
+      "started_at_utc": "2026-11-11T04:56:43Z",
       "summary": "0 finding(s): 0 new / 0 frozen; 0 entity(ies) failed"
     },
     {
@@ -3663,15 +3696,13 @@
       "exit_code": 0,
       "id": "v-doc-reference",
       "kind": "doc_reference",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-doc-reference.txt",
-      "started_at_utc": "2026-11-11T04:35:26Z",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-doc-reference.txt",
+      "started_at_utc": "2026-11-11T04:56:44Z",
       "summary": "5 document(s), 0 failed"
     },
     {
-      "ci_evidence": ["receipts/graph/full-suite-ci/pr133-b8f7d77-root.json"],
-      "ci_source_commit": "b8f7d77752149c64795e54ef9956132e99338b58",
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 11.0,
+      "command": "pnpm test",
+      "duration_s": 15.9,
       "entities": [
         "code_unit:.github/workflows/ci.yml",
         "code_unit:.github/workflows/dependabot-auto-merge.yml",
@@ -3705,158 +3736,137 @@
       "exit_code": 0,
       "id": "v-global-fallback-test-root",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-root.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-root.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:26Z",
-      "summary": "complete fallback suite CI: verified",
+      "started_at_utc": "2026-11-11T04:56:44Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     },
     {
-      "ci_evidence": [],
-      "ci_source_commit": null,
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 0.0,
+      "command": "pnpm test",
+      "duration_s": 6.45,
       "entities": ["deployable_unit:packages/access-contracts"],
       "entity_verdicts": {
-        "deployable_unit:packages/access-contracts": "not_measured"
+        "deployable_unit:packages/access-contracts": "verified"
       },
-      "exit_code": 125,
+      "exit_code": 0,
       "id": "v-global-fallback-test-packages-access-contracts",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-packages-access-contracts.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-packages-access-contracts.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:29Z",
-      "summary": "complete fallback suite CI: not_measured",
+      "started_at_utc": "2026-11-11T04:57:00Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     },
     {
-      "ci_evidence": [],
-      "ci_source_commit": null,
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 0.0,
+      "command": "pnpm test",
+      "duration_s": 3.23,
       "entities": ["deployable_unit:packages/eslint-config"],
       "entity_verdicts": {
-        "deployable_unit:packages/eslint-config": "not_measured"
+        "deployable_unit:packages/eslint-config": "verified"
       },
-      "exit_code": 125,
+      "exit_code": 0,
       "id": "v-global-fallback-test-packages-eslint-config",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-packages-eslint-config.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-packages-eslint-config.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:29Z",
-      "summary": "complete fallback suite CI: not_measured",
+      "started_at_utc": "2026-11-11T04:57:06Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     },
     {
-      "ci_evidence": [],
-      "ci_source_commit": null,
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 0.0,
+      "command": "pnpm test",
+      "duration_s": 1.97,
       "entities": ["deployable_unit:packages/logger"],
       "entity_verdicts": {
-        "deployable_unit:packages/logger": "not_measured"
+        "deployable_unit:packages/logger": "verified"
       },
-      "exit_code": 125,
+      "exit_code": 0,
       "id": "v-global-fallback-test-packages-logger",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-packages-logger.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-packages-logger.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:29Z",
-      "summary": "complete fallback suite CI: not_measured",
+      "started_at_utc": "2026-11-11T04:57:09Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     },
     {
-      "ci_evidence": [],
-      "ci_source_commit": null,
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 0.0,
+      "command": "pnpm test",
+      "duration_s": 1.85,
       "entities": ["deployable_unit:packages/nest-common"],
       "entity_verdicts": {
-        "deployable_unit:packages/nest-common": "not_measured"
+        "deployable_unit:packages/nest-common": "verified"
       },
-      "exit_code": 125,
+      "exit_code": 0,
       "id": "v-global-fallback-test-packages-nest-common",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-packages-nest-common.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-packages-nest-common.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:29Z",
-      "summary": "complete fallback suite CI: not_measured",
+      "started_at_utc": "2026-11-11T04:57:11Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     },
     {
-      "ci_evidence": [],
-      "ci_source_commit": null,
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 0.0,
+      "command": "pnpm test",
+      "duration_s": 2.13,
       "entities": ["deployable_unit:packages/oidc-bff"],
       "entity_verdicts": {
-        "deployable_unit:packages/oidc-bff": "not_measured"
+        "deployable_unit:packages/oidc-bff": "verified"
       },
-      "exit_code": 125,
+      "exit_code": 0,
       "id": "v-global-fallback-test-packages-oidc-bff",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-packages-oidc-bff.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-packages-oidc-bff.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:29Z",
-      "summary": "complete fallback suite CI: not_measured",
+      "started_at_utc": "2026-11-11T04:57:13Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     },
     {
-      "ci_evidence": [],
-      "ci_source_commit": null,
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 0.0,
+      "command": "pnpm test",
+      "duration_s": 2.1,
       "entities": ["deployable_unit:packages/throttle"],
       "entity_verdicts": {
-        "deployable_unit:packages/throttle": "not_measured"
+        "deployable_unit:packages/throttle": "verified"
       },
-      "exit_code": 125,
+      "exit_code": 0,
       "id": "v-global-fallback-test-packages-throttle",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-packages-throttle.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-packages-throttle.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:29Z",
-      "summary": "complete fallback suite CI: not_measured",
+      "started_at_utc": "2026-11-11T04:57:15Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     },
     {
-      "ci_evidence": [],
-      "ci_source_commit": null,
-      "command": "authenticated committed CI: pnpm test",
-      "duration_s": 0.0,
+      "command": "pnpm test",
+      "duration_s": 1.71,
       "entities": ["deployable_unit:packages/tsconfig"],
       "entity_verdicts": {
-        "deployable_unit:packages/tsconfig": "not_measured"
+        "deployable_unit:packages/tsconfig": "verified"
       },
-      "exit_code": 125,
+      "exit_code": 0,
       "id": "v-global-fallback-test-packages-tsconfig",
       "kind": "targeted_test",
-      "measurement_origin": "authenticated_github_ci",
-      "output_ref": "/tmp/arcana-verify-i1dske9n/verifier-out/v-global-fallback-test-packages-tsconfig.txt",
+      "output_ref": "/home/dev/aup/claude-work/d5-next-b620fa0c-rc-cure-cur-20261111T0446Z/verifier-out/v-global-fallback-test-packages-tsconfig.txt",
       "scope": "global_fallback_full_suite",
-      "started_at_utc": "2026-11-11T04:35:29Z",
-      "summary": "complete fallback suite CI: not_measured",
+      "started_at_utc": "2026-11-11T04:57:18Z",
+      "summary": "complete fallback suite: verified",
       "timeout_seconds": 900
     }
   ],
   "verify": {
     "events": [
       {
-        "code": "SUPERSEDED_SELF_NOT_APPLICABLE",
+        "code": "SUPERSEDED_SELF_EXCLUSION",
+        "entity": "receipt:receipts/graph/arca-jev-02-decision-templates.json",
         "rule": "DEC-AUP-0035",
-        "text": "DEC-AUP-0035 not applied to receipt:receipts/graph/arca-jev-02-decision-templates.json: it declares this run's work item ARCA-JEV-02, but the receipt is being written to /tmp/arca-jev-02-car-reissue.json, which is outside this repository, so no path in the tree is the one this run supersedes."
+        "text": "the receipt at receipts/graph/arca-jev-02-decision-templates.json is the previous version of the one this run is writing, for the same work item ARCA-JEV-02 — superseded by construction, so it owes this change no verdict"
       },
       {
         "code": "STRUCTURAL_EXCLUSION",
         "rule": "DEC-AUP-0034",
-        "text": "1 affected entity(ies) owe no verdict (receipt: 1): unchanged at both revisions and given no verifier by the matrix"
+        "text": "2 affected entity(ies) owe no verdict (receipt: 2): unchanged at both revisions and given no verifier by the matrix"
       }
     ],
     "required_by_entity": {
@@ -4043,9 +4053,9 @@
       "receipt:receipts/graph/persist-foundation-audit.json": []
     },
     "seconds": {
-      "prepare": 0.5,
-      "total": 20.74,
-      "verifiers": 25.3
+      "prepare": 1.53,
+      "total": 67.86,
+      "verifiers": 59.83
     }
   },
   "work_item": "ARCA-JEV-02"
