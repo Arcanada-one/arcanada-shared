@@ -34,13 +34,13 @@ const PREPARE_STEP_ALLOWLIST = [
   {
     kind: "action",
     keys: ["uses"],
-    uses: "pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271",
+    uses: "pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413",
     with: {},
   },
   {
     kind: "action",
     keys: ["uses", "with"],
-    uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+    uses: "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
     with: {
       "node-version": RELEASE_NODE_VERSION,
       "package-manager-cache": false,
@@ -118,7 +118,7 @@ const PREPARE_STEP_ALLOWLIST = [
   {
     kind: "action",
     keys: ["uses", "with"],
-    uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+    uses: "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
     with: {
       name: RELEASE_ARTIFACT_NAME,
       path: [
@@ -143,7 +143,7 @@ const PRIVILEGED_STEP_ALLOWLIST = {
     {
       kind: "action",
       keys: ["uses", "with"],
-      uses: "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+      uses: "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
       with: {
         name: RELEASE_ARTIFACT_NAME,
         path: "${{ runner.temp }}/release-artifact",
@@ -176,7 +176,7 @@ const PRIVILEGED_STEP_ALLOWLIST = {
     {
       kind: "action",
       keys: ["uses", "with"],
-      uses: "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+      uses: "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
       with: {
         "node-version": RELEASE_NODE_VERSION,
         "package-manager-cache": false,
@@ -194,7 +194,7 @@ const PRIVILEGED_STEP_ALLOWLIST = {
     {
       kind: "action",
       keys: ["uses", "with"],
-      uses: "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+      uses: "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
       with: {
         name: RELEASE_ARTIFACT_NAME,
         path: "${{ runner.temp }}/release-artifact",
