@@ -67,6 +67,10 @@ const TEXT = {
   },
 };
 
+// One controller owns each region and generated detail ID within a document.
+// Weak document keys avoid retaining documents after their browsing context ends.
+const mountsByDocument = new WeakMap();
+
 function element(doc, tag, attrs = {}, text) {
   const out = doc.createElement(tag);
   for (const [key, value] of Object.entries(attrs)) out.setAttribute(key, String(value));
@@ -103,22 +107,28 @@ function mountProjectedInspector({
   document: doc, graphRoot, timelineRoot, inspectorRoot, graph, view,
   locale = doc.documentElement?.lang || 'en', idPrefix = 'lab-observation',
 }) {
-  if (!graphRoot || !timelineRoot || !inspectorRoot || !/^[a-z][a-z0-9-]*$/.test(idPrefix)) {
+  if (!graphRoot || !timelineRoot || !inspectorRoot || typeof doc.getElementById !== 'function' ||
+      typeof idPrefix !== 'string' || !/^[a-z][a-z0-9-]*$/.test(idPrefix)) {
     throw new Error('observation-inspector-mount-unavailable');
   }
-  const words = TEXT[locale] || TEXT.en;
+  const detailId = idPrefix + '-detail';
+  const roots = new Set([graphRoot, timelineRoot, inspectorRoot]);
+  const active = mountsByDocument.get(doc);
+  if (active?.ids.has(detailId) || [...roots].some(root => active?.roots.has(root)) ||
+      doc.getElementById(detailId)) {
+    throw new Error('observation-inspector-mount-conflict');
+  }
+  const reservations = active || { ids: new Set(), roots: new Set() };
+  const words = typeof locale === 'string' && Object.hasOwn(TEXT, locale) ? TEXT[locale] : TEXT.en;
   const timeline = element(doc, 'div', { 'data-lab-observation-timeline': '', class: 'lab-observation' });
   const inspector = element(doc, 'div', { 'data-lab-observation-inspector': '', class: 'lab-observation' });
-  const details = element(doc, 'div', { id: idPrefix + '-detail', tabindex: '-1' });
+  const details = element(doc, 'div', { id: detailId, tabindex: '-1' });
   const placeholders = [...timelineRoot.querySelectorAll('[data-lab-placeholder]'),
-    ...inspectorRoot.querySelectorAll('[data-lab-placeholder]')].map(node => ({ node, hidden: node.hasAttribute('hidden') }));
+    ...inspectorRoot.querySelectorAll('[data-lab-placeholder]')].map(node => ({ node, hidden: node.getAttribute('hidden') }));
   let current = null;
   let generation = 0;
   let disposed = false;
   let buttons = [];
-  timelineRoot.append(timeline);
-  inspectorRoot.append(inspector);
-  for (const { node } of placeholders) node.setAttribute('hidden', '');
 
   const clearChildren = node => { while (node.firstChild) node.removeChild(node.firstChild); };
   const row = (list, label, value) => {
@@ -325,10 +335,24 @@ function mountProjectedInspector({
     clearChildren(details);
     timeline.remove();
     inspector.remove();
-    for (const { node, hidden } of placeholders) if (!hidden) node.removeAttribute('hidden');
+    for (const { node, hidden } of placeholders) {
+      if (hidden === null) node.removeAttribute('hidden');
+      else node.setAttribute('hidden', hidden);
+    }
+    reservations.ids.delete(detailId);
+    for (const root of roots) reservations.roots.delete(root);
+    if (!reservations.ids.size) mountsByDocument.delete(doc);
   }
 
-  try { update({ graph, view }); } catch (error) { destroy(); throw error; }
+  reservations.ids.add(detailId);
+  for (const root of roots) reservations.roots.add(root);
+  mountsByDocument.set(doc, reservations);
+  try {
+    timelineRoot.append(timeline);
+    inspectorRoot.append(inspector);
+    for (const { node } of placeholders) node.setAttribute('hidden', '');
+    update({ graph, view });
+  } catch (error) { destroy(); throw error; }
   return { select, update, destroy };
 }
 
@@ -359,3 +383,4 @@ export function createObservationInspectorMount({ projectGraph, projectView }) {
     };
   };
 }
+
