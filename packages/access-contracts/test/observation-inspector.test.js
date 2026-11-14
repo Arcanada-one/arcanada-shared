@@ -376,6 +376,34 @@ describe('inspector mount identity', () => {
     controller.destroy();
   });
 
+  it('refuses each ancestor and descendant overlap independently with distinct roots and ids', () => {
+    const state = stateFor(['snapshot-A', 'receipt-captured-1']);
+    const graph = projectGraphPresentation(state);
+    const first = inspectorDocument(graph);
+    const owned = mount({ ...first, state, idPrefix: 'owned' });
+    expect(owned.select('node', graph.nodes[0].key)).toBe(true);
+    const before = first.inspectorRoot.textContent;
+    const candidate = inspectorRegions(graph, first.document);
+    // Only the graph-root candidate overlaps. The two other regions and
+    // generated detail ID are distinct, so neither can accidentally be the
+    // reason for rejecting the mount.
+    const ancestor = first.document.createElement('section');
+    ancestor.append(first.graphRoot);
+    first.document.body.append(ancestor);
+    const descendant = first.document.createElement('section');
+    first.graphRoot.append(descendant);
+    for (const graphRoot of [ancestor, descendant]) {
+      expect(() => mount({ ...candidate, graphRoot, state, idPrefix: 'candidate' })).toThrow(
+        'observation-inspector-mount-conflict',
+      );
+      expect(first.inspectorRoot.textContent).toBe(before);
+      expect(first.document.querySelectorAll('[id]').map(node => node.id)).toEqual(['owned-detail']);
+      expect(candidate.inspectorRoot.querySelector('[data-lab-placeholder]').hasAttribute('hidden')).toBe(false);
+    }
+    expect(owned.select('artifact', 'receipt-captured-1')).toBe(true);
+    owned.destroy();
+  });
+
   it('supports distinct roots and prefixes in one document and independent documents', () => {
     const state = stateFor(['snapshot-A']);
     const graph = projectGraphPresentation(state);
