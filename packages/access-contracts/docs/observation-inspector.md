@@ -3,7 +3,7 @@
 This browser module displays details already present in the shared observation projections. It introduces no parser, reducer, transport, authority, file reader or execution control.
 
 ```js
-import { createObservationInspectorMount } from '@arcanada/access-contracts/observation-inspector';
+import { createObservationInspectorMount } from "@arcanada/access-contracts/observation-inspector";
 
 const mountObservationInspector = createObservationInspectorMount({
   projectGraph: projectKnowledgeObservationGraph,
