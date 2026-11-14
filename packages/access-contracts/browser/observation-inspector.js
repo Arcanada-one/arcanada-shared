@@ -114,7 +114,9 @@ function mountProjectedInspector({
   const detailId = idPrefix + '-detail';
   const roots = new Set([graphRoot, timelineRoot, inspectorRoot]);
   const active = mountsByDocument.get(doc);
-  if (active?.ids.has(detailId) || [...roots].some(root => active?.roots.has(root)) ||
+  const overlaps = [...roots].some(root => [...(active?.roots || [])].some(reserved =>
+    root === reserved || root.contains(reserved) || reserved.contains(root)));
+  if (active?.ids.has(detailId) || overlaps ||
       doc.getElementById(detailId)) {
     throw new Error('observation-inspector-mount-conflict');
   }

@@ -354,6 +354,28 @@ describe('inspector mount identity', () => {
     });
   }
 
+  it('refuses nested regions without letting a second controller lose its visible inspector', () => {
+    const state = stateFor(['snapshot-A', 'receipt-captured-1']);
+    const graph = projectGraphPresentation(state);
+    const first = inspectorDocument(graph);
+    const controller = mount({ ...first, state, idPrefix: 'first' });
+    expect(controller.select('node', graph.nodes[0].key)).toBe(true);
+    const shown = first.inspectorRoot.textContent;
+    const controls = first.graphRoot.querySelectorAll('[data-lab-inspect-kind]');
+    // Both descendant and ancestor roots would let one controller remove the
+    // other's visible details while its separate graph controls remain live.
+    for (const inspectorRoot of [first.document.getElementById('first-detail'), first.document.body]) {
+      const second = inspectorRegions(graph, first.document);
+      expect(() => mount({ ...second, inspectorRoot, state, idPrefix: 'second' })).toThrow();
+      expect(first.inspectorRoot.textContent).toBe(shown);
+      expect(first.graphRoot.querySelectorAll('[data-lab-inspect-kind]')).toEqual(controls);
+      expect(first.document.querySelectorAll('[id]')).toHaveLength(1);
+      expect(second.graphRoot.querySelectorAll('[data-lab-inspect-kind]')).toHaveLength(0);
+    }
+    expect(controller.select('artifact', 'receipt-captured-1')).toBe(true);
+    controller.destroy();
+  });
+
   it('supports distinct roots and prefixes in one document and independent documents', () => {
     const state = stateFor(['snapshot-A']);
     const graph = projectGraphPresentation(state);
