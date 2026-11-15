@@ -488,7 +488,7 @@ describe('event evidence survives the reducer and remains an observation', () =>
       const state = stateFor(['snapshot-A', 'event-1', artifactId], record => {
         if (record.record_id === 'event-1') record.data.evidence_refs = [...refs];
       });
-      const view = projectView(state);
+      const view = structuredClone(projectView(state));
       expect(view.eventLedger.find(event => event.recordId === 'event-1').evidenceRefs).toEqual(refs);
       const surface = inspectorDocument(projectGraphPresentation(state));
       const controller = mount({ ...surface, state });
@@ -580,8 +580,8 @@ describe('event evidence survives the reducer and remains an observation', () =>
     controller.destroy();
   });
 
-  it('keeps hostile and URL-like event evidence inert through decoding, projection and selection', () => {
-    for (const ref of ['javascript:alert(1)', 'https://example.invalid/private-receipt', '<img src=x onerror="globalThis.pwned=true">']) {
+  it('keeps schema-valid scheme-like event evidence inert through decoding, projection and selection', () => {
+    for (const ref of ['javascript:globalThis.alert', 'https://example.invalid/private-receipt']) {
       const state = stateFor(['snapshot-A', 'event-1'], record => {
         if (record.record_id === 'event-1') record.data.evidence_refs = [ref];
       });
@@ -595,6 +595,27 @@ describe('event evidence survives the reducer and remains an observation', () =>
         expect(['script', 'img', 'iframe', 'svg', 'a'].includes(node.tag)).toBe(false);
         expect(Object.keys(node.attrs).some(name => /^(?:on|href$|src$|style$)/i.test(name))).toBe(false);
       }
+      controller.destroy();
+    }
+  });
+
+  it('rejects schema-invalid event references before they can enter the ledger or inspector', () => {
+    for (const ref of ['javascript:alert(1)', '<img src=x onerror="globalThis.pwned=true">']) {
+      const state = stateFor(['snapshot-A']);
+      const before = structuredClone(state);
+      const record = structuredClone(records['event-1']);
+      record.data.evidence_refs = [ref];
+      const result = reduce(state, { kind: 'receive', record });
+      expect(result.outcome).toEqual({ disposition: 'rejected', code: 'SCHEMA_INVALID' });
+      expect(result.commands).toEqual([]);
+      expect(result.state.eventLedger).toEqual(before.eventLedger);
+      expect(result.state.appliedCursor).toBe(before.appliedCursor);
+      expect(state).toEqual(before);
+      const surface = inspectorDocument(projectGraphPresentation(result.state));
+      const controller = mount({ ...surface, state: result.state });
+      expect(controller.select('event', 'event-1')).toBe(false);
+      expect(controller.select('evidence', ref)).toBe(false);
+      expect(surface.inspectorRoot.textContent).not.toContain(ref);
       controller.destroy();
     }
   });
