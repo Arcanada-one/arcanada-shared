@@ -43,6 +43,12 @@ is capped at 15 minutes and token expiry. Local logout invalidates the cabinet
 session and pending login; it does not terminate the user's ecosystem account
 or every other product session. No refresh token is requested.
 
+## Change history
+
+Unpublished changes are recorded in [CHANGELOG.md](CHANGELOG.md), outside the
+public Changesets queue. Retaining a change note does not publish this package
+or qualify its production mounting.
+
 ## Delivery boundary
 
 This is an unpublished private package candidate. A production durable store,
