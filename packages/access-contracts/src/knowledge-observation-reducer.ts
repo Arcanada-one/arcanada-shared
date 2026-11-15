@@ -113,6 +113,8 @@ interface HistoryEntry {
 }
 
 export interface EventLedgerEntry {
+  /** Exact declared evidence references; absent in historical ledgers that did not retain them. */
+  readonly evidenceRefs?: readonly string[];
   readonly eventId: string;
   readonly recordId: string;
   readonly cursor: string;
@@ -553,6 +555,7 @@ function applyEvent(
       eventId: d.event_id,
       recordId: rec.record_id,
       cursor: d.cursor,
+      evidenceRefs: [...d.evidence_refs],
       producer: {
         service: rec.producer.service,
         instanceId: rec.producer.instance_id,
