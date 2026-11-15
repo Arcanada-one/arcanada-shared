@@ -22,13 +22,17 @@
     "fail-closed"
   ],
   "files": [
-    "dist"
+    "dist",
+    "browser"
   ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./observation-inspector": {
+      "import": "./browser/observation-inspector.js"
     }
   },
   "main": "./dist/index.cjs",
