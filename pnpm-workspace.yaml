@@ -16,8 +16,8 @@ catalog:
   ioredis: ^6.0.0
   ioredis-mock: ^8.9.0
   "rate-limiter-flexible": ^11.2.4
-  "@typescript-eslint/eslint-plugin": ^8.72.1
-  "@typescript-eslint/parser": ^8.72.1
+  "@typescript-eslint/eslint-plugin": ^8.72.2
+  "@typescript-eslint/parser": ^8.72.2
   eslint: ^10.14.0
   prettier: ^3.9.10
   reflect-metadata: ^0.2.2
