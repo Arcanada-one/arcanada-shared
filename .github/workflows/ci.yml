@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build-test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64, ci-general]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -45,7 +45,7 @@ jobs:
         run: pnpm audit --audit-level=high
 
   secret-scan:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64, ci-general]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
