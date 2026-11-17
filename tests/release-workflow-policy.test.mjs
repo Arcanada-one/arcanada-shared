@@ -408,8 +408,18 @@ const validateReleaseWorkflow = (source) => {
   assert.equal(publishJob?.needs, "prepare");
   assert.equal(versionJob?.if, "needs.prepare.outputs.mode == 'version'");
   assert.equal(publishJob?.if, "needs.prepare.outputs.mode == 'publish'");
-  assert.deepEqual(prepareJob?.["runs-on"], ["self-hosted", "Linux", "X64", "ci-general"]);
-  assert.deepEqual(versionJob?.["runs-on"], ["self-hosted", "Linux", "X64", "ci-general"]);
+  assert.deepEqual(prepareJob?.["runs-on"], [
+    "self-hosted",
+    "Linux",
+    "X64",
+    "ci-general",
+  ]);
+  assert.deepEqual(versionJob?.["runs-on"], [
+    "self-hosted",
+    "Linux",
+    "X64",
+    "ci-general",
+  ]);
   assert.equal(publishJob?.["runs-on"], "ubuntu-latest");
   assert.ok(Array.isArray(prepareSteps));
   assert.ok(Array.isArray(versionSteps));
