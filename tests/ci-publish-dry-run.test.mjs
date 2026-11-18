@@ -1,3 +1,5 @@
+/** @typedef {import('./workflow-types.js').Step} Step */
+/** @typedef {import('./workflow-types.js').Workflow} Workflow */
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -8,10 +10,12 @@ test("CI runs npm publish --dry-run without secrets.NPM_TOKEN", async () => {
     new URL("../.github/workflows/ci.yml", import.meta.url),
     "utf8",
   );
+  /** @type {Workflow} */
   const workflow = parse(source);
   const steps = workflow.jobs?.["build-test"]?.steps ?? [];
   const dryRun = steps.find(
-    (step) => step?.name === "npm publish dry-run (no secret)",
+    (/** @type {Step} */ step) =>
+      step?.name === "npm publish dry-run (no secret)",
   );
   assert.ok(dryRun, "CI must include an npm publish dry-run step");
   assert.match(String(dryRun.run), /npm publish --dry-run --ignore-scripts/);
