@@ -35,6 +35,23 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: npm publish dry-run (no secret)
+        run: |
+          set -euo pipefail
+          # PR-safe packaging check without NODE_AUTH_TOKEN / secrets.NPM_TOKEN.
+          # Provenance attestations omitted: unsupported off GitHub-hosted.
+          for dir in \
+            packages/access-contracts \
+            packages/eslint-config \
+            packages/jev-decision-templates \
+            packages/logger \
+            packages/nest-common \
+            packages/throttle \
+            packages/tsconfig
+          do
+            (cd "$dir" && npm publish --dry-run --ignore-scripts)
+          done
+
       - name: Test
         run: pnpm test
 

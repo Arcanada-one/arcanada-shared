@@ -13,7 +13,7 @@ const execFileAsync = promisify(execFile);
 const TASK_ID_PATTERN =
   /\b(?:INFRA|WEB|DEV|DEVOPS|CONTENT|RESEARCH|AGENT|BENCH|MAINT|FIN|QA|SEC|QCK|TUNE|ROB|DATA|ARCA|CUBR|VERD|AUTH|BILL|CONV|MUN|TRANS|SUP|OVER|CONS|VOICE|LTM|SRCH|CONN|ARGA|EMAIL|ARAS|STATUS|ADSR|LEGAL|PUB|SPACE|SHARED|CTRL|WIKI|DISK)-\d{4}\b/;
 const REPO_DEPENDENCY_COMMAND =
-  /\bpnpm\b|\bchangesets?\b|\bnpm\s+(?:ci|add|i)\b|\bnpm\s+install(?! --global --ignore-scripts npm@11\.18\.0\b)/;
+  /\bpnpm\b|\bchangesets?\b|\bnpm\s+(?:ci|add|i)\b|\bnpm\s+install\b/;
 
 /** @returns {Promise<import('./workflow-types.js').Workflow>} */
 const readWorkflow = async () =>
@@ -49,7 +49,6 @@ test("write-capable release jobs never install or execute repository dependencie
   });
   assert.deepEqual(publish?.permissions, {
     contents: "write",
-    "id-token": "write",
   });
   assert.equal(versionPr?.if, "needs.prepare.outputs.mode == 'version'");
   assert.equal(publish?.if, "needs.prepare.outputs.mode == 'publish'");
@@ -83,7 +82,7 @@ test("write-capable release jobs never install or execute repository dependencie
     .join("\n");
   assert.match(
     publishCommands,
-    /npm publish "\$package_file" --access public --provenance --ignore-scripts/,
+    /npm publish "\$package_file" --access public --ignore-scripts/,
   );
 });
 
