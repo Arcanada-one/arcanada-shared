@@ -10,7 +10,19 @@
 # withdrawn by GitHub on 2026-10-23 and 2026-10-22 ("not a practically exploitable
 # vulnerability" / withdrawn), so the ignores and entries were removed on 2026-11-07.
 # Reachability at acceptance time: dev-only via @changesets/cli (micromatch, argparse).
+#
+# 2026-11-18: GHSA-fc5q-39xc-vjpf (picomatch) accepted — npm latest is still 4.0.7;
+# patched range is >=4.0.8. Reachability: dev-only via @changesets/cli → micromatch.
+# build-test on main@ba58b1ce failed on `pnpm audit --audit-level=high` (run 44143466288).
 
 schema_version: 1
 
-entries: []
+entries:
+  - id: GHSA-fc5q-39xc-vjpf
+    package: picomatch
+    severity: high
+    re_review: "2026-12-18"
+    reason: >
+      Build/dev-only transitive via @changesets/cli. GitHub advisory patched
+      versions are >=4.0.8 but npm latest remains 4.0.7 (measured 2026-11-18).
+      Exception expires when 4.0.8+ publishes or on re_review, whichever is sooner.

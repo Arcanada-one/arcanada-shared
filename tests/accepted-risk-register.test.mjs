@@ -73,3 +73,25 @@ test("a malformed today is rejected", () => {
     /today must be YYYY-MM-DD/,
   );
 });
+
+test("live register covers picomatch GHSA-fc5q-39xc-vjpf while 4.0.8 is unpublished", async () => {
+  const { readRegister } = await import("../scripts/check-accepted-risk.mjs");
+  const id = "GHSA-fc5q-39xc-vjpf";
+  const { ignored, entries } = await readRegister(
+    new URL("../", import.meta.url),
+  );
+  assert.ok(
+    ignored.includes(id),
+    `${id} must be in pnpm-workspace.yaml auditConfig.ignoreGhsas (build-test pnpm audit)`,
+  );
+  assert.ok(
+    entries.some((entry) => entry.id === id),
+    `${id} must have an accepted-risk.yml entry with a future re_review`,
+  );
+  const problems = checkAcceptedRisk({
+    ignored,
+    entries,
+    today: new Date().toISOString().slice(0, 10),
+  });
+  assert.deepEqual(problems, []);
+});
