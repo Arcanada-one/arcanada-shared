@@ -10,19 +10,7 @@
 # withdrawn by GitHub on 2026-10-23 and 2026-10-22 ("not a practically exploitable
 # vulnerability" / withdrawn), so the ignores and entries were removed on 2026-11-07.
 # Reachability at acceptance time: dev-only via @changesets/cli (micromatch, argparse).
-#
-# reverse_if for GHSA-fc5q-39xc-vjpf: picomatch >= 4.0.8 is published on npm, OR
-# the advisory is withdrawn, OR the package leaves every workspace production tree.
 
 schema_version: 1
 
-entries:
-  - id: GHSA-fc5q-39xc-vjpf
-    pkg: "picomatch"
-    severity: high
-    scope: transitive-lint-tooling
-    reason: "No patched release exists (npm latest 4.0.7; advisory patched range >=4.0.8 unpublished as of 2026-11-18). Reachable via tinyglobby/fdir from @typescript-eslint (dependency of @arcanada/eslint-config). Override is impossible without a published version. CI audit --audit-level=high fails ambiently on main until a patch ships."
-    last_review: 2026-11-18
-    re_review: 2026-12-18
-    reviewed_by: agent
-    upstream_tracking_url: "https://github.com/advisories/GHSA-fc5q-39xc-vjpf"
+entries: []
