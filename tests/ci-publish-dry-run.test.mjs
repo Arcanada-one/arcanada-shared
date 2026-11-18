@@ -17,10 +17,7 @@ test("CI runs npm publish --dry-run without secrets.NPM_TOKEN", async () => {
   assert.match(String(dryRun.run), /npm publish --dry-run --ignore-scripts/);
   assert.doesNotMatch(String(dryRun.run), /(?:^|[^-\w])--provenance\b/);
   assert.equal(dryRun.env?.NODE_AUTH_TOKEN, undefined);
-  assert.doesNotMatch(
-    String(dryRun.run),
-    /\$\{\{\s*secrets\.NPM_TOKEN\s*\}\}/,
-  );
+  assert.doesNotMatch(String(dryRun.run), /\$\{\{\s*secrets\.NPM_TOKEN\s*\}\}/);
   assert.deepEqual(workflow.jobs["build-test"]["runs-on"], [
     "self-hosted",
     "Linux",
