@@ -49,11 +49,6 @@ overrides:
   # patched in 6.4.4, but that release reopens GHSA-8g5g-mxqh-grgj
   # (server.fs.deny query bypass). 6.4.5 is the patched 6.x vitest accepts.
   "vite@<=6.4.4": 6.4.5
-  # GHSA-fc5q-39xc-vjpf — ReDoS via single-branch repeated extglobs. npm patched
-  # range is >=4.0.8 but that tag is unpublished (latest still 4.0.7 as of
-  # 2026-11-18). Override to the vendored tree of micromatch/picomatch#267 at
-  # version 4.0.8 under vendor/picomatch (see vendor/picomatch/VENDOR.md).
-  "picomatch@<=4.0.7": "file:vendor/picomatch"
 
 # Accepted-risk register: see accepted-risk.yml. It is currently empty: the two
 # former ignores (GHSA-vfj7-8cjw-p6xm, GHSA-hp3w-g68c-fv3c) were withdrawn upstream

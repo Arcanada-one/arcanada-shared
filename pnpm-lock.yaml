@@ -71,7 +71,6 @@ overrides:
   postcss@<=8.5.22: 8.5.23
   source-map-js@>=1.0.0 <1.2.2: 1.2.2
   vite@<=6.4.4: 6.4.5
-  picomatch@<=4.0.7: file:vendor/picomatch
 
 importers:
 
@@ -1304,7 +1303,6 @@ packages:
 
   fdir@6.5.0:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
-    version: 6.5.0
     engines: {node: '>=12.0.0'}
     peerDependencies:
       picomatch: ^3 || ^4
@@ -1645,8 +1643,12 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  picomatch@file:vendor/picomatch:
-    resolution: {directory: vendor/picomatch, type: directory}
+  picomatch@2.3.2:
+    resolution: {integrity: sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA==}
+    engines: {node: '>=8.6'}
+
+  picomatch@4.0.7:
+    resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
   pify@4.0.1:
@@ -3106,9 +3108,9 @@ snapshots:
     dependencies:
       reusify: 1.1.0
 
-  fdir@6.5.0(picomatch@file:vendor/picomatch):
+  fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
-      picomatch: file:vendor/picomatch
+      picomatch: 4.0.7
 
   fengari-interop@0.1.4(fengari@0.1.5):
     dependencies:
@@ -3324,7 +3326,7 @@ snapshots:
   micromatch@4.0.8:
     dependencies:
       braces: 3.0.3
-      picomatch: file:vendor/picomatch
+      picomatch: 2.3.2
 
   minimatch@10.2.5:
     dependencies:
@@ -3427,7 +3429,9 @@ snapshots:
 
   picocolors@1.1.1: {}
 
-  picomatch@file:vendor/picomatch: {}
+  picomatch@2.3.2: {}
+
+  picomatch@4.0.7: {}
 
   pify@4.0.1: {}
 
@@ -3651,8 +3655,8 @@ snapshots:
 
   tinyglobby@0.2.17:
     dependencies:
-      fdir: 6.5.0(picomatch@file:vendor/picomatch)
-      picomatch: file:vendor/picomatch
+      fdir: 6.5.0(picomatch@4.0.7)
+      picomatch: 4.0.7
 
   tmp@0.2.7: {}
 
@@ -3729,8 +3733,8 @@ snapshots:
   vite@6.4.5(@types/node@22.20.5)(yaml@2.9.1):
     dependencies:
       esbuild: 0.25.12
-      fdir: 6.5.0(picomatch@file:vendor/picomatch)
-      picomatch: file:vendor/picomatch
+      fdir: 6.5.0(picomatch@4.0.7)
+      picomatch: 4.0.7
       postcss: 8.5.23
       rollup: 4.61.0
       tinyglobby: 0.2.17
@@ -3748,7 +3752,7 @@ snapshots:
       expect-type: 1.4.0
       magic-string: 1.4.5
       obug: 3.0.0
-      picomatch: file:vendor/picomatch
+      picomatch: 4.0.7
       std-env: 4.3.0
       tinybench: 6.2.3
       tinyexec: 1.3.1
