@@ -3,9 +3,6 @@ dist/
 coverage/
 *.tsbuildinfo
 
-# Third-party vendored picomatch (micromatch/picomatch#267); keep upstream bytes.
-vendor/picomatch/
-
 # Verbatim Agent-Brain observation package (sha256-pinned); formatting would change the pinned bytes.
 packages/observation-profile/src/observation.schema.json
 packages/observation-profile/test/fixtures/
