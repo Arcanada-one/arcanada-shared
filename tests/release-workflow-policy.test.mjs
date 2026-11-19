@@ -12,12 +12,11 @@ import {
   INTERNAL_TASK_ID_PATTERN,
   INTERNAL_TASK_PREFIXES,
   isGlobalToolchainMutation,
-  normalizeShellCommand,
 } from "../scripts/release-policy.mjs";
 
 const RELEASE_NODE_VERSION = "22.23.4";
-const RELEASE_NPM_VERSION = "11.18.0";
 const NPM_REGISTRY = "https://registry.npmjs.org";
+const SELF_HOSTED_RUNNER = ["self-hosted", "Linux", "X64", "ci-general"];
 const RELEASE_ARTIFACT_NAME = "release-plan-${{ github.sha }}";
 const PINNED_ACTION_PATTERN = /^[^@\s]+@[0-9a-f]{40}$/;
 const WORKFLOW_KEYS = ["concurrency", "jobs", "name", "on", "permissions"];
@@ -184,14 +183,6 @@ const PRIVILEGED_STEP_ALLOWLIST = {
       },
     },
     {
-      kind: "run",
-      keys: ["name", "run"],
-      name: "Ensure npm supports trusted publishing",
-      runSha256:
-        "a16e577dc0083813577f02572b1638388f68ce69b13b1fec5fd8144d75dc370c",
-      env: {},
-    },
-    {
       kind: "action",
       keys: ["uses", "with"],
       uses: "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
@@ -215,10 +206,11 @@ const PRIVILEGED_STEP_ALLOWLIST = {
       keys: ["env", "name", "run"],
       name: "Publish only validated package tarballs",
       runSha256:
-        "5b0e0e109f24abb7253b0ff5854182d2f947df034e3d0d1ef21e122fe562c52e",
+        "03421387b4bb0b4445bcf5a7c78828c5ebf310766d48ffa1da10c387d3dc9231",
       env: {
         GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
         GH_REPO: "${{ github.repository }}",
+        NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}",
       },
     },
   ],
@@ -402,25 +394,14 @@ const validateReleaseWorkflow = (source) => {
   });
   assert.deepEqual(publishJob?.permissions, {
     contents: "write",
-    "id-token": "write",
   });
   assert.equal(versionJob?.needs, "prepare");
   assert.equal(publishJob?.needs, "prepare");
   assert.equal(versionJob?.if, "needs.prepare.outputs.mode == 'version'");
   assert.equal(publishJob?.if, "needs.prepare.outputs.mode == 'publish'");
-  assert.deepEqual(prepareJob?.["runs-on"], [
-    "self-hosted",
-    "Linux",
-    "X64",
-    "ci-general",
-  ]);
-  assert.deepEqual(versionJob?.["runs-on"], [
-    "self-hosted",
-    "Linux",
-    "X64",
-    "ci-general",
-  ]);
-  assert.equal(publishJob?.["runs-on"], "ubuntu-latest");
+  assert.deepEqual(prepareJob?.["runs-on"], SELF_HOSTED_RUNNER);
+  assert.deepEqual(versionJob?.["runs-on"], SELF_HOSTED_RUNNER);
+  assert.deepEqual(publishJob?.["runs-on"], SELF_HOSTED_RUNNER);
   assert.ok(Array.isArray(prepareSteps));
   assert.ok(Array.isArray(versionSteps));
   assert.ok(Array.isArray(publishSteps));
@@ -511,20 +492,27 @@ const validateReleaseWorkflow = (source) => {
   const mutations = publishSteps
     .map((step, index) => ({ index, step }))
     .filter(({ step }) => isGlobalToolchainMutation(step?.run));
-  const npmSetup = assertOne(
-    mutations,
-    "publish must define exactly one global toolchain mutation",
-  );
   assert.equal(
-    normalizeShellCommand(npmSetup.step.run),
-    `npm install --global --ignore-scripts npm@${RELEASE_NPM_VERSION}`,
+    mutations.length,
+    0,
+    "publish must not mutate the global toolchain (token auth, not OIDC npm upgrade)",
   );
-  assertOne(
+  const publishRun = assertOne(
     findRunSteps(
       publishSteps,
-      /npm publish "\$package_file" --access public --provenance --ignore-scripts/,
+      /npm publish "\$package_file" --access public --ignore-scripts/,
     ),
     "publish must publish only prepared tarball files without scripts",
+  );
+  assert.doesNotMatch(
+    String(publishRun.step.run),
+    /--provenance\b/,
+    "provenance is unsupported off GitHub-hosted runners",
+  );
+  assert.equal(
+    publishRun.step.env?.NODE_AUTH_TOKEN,
+    "${{ secrets.NPM_TOKEN }}",
+    "publish must bind NODE_AUTH_TOKEN from secrets.NPM_TOKEN",
   );
   assertOne(
     findRunSteps(publishSteps, /grep -aERq.*INFRA.*DISK/s),
@@ -543,7 +531,7 @@ const validateReleaseWorkflow = (source) => {
     );
     for (const { step } of findRunSteps(
       steps,
-      /\bpnpm\b|\bnpm\s+(?:ci|add|i)\b|\bnpm\s+install(?! --global --ignore-scripts npm@11\.18\.0\b)/,
+      /\bpnpm\b|\bnpm\s+(?:ci|add|i)\b|\bnpm\s+install\b/,
     )) {
       assert.fail(
         `${jobName} must not install or execute repository dependencies: ${step.run}`,
