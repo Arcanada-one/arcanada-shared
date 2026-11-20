@@ -32,9 +32,9 @@ const PREPARE_STEP_ALLOWLIST = [
   },
   {
     kind: "action",
-    keys: ["uses"],
+    keys: ["uses", "with"],
     uses: "pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413",
-    with: {},
+    with: { dest: "${{ runner.temp }}/setup-pnpm" },
   },
   {
     kind: "action",
