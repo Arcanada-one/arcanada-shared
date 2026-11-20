@@ -39,7 +39,9 @@ Each mounted controller exclusively owns its graph, timeline and inspector regio
 
 ## Evidence and files
 
-Node, ordinary-edge and crosslink evidence references can be inspected. An evidence reference resolves to artifact metadata only when it exactly equals a retained artifact record ID. All other references remain explicit unresolved references. Artifact keys, URLs, digests and partial strings are not used to infer a relationship.
+Node, ordinary-edge, crosslink and retained-event evidence references can be inspected. An evidence reference resolves to artifact metadata only when it exactly equals a retained artifact record ID. All other references remain explicit unresolved references. Artifact keys, URLs, digests and partial strings are not used to infer a relationship.
+
+Event references come only from the decoded event's `evidence_refs`, retained as `EventLedgerEntry.evidenceRefs` in their declared order. Related record IDs, body references, subject identities and digests are not promoted to evidence references. A historical ledger without this optional field displays `NOT_MEASURED`; a present empty array reports no observed evidence references. No missing history is reconstructed from graph proximity or current artifacts.
 
 Locators are never displayed or made clickable. Observed `access: allowed`, an immutable identity, a digest or a source PASS does not enable file opening. A separate current-authorized reader must retrieve the actual bytes and verify them before a future open action can be added. Denied artifact digests are not displayed.
 
@@ -54,3 +56,5 @@ This source addition does not demonstrate real extraction, registration, agent e
 ## Focused source qualification
 
 The existing inspector test file now exercises queued stale handlers, terminal disposal, failed graph/view projections, node/edge/crosslink evidence, exact versus partial reference lookup, retained unresolved references, hostile inert text, prefix validation and collisions, region ownership and locale fallback. The DOM double catches HTML sinks but does not substitute for a real browser or current-user authorization test. A redundant internal cleanup assignment may remain behaviorally covered by another guard; do not require source-text assertions merely to kill every deletion mutant.
+
+The event-reference regression cases use the actual shared decoder/reducer/projectors and the existing record fixtures. They check exact receipt metadata, event-only unresolved references, near-match refusal, historical absence versus observed empty arrays, revocation and captured controls, and inert hostile references. Site owners must update both their pinned reducer bundle and inspector before the new field is displayed; an inspector update alone cannot recover previously discarded references. Native evidence production and authorized byte reading remain separate.

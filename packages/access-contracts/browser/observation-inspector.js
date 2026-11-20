@@ -7,6 +7,7 @@
 const TEXT = {
   en: {
     inspect: 'Inspect', node: 'Node', edge: 'Edge', link: 'Crosslink', event: 'Event',
+    unmeasuredEvidence: 'Event evidence references were not retained (NOT_MEASURED).',
     evidence: 'Evidence reference', artifacts: 'Retained artifact records', emptyArtifacts: 'No artifact records retained in this view.',
     select: 'Select a node, connection, event or artifact to inspect its observed details.',
     emptyEvents: 'No applied events retained in this view.',
@@ -27,6 +28,7 @@ const TEXT = {
   },
   ru: {
     inspect: 'Рассмотреть', node: 'Узел', edge: 'Связь', link: 'Межграфовая связь', event: 'Событие',
+    unmeasuredEvidence: 'Ссылки на свидетельства события не сохранены (NOT_MEASURED).',
     evidence: 'Ссылка на свидетельство', artifacts: 'Сохранённые записи артефактов', emptyArtifacts: 'В этом представлении нет сохранённых записей артефактов.',
     select: 'Выберите узел, связь, событие или артефакт, чтобы изучить наблюдаемые сведения.',
     emptyEvents: 'В этом представлении нет сохранённых применённых событий.',
@@ -47,6 +49,7 @@ const TEXT = {
   },
   'zh-Hans': {
     inspect: '查看', node: '节点', edge: '边', link: '跨图关联', event: '事件',
+    unmeasuredEvidence: '未保留事件的证据引用（NOT_MEASURED）。',
     evidence: '证据引用', artifacts: '保留的制品记录', emptyArtifacts: '此视图未保留制品记录。',
     select: '选择节点、连接、事件或制品，查看其观测详情。',
     emptyEvents: '此视图未保留已应用的事件。',
@@ -162,7 +165,8 @@ function mountProjectedInspector({
   const evidence = refs => {
     const section = element(doc, 'section');
     section.append(element(doc, 'h4', {}, words.evidence));
-    if (!refs.length) section.append(element(doc, 'p', {}, words.none));
+    if (refs === undefined) section.append(element(doc, 'p', {}, words.unmeasuredEvidence));
+    else if (!refs.length) section.append(element(doc, 'p', {}, words.none));
     else {
       const list = element(doc, 'ul');
       for (const ref of refs) {
@@ -234,18 +238,20 @@ function mountProjectedInspector({
       const e = v.eventLedger.find(e => e.recordId === key);
       if (e) {
         found = true; title = words.event;
-        content = rows([[words.id, e.recordId], [words.event, e.eventId], [words.cursor, e.cursor],
+        content = element(doc, 'div');
+        content.append(rows([[words.id, e.recordId], [words.event, e.eventId], [words.cursor, e.cursor],
           [words.plan, e.planRevision], [words.producer, e.producer], [words.sequence, e.sourceSequence],
           [words.occurred, e.occurredAt], [words.observed, e.observedAt], [words.recorded, e.recordedAt],
-          [words.causation, e.causationRef], [words.correlation, e.correlationRef]]);
+          [words.causation, e.causationRef], [words.correlation, e.correlationRef]]), evidence(e.evidenceRefs));
       }
     } else if (kind === 'artifact' || kind === 'evidence') {
       const a = v.artifacts.find(a => a.recordId === key);
       title = kind === 'artifact' ? words.artifacts : words.evidence;
       if (a) { found = true; content = artifactDetails(a); }
       else if (kind === 'evidence') {
-        // Only references explicitly present in the current graph may be selected.
-        const retained = [...g.nodes, ...g.edges, ...g.crosslinks].some(x => x.evidenceRefs.includes(key));
+        // Only references explicitly retained in the current graph or event ledger may be selected.
+        const retained = [...g.nodes, ...g.edges, ...g.crosslinks].some(x => x.evidenceRefs.includes(key)) ||
+          v.eventLedger.some(event => event.evidenceRefs?.includes(key) === true);
         if (retained) {
           found = true;
           content = element(doc, 'div');

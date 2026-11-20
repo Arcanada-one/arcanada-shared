@@ -481,3 +481,142 @@ describe('inspector mount identity', () => {
   });
 });
 
+describe('event evidence survives the reducer and remains an observation', () => {
+  for (const artifactId of ['receipt-captured-1', 'artifact-denied', 'artifact-missing']) {
+    it('follows the event reference to exact ' + artifactId + ' metadata without opening bytes', () => {
+      const refs = [artifactId, 'fixture:event-only'];
+      const state = stateFor(['snapshot-A', 'event-1', artifactId], record => {
+        if (record.record_id === 'event-1') record.data.evidence_refs = [...refs];
+      });
+      const view = structuredClone(projectView(state));
+      expect(view.eventLedger.find(event => event.recordId === 'event-1').evidenceRefs).toEqual(refs);
+      const surface = inspectorDocument(projectGraphPresentation(state));
+      const controller = mount({ ...surface, state });
+      surface.timelineRoot.querySelector('[data-lab-inspect-kind="event"]').click();
+      const controls = surface.inspectorRoot.querySelectorAll('[data-lab-inspect-kind="evidence"]');
+      expect(controls.map(control => control.textContent)).toEqual(refs);
+      controls[0].click();
+      const artifact = view.artifacts.find(item => item.recordId === artifactId);
+      expect(surface.inspectorRoot.textContent).toContain(artifact.access);
+      expect(surface.inspectorRoot.textContent).toContain(artifact.availability);
+      expect(surface.inspectorRoot.querySelector('[disabled]').getAttribute('aria-disabled')).toBe('true');
+      expect(surface.inspectorRoot.querySelectorAll('[href]')).toHaveLength(0);
+      expect(surface.inspectorRoot.textContent).not.toContain('fixture-artifact:' + artifactId);
+      if (artifact.access !== 'allowed') expect(surface.inspectorRoot.textContent).not.toContain('Observed digests');
+      expect(projectView(state)).toEqual(view); // Inspection does not change acceptance or other observations.
+      controller.destroy();
+    });
+  }
+
+  it('keeps event-only and near-match references unresolved without inventing evidence from other event fields', () => {
+    const refs = ['fixture:event-only', 'receipt-captured', 'receipt-captured-1-extra'];
+    const state = stateFor(['snapshot-A', 'event-1', 'receipt-captured-1'], record => {
+      if (record.record_id !== 'event-1') return;
+      record.data.evidence_refs = [...refs];
+      record.data.body.evidence_ref = 'fixture:body-only';
+      record.data.related_record_ids = ['fixture:related-only'];
+    });
+    const surface = inspectorDocument(projectGraphPresentation(state));
+    const controller = mount({ ...surface, state });
+    expect(controller.select('event', 'event-1')).toBe(true);
+    expect(surface.inspectorRoot.querySelectorAll('[data-lab-inspect-kind="evidence"]')
+      .map(control => control.textContent)).toEqual(refs);
+    for (const ref of refs) {
+      expect(controller.select('evidence', ref)).toBe(true);
+      expect(surface.inspectorRoot.textContent).toContain(ref);
+      expect(surface.inspectorRoot.textContent).toContain('No artifact record with this exact record ID');
+      expect(surface.inspectorRoot.querySelector('[disabled]')).toBeNull();
+      expect(surface.inspectorRoot.textContent).not.toContain('Observed digests');
+    }
+    for (const ref of ['fixture:body-only', 'fixture:related-only', 'fixture:never-referenced']) {
+      expect(controller.select('evidence', ref)).toBe(false);
+      expect(surface.inspectorRoot.textContent).not.toContain(ref);
+    }
+    controller.destroy();
+  });
+
+  it('distinguishes an unretained historical field from an observed empty list in every supported locale', () => {
+    const observed = stateFor(['snapshot-A', 'event-1'], record => {
+      if (record.record_id === 'event-1') record.data.evidence_refs = [];
+    });
+    const historical = structuredClone(observed);
+    for (const entry of historical.eventLedger) delete entry.evidenceRefs;
+    for (const locale of ['en', 'ru', 'zh-Hans']) {
+      const surface = inspectorDocument(projectGraphPresentation(historical), locale);
+      const controller = mount({ ...surface, state: historical });
+      expect(controller.select('event', 'event-1')).toBe(true);
+      expect(surface.inspectorRoot.textContent).toContain('NOT_MEASURED');
+      expect(surface.inspectorRoot.querySelectorAll('[data-lab-inspect-kind="evidence"]')).toHaveLength(0);
+      expect(controller.update(observed)).toBe(true);
+      expect(controller.select('event', 'event-1')).toBe(true);
+      expect(projectView(observed).eventLedger[0].evidenceRefs).toEqual([]);
+      expect(surface.inspectorRoot.textContent).not.toContain('NOT_MEASURED');
+      expect(surface.inspectorRoot.querySelectorAll('[data-lab-inspect-kind="evidence"]')).toHaveLength(0);
+      controller.destroy();
+    }
+  });
+
+  it('forgets event-only evidence and its captured controls after trusted revocation', () => {
+    const ref = 'fixture:private-event-only';
+    const state = stateFor(['snapshot-A', 'event-1'], record => {
+      if (record.record_id === 'event-1') record.data.evidence_refs = [ref];
+    });
+    const surface = inspectorDocument(projectGraphPresentation(state));
+    const controller = mount({ ...surface, state });
+    expect(controller.select('event', 'event-1')).toBe(true);
+    const oldButton = surface.inspectorRoot.querySelector('[data-lab-inspect-kind="evidence"]');
+    const [queuedClick] = [...oldButton.handlers.get('click')];
+    const revoked = reduce(state, { kind: 'trusted_authorization_revoked', viewContext: caseMeta.default_view_context }).state;
+    expect(controller.update(revoked)).toBe(true);
+    expect(surface.inspectorRoot.textContent).not.toContain(ref);
+    expect(surface.timelineRoot.textContent).not.toContain('event-1');
+    expect(oldButton.handlers.get('click').size).toBe(0);
+    const after = surface.inspectorRoot.textContent;
+    surface.document.activeElement = surface.graphRoot;
+    queuedClick({ target: oldButton });
+    expect(surface.inspectorRoot.textContent).toBe(after);
+    expect(surface.document.activeElement).toBe(surface.graphRoot);
+    expect(controller.select('evidence', ref)).toBe(false);
+    controller.destroy();
+  });
+
+  it('keeps schema-valid scheme-like event evidence inert through decoding, projection and selection', () => {
+    for (const ref of ['javascript:globalThis.alert', 'https://example.invalid/private-receipt']) {
+      const state = stateFor(['snapshot-A', 'event-1'], record => {
+        if (record.record_id === 'event-1') record.data.evidence_refs = [ref];
+      });
+      const surface = inspectorDocument(projectGraphPresentation(state));
+      const controller = mount({ ...surface, state });
+      expect(controller.select('event', 'event-1')).toBe(true);
+      surface.inspectorRoot.querySelector('[data-lab-inspect-kind="evidence"]').click();
+      expect(surface.inspectorRoot.textContent).toContain(ref);
+      expect(surface.inspectorRoot.textContent).toContain('No artifact record with this exact record ID');
+      for (const node of allElements(surface.document.body)) {
+        expect(['script', 'img', 'iframe', 'svg', 'a'].includes(node.tag)).toBe(false);
+        expect(Object.keys(node.attrs).some(name => /^(?:on|href$|src$|style$)/i.test(name))).toBe(false);
+      }
+      controller.destroy();
+    }
+  });
+
+  it('rejects schema-invalid event references before they can enter the ledger or inspector', () => {
+    for (const ref of ['javascript:alert(1)', '<img src=x onerror="globalThis.pwned=true">']) {
+      const state = stateFor(['snapshot-A']);
+      const before = structuredClone(state);
+      const record = structuredClone(records['event-1']);
+      record.data.evidence_refs = [ref];
+      const result = reduce(state, { kind: 'receive', record });
+      expect(result.outcome).toEqual({ disposition: 'rejected', code: 'SCHEMA_INVALID' });
+      expect(result.commands).toEqual([]);
+      expect(result.state.eventLedger).toEqual(before.eventLedger);
+      expect(result.state.appliedCursor).toBe(before.appliedCursor);
+      expect(state).toEqual(before);
+      const surface = inspectorDocument(projectGraphPresentation(result.state));
+      const controller = mount({ ...surface, state: result.state });
+      expect(controller.select('event', 'event-1')).toBe(false);
+      expect(controller.select('evidence', ref)).toBe(false);
+      expect(surface.inspectorRoot.textContent).not.toContain(ref);
+      controller.destroy();
+    }
+  });
+});
