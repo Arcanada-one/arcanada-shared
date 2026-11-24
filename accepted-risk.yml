@@ -10,6 +10,13 @@
 # withdrawn by GitHub on 2026-10-23 and 2026-10-22 ("not a practically exploitable
 # vulnerability" / withdrawn), so the ignores and entries were removed on 2026-11-07.
 # Reachability at acceptance time: dev-only via @changesets/cli (micromatch, argparse).
+#
+# 2026-11-19: main CI run 44143466288 (build-test) failed on
+# `pnpm audit --audit-level=high` for GHSA-fc5q-39xc-vjpf (picomatch ReDoS via
+# @changesets/cli → micromatch). GitHub withdrew that advisory on
+# 2026-11-18T15:38:56Z (title prefix "Withdrawn Advisory"). No ignore was added;
+# tests/audit-high-floor.test.mjs keeps the high floor green. FOREIGN PRs that
+# vendor picomatch 4.0.8 for the same run remain other lanes' work.
 
 schema_version: 1
 
